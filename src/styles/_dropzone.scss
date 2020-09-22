@@ -1,0 +1,89 @@
+@use 'colors';
+
+@keyframes change-color {
+  0% {
+    background-color: white;
+    color: colors.$dark-red;
+  }
+  100% {
+    background-color: colors.$bright-red;
+  }
+
+}
+
+.dropzone-idle {
+  &:before {
+    content: "Drag and drop file here ";
+  }
+  width: 300px;
+  height: 300px;
+  margin:auto;
+  border-radius: 150px;
+  margin-top: 50px;
+  text-align: center;
+  border: 2px dashed colors.$light-green;
+  text-align: center;
+  color: colors.$dark-red;
+  font-size: 1.5rem;
+  box-sizing: border-box;
+  padding: 60px;
+  transition: 0.3s all;
+  .select-file-button {
+    &:hover {
+      transition: 0.2s all;
+      background-color: colors.$bright-red;
+    }
+  }
+}
+
+.dropzone-active {
+  margin:auto;
+  &:before {
+    font-size: 3rem;
+    margin-top: 100px;
+    content: "DROP!!";
+    color: white;
+  }
+  width: 300px;
+  height: 300px;
+  border-radius: 150px;
+  margin-top: 50px;
+  text-align: center;
+  border: 2px dashed colors.$light-green;
+  text-align: center;
+  color: colors.$dark-red;
+  font-size: 1.5rem;
+  padding: 60px;
+  box-sizing: border-box;
+  transition: 0.3s all;
+  animation: change-color linear 2s;
+  .select-file-button {
+    transition: 0.3s all;
+    display: none;
+  }
+}
+.select-container{
+  display:flex;
+
+  position: relative;
+  margin-top:20px
+}
+.select-button {
+  margin:auto;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 10px;
+  font-family: sans-serif;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  width: 100px;
+  height: 50px;
+  color: white;
+  background-color: colors.$dark-red;
+  transition:.2s all;
+   &:hover{
+      background-color:colors.$light-green;
+      transition:.2s all
+   }
+}

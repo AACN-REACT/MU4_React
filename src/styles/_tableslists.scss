@@ -1,0 +1,121 @@
+@use 'colors';
+@use 'fonts';
+.table-container {
+  border:2px solid red;
+  position: relative;
+  top:70%;
+  left:0px;
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  flex-direction: row;
+  table {
+    margin: 10px;
+    border: 1px dotted lightblue;
+    width: 46vw;
+    margin:0px;
+    tr {th{background-color:slategray;
+        color:white;
+    }
+  }
+  }
+  caption{
+    font-family: fonts.$vt;
+    display:block;
+    color:rgb(250, 171, 185);
+    margin-bottom:10px;
+    font-size:1.2rem;
+    &::after{
+      content:".."
+    }
+  }
+}
+
+
+
+
+.upload-container {
+  padding: 3px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  height: auto;
+  overflow: hidden;
+  justify-content: start;
+  flex-direction: column;
+  width: auto;
+  border: 1px solid lightblue;
+  transition: all 0.5s;
+}
+
+
+.title-box {
+  font-family: sans-serif;
+  height: 30px;
+  background-color: ghostwhite;
+}
+.upload-list-item {
+  box-sizing: border-box;
+  height: 35px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  border-bottom: 1px solid lightblue;
+  align-items: center;
+  transition: all 0.5s;
+  &.completed{
+      &::after{content:"completed"}
+  }
+  & > div {
+    padding: 5px;
+    overflow: ellipsis;
+    border: 1px solid lightblue;
+    text-align: center;
+    &.name-box {
+      background-color: slategray;
+    }
+  }
+}
+
+.type-box,
+.size-box {
+  width: 60px;
+  color: slategray;
+  background-color: rgb(231, 228, 228);
+}
+
+.name-box,
+.progress-box {
+  width: 120px;
+  overflow: hidden;
+  font-size: 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.name-box {
+  color: white;
+  background-color: slateblue;
+}
+
+.close-box {
+  padding: 0px;
+  box-sizing: border-box;
+  width: 30px;
+  height: 90%;
+  margin-left: 0px;
+
+  cursor: pointer;
+  background-color: rgb(180, 50, 3);
+  color: white;
+  text-align: center;
+  font-size: 1.2rem;
+  font-family: sans-serif;
+  padding-top: -20px;
+  transition: 0.5s all;
+  &:hover {
+    background-color: rgb(253, 117, 68);
+  }
+}

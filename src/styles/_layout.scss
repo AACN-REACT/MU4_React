@@ -1,0 +1,58 @@
+@use 'colors';
+@use 'fonts';
+
+
+
+.triptych{
+
+  display:block;
+  width:50%;
+  flex-direction:row;
+  .triptych-panal{
+flex-basis:20%
+  }
+}
+.centered-container {
+  font-family: fonts.$slab;
+  //    font-weight: bolder;
+  text-shadow: 3px 3px 3px rgb(226, 49, 226);
+  font-size: 1rem;
+  display: flex;
+  margin-bottom: 20px;
+
+  //   border-bottom: 25px solid rgb(226, 49, 226);
+  // box-shadow:10px 10px 2px colors.$pink;
+  justify-content: space-between;
+  background-image: linear-gradient(
+    to left,
+    rgb(167, 80, 175),
+    colors.$deep-purple
+  );
+  height: 130px;
+  img {
+    max-width: 100%;
+    height: 100%;
+  }
+}
+
+
+.profile-container {
+  background: colors.$med-purple;
+  color: white;
+  display: flex;
+  flex-flow: column;
+  // margin-right:100px;
+  padding: 10px;
+  width: 150px;
+  height: 100%;
+  align-content: center;
+  .profile-pic {
+    object-fit: cover;
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    border: 5px solid white;
+    border-radius: 40px;
+    margin: 10px auto 10px;
+  }
+}

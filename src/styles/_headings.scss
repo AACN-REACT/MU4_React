@@ -1,0 +1,19 @@
+@use 'colors';
+
+.main-heading {
+  color: colors.$dark-red;
+  display: block;
+  font-size: 5rem;
+  text-align: center;
+  margin: auto;
+  max-width: 600px;
+  width: 100%;
+  background-color: colors.$deep-purple;
+  & + .secondary-heading {
+    text-align: center;
+    margin: auto;
+    display: block;
+    color: colors.$dark-red;
+    font-size: 2rem;
+  }
+}
