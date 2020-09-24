@@ -11,7 +11,7 @@ import { useAuth } from "../utils/custom_hooks/useauth";
 import { auth0 } from "../data/identity-config";
 const settings = { authority: "nothing" };
 export default function App() {
-  const [identity, isAuthenticated] = useAuth(auth0);
+  const [identity, isAuthenticated] = useAuth(false);
 
 console.log("PASSED",identity)
     return (

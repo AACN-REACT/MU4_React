@@ -19,7 +19,6 @@ export function useAuth(settings) {
       mgr
         .signinRedirectCallback()
         .then((user) => {
-          debugger
           authenticate(true);
           setIdentity(s=>({...s,...user}));
           window.location.replace("#");

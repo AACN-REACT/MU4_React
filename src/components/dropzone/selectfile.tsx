@@ -31,6 +31,7 @@ export function SelectFile({ DISPATCHupload, sizeLimit}) {
                       size: (parseInt(file["size"])/1000000).toFixed(1)+"mb",
                       type: (file["type"]).substring(file['type'].indexOf('/')).slice(1),
                       file: file,
+                      status:"pending",
                       id: guid,
                       progress: 0,
                     },
