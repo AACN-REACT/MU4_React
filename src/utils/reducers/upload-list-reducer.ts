@@ -24,6 +24,12 @@ export function uploadListReducer(state, { type, action }) {
         [action]: { ...newstate[action], status: "completed" },
       };
       break;
+      case "CANEDIT":
+        newstate = {
+          ...newstate,
+          [action]: { ...newstate[action], status: "canedit" },
+        };
+        break;
     case "ACTIVE":
       newstate = {
         ...newstate,

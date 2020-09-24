@@ -1,4 +1,4 @@
-export function XHRNew(file, url, setter) {
+export function XHRNew(item, url, setter, dispatch) {
   function createFormData(file) {
     let myFormData = new FormData();
     myFormData.append("file", file);
@@ -13,12 +13,13 @@ export function XHRNew(file, url, setter) {
   xhr.addEventListener("readystatechange", (e) => {
     if (xhr.readyState == 4 && xhr.status == 200) {
       console.log("DONE!");
+      dispatch({type:"CANEDIT" , action:item.id})
     }
     else if (xhr.readyState == 4 && xhr.status !== 200) {
       console.log("ERROR", xhr.status);
     }
   });
-  let mydata = createFormData(file);
+  let mydata = createFormData(item.file);
   xhr.send(mydata);
 
 
