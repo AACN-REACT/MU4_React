@@ -9,6 +9,7 @@ export function UploadTable({ list, url, user, dispatch }) {
   let arr = [];
   let activelist = [],
     completedlist = [],
+    editablelist = [],
     pendinglist = [];
   for (let i in list) {
     console.log("arr 1", list);

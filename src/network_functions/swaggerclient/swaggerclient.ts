@@ -1728,7 +1728,7 @@ export class Client {
       return this.processGetMediaDetailsVm(_response);
     });
   }
-
+//media details
   protected processGetMediaDetailsVm(
     response: Response
   ): Promise<FileResponse> {

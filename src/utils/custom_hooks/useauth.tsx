@@ -1,7 +1,7 @@
 import * as React from "react";
 import { UserManager } from "oidc-client";
 import placeholder from '../../images/SVG/question.svg'
-export function useAuth(settings) {
+export function useAuth(settings, addParams) {
   const [isAuthenticated, authenticate] = React.useState(false);
 
   const [mgr] = React.useState(new UserManager(settings));
@@ -22,6 +22,8 @@ export function useAuth(settings) {
           authenticate(true);
           setIdentity(s=>({...s,...user}));
           window.location.replace("#");
+       
+
           return user;
         })
         .catch((err) => setIdentity({ error: err }));
