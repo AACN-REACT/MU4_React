@@ -49,36 +49,46 @@ export function UploadTable({ list, url, user, dispatch }) {
     return (
       <div className="upload-container">
         <div className="title-box">Uploading...</div>
-        {activelist.map((item) => (
-          <UploadingListItem
-            status={item.status}
-            dispatch={dispatch}
-            key={item.id}
-            item={item}
-            url={url}
-            user={user}
-          />
-        ))}
-        {pendinglist.map((item) => (
-          <UploadingListItem
-            status={item.status}
-            dispatch={dispatch}
-            key={item.id}
-            item={item}
-            url={url}
-            user={user}
-          />
-        ))}
-        {completedlist.map((item) => (
-          <UploadingListItem
-            status={item.status}
-            dispatch={dispatch}
-            key={item.id}
-            item={item}
-            url={url}
-            user={user}
-          />
-        ))}
+        <div className="active">
+          {activelist.length > 0 ? "ACTIVE" : null}
+          {activelist.map((item) => (
+            <UploadingListItem
+              status={item.status}
+              dispatch={dispatch}
+              key={item.id}
+              item={item}
+              url={url}
+              user={user}
+            />
+          ))}
+        </div>
+        <div className="pending">
+          {" "}
+          {pendinglist.length > 0 ? "PENDING" : null}
+          {pendinglist.map((item) => (
+            <UploadingListItem
+              status={item.status}
+              dispatch={dispatch}
+              key={item.id}
+              item={item}
+              url={url}
+              user={user}
+            />
+          ))}
+        </div>
+        <div className="completed">
+          {completedlist.length > 0 ? "COMPLETED" : null}
+          {completedlist.map((item) => (
+            <UploadingListItem
+              status={item.status}
+              dispatch={dispatch}
+              key={item.id}
+              item={item}
+              url={url}
+              user={user}
+            />
+          ))}
+        </div>
       </div>
     );
   }
