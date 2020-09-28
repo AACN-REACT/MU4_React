@@ -1,6 +1,8 @@
+@use 'colors';
+
 .title-container {
   display: flex;
   height: 100px;
   width: 100%;
-  background-color: greenyellow;
+  background-color: colors.$midgreen
 }

@@ -1,0 +1,46 @@
+@use 'colors';
+
+.panel-container {
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  border: 1px solid colors.$midgreen;
+  padding: 5px;
+}
+
+[class*="details-container-"] {
+  background: blue;
+  transition: all 1s;
+}
+.details-container-0 {
+  flex-basis: 5px;
+}
+.details-container-1 {
+  flex-basis: 100px;
+}
+.details-container-2 {
+  flex-basis: 500px;
+}
+[class*="upload-container-"] {
+  background: skyblue;
+  transition: all 1s;
+}
+
+[class*="list-container-"] {
+  background: slateblue;
+  transition: all 1s;
+  display: flex;
+  flex-direction: row;
+}
+.list-container-0 {
+  flex-basis: 5px;
+}
+.list-container-1 {
+  flex-basis: 100px;
+}
+.list-container-2 {
+  flex-basis: 300px;
+}
+[class*="list-container-"] {
+}
