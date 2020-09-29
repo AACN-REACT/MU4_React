@@ -93,11 +93,15 @@ export function Panels(props) {
   console.log("panels", Panels);
   return (
     <div className="panel-container">
-      <div className={`upload-container-${panelState.upload_container}`}>{elements[0]}</div>
+      <div className={`upload-container-${panelState.upload_container}`}>
+        {elements[0]}
+      </div>
       <div className={`list-container-${panelState.list_container}`}>
         {[elements[1], elements[2], elements[3]]}
       </div>
-      <div onMouseOut={e=>dispatchPanelState({type:"CLOSE DETAILS OPEN OTHERS"})} onMouseOver={e=>dispatchPanelState({type:"OPEN DETAILS CLOSE OTHERS"})} className={`details-container-${panelState.details_container}`}>{[elements[4]]}</div>
+      <div className={`details-container-${panelState.details_container}`}>
+        {elements[4]}
+      </div>
     </div>
   );
 }
