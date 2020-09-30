@@ -42,6 +42,17 @@ function panelReducer(state, action) {
         details_container: 0,
       };
       break;
+    case "OPEN PARTIAL":
+      newPanelState = {
+        ...newPanelState,
+        list_container: 2,
+        pending_container: 1,
+        completed_container: 1,
+        dropzone_container: 1,
+        details_container: 0,
+      };
+      break;
+      
     case "OPEN COMPLETED":
       newPanelState = {
         ...newPanelState,

@@ -9,6 +9,15 @@ export function DetailsPage({mediaKey, panelState, dispatchPanelState}){
 
 
 
+
+    React.useEffect(function(){
+
+       
+
+
+
+    })
+
     console.log("PANEL STATE", panelState)
     return (
         <div className="details-page">

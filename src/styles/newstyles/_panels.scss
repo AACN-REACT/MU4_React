@@ -1,11 +1,12 @@
 @use 'colors';
+@use 'fonts';
 
 .panel-container {
   height: 800px;
   display: flex;
   flex-direction: column;
   margin: 5px;
-  border: 1px solid colors.$midgreen;
+  border: 1px solid colors.$mid-green;
   padding: 5px;
 }
 
@@ -26,7 +27,7 @@
   background: skyblue;
   transition: all 1s;
 
-   overflow: hidden;
+  overflow: hidden;
 }
 .upload-container-0 {
   flex-basis: 100px;
@@ -39,7 +40,7 @@
 }
 
 [class*="list-container-"] {
-  background: slateblue;
+  background: linear-gradient(0deg, colors.$white-green, colors.$white-yellow);
   transition: all 1s;
   display: flex;
   flex-direction: row;
@@ -101,4 +102,34 @@
 }
 .completed-list-2 {
   flex-basis: 90%;
+}
+[class*="list-"] {
+  box-sizing: border-box;
+  border: 2px solid
+    linear-gradient(45deg, colors.$dark-green, colors.$light-green);
+  transition: 0.5s all;
+
+  font-family: fonts.$mono;
+  .list-heading {
+    font-family: fonts.$vt;
+  }
+}
+.list-0 {
+  flex-basis: 5%;
+}
+.list-1 {
+  flex-basis: 30%;
+}
+.list-2 {
+  flex-basis: 90%;
+}
+
+.list-heading {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.3rem;
+  padding: 5px;
+  color: white;
+  text-shadow: 1px 1px 5px white;
+  background: linear-gradient(45deg, colors.$dark-green, colors.$mid-green);
 }

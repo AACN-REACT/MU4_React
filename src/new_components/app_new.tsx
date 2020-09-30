@@ -7,6 +7,7 @@ import { DetailsPage } from "./details_page";
 import { Dummy } from "./dummy";
 import { Panels } from "./panels";
 import { PendingList } from "./pending_list";
+import {ListComponent} from "./list-component"
 import { TitleBar } from "./title";
 import { UploadTable } from "../components/ListTables/listtable";
 import { videolist } from "../data/videolist";
@@ -46,13 +47,16 @@ this needs to changed into a custome hook: */
   ]);
 
   React.useEffect(function () {
-    fetch("https://localhost:44390/api/v0/MediaManagement").then(res=>res.json()).then(res=>{
-      console.log("RES",res)
-      let pending = res['Result']["PendingMediaDetailsDto"];
-      let completed = res['Result']["FinalizedMediaDetailsDtos"];
-      setManagementLists([pending,completed])
-    })
-  },[]);
+    fetch("http://localhost:3000/Result")
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("RES", res);
+        let completed = res["FinalizedMediaDetailsDto"];
+        let pending = res["PendingMediaDetailsDto"];
+        console.log("completed", completed)
+        setManagementLists([pending, completed]);
+      });
+  }, []);
 
   /*--------------------------------------------------------------------------------------------------------*/
   return (
@@ -65,12 +69,12 @@ this needs to changed into a custome hook: */
           dispatch={DISPATCHUpload}
           user={user}
         />
-        <PendingList videolist={pendingList} />
+        <ListComponent heading="Pending" videolist={pendingList} />
         <DropzoneContainer
           uploadSTATE={uploadSTATE}
           DISPATCHUpload={DISPATCHUpload}
         />
-        <CompletedList videolist={finalizedList} />
+        <ListComponent heading="Completed" videolist={finalizedList} />
         <DetailsPage idTakenFromUrl={idTakenFromUrl} />
       </Panels>
     </Auth>

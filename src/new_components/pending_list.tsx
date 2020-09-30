@@ -9,10 +9,14 @@ export function PendingList({ dispatchPanelState, panelState, videolist }) {
   }, [videolist]);
 
   return (
-    <div className={`completed-list-${panelState.completed_container}`}>
+    <div className={`completed-list-${panelState.pending_container}`}>
+      <div className="list-heading">
+        <div>{heading}</div>
+        <div className="switch"></div>
+      </div>
       {list?.map((el) => (
         <div
-          onClick={(e) => dispatchPanelState({ type: "OPEN COMPLETED" })}
+          onClick={(e) => dispatchPanelState({ type: "OPEN PENDING" })}
           key={el.Key}
         >
           {el.Title}

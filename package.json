@@ -8,6 +8,7 @@
     "build:dev": "webpack --mode development --env.development",
     "build:prod": "webpack --mode production --env.production",
     "serve": "webpack-dev-server --env.development --open",
+    "json": "start json-server src/data/db.json && start npm run serve",
     "greeting": "echo hello"
   },
   "keywords": [
@@ -33,6 +34,7 @@
     "css-loader": "^4.2.0",
     "file-loader": "^6.1.0",
     "html-webpack-plugin": "^4.3.0",
+    "json-server": "^0.16.2",
     "mini-css-extract-plugin": "^0.9.0",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.2",
