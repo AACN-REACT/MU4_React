@@ -9,16 +9,16 @@ import { UploadTable } from "../components/ListTables/listtable";
 // reducers
 import { uploadListReducer } from "../utils/reducers/upload-list-reducer";
 
-export function DropzoneContainer({ uploadURL,  user, sizeLimit, panelState,dispatchPanelState }) {
+export function DropzoneContainer({ uploadURL,  user, sizeLimit, panelState,dispatchPanelState, uploadSTATE, DISPATCHUpload }) {
   //set up state for Uploading files
-  const [uploadSTATE, DISPATCHUpload] = React.useReducer(uploadListReducer, {});
+  //const [uploadSTATE, DISPATCHUpload] = React.useReducer(uploadListReducer, {});
 
   console.log("upload state", uploadSTATE);
   return (
     <div  className={`dropzone-container-${panelState.dropzone_container}`}>
       <DropZone DISPATCHupload={DISPATCHUpload} />
       <SelectFile DISPATCHupload={DISPATCHUpload} sizeLimit={sizeLimit} />
-      <UploadTable list={uploadSTATE} url={uploadURL} dispatch={DISPATCHUpload} user={user}/>
+      {/* <UploadTable list={uploadSTATE} url={uploadURL} dispatch={DISPATCHUpload} user={user}/> */}
     </div>
   );
 }

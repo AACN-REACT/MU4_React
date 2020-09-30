@@ -11,7 +11,7 @@ export function CompletedList({ dispatchPanelState, panelState, videolist }) {
   return (
     <div className={`completed-list-${panelState.completed_container}`}>
       {list.map((el) => (
-        <div key={el.Key}>{el.Title}</div>
+        <div onClick={e=>dispatchPanelState({type:"OPEN COMPLETED"})} key={el.Key}>{el.Title}</div>
       ))}
     </div>
   );

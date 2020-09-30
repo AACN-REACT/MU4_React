@@ -1,13 +1,6 @@
 import * as React from "react";
 
-const initialPanelState = {
-  upload_container: 0,
-  list_container: 2,
-  pending_container: 1,
-  completed_container: 1,
-  dropzone_container: 1,
-  details_container: 0,
-};
+
 
 function panelReducer(state, action) {
   let newPanelState = state;
@@ -82,14 +75,31 @@ function panelReducer(state, action) {
   return newPanelState;
 }
 export function Panels(props) {
+
+// can dynamically change this if we have a detail key stored or passed down
+  const initialPanelState = {
+    upload_container: 0,
+    list_container: 2,
+    pending_container: 1,
+    completed_container: 1,
+    dropzone_container: 1,
+    details_container: 0,
+  };
+  /* the reducer sets up the initial state of the panels, we should make the initial state of panels dependent on whether 
+  there is a details key availble in storage - perhaps we implement that later down the component tree?
+  */
   const [panelState, dispatchPanelState] = React.useReducer(
     panelReducer,
     initialPanelState
   );
 
+
+  //this piece of code adds the panel state and panel state dispatcher to our anonymous children's props
   const elements = React.Children.map(props.children, (el) =>
     React.cloneElement(el, { panelState, dispatchPanelState })
   );
+
+  
   console.log("panels", Panels);
   return (
     <div className="panel-container">
