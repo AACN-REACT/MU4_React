@@ -1,26 +1,23 @@
 import * as React from "react";
 
-export function PendingList({ dispatchPanelState, panelState }) {
+export function PendingList({ dispatchPanelState, panelState, videolist }) {
+  let [list, changelist] = React.useState([]);
+
+  React.useEffect(() => {
+    changelist(videolist);
+    console.log("list", list);
+  }, [videolist]);
+
   return (
-    <div className={`pending-list-${panelState.pending_container}`}>
-      <ul>
-        <li onClick={(e) => dispatchPanelState({ type: "OPEN PENDING" })}>
-          one
-        </li>
-        <li>two</li>
-        <li>three</li>
-        <li>four</li>
-        <li>five</li>
-        <li
-          onClick={(e) =>
-            dispatchPanelState({ type: "OPEN DETAILS CLOSE OTHERS" })
-          }
+    <div className={`completed-list-${panelState.completed_container}`}>
+      {list?.map((el) => (
+        <div
+          onClick={(e) => dispatchPanelState({ type: "OPEN COMPLETED" })}
+          key={el.Key}
         >
-          six
-        </li>
-        <li>seven</li>
-        <li>eight</li>
-      </ul>
+          {el.Title}
+        </div>
+      ))}
     </div>
   );
 }

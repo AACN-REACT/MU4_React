@@ -50,13 +50,17 @@ module.exports = function (env) {
           },
         },
         {
-          test: /\.[tj]sx?/,
+          test: /\.[jt]s(x?)$/,
           exclude: /node_modules/,
           use: [
             {
               loader: "babel-loader",
               options: {
-                presets: ["@babel/preset-typescript", "@babel/preset-react", "@babel/preset-env"],
+                presets: [
+                  "@babel/preset-react",
+                  "@babel/preset-env",
+                  "@babel/preset-typescript",
+                ],
               },
             },
           ],
