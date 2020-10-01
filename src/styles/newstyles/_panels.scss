@@ -139,14 +139,21 @@
   justify-content: space-between;
   border: 2px solid colors.$light-green;
   flex: 1 1 0px;
-  font-size: 0.9rem;
+  font-size: 0.9vw;
   background: colors.$light-green;
+  transition: all 0.2s;
   &:nth-of-type(odd) {
     background: colors.$off-light-green;
   }
+  &:not(.row-heading):not(.row-page) {
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(241, 161, 55);
+    }
+  }
 }
 .row-heading {
-  font-size: 1.1rem;
+  font-size: 1.1vw;
   background: colors.$mid-green;
 }
 [class*="column-"] {

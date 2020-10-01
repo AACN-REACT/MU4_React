@@ -5,6 +5,7 @@ export function ListComponent({
   dispatchPanelState,
   panelState,
   videolist,
+  setMediaKey,
 }) {
   let [list, changelist] = React.useState([]);
 
@@ -85,7 +86,14 @@ export function ListComponent({
 
               {videolist.map((el, id) => {
                 return (
-                  <div key={`${el.Key}`} className={`row-${id}`}>
+                  <div
+                    key={`${el.Key}`}
+                    onClick={(e) => {
+                      setMediaKey(el.Key);
+                      dispatchPanelState({ type: "OPEN DETAILS CLOSE OTHERS" });
+                    }}
+                    className={`row-${id}`}
+                  >
                     <div key={el.Title} className="column-title">
                       {el.Title}
                     </div>

@@ -1,37 +1,22 @@
-import * as React from 'react'
-import { Controls } from './controls'
-import { ControlButton } from './control_button'
-import { Dummy } from './dummy'
+import * as React from "react";
+import { Controls } from "./controls";
+import { ControlButton } from "./control_button";
+import { Dummy } from "./dummy";
 
+export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
+  React.useEffect(function () {});
 
-
-export function DetailsPage({mediaKey, panelState, dispatchPanelState}){
-
-
-
-
-    React.useEffect(function(){
-
-       
-
-
-
-    })
-
-    console.log("PANEL STATE", panelState)
-    return (
-        <div className="details-page">
-            <button onClick={e=>{panelState.details_container===0?dispatchPanelState({type:"OPEN DETAILS CLOSE OTHERS"}):dispatchPanelState({type:"CLOSE DETAILS OPEN OTHER"})}} />
-        <Dummy msg="hello" />
-
-
-
-
-
-        </div>
-    )
-
-
-
-
+  console.log("PANEL STATE", panelState);
+  return (
+    <div className="details-page">
+      <button
+        onClick={(e) => {
+          panelState.details_container === 0
+            ? dispatchPanelState({ type: "OPEN DETAILS CLOSE OTHERS" })
+            : dispatchPanelState({ type: "CLOSE DETAILS OPEN OTHER" });
+        }}
+      />
+      <h1>{mediaKey}</h1>
+    </div>
+  );
 }

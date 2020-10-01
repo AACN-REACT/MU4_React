@@ -46,6 +46,8 @@ this needs to changed into a custome hook: */
     [],
   ]);
 
+  const [mediaKey,setMediaKey] = React.useState(null)
+
   React.useEffect(function () {
     fetch("http://localhost:3000/Result")
       .then((res) => res.json())
@@ -69,13 +71,13 @@ this needs to changed into a custome hook: */
           dispatch={DISPATCHUpload}
           user={user}
         />
-        <ListComponent heading="Pending" videolist={pendingList} />
+        <ListComponent heading="Pending" videolist={pendingList} setMediaKey={setMediaKey} />
         <DropzoneContainer
           uploadSTATE={uploadSTATE}
           DISPATCHUpload={DISPATCHUpload}
         />
-        <ListComponent heading="Completed" videolist={finalizedList} />
-        <DetailsPage idTakenFromUrl={idTakenFromUrl} />
+        <ListComponent heading="Completed" videolist={finalizedList} setMediaKey={setMediaKey}/>
+        <DetailsPage mediaKey={mediaKey} />
       </Panels>
     </Auth>
   );
