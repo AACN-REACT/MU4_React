@@ -24,22 +24,93 @@ export function ListComponent({
             </h1>,
           ];
         case 1:
-          return videolist.map((el, id) => (
-            <div>
-              <div className="columns"></div>
-              <span>{el.Title}</span>
-              <span>{new Date(el.StartDateTime).toDateString()}</span>
+          return (
+            <div className="list-wrapper">
+              <div key="page" className="row-page">
+                <div>prev</div>
+                <div>page num</div>
+                <div>next</div>
+              </div>
+              <div className="row-heading" key="randomvalue">
+                <div className="column-1">Title</div>
+                <div className="column-2">Added By..</div>
+                <div className="column-3">Date</div>
+              </div>
+
+              {videolist.map((el, id) => {
+                return (
+                  <div className={`row-${id}`}>
+                    <div key={el.Title} className="column-1">
+                      {el.Title}
+                    </div>
+                    <div key={el.StartedByUserName} className="column-2">
+                      {el.StartedByUserName}
+                    </div>
+                    <div key={el.StartDateTime} className="column-3">
+                      {new Date(el.StartDateTime).toDateString()}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          ));
+          );
         case 2:
-          return videolist.map((el, id) => (
-            <div>
-              <span>{el.Title}</span>
-              <span>{new Date(el.StartDateTime).toDateString}</span>
-              <span>{el.StartedByUserName}</span>
-              <span>{el.OriginalFileName}</span>
+          return (
+            <div className="list-wrapper">
+              <div key="page" className="row-page">
+                <div>prev</div>
+                <div>page num</div>
+                <div>next</div>
+              </div>
+              <div className="row-heading" key="heading">
+                <div key="title" className="column-title">
+                  Title
+                </div>
+                <div key="addedby" className="column-addedby">
+                  Added By..
+                </div>
+                <div key="keywords" className="column-keywords">
+                  Has Keywords?
+                </div>
+                <div key="netforum" className="column-netforum">
+                  Linked to Netforum
+                </div>
+                <div key="status" className="column-status">
+                  Status
+                </div>
+                <div key="date" className="column-date">
+                  Date
+                </div>
+              </div>
+
+              {videolist.map((el, id) => {
+                return (
+                  <div key={`${el.Key}`} className={`row-${id}`}>
+                    <div key={el.Title} className="column-title">
+                      {el.Title}
+                    </div>
+                    <div key={el.StartedByUserName} className="column-addedby">
+                      {el.StartedByUserName}
+                    </div>
+                    <div key="mykeywords" className="column-keywords">
+                      {el.Keywords.length > 0 ? "True" : "False"}
+                    </div>
+                    <div key="netforum" className="column-keywords">
+                      {el.NetforumItemLink.NetforumKey.length > 0
+                        ? "True"
+                        : "False"}
+                    </div>
+                    <div key={el.Status} className="column-status">
+                      {el.Status}
+                    </div>
+                    <div key={el.StartDateTime} className="column-date">
+                      {new Date(el.StartDateTime).toDateString()}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          ));
+          );
         default:
           return [];
       }

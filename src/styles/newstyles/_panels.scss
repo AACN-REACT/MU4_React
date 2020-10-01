@@ -133,3 +133,37 @@
   text-shadow: 1px 1px 5px white;
   background: linear-gradient(45deg, colors.$dark-green, colors.$mid-green);
 }
+
+[class*="row-"] {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid colors.$light-green;
+  flex: 1 1 0px;
+  font-size: 0.9rem;
+  background: colors.$light-green;
+  &:nth-of-type(odd) {
+    background: colors.$off-light-green;
+  }
+}
+.row-heading {
+  font-size: 1.1rem;
+  background: colors.$mid-green;
+}
+[class*="column-"] {
+  color: colors.$white-yellow;
+  flex-grow: 1;
+  text-shadow: 1px 1px 5px white;
+
+  text-align: center;
+
+  &:first-of-type {
+    text-align: start;
+  }
+  &:last-of-type {
+    text-align: end;
+  }
+}
+.list-wrapper {
+  display: flex;
+  flex-direction: column;
+}

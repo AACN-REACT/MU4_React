@@ -1,417 +1,337 @@
 {
   "Result": {
-     "FinalizedMediaDetailsDto": [
-        {
-           "Key": "03D9B0A1-643F-45A9-A075-008A1B1B598B",
-           "StartDateTime": "2018-12-10T13:45:00.000Z",
-           "StartedByUserName": "Amin",
-           "Status": "Completed",
-           "Title": "Titanic",
-           "OriginalFileName": "t1.mov",
-           "Keywords": [
-              "boat",
-              "disaster",
-              "James Cameron"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+    "FinalizedMediaDetailsDto": [
+      {
+        "Key": "03D9B0A1-643F-45A9-A075-008A1B1B598B",
+        "StartDateTime": "2018-12-10T13:45:00.000Z",
+        "StartedByUserName": "Amin",
+        "Status": "Completed",
+        "Title": "Titanic",
+        "OriginalFileName": "t1.mov",
+        "Keywords": ["boat", "disaster", "James Cameron"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "2BADB37F-0603-4B73-BA7B-FCAF1823067B",
-           "StartDateTime": "2018-12-11T13:45:00.000Z",
-           "StartedByUserName": "Eric",
-           "Status": "Completed",
-           "Title": "Star Wars",
-           "OriginalFileName": "s1.mov",
-           "Keywords": [
-              "space",
-              "wookie",
-              "jedi"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "2BADB37F-0603-4B73-BA7B-FCAF1823067B",
+        "StartDateTime": "2018-12-11T13:45:00.000Z",
+        "StartedByUserName": "Eric",
+        "Status": "Completed",
+        "Title": "Star Wars",
+        "OriginalFileName": "s1.mov",
+        "Keywords": ["space", "wookie", "jedi"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "A77FC83D-C641-4F2D-97A7-B5C39FDBF0ED",
-           "StartDateTime": "2018-12-12T13:45:00.000Z",
-           "StartedByUserName": "Ram",
-           "Status": "Completed",
-           "Title": "Matrix",
-           "OriginalFileName": "m1.mov",
-           "Keywords": [
-              "neo",
-              "sci-fi",
-              "Wachoski"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "A77FC83D-C641-4F2D-97A7-B5C39FDBF0ED",
+        "StartDateTime": "2018-12-12T13:45:00.000Z",
+        "StartedByUserName": "Ram",
+        "Status": "Completed",
+        "Title": "Matrix",
+        "OriginalFileName": "m1.mov",
+        "Keywords": ["neo", "sci-fi", "Wachoski"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "7A455569-CE05-42B3-83AF-DF91DAAB38F1",
-           "StartDateTime": "2018-12-13T13:45:00.000Z",
-           "StartedByUserName": "Mark",
-           "Status": "Completed",
-           "Title": "Karate Kid",
-           "OriginalFileName": "kk1.mov",
-           "Keywords": [
-              "karate",
-              "mayagi",
-              "fight"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "7A455569-CE05-42B3-83AF-DF91DAAB38F1",
+        "StartDateTime": "2018-12-13T13:45:00.000Z",
+        "StartedByUserName": "Mark",
+        "Status": "Completed",
+        "Title": "Karate Kid",
+        "OriginalFileName": "kk1.mov",
+        "Keywords": ["karate", "mayagi", "fight"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "93C1481C-16FB-445D-ABE6-9D91F915055D",
-           "StartDateTime": "2018-12-14T13:45:00.000Z",
-           "StartedByUserName": "Sean",
-           "Status": "Completed",
-           "Title": "Toy Story",
-           "OriginalFileName": "ts.mov",
-           "Keywords": [
-              "toys",
-              "animation",
-              "pixar"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "93C1481C-16FB-445D-ABE6-9D91F915055D",
+        "StartDateTime": "2018-12-14T13:45:00.000Z",
+        "StartedByUserName": "Sean",
+        "Status": "Completed",
+        "Title": "Toy Story",
+        "OriginalFileName": "ts.mov",
+        "Keywords": ["toys", "animation", "pixar"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "4CEB4E04-9E73-4286-4054-CC82CF04ACC0",
-           "StartDateTime": "2018-12-15T13:45:00.000Z",
-           "StartedByUserName": "Amin",
-           "Status": "Completed",
-           "Title": "Jaws",
-           "OriginalFileName": "j.mov",
-           "Keywords": [
-              "boat",
-              "shark",
-              "Spielberg"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "4CEB4E04-9E73-4286-4054-CC82CF04ACC0",
+        "StartDateTime": "2018-12-15T13:45:00.000Z",
+        "StartedByUserName": "Amin",
+        "Status": "Completed",
+        "Title": "Jaws",
+        "OriginalFileName": "j.mov",
+        "Keywords": ["boat", "shark", "Spielberg"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "3AAF53C1-DDE1-46F5-7D27-E4E34990402D",
-           "StartDateTime": "2018-12-16T13:45:00.000Z",
-           "StartedByUserName": "Eric",
-           "Status": "Completed",
-           "Title": "Scarface",
-           "OriginalFileName": "sf.mov",
-           "Keywords": [
-              "gangster",
-              "pacino",
-              "violence"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "3AAF53C1-DDE1-46F5-7D27-E4E34990402D",
+        "StartDateTime": "2018-12-16T13:45:00.000Z",
+        "StartedByUserName": "Eric",
+        "Status": "Completed",
+        "Title": "Scarface",
+        "OriginalFileName": "sf.mov",
+        "Keywords": ["gangster", "pacino", "violence"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "1C227A9E-8D40-445E-B764-A46D5607482A",
-           "StartDateTime": "2018-12-17T13:45:00.000Z",
-           "StartedByUserName": "Ram",
-           "Status": "Completed",
-           "Title": "Batman",
-           "OriginalFileName": "bm.mov",
-           "Keywords": [
-              "superhero",
-              "gotham",
-              "dark"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "1C227A9E-8D40-445E-B764-A46D5607482A",
+        "StartDateTime": "2018-12-17T13:45:00.000Z",
+        "StartedByUserName": "Ram",
+        "Status": "Completed",
+        "Title": "Batman",
+        "OriginalFileName": "bm.mov",
+        "Keywords": ["superhero", "gotham", "dark"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "8C553134-CEE6-4C9B-C429-3358C2F0CCB8",
-           "StartDateTime": "2018-12-18T13:45:00.000Z",
-           "StartedByUserName": "Mark",
-           "Status": "Completed",
-           "Title": "Ghostbusters",
-           "OriginalFileName": "gb.mov",
-           "Keywords": [
-              "comedy",
-              "super-natural",
-              "eighties"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "8C553134-CEE6-4C9B-C429-3358C2F0CCB8",
+        "StartDateTime": "2018-12-18T13:45:00.000Z",
+        "StartedByUserName": "Mark",
+        "Status": "Completed",
+        "Title": "Ghostbusters",
+        "OriginalFileName": "gb.mov",
+        "Keywords": ["comedy", "super-natural", "eighties"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "239D7F42-AA6A-4055-5D12-CAAF511BBDDC",
-           "StartDateTime": "2018-12-19T13:45:00.000Z",
-           "StartedByUserName": "Sean",
-           "Status": "Completed",
-           "Title": "High Noon",
-           "OriginalFileName": "hn.mov",
-           "Keywords": [
-              "classic",
-              "western",
-              "cowboy"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
-        }
-     ],
-     "PendingMediaDetailsDto": [
-        {
-           "Key": "358B2ACE-1EFA-43D5-744C-1DE520DF8D90",
-           "StartDateTime": "2018-12-10T13:45:00.000Z",
-           "StartedByUserName": "Amin",
-           "Status": "Completed",
-           "Title": "Titanic",
-           "OriginalFileName": "t1.mov",
-           "Keywords": [
-              "boat",
-              "disaster",
-              "James Cameron"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "239D7F42-AA6A-4055-5D12-CAAF511BBDDC",
+        "StartDateTime": "2018-12-19T13:45:00.000Z",
+        "StartedByUserName": "Sean",
+        "Status": "Completed",
+        "Title": "High Noon",
+        "OriginalFileName": "hn.mov",
+        "Keywords": ["classic", "western", "cowboy"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "72ED137F-A509-4FF5-0007-CC69BBD605E9",
-           "StartDateTime": "2018-12-11T13:45:00.000Z",
-           "StartedByUserName": "Eric",
-           "Status": "Completed",
-           "Title": "Star Wars",
-           "OriginalFileName": "s1.mov",
-           "Keywords": [
-              "space",
-              "wookie",
-              "jedi"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+        "CanEdit": true,
+        "IsProcessing": false
+      }
+    ],
+    "PendingMediaDetailsDto": [
+      {
+        "Key": "358B2ACE-1EFA-43D5-744C-1DE520DF8D90",
+        "StartDateTime": "2018-12-10T13:45:00.000Z",
+        "StartedByUserName": "Amin",
+        "Status": "Completed",
+        "Title": "Titanic",
+        "OriginalFileName": "t1.mov",
+        "Keywords": ["boat", "disaster", "James Cameron"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "3BF89E79-6A8C-45C4-BDF1-CFFEBA202F7F",
-           "StartDateTime": "2018-12-12T13:45:00.000Z",
-           "StartedByUserName": "Ram",
-           "Status": "Completed",
-           "Title": "Matrix",
-           "OriginalFileName": "m1.mov",
-           "Keywords": [
-              "neo",
-              "sci-fi",
-              "Wachoski"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "72ED137F-A509-4FF5-0007-CC69BBD605E9",
+        "StartDateTime": "2018-12-11T13:45:00.000Z",
+        "StartedByUserName": "Eric",
+        "Status": "Completed",
+        "Title": "Star Wars",
+        "OriginalFileName": "s1.mov",
+        "Keywords": ["space", "wookie", "jedi"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "04FE25AF-8024-42A2-C4EB-ECDE12559373",
-           "StartDateTime": "2018-12-13T13:45:00.000Z",
-           "StartedByUserName": "Mark",
-           "Status": "Completed",
-           "Title": "Karate Kid",
-           "OriginalFileName": "kk1.mov",
-           "Keywords": [
-              "karate",
-              "mayagi",
-              "fight"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "3BF89E79-6A8C-45C4-BDF1-CFFEBA202F7F",
+        "StartDateTime": "2018-12-12T13:45:00.000Z",
+        "StartedByUserName": "Ram",
+        "Status": "Completed",
+        "Title": "Matrix",
+        "OriginalFileName": "m1.mov",
+        "Keywords": ["neo", "sci-fi", "Wachoski"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "6EECB18E-F2F3-4B17-8981-D970ADA28D83",
-           "StartDateTime": "2018-12-14T13:45:00.000Z",
-           "StartedByUserName": "Sean",
-           "Status": "Completed",
-           "Title": "Toy Story",
-           "OriginalFileName": "ts.mov",
-           "Keywords": [
-              "toys",
-              "animation",
-              "pixar"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "04FE25AF-8024-42A2-C4EB-ECDE12559373",
+        "StartDateTime": "2018-12-13T13:45:00.000Z",
+        "StartedByUserName": "Mark",
+        "Status": "Completed",
+        "Title": "Karate Kid",
+        "OriginalFileName": "kk1.mov",
+        "Keywords": ["karate", "mayagi", "fight"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "420F28C2-A6B4-45B5-9380-76B2769703FA",
-           "StartDateTime": "2018-12-15T13:45:00.000Z",
-           "StartedByUserName": "Amin",
-           "Status": "Completed",
-           "Title": "Jaws",
-           "OriginalFileName": "j.mov",
-           "Keywords": [
-              "boat",
-              "shark",
-              "Spielberg"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "6EECB18E-F2F3-4B17-8981-D970ADA28D83",
+        "StartDateTime": "2018-12-14T13:45:00.000Z",
+        "StartedByUserName": "Sean",
+        "Status": "Completed",
+        "Title": "Toy Story",
+        "OriginalFileName": "ts.mov",
+        "Keywords": ["toys", "animation", "pixar"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "DA915ECE-EA93-41F2-E65D-7E106B0B78F5",
-           "StartDateTime": "2018-12-16T13:45:00.000Z",
-           "StartedByUserName": "Eric",
-           "Status": "Completed",
-           "Title": "Scarface",
-           "OriginalFileName": "sf.mov",
-           "Keywords": [
-              "gangster",
-              "pacino",
-              "violence"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "420F28C2-A6B4-45B5-9380-76B2769703FA",
+        "StartDateTime": "2018-12-15T13:45:00.000Z",
+        "StartedByUserName": "Amin",
+        "Status": "Completed",
+        "Title": "Jaws",
+        "OriginalFileName": "j.mov",
+        "Keywords": ["boat", "shark", "Spielberg"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "350D59E6-D1F2-49E3-C488-34C4C315006A",
-           "StartDateTime": "2018-12-17T13:45:00.000Z",
-           "StartedByUserName": "Ram",
-           "Status": "Completed",
-           "Title": "Batman",
-           "OriginalFileName": "bm.mov",
-           "Keywords": [
-              "superhero",
-              "gotham",
-              "dark"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "DA915ECE-EA93-41F2-E65D-7E106B0B78F5",
+        "StartDateTime": "2018-12-16T13:45:00.000Z",
+        "StartedByUserName": "Eric",
+        "Status": "Completed",
+        "Title": "Scarface",
+        "OriginalFileName": "sf.mov",
+        "Keywords": ["gangster", "pacino", "violence"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "49CE80B8-64FD-41F0-E809-81EA6211849D",
-           "StartDateTime": "2018-12-18T13:45:00.000Z",
-           "StartedByUserName": "Mark",
-           "Status": "Completed",
-           "Title": "Ghostbusters",
-           "OriginalFileName": "gb.mov",
-           "Keywords": [
-              "comedy",
-              "super-natural",
-              "eighties"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "350D59E6-D1F2-49E3-C488-34C4C315006A",
+        "StartDateTime": "2018-12-17T13:45:00.000Z",
+        "StartedByUserName": "Ram",
+        "Status": "Completed",
+        "Title": "Batman",
+        "OriginalFileName": "bm.mov",
+        "Keywords": ["superhero", "gotham", "dark"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
         },
-        {
-           "Key": "79143B3E-F2F3-4D6C-388C-F30810C79F06",
-           "StartDateTime": "2018-12-19T13:45:00.000Z",
-           "StartedByUserName": "Sean",
-           "Status": "Completed",
-           "Title": "High Noon",
-           "OriginalFileName": "hn.mov",
-           "Keywords": [
-              "classic",
-              "western",
-              "cowboy"
-           ],
-           "MediaHostedUrl": "https://some/url/t1",
-           "NetforumItemLink": {
-              "NetofrumKey": "1234",
-              "NetforumType": "someType"
-           },
-           "CanEdit": true,
-           "IsProcessing": false
-        }
-     ]
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "49CE80B8-64FD-41F0-E809-81EA6211849D",
+        "StartDateTime": "2018-12-18T13:45:00.000Z",
+        "StartedByUserName": "Mark",
+        "Status": "Completed",
+        "Title": "Ghostbusters",
+        "OriginalFileName": "gb.mov",
+        "Keywords": ["comedy", "super-natural", "eighties"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
+        },
+        "CanEdit": true,
+        "IsProcessing": false
+      },
+      {
+        "Key": "79143B3E-F2F3-4D6C-388C-F30810C79F06",
+        "StartDateTime": "2018-12-19T13:45:00.000Z",
+        "StartedByUserName": "Sean",
+        "Status": "Completed",
+        "Title": "High Noon",
+        "OriginalFileName": "hn.mov",
+        "Keywords": ["classic", "western", "cowboy"],
+        "MediaHostedUrl": "https://some/url/t1",
+        "NetforumItemLink": {
+          "NetforumKey": "1234",
+          "NetforumType": "someType"
+        },
+        "CanEdit": true,
+        "IsProcessing": false
+      }
+    ]
   },
   "ErrorInfo": {
-     "UserErrorMessage": "str"
+    "UserErrorMessage": "str"
   },
   "Errors": [
-     {
-        "Key": "str",
-        "Value": "str"
-     }
+    {
+      "Key": "str",
+      "Value": "str"
+    }
   ]
 }
