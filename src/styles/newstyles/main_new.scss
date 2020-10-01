@@ -1,15 +1,6 @@
-
 @use 'title_new';
 @use 'panels';
 @use 'misc';
 @use 'buttons';
 @use 'dropzone';
-
-.dummy {
-  //   height: 200px;
-  //   width: 200px;
-
-  border: 2px solid red;
-  width: 100%;
-  height:100%;
-}
+@use 'detailspage';

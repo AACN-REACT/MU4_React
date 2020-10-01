@@ -94,24 +94,24 @@ export function ListComponent({
                     }}
                     className={`row-${id}`}
                   >
-                    <div key={el.Title} className="column-title">
+                    <div key={el.Title} className="column-full-title">
                       {el.Title}
                     </div>
-                    <div key={el.StartedByUserName} className="column-addedby">
+                    <div key={el.StartedByUserName} className="column-full-addedby">
                       {el.StartedByUserName}
                     </div>
-                    <div key="mykeywords" className="column-keywords">
+                    <div key="mykeywords" className="column-full-keywords">
                       {el.Keywords.length > 0 ? "True" : "False"}
                     </div>
-                    <div key="netforum" className="column-keywords">
+                    <div key="netforum" className="column-full-keywords">
                       {el.NetforumItemLink.NetforumKey.length > 0
                         ? "True"
                         : "False"}
                     </div>
-                    <div key={el.Status} className="column-status">
+                    <div key={el.Status} className="column-full-status">
                       {el.Status}
                     </div>
-                    <div key={el.StartDateTime} className="column-date">
+                    <div key={el.StartDateTime} className="column-full-date">
                       {new Date(el.StartDateTime).toDateString()}
                     </div>
                   </div>

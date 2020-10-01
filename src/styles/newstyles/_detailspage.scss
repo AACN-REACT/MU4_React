@@ -1,0 +1,21 @@
+@use 'colors';
+@use 'fonts';
+
+.details-page {
+  box-sizing: border-box;
+}
+.details-bar {
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  padding: 5px;
+  background-color: colors.$mid-green;
+  color: white;
+  font-family: fonts.$vt;
+  font-size: 1.3rem;
+  text-shadow: 1px 1px 5px white;
+}
+.details-frame {
+  box-sizing: border-box;
+  display: grid;
+}

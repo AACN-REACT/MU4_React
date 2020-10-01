@@ -18,14 +18,22 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
   console.log("PANEL STATE", panelState);
   return (
     <div className="details-page">
-      <button
-        onClick={(e) => {
-          panelState.details_container === 0
-            ? dispatchPanelState({ type: "OPEN DETAILS CLOSE OTHERS" })
-            : dispatchPanelState({ type: "CLOSE DETAILS OPEN OTHER" });
-        }}
-      />
-      <h1>{mediaDetails?.["OriginalFileName"]}</h1>
+
+      <div className="details-bar">
+        <span>media details...</span>
+        <button
+          onClick={(e) => {
+            panelState.details_container === 0
+              ? dispatchPanelState({ type: "OPEN DETAILS CLOSE OTHERS" })
+              : dispatchPanelState({ type: "CLOSE DETAILS OPEN OTHER" });
+          }}
+        />
+      </div>
+      <div className="details-frame">
+          <
+
+      </div>
+
     </div>
   );
 }
