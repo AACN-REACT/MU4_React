@@ -4,7 +4,16 @@ import { ControlButton } from "./control_button";
 import { Dummy } from "./dummy";
 
 export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
-  React.useEffect(function () {});
+  const [mediaDetails, setMediaDetails] = React.useState(null);
+
+  React.useEffect(
+    function () {
+      fetch(`https://localhost:44390/api/v1/Medias/${mediaKey}/MediaDetailsVm`)
+        .then((res) => res.json())
+        .then((res) => setMediaDetails(res["Result"]));
+    },
+    [mediaKey]
+  );
 
   console.log("PANEL STATE", panelState);
   return (
@@ -16,7 +25,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
             : dispatchPanelState({ type: "CLOSE DETAILS OPEN OTHER" });
         }}
       />
-      <h1>{mediaKey}</h1>
+      <h1>{mediaDetails?.["OriginalFileName"]}</h1>
     </div>
   );
 }
