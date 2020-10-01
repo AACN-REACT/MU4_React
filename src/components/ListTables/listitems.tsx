@@ -6,15 +6,20 @@ export function UploadingListItem({ status, item, url, user, key, dispatch }) {
   console.log("STATUS", status);
   const [progress, setprogress] = useState(item.progress);
   useEffect(function () {
-    if(status==="active"){XHRNew(item, `${url}/${item.id}?username=${user}`, setprogress, dispatch)}
-    else if(status==="completed"){setprogress(100)}
-  }, []);
-  useEffect(function () {
-    if(progress===100){
-      dispatch({type:"COMPLETED", action:item.id})
+    if (status === "active") {
+      XHRNew(item, `${url}/${item.id}?username=${user}`, setprogress, dispatch);
+    } else if (status === "completed") {
+      setprogress(100);
     }
-    
-  }, [progress]);
+  }, []);
+  useEffect(
+    function () {
+      if (progress === 100) {
+        dispatch({ type: "COMPLETED", action: item.id });
+      }
+    },
+    [progress]
+  );
 
   switch (status) {
     case "active":
@@ -80,9 +85,9 @@ export function UploadingListItem({ status, item, url, user, key, dispatch }) {
             {item.edit ? "o" : "x"}
           </div>
         </div>
-      );;
+      );
     case "pending":
-      return  (
+      return (
         <div
           key={key}
           className={`upload-list-item ${progress === 100 ? "completed" : ""}`}
@@ -112,7 +117,7 @@ export function UploadingListItem({ status, item, url, user, key, dispatch }) {
             {item.edit ? "o" : "x"}
           </div>
         </div>
-      );;
+      );
     default:
       return null;
   }

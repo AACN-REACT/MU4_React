@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import butt from "../images/switch.png";
 export function ListComponent({
   heading,
   dispatchPanelState,
@@ -38,9 +38,16 @@ export function ListComponent({
                 <div className="column-3">Date</div>
               </div>
 
-              {videolist.map((el, id) => {
+              {videolist?.map((el, id) => {
                 return (
-                  <div className={`row-${id}`}>
+                  <div
+                    className={`row-${id}`}
+                    onClick={(e) => {
+                      dispatchPanelState({
+                        type: `OPEN ${heading.toUpperCase()}`,
+                      });
+                    }}
+                  >
                     <div key={el.Title} className="column-1">
                       {el.Title}
                     </div>
@@ -97,7 +104,10 @@ export function ListComponent({
                     <div key={el.Title} className="column-full-title">
                       {el.Title}
                     </div>
-                    <div key={el.StartedByUserName} className="column-full-addedby">
+                    <div
+                      key={el.StartedByUserName}
+                      className="column-full-addedby"
+                    >
                       {el.StartedByUserName}
                     </div>
                     <div key="mykeywords" className="column-full-keywords">
@@ -143,7 +153,7 @@ export function ListComponent({
           }}
           className="switch"
         >
-          t
+          <img src={butt} />
         </div>
       </div>
       {list}

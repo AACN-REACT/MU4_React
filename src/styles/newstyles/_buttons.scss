@@ -1,5 +1,23 @@
 @use 'colors';
 
+.switch {
+  img {
+    width: 20px;
+    object-fit: contain;
+    cursor: pointer;
+  }
+}
+
+.check {
+  background-color: colors.$mid-green;
+  width: 30px;
+  img {
+    width: 20px;
+    margin: 0 auto;
+    object-fit: contain;
+    cursor: pointer;
+  }
+}
 .outer-ring {
   display: flex;
   justify-content: space-around;

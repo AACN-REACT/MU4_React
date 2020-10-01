@@ -7,7 +7,7 @@ import { DetailsPage } from "./details_page";
 import { Dummy } from "./dummy";
 import { Panels } from "./panels";
 import { PendingList } from "./pending_list";
-import {ListComponent} from "./list-component"
+import { ListComponent } from "./list-component";
 import { TitleBar } from "./title";
 import { UploadTable } from "../components/ListTables/listtable";
 import { videolist } from "../data/videolist";
@@ -46,8 +46,8 @@ this needs to changed into a custome hook: */
     [],
   ]);
 
-  const [mediaKey,setMediaKey] = React.useState(null)
-
+  const [mediaKey, setMediaKey] = React.useState(null);
+ const v0 = "https://localhost:44390/api/v0/MediaManagement"
   React.useEffect(function () {
     fetch("http://localhost:3000/Result")
       .then((res) => res.json())
@@ -55,7 +55,7 @@ this needs to changed into a custome hook: */
         console.log("RES", res);
         let completed = res["FinalizedMediaDetailsDto"];
         let pending = res["PendingMediaDetailsDto"];
-        console.log("completed", completed)
+        console.log("completed", completed);
         setManagementLists([pending, completed]);
       });
   }, []);
@@ -71,12 +71,20 @@ this needs to changed into a custome hook: */
           dispatch={DISPATCHUpload}
           user={user}
         />
-        <ListComponent heading="Pending" videolist={pendingList} setMediaKey={setMediaKey} />
+        <ListComponent
+          heading="Pending"
+          videolist={pendingList}
+          setMediaKey={setMediaKey}
+        />
         <DropzoneContainer
           uploadSTATE={uploadSTATE}
           DISPATCHUpload={DISPATCHUpload}
         />
-        <ListComponent heading="Completed" videolist={finalizedList} setMediaKey={setMediaKey}/>
+        <ListComponent
+          heading="Completed"
+          videolist={finalizedList}
+          setMediaKey={setMediaKey}
+        />
         <DetailsPage mediaKey={mediaKey} />
       </Panels>
     </Auth>

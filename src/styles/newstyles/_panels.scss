@@ -13,16 +13,17 @@
 
 [class*="details-container-"] {
   transition: all 1s;
+  overflow: hidden;
   background: linear-gradient(0deg, colors.$white-green, colors.$white-yellow);
 }
 .details-container-0 {
-  flex-basis: 0px;
+  height: 30px;
 }
 .details-container-1 {
   flex-basis: 00px;
 }
 .details-container-2 {
-  flex-basis: 500px;
+  flex-basis: 700px;
 }
 [class*="upload-container-"] {
   background: skyblue;
@@ -37,7 +38,7 @@
   flex-basis: 100px;
 }
 .upload-container-2 {
-  flex-basis: 300px;
+  flex-basis: 400px;
 }
 
 [class*="list-container-"] {

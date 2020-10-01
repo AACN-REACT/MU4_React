@@ -9,13 +9,16 @@ import { render } from "react-dom";
 import "./styles/newstyles/main_new.scss";
 //components
 
-
-//import 
+//import
 
 //import App from "./components/app2";
 
-import {App} from './new_components/app_new'
+import { App } from "./new_components/app_new";
+
+const user = "akhan";
+const uploadURL = "https://localhost:44390/api/v1/Medias";
+const sizeLimit = 45000000;
 
 const root = document.querySelector("#root");
 
-render(<App />, root);
+render(<App uploadURL={uploadURL} user={user} />, root);

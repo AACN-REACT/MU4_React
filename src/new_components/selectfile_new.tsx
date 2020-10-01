@@ -4,7 +4,7 @@ import * as React from "react";
 import { isAcceptableType, isWithinSizeLimit} from "../utils/fileprocess";
 import { getGuid } from "../utils/getguid";
 
-export function SelectFile({ DISPATCHupload, sizeLimit}) {
+export function SelectFile({ DISPATCHupload, sizeLimit, dispatchPanelState}) {
   //set up ref to hidden input field
   const inputField = React.useRef();
 
@@ -37,6 +37,7 @@ export function SelectFile({ DISPATCHupload, sizeLimit}) {
                     },
                 },
               });
+              dispatchPanelState({ type: "OPEN UPLOAD" });
             } else if (!isAcceptableType(file)){
               alert(`${file['name']} is not an accepted video format`);
             }

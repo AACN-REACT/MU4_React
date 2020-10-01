@@ -4,5 +4,16 @@
   display: flex;
   height: 100px;
   width: 100%;
-  background-color: colors.$mid-green;
+  margin: 0 auto;
+  max-width: 1600px;
+  border: 1px solid colors.$light-green;
+  img {
+    width: 500px;
+    margin: 0 auto;
+    object-fit: cover;
+  }
+}
+.logo {
+  width: 500px;
+  height: auto;
 }
