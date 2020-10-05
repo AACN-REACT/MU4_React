@@ -9,7 +9,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
 
   React.useEffect(
     function () {
-      fetch(`https://localhost:44390/api/v1/Medias/${mediaKey}/MediaDetailsVm`)
+      fetch(`https://localhost:44325/api/v1/Medias/${mediaKey}/MediaDetailsVm`)
         .then((res) => res.json())
         .then((res) => setMediaDetails(res["Result"]));
     },
@@ -37,7 +37,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           name="Title"
           displayName="Title"
           data={mediaDetails?.Title}
-          endpoint={"https://localhost:44390/api/v1/Medias/"}
+          endpoint={"https://localhost:44325/api/v1/Medias/"}
           user="amin"
           itemKey={mediaDetails?.Key}
           itemName="title"
@@ -48,7 +48,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           name="NetforumLink"
           displayName="Netforum Link"
           data={mediaDetails?.NetforumItemLink?.NetforumKey}
-          endpoint={"https://localhost:44390/api/v1/Medias/"}
+          endpoint={"https://localhost:44325/api/v1/Medias/"}
           user="amin"
           itemKey={mediaDetails?.Key}
           itemName="netforumItemLink"
@@ -59,28 +59,28 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           name="NetforumLink"
           displayName="Mediahost URL"
           data={mediaDetails?.MediaHostUrl}
-          endpoint={"https://localhost:44390/api/v1/Medias/"}
+          endpoint={"https://localhost:44325/api/v1/Medias/"}
           user="amin"
           itemKey={mediaDetails?.Key}
           itemName="originalfilename"
         />
         <EditableField
-          method="PUT"
+          method="POST"
           setter={setMediaDetails}
           name="Keywords"
           displayName="Keywords"
           data={mediaDetails?.Keywords}
-          endpoint={"https://localhost:44390/api/v1/Medias/"}
+          endpoint={"https://localhost:44325/api/v1/Medias/"}
           user="amin"
           itemKey={mediaDetails?.Key}
-          itemName="keywords"
+          itemName="keyword"
         />
         <EditableField
           setter={setMediaDetails}
           name="StartedByUsername"
           displayName="Added By.."
           data={mediaDetails?.StartedByUsername}
-          endpoint={"https://localhost:44390/api/v1/Medias/"}
+          endpoint={"https://localhost:44325/api/v1/Medias/"}
           user="amin"
           itemKey={mediaDetails?.Key}
           itemName="StartedByUserName"

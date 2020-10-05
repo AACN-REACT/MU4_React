@@ -19,7 +19,7 @@ export function EditableField({
   function sendData(userEdit) {
     let myquery = new URLSearchParams({ [itemName]: userEdit, username: user });
     let myrequest = new Request(
-      endpoint + itemKey + "/" + itemName + "?" + myquery.toString(),
+      endpoint + itemKey + "/" + name.toLowerCase() + "?" + myquery.toString(),
       {
         method: method,
       }
