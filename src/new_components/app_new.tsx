@@ -47,7 +47,7 @@ this needs to changed into a custome hook: */
   ]);
 
   const [mediaKey, setMediaKey] = React.useState(null);
- const v0 = "https://localhost:44390/api/v0/MediaManagement"
+  const v0 = "https://localhost:44390/api/v0/MediaManagement";
   React.useEffect(function () {
     fetch("http://localhost:3000/Result")
       .then((res) => res.json())
@@ -66,6 +66,7 @@ this needs to changed into a custome hook: */
       <TitleBar />
       <Panels>
         <UploadTable
+          setMediaKey={setMediaKey}
           list={uploadSTATE}
           url={uploadURL}
           dispatch={DISPATCHUpload}

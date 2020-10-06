@@ -124,16 +124,12 @@
 }
 
 .upload-container {
-  padding: 3px;
-  //position: relative;
-  top: 10px;
-  left: 10px;
   display: flex;
   height: auto;
   overflow: hidden;
-  justify-content: start;
+  justify-content: space-evenly;
   flex-direction: column;
-  width: auto;
+  width: 100%;
   border: 1px solid lightblue;
   transition: all 0.5s;
 }
@@ -152,7 +148,7 @@
   justify-content: start;
   border-bottom: 1px solid lightblue;
   align-items: center;
-  transition: all 0.5s;
+  transition: all 1s;
   &.completed {
     &::after {
       content: "completed";
