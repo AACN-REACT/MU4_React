@@ -22,6 +22,16 @@ function panelReducer(state, action) {
         details_container: 2,
       };
       break;
+    case "OPEN DETAILS OPEN UPLOAD CLOSE OTHERS":
+      newPanelState = {
+        upload_container: 2,
+        list_container: 0,
+        pending_container: 1,
+        completed_container: 1,
+        dropzone_container: 1,
+        details_container: 2,
+      };
+      break;
     case "CLOSE DETAILS OPEN OTHERS":
       newPanelState = {
         upload_container: 2,

@@ -31,6 +31,7 @@ export function DropZone({
         SETdropzone("dropzone-idle");
       }}
       onDrop={function (e) {
+        e.persist();
         e.preventDefault();
         e.stopPropagation();
         SETdropzone("dropzone-idle");
@@ -38,11 +39,10 @@ export function DropZone({
         let files = Array.from(dt.files);
         for (let i = 0; i < files.length; i++) {
           let file = files[i];
-
+          console.log("FILEZZ " + i, file);
           const guid = getGuid();
           if (isAcceptableType(file) && isWithinSizeLimit(file, sizeLimit)) {
             console.log("dropzone file", file);
-
             DISPATCHupload({
               type: "ADD",
               action: {
@@ -53,6 +53,7 @@ export function DropZone({
                     .substring(file["type"].indexOf("/"))
                     .slice(1),
                   file: file,
+                  status: "pending",
                   id: guid,
                   progress: 0,
                 },

@@ -1,10 +1,10 @@
 import * as React from "react";
 
 //import filechecker
-import { isAcceptableType, isWithinSizeLimit} from "../utils/fileprocess";
+import { isAcceptableType, isWithinSizeLimit } from "../utils/fileprocess";
 import { getGuid } from "../utils/getguid";
 
-export function SelectFile({ DISPATCHupload, sizeLimit, dispatchPanelState}) {
+export function SelectFile({ DISPATCHupload, sizeLimit, dispatchPanelState }) {
   //set up ref to hidden input field
   const inputField = React.useRef();
 
@@ -12,37 +12,43 @@ export function SelectFile({ DISPATCHupload, sizeLimit, dispatchPanelState}) {
     <div className="select-container">
       <input
         ref={inputField}
-        type="file" 
+        type="file"
         hidden
         multiple
         onChange={(e) => {
+          e.preventDefault();
+
           let files = e.target.files;
-          console.log('select', e,files)
+          console.log("select", e, files);
           for (let i = 0; i < files.length; i++) {
             let file = files[i];
             const guid = getGuid();
-            if (isAcceptableType(file) && isWithinSizeLimit(file,sizeLimit)) {
-                console.log("select", file)
+            if (isAcceptableType(file) && isWithinSizeLimit(file, sizeLimit)) {
+              console.log("select", file);
+
               DISPATCHupload({
                 type: "ADD",
                 action: {
-                    [guid]: {
-                      name: (file["name"]).split('.')[0],
-                      size: (parseInt(file["size"])/1000000).toFixed(1)+"mb",
-                      type: (file["type"]).substring(file['type'].indexOf('/')).slice(1),
-                      file: file,
-                      status:"pending",
-                      id: guid,
-                      progress: 0,
-                    },
+                  [guid]: {
+                    name: file["name"].split(".")[0],
+                    size: (parseInt(file["size"]) / 1000000).toFixed(1) + "mb",
+                    type: file["type"]
+                      .substring(file["type"].indexOf("/"))
+                      .slice(1),
+                    file: file,
+                    status: "pending",
+                    id: guid,
+                    progress: 0,
+                  },
                 },
               });
               dispatchPanelState({ type: "OPEN UPLOAD" });
-            } else if (!isAcceptableType(file)){
-              alert(`${file['name']} is not an accepted video format`);
-            }
-            else {
-                alert(`${file['name']} is not within the size limit of ${sizeLimit} `)
+            } else if (!isAcceptableType(file)) {
+              alert(`${file["name"]} is not an accepted video format`);
+            } else {
+              alert(
+                `${file["name"]} is not within the size limit of ${sizeLimit} `
+              );
             }
           }
         }}
@@ -52,7 +58,9 @@ export function SelectFile({ DISPATCHupload, sizeLimit, dispatchPanelState}) {
         onClick={function (e) {
           inputField.current.click();
         }}
-      >Select Files</div> 
+      >
+        Select Files
+      </div>
     </div>
   );
 }

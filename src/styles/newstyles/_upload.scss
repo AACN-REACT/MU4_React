@@ -1,27 +1,18 @@
-// .upload-container {
-//   height: 200px;
-//   display: flex;
-//   width: 100%;
-
-//   justify-content: start;
-//   background-color: orange;
-// }
-// .active {
-//   width: 20%;
-//   background-color: red;
-// }
-
-// .pending {
-//   width: 20%;
-//   background-color: slateblue;
-// }
-
-// .completed {
-//   width: 20%;
-//   background-color: green;
-// }
-
-// .canedit {
-//   width: 20%;
-//   background-color: lightgreen;
-// }
+@use 'colors';
+@use 'fonts';
+.upload-heading {
+    transition:all .3s;
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  padding: 5px;
+  background-color: colors.$mid-green;
+  color: white;
+  font-family: fonts.$vt;
+  font-size: 1.3rem;
+  text-shadow: 1px 1px 5px white;
+  img {
+    width: 20px;
+    object-fit: contain;
+  }
+}

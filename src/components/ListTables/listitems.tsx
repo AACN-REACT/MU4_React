@@ -14,9 +14,17 @@ export function UploadingListItem({
   console.log("arr name", item);
   console.log("STATUS", status);
   const [progress, setprogress] = useState(item.progress);
+  let [returnedXhr, setReturnedXhr] = useState({ abort: () => null });
   useEffect(function () {
     if (status === "active") {
-      XHRNew(item, `${url}/${item.id}?username=${user}`, setprogress, dispatch);
+      setReturnedXhr(
+        XHRNew(
+          item,
+          `${url}/${item.id}?username=${user}`,
+          setprogress,
+          dispatch
+        )
+      );
     } else if (status === "completed") {
       setprogress(100);
     }
@@ -56,6 +64,7 @@ export function UploadingListItem({
           </div>
           <div
             onClick={(e) => {
+              returnedXhr.abort();
               dispatch({ type: "DELETE", action: item.id });
             }}
             className="close-box"
@@ -129,13 +138,14 @@ export function UploadingListItem({
         </div>
       );
     case "canedit":
-      debugger
       return (
         <div
           key={key}
           onClick={(e) => {
             setMediaKey(item.id);
-            dispatchPanelState({ type: "OPEN DETAILS CLOSE OTHERS" });
+            dispatchPanelState({
+              type: "OPEN DETAILS OPEN UPLOAD CLOSE OTHERS",
+            });
           }}
           className={`upload-list-item ${progress === 100 ? "EDIT" : ""}`}
         >

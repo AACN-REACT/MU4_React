@@ -48,13 +48,15 @@ this needs to changed into a custome hook: */
 
   const [mediaKey, setMediaKey] = React.useState(null);
   const v0 = "https://localhost:44390/api/v0/MediaManagement";
+  const v1 = "https://localhost:44340/api/v1/MediaManagement";
+  const localJson = "http://localhost:3000/Result";
   React.useEffect(function () {
-    fetch("http://localhost:3000/Result")
+    fetch(v1)
       .then((res) => res.json())
       .then((res) => {
         console.log("RES", res);
-        let completed = res["FinalizedMediaDetailsDto"];
-        let pending = res["PendingMediaDetailsDto"];
+        let completed = res["Result"]["FinalizedMediaDetailsDtos"];
+        let pending = res["Result"]["PendingMediaDetailsDto"];
         console.log("completed", completed);
         setManagementLists([pending, completed]);
       });

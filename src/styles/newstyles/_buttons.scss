@@ -38,3 +38,22 @@
   background-color: colors.$mid-green;
   border-radius: 10px;
 }
+
+[class*="delete-button"] {
+  width: 200px;
+  height: 50px;
+  transition: 0.5s all;
+  color: white;
+}
+
+.disabled-delete-button {
+  pointer-events: none;
+  background-color: gray;
+}
+.active-delete-button {
+  pointer-events: auto;
+  background-color: green;
+  &:hover {
+    background-color: lightgreen;
+  }
+}

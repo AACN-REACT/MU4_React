@@ -3,13 +3,14 @@ import { Controls } from "./controls";
 import { ControlButton } from "./control_button";
 import { EditableField } from "./edit_field";
 import butt from "../images/switch.png";
+import { DeleteButton } from "./delete_button";
 
 export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
   const [mediaDetails, setMediaDetails] = React.useState(null);
 
   React.useEffect(
     function () {
-      fetch(`https://localhost:44325/api/v1/Medias/${mediaKey}/MediaDetailsVm`)
+      fetch(`https://localhost:44340/api/v1/Medias/${mediaKey}/MediaDetailsVm`)
         .then((res) => res.json())
         .then((res) => setMediaDetails(res["Result"]));
     },
@@ -37,7 +38,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           name="Title"
           displayName="Title"
           data={mediaDetails?.Title}
-          endpoint={"https://localhost:44325/api/v1/Medias/"}
+          endpoint={"https://localhost:44340/api/v1/Medias/"}
           user="amin"
           itemKey={mediaDetails?.Key}
           itemName="title"
@@ -85,6 +86,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           itemKey={mediaDetails?.Key}
           itemName="StartedByUserName"
         />
+        <DeleteButton user="amin" itemKey={mediaDetails?.Key} />
       </div>
     </div>
   );

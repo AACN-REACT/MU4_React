@@ -27,19 +27,21 @@
   height: 700px;
 }
 [class*="upload-container-"] {
-  background: skyblue;
-  transition: all 1s;
+  background: linear-gradient(0deg, colors.$white-green, colors.$white-yellow);
+  transition: all 0.5s;
 
   overflow: hidden;
 }
 .upload-container-0 {
-  flex-basis: 0px;
+  height: auto;
+  height: 30px;
 }
 .upload-container-1 {
-  flex-basis: 100px;
+  height: 100px;
 }
 .upload-container-2 {
-  flex-basis: 400px;
+  height: 300px;
+  overflow-y: scroll;
 }
 
 [class*="list-container-"] {

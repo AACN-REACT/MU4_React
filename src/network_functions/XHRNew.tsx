@@ -13,7 +13,6 @@ export function XHRNew(item, url, setter, dispatch) {
   xhr.addEventListener("readystatechange", (e) => {
     if (xhr.readyState == 4 && xhr.status == 200) {
       console.log("DONE!");
-      alert("can edit!");
       dispatch({ type: "CANEDIT", action: item.id });
     } else if (xhr.readyState == 4 && xhr.status !== 200) {
       console.log("ERROR", xhr.status);
@@ -21,4 +20,5 @@ export function XHRNew(item, url, setter, dispatch) {
   });
   let mydata = createFormData(item.file);
   xhr.send(mydata);
+  return xhr
 }
