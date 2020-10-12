@@ -4,19 +4,30 @@ import * as React from "react";
 import { isAcceptableType, isWithinSizeLimit } from "../utils/fileprocess";
 import { getGuid } from "../utils/getguid";
 
-export function SelectFile({ DISPATCHupload, sizeLimit, dispatchPanelState }) {
+function clickHiddenInput (inputRef) {
+  inputRef.current.click();
+ 
+
+}
+export function SelectFile({
+  DISPATCHupload,
+  sizeLimit,
+  dispatchPanelState,
+  setError,
+}) {
   //set up ref to hidden input field
   const inputField = React.useRef();
 
   return (
     <div className="select-container">
       <input
+        key="inputField"
         ref={inputField}
         type="file"
         hidden
         multiple
         onChange={(e) => {
-          e.preventDefault();
+          e.persist();
 
           let files = e.target.files;
           console.log("select", e, files);
@@ -43,6 +54,7 @@ export function SelectFile({ DISPATCHupload, sizeLimit, dispatchPanelState }) {
                 },
               });
               dispatchPanelState({ type: "OPEN UPLOAD" });
+             
             } else if (!isAcceptableType(file)) {
               alert(`${file["name"]} is not an accepted video format`);
             } else {
@@ -51,12 +63,13 @@ export function SelectFile({ DISPATCHupload, sizeLimit, dispatchPanelState }) {
               );
             }
           }
+          inputField.current.value="";
         }}
       />
       <div
         className={"select-button"}
-        onClick={function (e) {
-          inputField.current.click();
+        onClick={(e)=>{
+            clickHiddenInput(inputField)
         }}
       >
         Select Files

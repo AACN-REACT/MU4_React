@@ -9,6 +9,7 @@ import { Panels } from "./panels";
 import { PendingList } from "./pending_list";
 import { ListComponent } from "./list-component";
 import { TitleBar } from "./title";
+import {Tooltip} from  './tooltip';
 import { UploadTable } from "../components/ListTables/listtable";
 import { videolist } from "../data/videolist";
 import { uploadListReducer } from "../utils/reducers/upload-list-reducer";
@@ -16,12 +17,22 @@ import { Client } from "../network_functions/swaggerclient/swaggerclient";
 
 /*-------------------------------------------------------------------------------------------------------*/
 // our App component starts here, takes uploadUrl and user at this point - perhaps should include uploadlimit?
-export function App({ uploadURL, user }) {
+export function App({ uploadURL, user, sizeLimit }) {
   /* since we are defiing our components at the top level its important that we set up the uploading state and dispatcher here so we can 
 pass them directly down to the sibling components, utilises the uploadListReducer - see there for logic */
   const [uploadSTATE, DISPATCHUpload] = React.useReducer(uploadListReducer, {});
   /*-------------------------------------------------------------------------------------------------------*/
-
+  /*Now we set up state for a an error and error message */
+  const [ErrorMsg, setErrorMsg] = React.useState(null)
+  
+  
+  /*Now we set up state for a tooltip */
+  const [toolTip, setTooltip]  = React.useState(null)
+  
+  
+  
+  
+  /*-------------------------------------------------------------------------------------------------------*/
   /* this initial value is too check if we have a key value in the url params, so that we can use it to
 load an initial details page. This is required if we are to allow copy and pasting of urls to specific details pages
 0Auth may interfer with this so an alternative is to put it into browser storage and check for it on any return from 
@@ -56,7 +67,7 @@ this needs to changed into a custome hook: */
       .then((res) => {
         console.log("RES", res);
         let completed = res["Result"]["FinalizedMediaDetailsDtos"];
-        let pending = res["Result"]["PendingMediaDetailsDto"];
+        let pending = res["Result"]["PendingMediaDetailsDtos"];
         console.log("completed", completed);
         setManagementLists([pending, completed]);
       });
@@ -65,6 +76,8 @@ this needs to changed into a custome hook: */
   /*--------------------------------------------------------------------------------------------------------*/
   return (
     <Auth idserver="aacn" flow="PKCE" config={{}}>
+      <Tooltip toolTip={toolTip} />
+      <div>{ErrorMsg}</div>
       <TitleBar />
       <Panels>
         <UploadTable
@@ -73,15 +86,20 @@ this needs to changed into a custome hook: */
           url={uploadURL}
           dispatch={DISPATCHUpload}
           user={user}
+          setError={setErrorMsg}
         />
         <ListComponent
           heading="Pending"
           videolist={pendingList}
           setMediaKey={setMediaKey}
+         
         />
         <DropzoneContainer
           uploadSTATE={uploadSTATE}
           DISPATCHUpload={DISPATCHUpload}
+          sizeLimit ={sizeLimit}
+          setError={setErrorMsg}
+          
         />
         <ListComponent
           heading="Completed"

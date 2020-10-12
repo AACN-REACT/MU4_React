@@ -4,6 +4,7 @@ import { ControlButton } from "./control_button";
 import { EditableField } from "./edit_field";
 import butt from "../images/switch.png";
 import { DeleteButton } from "./delete_button";
+import { FinalizeButton } from "./finalize_button";
 
 export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
   const [mediaDetails, setMediaDetails] = React.useState(null);
@@ -87,6 +88,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           itemName="StartedByUserName"
         />
         <DeleteButton user="amin" itemKey={mediaDetails?.Key} />
+        <FinalizeButton user="amin" itemKey={mediaDetails?.Key} />
       </div>
     </div>
   );

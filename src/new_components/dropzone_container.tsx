@@ -17,6 +17,7 @@ export function DropzoneContainer({
   dispatchPanelState,
   uploadSTATE,
   DISPATCHUpload,
+  setError
 }) {
   //set up state for Uploading files
   //const [uploadSTATE, DISPATCHUpload] = React.useReducer(uploadListReducer, {});
@@ -30,6 +31,7 @@ export function DropzoneContainer({
         dispatchPanelState={dispatchPanelState}
       />
       <SelectFile
+        setError={setError}
         DISPATCHupload={DISPATCHUpload}
         sizeLimit={sizeLimit}
         dispatchPanelState={dispatchPanelState}

@@ -11,6 +11,7 @@ export function UploadTable({
   dispatch,
   panelState,
   dispatchPanelState,
+  setError
 }) {
   //create a list from the list
 
@@ -121,69 +122,3 @@ export function UploadTable({
   );
 }
 
-// if (arr.length > 0) {
-//   return (
-//     <>
-//       <div className="upload-container">
-//         <div className="loading-bar active" key="active">
-//           {activelist.length > 0 ? "ACTIVE" : null}
-//           {activelist.map((item) => (
-//             <UploadingListItem
-//               status={item.status}
-//               dispatch={dispatch}
-//               key={item.id}
-//               item={item}
-//               url={url}
-//               user={user}
-//             />
-//           ))}
-//         </div>
-//         <div className="loading-bar pending" key="pending">
-//           {" "}
-//           {pendinglist.length > 0 ? "PENDING" : null}
-//           {pendinglist.map((item) => (
-//             <UploadingListItem
-//               status={item.status}
-//               dispatch={dispatch}
-//               key={item.id}
-//               item={item}
-//               url={url}
-//               user={user}
-//             />
-//           ))}
-//         </div>
-//         <div className="loading-bar completed" key="completed">
-//           {completedlist.length > 0 ? "COMPLETED" : null}
-//           {completedlist.map((item) => (
-//             <UploadingListItem
-//               status={item.status}
-//               dispatch={dispatch}
-//               key={item.id}
-//               item={item}
-//               url={url}
-//               user={user}
-//             />
-//           ))}
-//         </div>
-//         <div className="loading-bar canedit" key="canedit">
-//           {editablelist.length > 0 ? "EDIT" : null}
-//           {editablelist.map((item) => (
-//             <UploadingListItem
-//               setMediaKey={setMediaKey}
-//               panelState={panelState}
-//               dispatchPanelState={dispatchPanelState}
-//               status={item.status}
-//               dispatch={dispatch}
-//               key={item.id}
-//               item={item}
-//               url={url}
-//               user={user}
-//             />
-//           ))}
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
-
-// return <div className="upload-heading">upload</div>;
