@@ -33,7 +33,7 @@ export function ListComponent({
                 <div>next</div>
               </div>
               <div className="row-heading" key="randomvalue">
-                <div className="column-1">Title</div>
+                <div className="column-title">Title</div>
                 <div className="column-2">Added By..</div>
                 <div className="column-3">Date</div>
               </div>
@@ -74,8 +74,14 @@ export function ListComponent({
                 <div key="title" className="column-title">
                   Title
                 </div>
+                <div key="original" className="column-original">
+                  Original Filename
+                </div>
                 <div key="addedby" className="column-addedby">
                   Added By..
+                </div>
+                <div key="size" className="column-size">
+                  Size
                 </div>
                 <div key="keywords" className="column-keywords">
                   Has Keywords?

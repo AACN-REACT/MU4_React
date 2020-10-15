@@ -1,6 +1,22 @@
 @use 'colors';
 @use 'fonts';
 
+// paginated set up
+.paged-list {
+  transition: 1s all;
+  display: inline;
+  position: relative;
+  border: 2px solid blue;
+  background-color: red;
+}
+.individual-pages {
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  border: 1px solid gray;
+  justify-content: start;
+}
 .panel-container {
   height: auto;
   display: flex;
@@ -10,7 +26,34 @@
   margin: 5px auto;
   border: 1px solid colors.$mid-green;
 }
-
+.page-controls {
+  display: flex;
+  justify-content: space-between;
+  height: 20px;
+  font-size: 0.8rem;
+  padding: 5px;
+  color: white;
+  text-shadow: 1px 1px 5px white;
+  background: linear-gradient(45deg, colors.$dark-green, colors.$mid-green);
+}
+.inner-container {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  justify-content: start;
+  color: white;
+  text-shadow: 1px 1px 5px white;
+  background: linear-gradient(45deg, colors.$dark-green, colors.$mid-green);
+  font-size: 0.8rem;
+}
+.column-close {
+  width: 0px;
+  border: 1px aolid red;
+}
+.pages-container {
+  background-color: blue;
+  height: 500px;
+}
 [class*="details-container-"] {
   transition: all 0.5s;
   overflow: hidden;
@@ -107,6 +150,8 @@
   border: 2px solid
     linear-gradient(45deg, colors.$dark-green, colors.$light-green);
   transition: 0.5s all;
+  white-space: nowrap;
+  overflow: hidden;
 
   font-family: fonts.$mono;
   .list-heading {
@@ -160,11 +205,15 @@
 }
 [class*="column-"] {
   color: colors.$white-yellow;
-  flex-grow: 1;
+  font-size: 0.8rem;
+  flex-shrink: 1;
+  height: 40px;
   width: 32%;
   text-shadow: 1px 1px 5px white;
   text-align: center;
-  white-space: nowrap;
+
+  overflow: hidden;
+  transition: all 1s;
 
   &:first-of-type {
     text-align: start;
@@ -172,7 +221,23 @@
   &:last-of-type {
     text-align: end;
   }
+  .false{
+    color:colors.$bright-red;
+    text-shadow: 1px 1px 5px colors.$light-red;
+    font-size: 1rem;
+  }
+  .true{
+    font-size: 1rem;
+  }
 }
+.column-close{
+  width:0px;
+}
+.column-double-line{
+  white-space: pre-wrap;
+}
+
+
 .list-wrapper {
   display: flex;
   flex-direction: column;

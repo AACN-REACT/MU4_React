@@ -14,10 +14,10 @@ let collection = [
 ];
 
 export function sortOldestDate(a, b) {
-  return new Date(a) - new Date(b);
+  return new Date(a.StartDateTime) - new Date(b.StartDateTime);
 }
 export function sortNewestDate(a, b) {
-  return new Date(b) - new Date(a);
+  return new Date(b.StartDateTime) - new Date(a.StartDateTime);
 }
 
 export function Paginate(arr, numPerPage) {
