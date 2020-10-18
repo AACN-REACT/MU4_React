@@ -18,7 +18,10 @@ import { Client } from "../network_functions/swaggerclient/swaggerclient";
 import {
   sortNewestDate,
   sortOldestDate,
+  sortTitle,
+  sortFileSize
 } from "../utils/sorting/sorting_algorithms";
+import { Levenshtein } from "../utils/sorting/levenshtein";
 
 /*-------------------------------------------------------------------------------------------------------*/
 // our App component starts here, takes uploadUrl and user at this point - perhaps should include uploadlimit?
@@ -57,7 +60,7 @@ this needs to changed into a custome hook: */
     [],
     [],
   ]);
-  const [transforms, setTransforms] = React.useState([sortNewestDate]);
+
   const [mediaKey, setMediaKey] = React.useState(null);
   const v0 = "https://localhost:44390/api/v0/MediaManagement";
   const v1 = "https://localhost:44340/api/v1/MediaManagement";
@@ -69,9 +72,7 @@ this needs to changed into a custome hook: */
         console.log("RES", res);
         let completed = res["Result"]["FinalizedMediaDetailsDtos"];
         let pending = res["Result"]["PendingMediaDetailsDtos"];
-        transforms.forEach((func) => {
-          pending = pending.sort(func);
-        });
+
         console.log("completed", pending);
         setManagementLists([pending, completed]);
       });

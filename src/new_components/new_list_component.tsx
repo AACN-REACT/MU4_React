@@ -1,6 +1,23 @@
 import * as React from "react";
 import butt from "../images/switch.png";
 import { Paginate } from "../utils/sorting/sorting_algorithms";
+import {
+  sortNewestDate,
+  sortOldestDate,
+  sortTitle,
+  sortTitleReverse,
+  sortFileSize,
+  sortFileSizeReverse,
+  sortNetforumLink,
+  sortNetforumLinkReverse,
+  sortKeywords,
+  sortKeywordsReverse,
+  sortAddedBy,
+  sortAddedByReverse,
+  sortOriginal,
+  sortOriginalReverse
+} from "../utils/sorting/sorting_algorithms";
+import { Levenshtein } from "../utils/sorting/levenshtein";
 export function ListComponent({
   heading,
   dispatchPanelState,
@@ -9,16 +26,29 @@ export function ListComponent({
   setMediaKey,
 }) {
   //not sure what this does just yet
-  let [list, changelist] = React.useState([]);
+  let [list, changeList] = React.useState([]);
 
+  const [transforms, setTransforms] = React.useState([
+    //sortTitle,
+    // sortFileSize,
+    // sortNewestDate,
+  ]);
+  console.log("tt", transforms);
   let pagedList = [];
 
   const [pageNumber, changePageNumber] = React.useState(0);
   // this extaract the number for the specific panelState
   const panelStateNumber = panelState[`${heading.toLowerCase()}_container`];
+
   React.useEffect(() => {
-    changelist(Paginate(videolist, 10));
-  }, [videolist]);
+    let internalList = [];
+    transforms.length > 0
+      ? transforms.forEach((func) => {
+          internalList = videolist.sort(func);
+        })
+      : (internalList = videolist);
+    changeList(Paginate(internalList, 10));
+  }, [videolist, transforms]);
 
   return (
     <div className={`list-${panelStateNumber}`}>
@@ -66,7 +96,21 @@ export function ListComponent({
         </div>
       </div>
       <div className="inner-container">
-        <div key="title" className="column-title">
+        <div
+          key="title"
+          className="column-title"
+          onClick={function (e) {
+            setTransforms((t) => {
+              if (t.indexOf(sortTitle) > -1) {
+                return [
+                  ...t.filter((el) => el !== sortTitle),
+                  sortTitleReverse,
+                ];
+              }
+              return [...t.filter((el) => el !== sortTitleReverse), sortTitle];
+            });
+          }}
+        >
           Title
         </div>
         <div
@@ -74,6 +118,17 @@ export function ListComponent({
           className={
             panelStateNumber === 2 ? "column-double-line" : "column-close"
           }
+          onClick={function (e) {
+            setTransforms((t) => {
+              if (t.indexOf(sortOriginal) > -1) {
+                return [
+                  ...t.filter((el) => el !== sortOriginal),
+                  sortOriginalReverse,
+                ];
+              }
+              return [...t.filter((el) => el !== sortOriginalReverse), sortOriginal];
+            });
+          }}
         >
           Original Filename
         </div>
@@ -82,18 +137,62 @@ export function ListComponent({
           className={`column-addedBy ${
             panelStateNumber === 2 ? "" : "column-close"
           }`}
+
+          onClick={function (e) {
+            setTransforms((t) => {
+              if (t.indexOf(sortAddedBy) > -1) {
+                return [
+                  ...t.filter((el) => el !== sortAddedBy),
+                  sortAddedByReverse,
+                ];
+              }
+              return [...t.filter((el) => el !== sortAddedByReverse), sortAddedBy];
+            });
+          }}
         >
           Added By..
         </div>
-        <div key="size" className="column-size">
-         <p>Size</p>
-         <p>MB</p>
+        <div
+          key="size"
+          className="column-size"
+          onClick={function (e) {
+            setTransforms((t) => {
+              if (t.indexOf(sortFileSize) > -1) {
+                return [
+                  ...t.filter((el) => el !== sortFileSize),
+                  sortFileSizeReverse,
+                ];
+              }
+              return [
+                ...t.filter((el) => el !== sortFileSizeReverse),
+                sortFileSize,
+              ];
+            });
+          }}
+        >
+          <p>Size</p>
+          <p>MB</p>
         </div>
         <div
           key="keywords"
           className={`column-keywords ${
             panelStateNumber === 2 ? "" : "column-close"
           }`}
+
+          onClick={function (e) {
+            setTransforms((t) => {
+              if (t.indexOf(sortKeywords) > -1) {
+                return [
+                  ...t.filter((el) => el !== sortKeywords),
+                  sortKeywordsReverse,
+                ];
+              }
+              return [
+                ...t.filter((el) => el !== sortKeywordsReverse),
+                sortKeywords,
+              ];
+            });
+          }}
         >
           Has Keywords?
         </div>
@@ -102,6 +201,20 @@ export function ListComponent({
           className={`column-double-line ${
             panelStateNumber === 2 ? "" : "column-close"
           }`}
+          onClick={function (e) {
+            setTransforms((t) => {
+              if (t.indexOf(sortNetforumLink) > -1) {
+                return [
+                  ...t.filter((el) => el !== sortNetforumLink),
+                  sortNetforumLinkReverse,
+                ];
+              }
+              return [
+                ...t.filter((el) => el !== sortNetforumLinkReverse),
+                sortNetforumLink,
+              ];
+            });
+          }}
         >
           Linked to Netforum
         </div>
@@ -113,7 +226,24 @@ export function ListComponent({
         >
           Status
         </div>
-        <div key="date" className="column-date">
+        <div
+          key="date"
+          className="column-date"
+          onClick={function (e) {
+            setTransforms((t) => {
+              if (t.indexOf(sortNewestDate) > -1) {
+                return [
+                  ...t.filter((el) => el !== sortNewestDate),
+                  sortOldestDate,
+                ];
+              }
+              return [
+                ...t.filter((el) => el !== sortOldestDate),
+                sortNewestDate,
+              ];
+            });
+          }}
+        >
           Date
         </div>
       </div>
@@ -147,7 +277,7 @@ export function ListComponent({
                     panelStateNumber === 2 ? { inherit: "" } : { width: "0px" }
                   }
                 >
-                  {mediaItem.Title}
+                  {mediaItem.OriginalFileName}
                 </div>
                 <div
                   key="column-addedBy"
@@ -166,9 +296,11 @@ export function ListComponent({
                     panelStateNumber === 2 ? "" : "column-close"
                   }`}
                 >
-                  {mediaItem.HasKeywords
-                    ? <span className="true">{String.fromCharCode(10004)}</span>
-                    : <span className="false"> {String.fromCharCode(10008)}</span>}
+                  {mediaItem.HasKeywords ? (
+                    <span className="true">{String.fromCharCode(10004)}</span>
+                  ) : (
+                    <span className="false"> {String.fromCharCode(10008)}</span>
+                  )}
                 </div>
                 <div
                   key="column-netforum"
@@ -176,9 +308,11 @@ export function ListComponent({
                     panelStateNumber === 2 ? "" : "column-close"
                   }`}
                 >
-                  {mediaItem.HasNetforumLink
-                    ? <span className="true">{String.fromCharCode(10004)}</span>
-                    : <span className="false"> {String.fromCharCode(10008)}</span>}
+                  {mediaItem.HasNetforumLink ? (
+                    <span className="true">{String.fromCharCode(10004)}</span>
+                  ) : (
+                    <span className="false"> {String.fromCharCode(10008)}</span>
+                  )}
                 </div>
                 <div
                   key="column-status"

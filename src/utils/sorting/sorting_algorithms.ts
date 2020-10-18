@@ -13,6 +13,100 @@ let collection = [
   { time: "2020-10-10T20:48:37.4130218" },
 ];
 
+export function sortOriginal(a, b) {
+  let aA = a.OriginalFileName.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
+  let bB = b.OriginalFileName.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
+
+  let elementsToCompare = [aA, bB];
+  console.log("COM", elementsToCompare);
+  if (elementsToCompare.sort()[0] === aA) {
+    return -1;
+  }
+  if (elementsToCompare.sort()[0] === bB) {
+    return 1;
+  }
+  return 0;
+}
+
+export function sortOriginalReverse(a, b) {
+  let aA = a.OriginalFileName.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
+  let bB = b.OriginalFileName.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
+
+  let elementsToCompare = [aA, bB];
+  console.log("COM", elementsToCompare);
+  if (elementsToCompare.sort()[0] === aA) {
+    return -1;
+  }
+  if (elementsToCompare.sort()[0] === bB) {
+    return 1;
+  }
+  return 0;
+}
+export function sortAddedBy(a, b) {
+  let aA = a.StartedByUsername.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
+  let bB = b.StartedByUsername.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
+
+  let elementsToCompare = [aA, bB];
+  console.log("COM", elementsToCompare);
+  if (elementsToCompare.sort()[0] === aA) {
+    return -1;
+  }
+  if (elementsToCompare.sort()[0] === bB) {
+    return 1;
+  }
+  return 0;
+}
+
+export function sortAddedByReverse(a, b) {
+  let aA = a.StartedByUsername.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
+  let bB = b.StartedByUsername.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
+
+  let elementsToCompare = [aA, bB];
+  console.log("COM", elementsToCompare);
+  if (elementsToCompare.sort()[0] === aA) {
+    return 1;
+  }
+  if (elementsToCompare.sort()[0] === bB) {
+    return -1;
+  }
+  return 0;
+}
+export function sortTitle(a, b) {
+  let aA = a.Title.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
+  let bB = b.Title.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
+
+  let elementsToCompare = [aA, bB];
+  console.log("COM", elementsToCompare);
+  if (elementsToCompare.sort()[0] === aA) {
+    return -1;
+  }
+  if (elementsToCompare.sort()[0] === bB) {
+    return 1;
+  }
+  return 0;
+}
+export function sortTitleReverse(a, b) {
+  let aA = a.Title.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
+  let bB = b.Title.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
+
+  let elementsToCompare = [aA, bB];
+  console.log("COM", elementsToCompare);
+  if (elementsToCompare.sort()[0] === aA) {
+    return 1;
+  }
+  if (elementsToCompare.sort()[0] === bB) {
+    return -1;
+  }
+  return 0;
+}
+
+export function sortFileSize(a, b) {
+  return a.FileSize - b.FileSize;
+}
+export function sortFileSizeReverse(a, b) {
+  return b.FileSize - a.FileSize;
+}
+
 export function sortOldestDate(a, b) {
   return new Date(a.StartDateTime) - new Date(b.StartDateTime);
 }
@@ -29,4 +123,45 @@ export function Paginate(arr, numPerPage) {
   }
 
   return newArray;
+}
+
+export function sortNetforumLink(a, b) {
+  if (a.HasNetforumLink && !b.HasNetforumLink) {
+    return 1;
+  }
+  if (b.HasNetforumLink && !a.HasNetforumLink) {
+    return -1;
+  }
+
+  return 0;
+}
+export function sortNetforumLinkReverse(a, b) {
+  if (a.HasNetforumLink && !b.HasNetforumLink) {
+    return 1;
+  }
+  if (b.HasNetforumLink && !a.HasNetforumLink) {
+    return -1;
+  }
+
+  return 0;
+}
+export function sortKeywordsReverse(a, b) {
+  if (a.HasKeywords && !b.HasKeywords) {
+    return 1;
+  }
+  if (b.HasKeywords && !a.HasKeywordsk) {
+    return -1;
+  }
+
+  return 0;
+}
+export function sortKeywords(a, b) {
+  if (a.HasKeywords && !b.HasKeywords) {
+    return -1;
+  }
+  if (b.HasKeywords && !a.HasKeywordsk) {
+    return 1;
+  }
+
+  return 0;
 }
