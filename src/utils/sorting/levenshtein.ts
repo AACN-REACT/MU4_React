@@ -1,7 +1,7 @@
 function forEach(array, fn) {
   var i, length;
   i = -1;
-  length = array.length;
+  length = array?.length;
   while (++i < length) fn(array[i], i, array);
 }
 
@@ -56,7 +56,7 @@ export function Levenshtein(str_m, str_n) {
       matrix[matrix.length] = previous;
     });
 
-    return (this.distance = current[current.length - 1]);
+    return (this.distance = current[current?.length - 1]);
   }
 }
 
@@ -98,21 +98,29 @@ Levenshtein.prototype.valueOf = function () {
   return this.distance;
 };
 
-export function textSearch(word, list ) {
+export function textSearch(word: string, list: any[], field: string) {
   //fill
 
-  list.sort()
+  function sortText(a, b) {
+    let first = new Levenshtein(a[field].toLowerCase(), word);
+    let second = new Levenshtein(b[field].toLowerCase(), word);
+    console.log(
+      "DISTANCE",
+      first.distance,
+      second.distance,
+      list,
+      a[field],
+      word
+    );
+    if (first.distance - second.distance > 0) {
+      return 1;
+    }
+    if (first.distance - second.distance < 0) {
+      return -1;
+    }
 
-  function sortText
-  let first = new Levenshtein(a, list);
-  let second = new Levenshtein(b, list);
-
-  if (first - second > 0) {
-    return 1;
+    return 0;
   }
-  if (first - second < 0) {
-    return -1;
-  }
-
-  return 0;
+  console.log(">>>", list.sort(sortText).slice(0, 10));
+  return list.sort(sortText).slice(0, 10);
 }

@@ -15,9 +15,9 @@ import {
   sortAddedBy,
   sortAddedByReverse,
   sortOriginal,
-  sortOriginalReverse
+  sortOriginalReverse,
 } from "../utils/sorting/sorting_algorithms";
-import { Levenshtein } from "../utils/sorting/levenshtein";
+import { textSearch } from "../utils/sorting/levenshtein";
 export function ListComponent({
   heading,
   dispatchPanelState,
@@ -34,7 +34,8 @@ export function ListComponent({
     // sortNewestDate,
   ]);
   console.log("tt", transforms);
-  let pagedList = [];
+
+  const searchValue = React.useRef();
 
   const [pageNumber, changePageNumber] = React.useState(0);
   // this extaract the number for the specific panelState
@@ -95,6 +96,21 @@ export function ListComponent({
           forwards
         </div>
       </div>
+      <div className="searchBar">
+        <input
+          onChange={(e) => {
+            changeList(
+              Paginate(
+                textSearch(searchValue.current.value, videolist, "Title"),
+                10
+              )
+            );
+          }}
+          type="text"
+          ref={searchValue}
+          className="search"
+        />
+      </div>
       <div className="inner-container">
         <div
           key="title"
@@ -126,7 +142,10 @@ export function ListComponent({
                   sortOriginalReverse,
                 ];
               }
-              return [...t.filter((el) => el !== sortOriginalReverse), sortOriginal];
+              return [
+                ...t.filter((el) => el !== sortOriginalReverse),
+                sortOriginal,
+              ];
             });
           }}
         >
@@ -137,7 +156,6 @@ export function ListComponent({
           className={`column-addedBy ${
             panelStateNumber === 2 ? "" : "column-close"
           }`}
-
           onClick={function (e) {
             setTransforms((t) => {
               if (t.indexOf(sortAddedBy) > -1) {
@@ -146,7 +164,10 @@ export function ListComponent({
                   sortAddedByReverse,
                 ];
               }
-              return [...t.filter((el) => el !== sortAddedByReverse), sortAddedBy];
+              return [
+                ...t.filter((el) => el !== sortAddedByReverse),
+                sortAddedBy,
+              ];
             });
           }}
         >
@@ -178,7 +199,6 @@ export function ListComponent({
           className={`column-keywords ${
             panelStateNumber === 2 ? "" : "column-close"
           }`}
-
           onClick={function (e) {
             setTransforms((t) => {
               if (t.indexOf(sortKeywords) > -1) {
@@ -255,7 +275,6 @@ export function ListComponent({
         }}
       >
         {list.map((page: [], pageInd) => {
-          console.log("PeL", pagedList);
           let thisPageList = page.map((mediaItem, mediaInd) => {
             return (
               <div
