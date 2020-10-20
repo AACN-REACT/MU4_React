@@ -98,7 +98,16 @@ function panelReducer(state, action) {
 export function Panels(props) {
 
 // can dynamically change this if we have a detail key stored or passed down
-  const initialPanelState = {
+
+
+  const initialPanelState =  props.openDetails?{
+    upload_container: 0,
+    list_container: 0,
+    pending_container: 1,
+    completed_container: 1,
+    dropzone_container: 1,
+    details_container: 2,
+  }:{
     upload_container: 0,
     list_container: 2,
     pending_container: 1,

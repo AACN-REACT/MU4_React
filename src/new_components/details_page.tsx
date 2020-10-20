@@ -2,6 +2,7 @@ import * as React from "react";
 import { Controls } from "./controls";
 import { ControlButton } from "./control_button";
 import { EditableField } from "./edit_field";
+import { NonEditableField } from "./non_edit_field";
 import butt from "../images/switch.png";
 import { DeleteButton } from "./delete_button";
 import { FinalizeButton } from "./finalize_button";
@@ -14,6 +15,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
       fetch(`https://localhost:44340/api/v1/Medias/${mediaKey}/MediaDetailsVm`)
         .then((res) => res.json())
         .then((res) => setMediaDetails(res["Result"]));
+      localStorage.removeItem("mediakey");
     },
     [mediaKey]
   );
@@ -23,6 +25,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
     <div className="details-page">
       <div className="details-bar">
         <span>media details...</span>
+        <div>Key: {mediaKey}</div>
         <img
           onClick={(e) => {
             panelState.details_container === 0
@@ -44,27 +47,11 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           itemKey={mediaDetails?.Key}
           itemName="title"
         />
-        <EditableField
-          method="PUT"
+        <NonEditableField
           setter={setMediaDetails}
-          name="NetforumLink"
-          displayName="Netforum Link"
-          data={mediaDetails?.NetforumItemLink?.NetforumKey}
-          endpoint={"https://localhost:44325/api/v1/Medias/"}
-          user="amin"
-          itemKey={mediaDetails?.Key}
-          itemName="netforumItemLink"
-        />
-        <EditableField
-          method="PUT"
-          setter={setMediaDetails}
-          name="NetforumLink"
-          displayName="Mediahost URL"
-          data={mediaDetails?.MediaHostUrl}
-          endpoint={"https://localhost:44325/api/v1/Medias/"}
-          user="amin"
-          itemKey={mediaDetails?.Key}
-          itemName="originalfilename"
+          name="StartedByUsername"
+          displayName="Added By.."
+          data={mediaDetails?.StartedByUsername}
         />
         <EditableField
           method="POST"
@@ -72,24 +59,84 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           name="Keywords"
           displayName="Keywords"
           data={mediaDetails?.Keywords}
-          endpoint={"https://localhost:44325/api/v1/Medias/"}
+          endpoint={"https://localhost:44340/api/v1/Medias/"}
           user="amin"
           itemKey={mediaDetails?.Key}
           itemName="keyword"
         />
-        <EditableField
+        <NonEditableField
           setter={setMediaDetails}
-          name="StartedByUsername"
-          displayName="Added By.."
-          data={mediaDetails?.StartedByUsername}
-          endpoint={"https://localhost:44325/api/v1/Medias/"}
+          name="StartDateTime"
+          displayName="Added Date.."
+          data={new Date(mediaDetails?.StartDateTime).toLocaleString()}
+        />
+        <EditableField
+          method="PUT"
+          setter={setMediaDetails}
+          name="NetforumLink"
+          displayName="Netforum Link"
+          data={mediaDetails?.NetforumItemLink?.NetforumKey}
+          endpoint={"https://localhost:44340/api/v1/Medias/"}
           user="amin"
           itemKey={mediaDetails?.Key}
-          itemName="StartedByUserName"
+          itemName="netforumItemLink"
         />
-        <DeleteButton user="amin" itemKey={mediaDetails?.Key} />
-        <FinalizeButton user="amin" itemKey={mediaDetails?.Key} />
+        <NonEditableField
+          setter={setMediaDetails}
+          name="StartedByUsername"
+          displayName="Media Item Key"
+          data={mediaDetails?.Key}
+        />
+        <NonEditableField
+          setter={setMediaDetails}
+          name="Status"
+          displayName="Current Status"
+          data={mediaDetails?.Status}
+        />
+        <NonEditableField
+          setter={setMediaDetails}
+          name="OriginalFileName"
+          displayName="Original File Name"
+          data={mediaDetails?.OriginalFileName}
+        />
+        <NonEditableField
+          setter={setMediaDetails}
+          name="FinalizedByUsername"
+          displayName="Finalized by..."
+          data={mediaDetails?.FinalizedByUsername}
+        />
+        <NonEditableField
+          setter={setMediaDetails}
+          name="FileSize"
+          displayName="File Size(mb)"
+          data={(parseInt(mediaDetails?.FileSize) / 1000000).toFixed(3)}
+        />
+        <NonEditableField
+          setter={setMediaDetails}
+          name="FinalizedDateTime"
+          displayName="Finalized Date"
+          data={mediaDetails?.FinalizedDateTime}
+        />
+        <NonEditableField
+          setter={setMediaDetails}
+          name="FileDuration"
+          displayName="File Duration"
+          data={mediaDetails?.FileDuration}
+        />
+        <EditableField
+          method="PUT"
+          setter={setMediaDetails}
+          name="NetforumLink"
+          displayName="Mediahost URL"
+          data={mediaDetails?.MediaHostUrl}
+          endpoint={"https://localhost:44340/api/v1/Medias/"}
+          user="amin"
+          itemKey={mediaDetails?.Key}
+          itemName="originalfilename"
+        />
       </div>
+      <DeleteButton user="amin" itemKey={mediaDetails?.Key} />
+      <FinalizeButton user="amin" itemKey={mediaDetails?.Key} />
     </div>
   );
 }

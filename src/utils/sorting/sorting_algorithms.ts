@@ -18,12 +18,12 @@ export function sortOriginal(a, b) {
   let bB = b.OriginalFileName.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
 
   let elementsToCompare = [aA, bB];
-  console.log("COM", elementsToCompare);
+  ;
   if (elementsToCompare.sort()[0] === aA) {
-    return -1;
+    return 1;
   }
   if (elementsToCompare.sort()[0] === bB) {
-    return 1;
+    return -1;
   }
   return 0;
 }
@@ -33,7 +33,7 @@ export function sortOriginalReverse(a, b) {
   let bB = b.OriginalFileName.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
 
   let elementsToCompare = [aA, bB];
-  console.log("COM", elementsToCompare);
+  ;
   if (elementsToCompare.sort()[0] === aA) {
     return -1;
   }
@@ -47,7 +47,7 @@ export function sortAddedBy(a, b) {
   let bB = b.StartedByUsername.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
 
   let elementsToCompare = [aA, bB];
-  console.log("COM", elementsToCompare);
+   ;
   if (elementsToCompare.sort()[0] === aA) {
     return -1;
   }
@@ -62,7 +62,7 @@ export function sortAddedByReverse(a, b) {
   let bB = b.StartedByUsername.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
 
   let elementsToCompare = [aA, bB];
-  console.log("COM", elementsToCompare);
+   ;
   if (elementsToCompare.sort()[0] === aA) {
     return 1;
   }
@@ -76,7 +76,7 @@ export function sortTitle(a, b) {
   let bB = b.Title.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
 
   let elementsToCompare = [aA, bB];
-  console.log("COM", elementsToCompare);
+   ;
   if (elementsToCompare.sort()[0] === aA) {
     return -1;
   }
@@ -90,7 +90,7 @@ export function sortTitleReverse(a, b) {
   let bB = b.Title.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
 
   let elementsToCompare = [aA, bB];
-  console.log("COM", elementsToCompare);
+   ;
   if (elementsToCompare.sort()[0] === aA) {
     return 1;
   }

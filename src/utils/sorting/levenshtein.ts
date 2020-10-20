@@ -102,8 +102,8 @@ export function textSearch(word: string, list: any[], field: string) {
   //fill
 
   function sortText(a, b) {
-    let first = new Levenshtein(a[field].toLowerCase(), word);
-    let second = new Levenshtein(b[field].toLowerCase(), word);
+    let first = new Levenshtein(a[field].toLowerCase().substring(0,word.length), word);
+    let second = new Levenshtein(b[field].toLowerCase().substring(0,word.length), word);
     console.log(
       "DISTANCE",
       first.distance,

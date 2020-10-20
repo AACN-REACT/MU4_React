@@ -19,7 +19,7 @@ import {
   sortNewestDate,
   sortOldestDate,
   sortTitle,
-  sortFileSize
+  sortFileSize,
 } from "../utils/sorting/sorting_algorithms";
 import { Levenshtein } from "../utils/sorting/levenshtein";
 
@@ -42,14 +42,20 @@ load an initial details page. This is required if we are to allow copy and pasti
 0Auth may interfer with this so an alternative is to put it into browser storage and check for it on any return from 
 the Auth server - not implemented yet
 */
+
+
   const idTakenFromUrl = React.useMemo(function () {
     let url = new URL(window.location.href);
-    if (url.searchParams.get("key")) {
-      return url.searchParams.get("key");
+    console.log("URL",url.searchParams.get("mediakey"))
+    if (url.searchParams.get("mediakey")) {
+      let tempMediaKey =  url.searchParams.get("mediakey");
+      localStorage.setItem("mediakey",tempMediaKey);
+      window.history.pushState({},"",window.location.origin)
+      return tempMediaKey
     }
     return null;
   }, []);
-
+console.log("LLLL",idTakenFromUrl)
   /*-------------------------------------------------------------------------------------------------------*/
   /* we make our initial request for the media management details here, this may change depending on how
 we implement 0Auth, since the api will be protected and we will need a token 
@@ -61,10 +67,11 @@ this needs to changed into a custome hook: */
     [],
   ]);
 
-  const [mediaKey, setMediaKey] = React.useState(null);
+  const [mediaKey, setMediaKey] = React.useState(localStorage.getItem("mediakey")||null);
   const v0 = "https://localhost:44390/api/v0/MediaManagement";
   const v1 = "https://localhost:44340/api/v1/MediaManagement";
   const localJson = "http://localhost:3000/Result";
+
   React.useEffect(function () {
     fetch(v1)
       .then((res) => res.json())
@@ -76,7 +83,10 @@ this needs to changed into a custome hook: */
         console.log("completed", pending);
         setManagementLists([pending, completed]);
       });
+     
   }, []);
+
+
 
   /*--------------------------------------------------------------------------------------------------------*/
   return (
@@ -84,7 +94,7 @@ this needs to changed into a custome hook: */
       <Tooltip toolTip={toolTip} />
       <div>{ErrorMsg}</div>
       <TitleBar />
-      <Panels>
+      <Panels openDetails={localStorage.getItem("mediakey") || null}>
         <UploadTable
           setMediaKey={setMediaKey}
           list={uploadSTATE}
