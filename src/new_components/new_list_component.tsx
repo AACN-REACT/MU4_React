@@ -80,7 +80,7 @@ export function ListComponent({
             })
           }
         >
-          backwards
+          {String.fromCharCode(9664)}
         </div>
         <div>Page {pageNumber + 1}</div>
         <div
@@ -93,10 +93,11 @@ export function ListComponent({
             })
           }
         >
-          forwards
+          {String.fromCharCode(9658)}
         </div>
       </div>
-      <div className="searchBar">
+      <div className="search-bar">
+        <label>Search</label>
         <input
           onChange={(e) => {
             changeList(

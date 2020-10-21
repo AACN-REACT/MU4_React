@@ -2,18 +2,18 @@
 
 .title-container {
   display: flex;
-  height: 100px;
+  height: 80px;
   width: 100%;
   margin: 0 auto;
   max-width: 1600px;
   border: 1px solid colors.$light-green;
   img {
-    width: 500px;
+    width: 400px;
     margin: 0 auto;
     object-fit: cover;
   }
 }
 .logo {
-  width: 500px;
+  width: 400px;
   height: auto;
 }

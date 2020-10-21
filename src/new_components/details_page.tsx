@@ -3,6 +3,7 @@ import { Controls } from "./controls";
 import { ControlButton } from "./control_button";
 import { EditableField } from "./edit_field";
 import { NonEditableField } from "./non_edit_field";
+import {OpenLogs} from "./open-logs-button"
 import butt from "../images/switch.png";
 import { DeleteButton } from "./delete_button";
 import { FinalizeButton } from "./finalize_button";
@@ -131,12 +132,14 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           data={mediaDetails?.MediaHostUrl}
           endpoint={"https://localhost:44340/api/v1/Medias/"}
           user="amin"
-          itemKey={mediaDetails?.Key}
+          itemKey={mediaDetails?.MediaHostUrl}
           itemName="originalfilename"
         />
+        <OpenLogs />
       </div>
-      <DeleteButton user="amin" itemKey={mediaDetails?.Key} />
-      <FinalizeButton user="amin" itemKey={mediaDetails?.Key} />
+      
+      <div className="button-container"><DeleteButton user="amin" itemKey={mediaDetails?.Key} />
+      <FinalizeButton user="amin" itemKey={mediaDetails?.Key} /></div>
     </div>
   );
 }

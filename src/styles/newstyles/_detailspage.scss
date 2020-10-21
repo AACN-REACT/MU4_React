@@ -25,7 +25,7 @@
   margin: auto auto;
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 70px 70px 70px 70px 70px 70px;
+  grid-template-rows: 70px 70px 70px 70px 70px 70px 70px;
   column-gap: 10px;
   row-gap: 10px;
 
@@ -35,7 +35,10 @@
   display: flex;
 }
 .field-container {
+  box-sizing: border-box;
+  padding: 5px;
   margin: 0px;
+  color:green;
   background: colors.$white-yellow;
   // width: 400px;
   // height: 200px;
@@ -48,4 +51,13 @@
   padding: 5px;
   text-shadow: 2px 2px 5px white;
   color: white;
+}
+
+.button-container{
+  margin:0px auto;
+  position:relative;
+  bottom:-50px;
+  display:flex;
+  width:50%;
+  justify-content: space-between;
 }

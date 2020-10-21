@@ -20,8 +20,8 @@ export function ListComponent({
           return [
             <h1 onClick={(e) => dispatchPanelState({ type: `OPEN PARTIAL` })}>
               {`Click
-              to
-            Open`}
+          to
+          Open`}
             </h1>,
           ];
         case 1:
