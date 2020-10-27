@@ -1,11 +1,10 @@
 @use 'colors';
 @use 'fonts';
 
-
-.search-bar{
-  padding:5px;
-  label{
-    margin-right:5px;
+.search-bar {
+  padding: 5px;
+  label {
+    margin-right: 5px;
   }
 }
 
@@ -228,22 +227,21 @@
   &:last-of-type {
     text-align: end;
   }
-  .false{
-    color:colors.$bright-red;
+  .false {
+    color: colors.$bright-red;
     text-shadow: 1px 1px 5px colors.$light-red;
     font-size: 1rem;
   }
-  .true{
+  .true {
     font-size: 1rem;
   }
 }
-.column-close{
-  width:0px;
+.column-close {
+  width: 0px;
 }
-.column-double-line{
+.column-double-line {
   white-space: pre-wrap;
 }
-
 
 .list-wrapper {
   display: flex;

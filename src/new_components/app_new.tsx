@@ -25,7 +25,7 @@ import { Levenshtein } from "../utils/sorting/levenshtein";
 
 /*-------------------------------------------------------------------------------------------------------*/
 // our App component starts here, takes uploadUrl and user at this point - perhaps should include uploadlimit?
-export function App({ uploadURL, user, sizeLimit }) {
+export function App({ uploadOrigin, user, sizeLimit }) {
   /* since we are defiing our components at the top level its important that we set up the uploading state and dispatcher here so we can 
 pass them directly down to the sibling components, utilises the uploadListReducer - see there for logic */
   const [uploadSTATE, DISPATCHUpload] = React.useReducer(uploadListReducer, {});
@@ -69,11 +69,11 @@ this needs to changed into a custome hook: */
 
   const [mediaKey, setMediaKey] = React.useState(localStorage.getItem("mediakey")||null);
   const v0 = "https://localhost:44390/api/v0/MediaManagement";
-  const v1 = "https://localhost:44340/api/v1/MediaManagement";
+  const uploadURL = uploadOrigin+"/api/v1/MediaManagement";
   const localJson = "http://localhost:3000/Result";
 
   React.useEffect(function () {
-    fetch(v1)
+    fetch(uploadURL)
       .then((res) => res.json())
       .then((res) => {
         console.log("RES", res);

@@ -2,6 +2,7 @@ import * as React from "react";
 import { Controls } from "./controls";
 import { ControlButton } from "./control_button";
 import { EditableField } from "./edit_field";
+import { KeywordEditableField } from "./edit_field_Keywords";
 import { NonEditableField } from "./non_edit_field";
 import {OpenLogs} from "./open-logs-button"
 import butt from "../images/switch.png";
@@ -54,7 +55,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           displayName="Added By.."
           data={mediaDetails?.StartedByUsername}
         />
-        <EditableField
+        <KeywordEditableField
           method="POST"
           setter={setMediaDetails}
           name="Keywords"

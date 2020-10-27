@@ -43,14 +43,14 @@ export function EditableField({
 
   return (
     <div className="field-container">
-      <div className="detail-name">{displayName}</div>
+      <div className="detail-name-edit"><div>{displayName}</div><div onClick={(e) => toggleEditable(s=>!s)} className={isEditable?"edit-icon-active":"edit-icon"}>{String.fromCharCode(9998)}</div></div>
       {!isEditable ? (
-        <div onClick={(e) => toggleEditable(true)} className="detail-value">
+        <div  className="detail-value">
           {Array.isArray(data)?data.join(","):data}
         </div>
       ) : (
         <div className="input-container">
-          <input ref={inputValue} type="text" />
+          <input ref={inputValue} type="text" placeholder={data}/>
           <div
             onClick={(e) => {
               toggleEditable(false);

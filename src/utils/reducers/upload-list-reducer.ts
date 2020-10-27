@@ -14,7 +14,7 @@ export function uploadListReducer(state, { type, action }) {
         if (i["id"] === action) {
           i["edit"] = true;
         } else {
-          i["edit"] == false;
+          i["edit"] = false;
         }
       }
       break;
