@@ -27,7 +27,7 @@ export function FinalizeButton({ itemKey, user }) {
       className={finalized ? "disabled-delete-button" : "active-delete-button"}
       onClick={FinalizeVideo}
     >
-      Finalize Video
+      Finalize 
     </div>
   );
 }

@@ -24,7 +24,7 @@ export function DeleteButton({ itemKey, user }) {
       className={deleted ? "disabled-delete-button" : "active-delete-button"}
       onClick={DeleteVideo}
     >
-      Delete Video
+      Delete 
     </div>
   );
 }

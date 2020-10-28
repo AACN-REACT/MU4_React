@@ -4,7 +4,7 @@ import { ControlButton } from "./control_button";
 import { EditableField } from "./edit_field";
 import { KeywordEditableField } from "./edit_field_Keywords";
 import { NonEditableField } from "./non_edit_field";
-import {OpenLogs} from "./open-logs-button"
+import { OpenLogs } from "./open-logs-button";
 import butt from "../images/switch.png";
 import { DeleteButton } from "./delete_button";
 import { FinalizeButton } from "./finalize_button";
@@ -136,11 +136,13 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           itemKey={mediaDetails?.MediaHostUrl}
           itemName="originalfilename"
         />
-        <OpenLogs />
       </div>
-      
-      <div className="button-container"><DeleteButton user="amin" itemKey={mediaDetails?.Key} />
-      <FinalizeButton user="amin" itemKey={mediaDetails?.Key} /></div>
+      <div className="button-container">
+        <DeleteButton user="amin" itemKey={mediaDetails?.Key} />
+        <FinalizeButton user="amin" itemKey={mediaDetails?.Key} />
+      </div>
+
+      <OpenLogs data={mediaDetails?.MediaAudits} />
     </div>
   );
 }

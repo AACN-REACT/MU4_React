@@ -73,7 +73,7 @@
   height: 30px;
 }
 .details-container-2 {
-  height: 700px;
+  height: 1200px;
 }
 [class*="upload-container-"] {
   background: linear-gradient(0deg, colors.$white-green, colors.$white-yellow);
@@ -208,6 +208,10 @@
 .row-heading {
   font-size: 1rem;
   background: colors.$mid-green;
+}
+.row-log {
+  background: colors.$white-green;
+  color: green;
 }
 [class*="column-"] {
   color: colors.$white-yellow;

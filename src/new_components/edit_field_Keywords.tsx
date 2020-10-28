@@ -12,10 +12,15 @@ export function KeywordEditableField({
   itemKey,
   itemName,
 }) {
-  console.log("DATA", data);
+  console.log("DATA keyword", data);
+  const [displayKeywords, addDisplayKeywords] = React.useState(data);
+  console.log("display keywords", displayKeywords);
   const [isEditable, toggleEditable] = React.useState(false);
   const inputValue = React.useRef();
-  console.log(isEditable);
+
+  //useEffect to set display keywords
+
+
   function sendData(userEdit) {
     let myquery = new URLSearchParams({ [itemName]: userEdit, username: user });
     let myrequest = new Request(
@@ -32,12 +37,13 @@ export function KeywordEditableField({
           setter((s) => {
             return { ...s, [name]: userEdit };
           });
+
           return res;
         } else {
           throw new Error("woops");
         }
       })
-      .then((res) => toggleEditable(false))
+      .then((res) => addDisplayKeywords((d) => [...d, userEdit]))
       .catch((err) => console.log(err));
   }
   function deleteData(userEdit) {
@@ -61,7 +67,9 @@ export function KeywordEditableField({
           throw new Error("woops");
         }
       })
-      .then((res) => toggleEditable(false))
+      .then((res) =>
+        addDisplayKeywords((d) => d.splice(d.indexOf(userEdit), 1))
+      )
       .catch((err) => console.log(err));
   }
 
@@ -78,15 +86,18 @@ export function KeywordEditableField({
       </div>
       {!isEditable ? (
         <div className="detail-value">
-          {Array.isArray(data) ? data.join(",") : data}
+          {Array.isArray(data)
+            ? data.join(",")
+            : data}
         </div>
       ) : (
         <div className="keyword-input-container">
           {data?.map((el) => (
             <div className="keyword-popup">
-              <input ref={inputValue} placeholder={el} type="text" />
+              <div className="keyword-name">{el}</div>
 
               <div
+                className="keyword-icon"
                 onClick={(e) => {
                   deleteData(el);
                 }}
@@ -95,6 +106,15 @@ export function KeywordEditableField({
               </div>
             </div>
           ))}
+          <input ref={inputValue} type="text" placeholder="enter keyword" />
+          <div
+            onClick={(e) => {
+              sendData(inputValue.current.value);
+            }}
+            className="check"
+          >
+            <img src={tick} />
+          </div>
         </div>
       )}
     </div>
