@@ -13,11 +13,15 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
   const [mediaDetails, setMediaDetails] = React.useState(null);
 
   React.useEffect(
+  
     function () {
+      let isMounted = true
       fetch(`https://localhost:44340/api/v1/Medias/${mediaKey}/MediaDetailsVm`)
-        .then((res) => res.json())
+        .then((res) =>{if(isMounted){return res.json()}})
         .then((res) => setMediaDetails(res["Result"]));
-      localStorage.removeItem("mediakey");
+
+        return ()=>{isMounted=false}
+
     },
     [mediaKey]
   );

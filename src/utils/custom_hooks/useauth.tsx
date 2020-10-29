@@ -5,19 +5,23 @@ export function useAuth(idserver, flow, settings) {
   const [isAuthenticated, authenticate] = React.useState(false);
 
   const [mgr] = React.useState(new UserManager({ ...settings }));
-  console.log("mgr", mgr);
+ 
   const [identity, setIdentity] = React.useState({
     profile: { acces_token: "", name: "guest", picture: null },
   });
+  const hasCode = new URL(window.location.href)
+  localStorage.setItem("code", hasCode.searchParams.get("code"))
   const checkURL =
-    flow === "pkce" ? window.location.search : window.location.hash;
-  alert("cehck url" + checkURL);
+    flow === "pkce" ? localStorage.getItem("code"): window.location.hash;
+  console.log("check url ", checkURL);
   if (settings === false) {
     return [identity, true];
   }
+  alert(!!checkURL)
   React.useEffect(function () {
     //when the component first loads , there will be no hash fragment in the url
-    if (checkURL.length < 1) {
+    if (checkURL) {
+      console.log("no code", checkURL)
       mgr.signinRedirect();
     } else {
       mgr
@@ -25,15 +29,14 @@ export function useAuth(idserver, flow, settings) {
         .then((user) => {
           authenticate(true);
           setIdentity((s) => ({ ...s, ...user }));
-          alert(localStorage.getItem("mediakey"));
-          window.location.replace("#");
+          flow==="pkce"?window.location.replace(""):window.location.replace("#");
 
           return user;
         })
         .catch((err) => setIdentity({ error: err }));
     }
 
-    // return ()=>{sessionStorage.clear();localStorage.clear()}
+    return ()=>{localStorage.removeItem("code")}
   }, []);
 
   return [identity, isAuthenticated];

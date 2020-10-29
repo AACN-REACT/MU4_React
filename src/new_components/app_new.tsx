@@ -46,12 +46,11 @@ the Auth server - not implemented yet
 
   const idTakenFromUrl = React.useMemo(function () {
     let url = new URL(window.location.href);
-    alert("URL  "+ url.searchParams.get("mediakey"));
-    if (url.searchParams.get("mediakey").length>0) {
+    alert("URL  " + url.searchParams.get("mediakey"));
+    if (url.searchParams.get("mediakey")?.length > 0) {
       let tempMediaKey = url.searchParams.get("mediakey");
       localStorage.setItem("mediakey", tempMediaKey);
       alert(localStorage.getItem("mediakey"));
-      window.history.pushState({}, "", window.location.origin);
       return tempMediaKey;
     }
     return null;
@@ -71,6 +70,7 @@ this needs to changed into a custome hook: */
   const [mediaKey, setMediaKey] = React.useState(
     localStorage.getItem("mediakey") || null
   );
+  console.log(">> mediakey", mediaKey);
   const v0 = "https://localhost:44390/api/v0/MediaManagement";
   const uploadURL = uploadOrigin + "/api/v1/MediaManagement";
   const localJson = "http://localhost:3000/Result";
@@ -90,7 +90,7 @@ this needs to changed into a custome hook: */
 
   /*--------------------------------------------------------------------------------------------------------*/
   return (
-    <Auth idserver="aacn"  config={aacn}>
+    <Auth idserver="aacn" flow="pkce" config={pkce}>
       <Tooltip toolTip={toolTip} />
       <div>{ErrorMsg}</div>
       <TitleBar />

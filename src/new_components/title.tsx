@@ -11,7 +11,7 @@ function TitleBar(user) {
     <div className="title-container">
       <img src={myimage} />
       <div style={{ color: "black", fontSize: "2rem" }}>
-        {Id.profile.given_name}
+        {Id?.profile?.given_name}
       </div>
     </div>
   );

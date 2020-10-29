@@ -21,5 +21,5 @@ export let pkce = {
   client_id: "reactclientpkce",
   redirect_uri: "http://localhost:8080",
   response_type: "code",
-  scope: "openid profile email",
+  scope: "openid profile mediauploaderapi",
 };
