@@ -23,6 +23,7 @@ module.exports = function (env) {
     },
     devServer: {
       // historyApiFallback: true,
+      https: true,
       contentBase: path.resolve(__dirname, "dist"),
       port: 8080,
       open: true,

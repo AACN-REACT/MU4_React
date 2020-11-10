@@ -17,15 +17,16 @@ export function useAuth(idserver, flow, settings) {
   if (settings === false) {
     return [identity, true];
   }
-  alert(!!checkURL)
+  alert("check "+checkURL)
   React.useEffect(function () {
     //when the component first loads , there will be no hash fragment in the url
-    if (checkURL) {
+    if (checkURL!==new URL(window.location.href).searchParams.get("code")) {
       console.log("no code", checkURL)
       mgr.signinRedirect();
     } else {
+      console.log("yes code", checkURL)
       mgr
-        .signinRedirectCallback()
+      .signinRedirectCallback()
         .then((user) => {
           authenticate(true);
           setIdentity((s) => ({ ...s, ...user }));
