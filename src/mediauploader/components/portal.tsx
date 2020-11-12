@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom'
 
 
 
-export function Portal(props){
+export function Portal({root, children}){
 
 
 // const portalNode = document.createElement('div');
@@ -14,11 +14,11 @@ export function Portal(props){
 
 // let nodeRef=React.useRef(portalNode)
 
-const portalNode = document.getElementById('portal')
+const portalNode = document.getElementById(root)
 
 
 //let childWithRef = React.Children.map(props.children,el=>React.cloneElement(el,{nodeRef:nodeRef.current}))
-return ReactDOM.createPortal(props.children, portalNode)
+return ReactDOM.createPortal(children, portalNode)
 
 
 }

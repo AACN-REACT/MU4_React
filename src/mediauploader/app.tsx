@@ -4,7 +4,10 @@ import * as React from "react";
 import { Container } from "./components/container";
 import { Portal } from "./components/portal";
 import { ErrorToast } from "./components/errortoast";
-import {Title} from "./components/title"
+import { Title } from "./components/title";
+import { Body } from "./components/body";
+import { Dropzone } from "./components/dropzone";
+import { MediaList } from "./components/medialist";
 
 //utils
 import { EndpointConstructor } from "./utils/endpoint_constructor";
@@ -25,12 +28,27 @@ export function App() {
     return new URL(window.location.href).searchParams;
   }, [window.location.href]);
 
+  // this code puts any mediakey in the url into localstorage and returns it or null
+  const idTakenFromUrl = React.useMemo(
+    function () {
+      if (searchParams.get("mediakey")?.length > 0) {
+        let tempMediaKey = searchParams.get("mediakey");
+        localStorage.setItem("mediakey", tempMediaKey);
+        return tempMediaKey;
+      }
+      return null;
+    },
+    [searchParams]
+  );
+
+  // set up  global state
+
+  const [tooltip, setToolTip] = React.useState("");
+
   const [errorMsg, setErrorMsg] = React.useState(
     searchParams.has("error") ? searchParams.get("error") : null
   );
-  const [mediaKey, setMediaKey] = React.useState(
-    searchParams.has("mediakey") ? searchParams.get("mediakey") : null
-  );
+  const [mediaKey, setMediaKey] = React.useState(idTakenFromUrl);
 
   // data state
 
@@ -51,7 +69,7 @@ export function App() {
           .fetchMainList(userInfo.access_token)
           .then((res) => {
             if (res.status === 401) {
-              throw new Error("401 api denied request");
+              throw new Error("401 api denied request, possible stale token");
             }
             return res.json();
           })
@@ -72,12 +90,19 @@ export function App() {
     [userInfo, isAuthenticated]
   );
 
-  return  (
+  return (
     <Container>
-      <Portal>
-        <ErrorToast msg={errorMsg} close={setErrorMsg} />
-      </Portal>
-      <Title profile={userInfo.profile} isAuthenticated={isAuthenticated} logout={logout} />
+      <ErrorToast msg={errorMsg} close={setErrorMsg} />
+      <Title
+        profile={userInfo.profile}
+        isAuthenticated={isAuthenticated}
+        logout={logout}
+      />
+      <Body>
+        <MediaList list={pendingList} />
+        <Dropzone />
+        <MediaList list={finalizedList} />
+      </Body>
     </Container>
-  ) 
+  );
 }

@@ -10,11 +10,11 @@ export function UserLog({profile, isAuthenticated, logout}){
 
     return (
         <div className="userlog-container">
-            <div className="user-image">
-                AACN media uploader
+            <div>
+                welcome, <span>{isAuthenticated?profile.given_name:"guest"}</span>
             </div>
-            {isAuthenticated?<button onClick={logout} >Logout</button>:
-            <button onClick={e=>window.location.href="https://localhost:8080"}>Login</button>}
+            {isAuthenticated?<button onClick={e=>{alert("logging out"); logout()}} >Logout</button>:
+            <button onClick={e=>window.location.href=window.location.origin}>Login</button>}
         </div>
     )
 

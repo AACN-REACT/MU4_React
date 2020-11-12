@@ -7,7 +7,7 @@ export function Container(props){
 
 
 return (
-    <div className="container">
+    <div className="container drop-shadow">
         {props.children}
     </div>
 )

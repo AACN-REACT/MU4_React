@@ -4,14 +4,15 @@
 .container {
     @include breakpoints.device(desktop){
         width:1200px;
-        background:red;
+        background:lightgray;
         margin:0px auto
 
     }
     @include breakpoints.device(tablet){
         width:100%;
-        background:blue;
-        margin:0px auto
+        background:lightgray;
+        margin:0px auto;
+        
 
     }
 
