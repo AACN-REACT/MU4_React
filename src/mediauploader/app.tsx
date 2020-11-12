@@ -48,7 +48,7 @@ export function App() {
   const [errorMsg, setErrorMsg] = React.useState(
     searchParams.has("error") ? searchParams.get("error") : null
   );
-  const [mediaKey, setMediaKey] = React.useState(idTakenFromUrl);
+  const [mediaKey, setMediaKey] = React.useState(localStorage.getItem('mediakey')?localStorage.getItem('mediakey'):idTakenFromUrl);
 
   // data state
 

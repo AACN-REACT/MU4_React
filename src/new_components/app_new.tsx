@@ -1,8 +1,8 @@
 import * as React from "react";
 import { DropZone } from "../components/dropzone/dropzoneOLD";
-import { aacn, pkce } from "../data/identity-config";
+import { aacn, pkce, pkcetls } from "../data/identity-config";
 import { DropzoneContainer } from "./dropzone_container";
-import { Auth } from "./auth_new";
+import { useAuth } from "../utils/custom_hooks/useauth";
 import { CompletedList } from "./completed_list";
 import { DetailsPage } from "./details_page";
 import { Dummy } from "./dummy";
@@ -23,6 +23,14 @@ import {
   sortFileSize,
 } from "../utils/sorting/sorting_algorithms";
 import { Levenshtein } from "../utils/sorting/levenshtein";
+import { EndpointConstructor } from "../mediauploader/utils/endpoint_constructor";
+import { Authentication, Identity,Logout,Endpoint } from "./contexts";
+
+const mediaManagement = new EndpointConstructor({
+  origin: "https://localhost:44340",
+  version: 1,
+  name: "MediaManagement",
+});
 
 /*-------------------------------------------------------------------------------------------------------*/
 // our App component starts here, takes uploadUrl and user at this point - perhaps should include uploadlimit?
@@ -61,7 +69,7 @@ the Auth server - not implemented yet
 we implement 0Auth, since the api will be protected and we will need a token 
 
 this needs to changed into a custome hook: */
-
+  const [identity, isAuthenticated, logout] = useAuth(pkcetls);
   const [[pendingList, finalizedList], setManagementLists] = React.useState([
     [],
     [],
@@ -75,52 +83,75 @@ this needs to changed into a custome hook: */
   const uploadURL = uploadOrigin + "/api/v1/MediaManagement";
   const localJson = "http://localhost:3000/Result";
 
-  React.useEffect(function () {
-    fetch(uploadURL)
-      .then((res) => res.json())
-      .then((res) => {
-        console.log("RES", res);
-        let completed = res["Result"]["FinalizedMediaDetailsDtos"];
-        let pending = res["Result"]["PendingMediaDetailsDtos"];
+  React.useEffect(
+    function () {
+      if (isAuthenticated) {
+        mediaManagement
+          .fetchMainList(identity.access_token)
+          .then((res) => {
+            if (res.status === 401) {
+              throw new Error("401 api denied request, possible stale token");
+            }
+            return res.json();
+          })
+          .then((res) => {
+            console.log("RES", res);
+            let completed = res["Result"]["FinalizedMediaDetailsDtos"];
+            let pending = res["Result"]["PendingMediaDetailsDtos"];
 
-        console.log("completed", pending);
-        setManagementLists([pending, completed]);
-      });
-  }, []);
+            console.log("completed", pending);
+            setManagementLists([pending, completed]);
+          })
+          .catch((err) => {
+            console.log("my error", err);
+            setErrorMsg(err.message);
+          });
+      }
+    },
+    [identity, isAuthenticated]
+  );
 
   /*--------------------------------------------------------------------------------------------------------*/
   return (
-    <Auth idserver="aacn" flow="pkce" config={pkce}>
-      <Tooltip toolTip={toolTip} />
-      <div>{ErrorMsg}</div>
-      <TitleBar />
-      <Panels openDetails={localStorage.getItem("mediakey") || null}>
-        <UploadTable
-          setMediaKey={setMediaKey}
-          list={uploadSTATE}
-          url={uploadURL}
-          dispatch={DISPATCHUpload}
-          user={user}
-          setError={setErrorMsg}
-        />
-        <ListComponent
-          heading="Pending"
-          videolist={pendingList}
-          setMediaKey={setMediaKey}
-        />
-        <DropzoneContainer
-          uploadSTATE={uploadSTATE}
-          DISPATCHUpload={DISPATCHUpload}
-          sizeLimit={sizeLimit}
-          setError={setErrorMsg}
-        />
-        <ListComponent
-          heading="Completed"
-          videolist={finalizedList}
-          setMediaKey={setMediaKey}
-        />
-        <DetailsPage mediaKey={mediaKey} />
-      </Panels>
-    </Auth>
+    <div>
+      <Endpoint.Provider value={mediaManagement}>
+      <Identity.Provider value={identity}>
+        <Authentication.Provider value={isAuthenticated}>
+          <Logout.Provider value={logout}>
+            <Tooltip toolTip={toolTip} />
+            <div>{ErrorMsg}</div>
+            <TitleBar />
+            <Panels openDetails={localStorage.getItem("mediakey") || null}>
+              <UploadTable
+                setMediaKey={setMediaKey}
+                list={uploadSTATE}
+                url={uploadURL}
+                dispatch={DISPATCHUpload}
+                user={user}
+                setError={setErrorMsg}
+              />
+              <ListComponent
+                heading="Pending"
+                videolist={pendingList}
+                setMediaKey={setMediaKey}
+              />
+              <DropzoneContainer
+                uploadSTATE={uploadSTATE}
+                DISPATCHUpload={DISPATCHUpload}
+                sizeLimit={sizeLimit}
+                setError={setErrorMsg}
+              />
+              <ListComponent
+                heading="Completed"
+                videolist={finalizedList}
+                setMediaKey={setMediaKey}
+              />
+              <DetailsPage mediaKey={mediaKey} />
+            </Panels>
+          </Logout.Provider>
+        </Authentication.Provider>
+      </Identity.Provider>
+      </Endpoint.Provider>
+    </div>
   );
 }

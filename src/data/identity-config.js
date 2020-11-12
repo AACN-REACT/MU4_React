@@ -23,3 +23,14 @@ export let pkce = {
   response_type: "code",
   scope: "openid profile mediauploaderapi",
 };
+
+export const pkcetls = {
+  name: "reactclientpkce",
+  authority: "https://localhost:44333/",
+  client_id: "reactclientpkce",
+  redirect_uri: "https://localhost:8080",
+  response_type: "code",
+  scope: "openid profile mediauploaderapi",
+  silent_redirect_uri: "https://localhost:8080",
+  post_logout_redirect_uri: "https://localhost:8080",
+};

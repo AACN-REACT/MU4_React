@@ -4,7 +4,7 @@ import { useAuth } from "../utils/custom_hooks/useauth";
 import {Authentication, Identity} from './contexts'
 
 export function Auth({ idserver, flow, config, children }) {
-  const [identity,isAuthenicated] = useAuth(idserver, flow, config);
+  const [identity,isAuthenicated,logout] = useAuth( config);
   console.log("ID",isAuthenicated)
   const AuthorisedChildren = React.Children.map(children, function (el, ind) {
     return React.cloneElement(el);
