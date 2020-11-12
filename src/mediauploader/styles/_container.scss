@@ -5,10 +5,13 @@
     @include breakpoints.device(desktop){
         width:1200px;
         background:red;
+        margin:0px auto
+
     }
     @include breakpoints.device(tablet){
         width:100%;
         background:blue;
+        margin:0px auto
 
     }
 
