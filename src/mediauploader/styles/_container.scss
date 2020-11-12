@@ -1,0 +1,15 @@
+@use 'breakpoints';
+
+
+.container {
+    @include breakpoints.device(desktop){
+        width:1200px;
+        background:red;
+    }
+    @include breakpoints.device(tablet){
+        width:100%;
+        background:blue;
+
+    }
+
+}

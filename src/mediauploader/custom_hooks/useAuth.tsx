@@ -26,20 +26,27 @@ export function useAuth(config) {
   //     console.log("expirng");
   //     mgr.signinSilent().then(user=>{console.log("re-signed!!")}).catch(err=>console.log("didnt resign :("));changeTokenWillExpire(true)
   //   })
-  const redirectedFromCallback = new URL(window.location.href).searchParams.has(
-    "code"
-  );
 
+  let myURL = React.useMemo(()=>new URL(window.location.href), [
+    window.location.href,
+  ]);
+  const redirectedFromCallback =
+    config.response_type === "code"
+      ? myURL.searchParams.has("code")
+      : myURL.hash !== "";
+
+  const pageHadErrored = myURL.searchParams.has("error")
   React.useEffect(
     function () {
-      mgr.getUser().then((user) => {
+
+if(!pageHadErrored)   {   mgr.getUser().then((user) => {
         if (!user && !redirectedFromCallback) {
-          mgr.signinRedirect();
+          mgr.signinRedirect().catch(err=>window.location.href=window.location.origin+`/?error=${err}`);
         } else if (!user && redirectedFromCallback) {
           mgr.signinRedirectCallback().then((user) => {
             let newUrl = window.location.origin;
             window.location.href = newUrl;
-          });
+          }).catch(err=>{ window.location.href=window.location.origin+`/?error=${err}`});
         }
 
         // else if (user && tokenWillExpire) {
@@ -57,6 +64,7 @@ export function useAuth(config) {
           setAuthenticated(true);
         }
       });
+    }
     },
     [mgr, redirectedFromCallback]
   );
