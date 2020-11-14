@@ -1,8 +1,8 @@
 import * as React from "react";
 import { render } from "react-dom";
 //import "./styles/main.scss";
-import "./styles/newstyles/main_new.scss";
-//import "./mediauploader/styles/main.scss";
+//import "./styles/newstyles/main_new.scss";
+import "./mediauploader/styles/main.scss";
 //components
 
 //import

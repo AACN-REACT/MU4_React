@@ -1,6 +1,14 @@
-
-.body{
-
-    display:flex;
-    justify-content: space-between;
+@keyframes arrive {
+    0% {transform:translateX()}
 }
+
+
+
+.body {
+
+  display: flex;
+
+  justify-content: space-between;
+  flex-direction: row;
+}
+

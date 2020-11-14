@@ -7,7 +7,7 @@ import { ErrorToast } from "./components/errortoast";
 import { Title } from "./components/title";
 import { Body } from "./components/body";
 import { Dropzone } from "./components/dropzone";
-import { MediaList } from "./components/medialist";
+import { MediaListContainer } from "./components/medialist-container";
 
 //utils
 import { EndpointConstructor } from "./utils/endpoint_constructor";
@@ -71,6 +71,10 @@ export function App() {
     function () {
       let toggle=true
       if (isAuthenticated && toggle) {
+        setManagementLists([
+          new Array(10).fill("loading"),
+          new Array(10).fill("loading"),
+        ])
         mediaManagement
           .fetchMainList(userInfo.access_token)
           .then((res) => {
@@ -103,9 +107,9 @@ export function App() {
         logout={logout}
       />
       <Body>
-        <MediaList list={pendingList} mediaKey={mediaKey} setMediaKey={setMediaKey} fetchListToggle={fetchListToggle}/>
+        <MediaListContainer list={pendingList} mediaKey={mediaKey} setMediaKey={setMediaKey} fetchListToggle={fetchListToggle}/>
         <Dropzone />
-        <MediaList list={finalizedList} mediaKey={mediaKey} setMediaKey={setMediaKey} fetchListToggle={fetchListToggle}/>
+        <MediaListContainer list={finalizedList} mediaKey={mediaKey} setMediaKey={setMediaKey} fetchListToggle={fetchListToggle}/>
       </Body>
     </Container>
   );
