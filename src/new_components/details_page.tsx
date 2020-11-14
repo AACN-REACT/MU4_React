@@ -8,20 +8,32 @@ import { OpenLogs } from "./open-logs-button";
 import butt from "../images/switch.png";
 import { DeleteButton } from "./delete_button";
 import { FinalizeButton } from "./finalize_button";
+import { Identity } from "./contexts";
 
 export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
   const [mediaDetails, setMediaDetails] = React.useState(null);
+  const identity = React.useContext(Identity);
 
   React.useEffect(
-  
     function () {
-      let isMounted = true
-      fetch(`https://localhost:44340/api/v1/Medias/${mediaKey}/MediaDetailsVm`)
-        .then((res) =>{if(isMounted){return res.json()}})
+      if (localStorage.getItem("mediakey")) {
+        localStorage.removeItem("mediakey");
+      }
+      let isMounted = true;
+      fetch(
+        `https://localhost:44340/api/v1/Medias/${mediaKey}/MediaDetailsVm`,
+        { headers: { Authorization: `Bearer ${identity.access_token}` } }
+      )
+        .then((res) => {
+          if (isMounted) {
+            return res.json();
+          }
+        })
         .then((res) => setMediaDetails(res["Result"]));
 
-        return ()=>{isMounted=false}
-
+      return () => {
+        isMounted = false;
+      };
     },
     [mediaKey]
   );
@@ -31,7 +43,17 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
     <div className="details-page">
       <div className="details-bar">
         <span>media details...</span>
-        <div>Key: {mediaKey}</div>
+        <div
+          style={{ cursor: "pointer" }}
+          onClick={(e) => {
+            window.open(
+              `https://localhost:8080/?mediakey=${mediaKey}`,
+              "_blank"
+            );
+          }}
+        >
+          Key: {mediaKey}
+        </div>
         <img
           onClick={(e) => {
             panelState.details_container === 0
@@ -52,6 +74,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           user="amin"
           itemKey={mediaDetails?.Key}
           itemName="title"
+          token={identity.access_token}
         />
         <NonEditableField
           setter={setMediaDetails}
@@ -69,6 +92,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           user="amin"
           itemKey={mediaDetails?.Key}
           itemName="keyword"
+          token={identity.access_token}
         />
         <NonEditableField
           setter={setMediaDetails}
@@ -86,6 +110,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           user="amin"
           itemKey={mediaDetails?.Key}
           itemName="netforumItemLink"
+          token={identity.access_token}
         />
         <NonEditableField
           setter={setMediaDetails}
@@ -139,6 +164,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           user="amin"
           itemKey={mediaDetails?.MediaHostUrl}
           itemName="originalfilename"
+          token={identity.access_token}
         />
       </div>
       <div className="button-container">

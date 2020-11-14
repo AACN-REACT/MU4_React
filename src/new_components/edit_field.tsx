@@ -11,6 +11,7 @@ export function EditableField({
   user,
   itemKey,
   itemName,
+  token
 }) {
   console.log("DATA", data);
   const [isEditable, toggleEditable] = React.useState(false);
@@ -22,6 +23,7 @@ export function EditableField({
       endpoint + itemKey + "/" + name.toLowerCase() + "?" + myquery.toString(),
       {
         method: method,
+        headers: {'Authorization' : `Bearer ${token}`}
       }
     );
     console.log("My request", myrequest);

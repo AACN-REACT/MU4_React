@@ -1,4 +1,4 @@
-export function XHRNew(item, url, setter, dispatch) {
+export function XHRNew(item, url, setter, dispatch, token) {
   function createFormData(file) {
     let myFormData = new FormData();
     myFormData.append("file", file);
@@ -6,6 +6,7 @@ export function XHRNew(item, url, setter, dispatch) {
   }
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
+  xhr.setRequestHeader("Authorization", `Bearer ${token}`);
   xhr.upload.onprogress = function (e) {
     console.log("progress!!", e.loaded * (100 / e.total));
     setter((progress) => e.loaded * (100 / e.total));
@@ -20,5 +21,5 @@ export function XHRNew(item, url, setter, dispatch) {
   });
   let mydata = createFormData(item.file);
   xhr.send(mydata);
-  return xhr
+  return xhr;
 }

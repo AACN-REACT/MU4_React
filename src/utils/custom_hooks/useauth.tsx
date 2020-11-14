@@ -5,7 +5,7 @@ import placeholder from "../../images/SVG/question.svg";
 //   const [isAuthenticated, authenticate] = React.useState(false);
 
 //   const [mgr] = React.useState(new UserManager({ ...settings }));
- 
+
 //   const [identity, setIdentity] = React.useState({
 //     profile: { acces_token: "", name: "guest", picture: null },
 //   });
@@ -63,7 +63,7 @@ export function useAuth(config) {
   //     mgr.signinSilent().then(user=>{console.log("re-signed!!")}).catch(err=>console.log("didnt resign :("));changeTokenWillExpire(true)
   //   })
 
-  let myURL = React.useMemo(()=>new URL(window.location.href), [
+  let myURL = React.useMemo(() => new URL(window.location.href), [
     window.location.href,
   ]);
   const redirectedFromCallback =
@@ -71,36 +71,48 @@ export function useAuth(config) {
       ? myURL.searchParams.has("code")
       : myURL.hash !== "";
 
-  const pageHadErrored = myURL.searchParams.has("error")
+  const pageHadErrored = myURL.searchParams.has("error");
   React.useEffect(
     function () {
+      if (!pageHadErrored) {
+        mgr.getUser().then((user) => {
+          if (!user && !redirectedFromCallback) {
+            mgr
+              .signinRedirect()
+              .catch(
+                (err) =>
+                  (window.location.href =
+                    window.location.origin + `/?error=${err}`)
+              );
+          } else if (!user && redirectedFromCallback) {
+            mgr
+              .signinRedirectCallback()
+              .then((user) => {
+                let newUrl = window.location.origin;
+                window.location.href = newUrl;
+              })
+              .catch((err) => {
+                window.location.href =
+                  window.location.origin + `/?error=${err}`;
+              });
+          }
 
-if(!pageHadErrored)   {   mgr.getUser().then((user) => {
-        if (!user && !redirectedFromCallback) {
-          mgr.signinRedirect().catch(err=>window.location.href=window.location.origin+`/?error=${err}`);
-        } else if (!user && redirectedFromCallback) {
-          mgr.signinRedirectCallback().then((user) => {
-            let newUrl = window.location.origin;
-            window.location.href = newUrl;
-          }).catch(err=>{ window.location.href=window.location.origin+`/?error=${err}`});
-        }
-
-        // else if (user && tokenWillExpire) {
-        //   //check if silent sign-in necessary
-        // console.log( "EXPIRES IN ", user.expires_in)
-        if (user.expires_in < 100)
-          mgr.signinSilent().then((user) => {
-            console.log("re-signed!!");
+          // else if (user && tokenWillExpire) {
+          //   //check if silent sign-in necessary
+          // console.log( "EXPIRES IN ", user.expires_in)
+          if (user.expires_in < 100)
+            mgr.signinSilent().then((user) => {
+              console.log("re-signed!!");
+              setIdentity(user);
+            });
+          // }
+          else {
             setIdentity(user);
-          });
-        // }
-        else {
-          setIdentity(user);
-          localStorage.setItem("mytoken", user.access_token); //should be removed eventually
-          setAuthenticated(true);
-        }
-      });
-    }
+            localStorage.setItem("mytoken", user.access_token); //should be removed eventually
+            setAuthenticated(true);
+          }
+        });
+      }
     },
     [mgr, redirectedFromCallback]
   );

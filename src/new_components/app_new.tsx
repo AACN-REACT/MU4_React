@@ -24,7 +24,7 @@ import {
 } from "../utils/sorting/sorting_algorithms";
 import { Levenshtein } from "../utils/sorting/levenshtein";
 import { EndpointConstructor } from "../mediauploader/utils/endpoint_constructor";
-import { Authentication, Identity,Logout,Endpoint } from "./contexts";
+import { Authentication, Identity, Logout, Endpoint } from "./contexts";
 
 const mediaManagement = new EndpointConstructor({
   origin: "https://localhost:44340",
@@ -54,11 +54,11 @@ the Auth server - not implemented yet
 
   const idTakenFromUrl = React.useMemo(function () {
     let url = new URL(window.location.href);
-    alert("URL  " + url.searchParams.get("mediakey"));
+
     if (url.searchParams.get("mediakey")?.length > 0) {
       let tempMediaKey = url.searchParams.get("mediakey");
       localStorage.setItem("mediakey", tempMediaKey);
-      alert(localStorage.getItem("mediakey"));
+      alert(localStorage.getItem("mediakey"))
       return tempMediaKey;
     }
     return null;
@@ -115,42 +115,42 @@ this needs to changed into a custome hook: */
   return (
     <div>
       <Endpoint.Provider value={mediaManagement}>
-      <Identity.Provider value={identity}>
-        <Authentication.Provider value={isAuthenticated}>
-          <Logout.Provider value={logout}>
-            <Tooltip toolTip={toolTip} />
-            <div>{ErrorMsg}</div>
-            <TitleBar />
-            <Panels openDetails={localStorage.getItem("mediakey") || null}>
-              <UploadTable
-                setMediaKey={setMediaKey}
-                list={uploadSTATE}
-                url={uploadURL}
-                dispatch={DISPATCHUpload}
-                user={user}
-                setError={setErrorMsg}
-              />
-              <ListComponent
-                heading="Pending"
-                videolist={pendingList}
-                setMediaKey={setMediaKey}
-              />
-              <DropzoneContainer
-                uploadSTATE={uploadSTATE}
-                DISPATCHUpload={DISPATCHUpload}
-                sizeLimit={sizeLimit}
-                setError={setErrorMsg}
-              />
-              <ListComponent
-                heading="Completed"
-                videolist={finalizedList}
-                setMediaKey={setMediaKey}
-              />
-              <DetailsPage mediaKey={mediaKey} />
-            </Panels>
-          </Logout.Provider>
-        </Authentication.Provider>
-      </Identity.Provider>
+        <Identity.Provider value={identity}>
+          <Authentication.Provider value={isAuthenticated}>
+            <Logout.Provider value={logout}>
+              <Tooltip toolTip={toolTip} />
+              <div>{ErrorMsg}</div>
+              <TitleBar />
+              <Panels openDetails={localStorage.getItem("mediakey") || null}>
+                <UploadTable
+                  setMediaKey={setMediaKey}
+                  list={uploadSTATE}
+                  url={uploadURL}
+                  dispatch={DISPATCHUpload}
+                  user={user}
+                  setError={setErrorMsg}
+                />
+                <ListComponent
+                  heading="Pending"
+                  videolist={pendingList}
+                  setMediaKey={setMediaKey}
+                />
+                <DropzoneContainer
+                  uploadSTATE={uploadSTATE}
+                  DISPATCHUpload={DISPATCHUpload}
+                  sizeLimit={sizeLimit}
+                  setError={setErrorMsg}
+                />
+                <ListComponent
+                  heading="Completed"
+                  videolist={finalizedList}
+                  setMediaKey={setMediaKey}
+                />
+                <DetailsPage mediaKey={mediaKey} />
+              </Panels>
+            </Logout.Provider>
+          </Authentication.Provider>
+        </Identity.Provider>
       </Endpoint.Provider>
     </div>
   );

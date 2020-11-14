@@ -1,6 +1,6 @@
 import React, { useEffect, createElement, useState } from "react";
 import { XHRNew } from "../../network_functions/XHRNew";
-
+import { Identity } from "../../new_components/contexts";
 export function UploadingListItem({
   setMediaKey,
   dispatchPanelState,
@@ -11,6 +11,7 @@ export function UploadingListItem({
   key,
   dispatch,
 }) {
+  const loggedUser = React.useContext(Identity);
   console.log("arr name", item);
   console.log("STATUS", status);
   const [progress, setprogress] = useState(item.progress);
@@ -20,9 +21,10 @@ export function UploadingListItem({
       setReturnedXhr(
         XHRNew(
           item,
-          `${url}/${item.id}?username=${user}`,
+          `https://localhost:44340/api/v1/Medias/${item.id}?username=${loggedUser.profile.given_name}`,
           setprogress,
-          dispatch
+          dispatch,
+          loggedUser.access_token
         )
       );
     } else if (status === "completed") {

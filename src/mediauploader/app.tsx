@@ -15,6 +15,7 @@ import { EndpointConstructor } from "./utils/endpoint_constructor";
 // openid settings and hooks
 import { pkce, pkcetls, auth0, aacn } from "./data/identity-config";
 import { useAuth } from "./custom_hooks/useAuth";
+import { Identity } from "../new_components/contexts";
 
 const mediaManagement = new EndpointConstructor({
   origin: "https://localhost:44340",
@@ -29,7 +30,7 @@ export function App() {
   }, [window.location.href]);
 
   // this code puts any mediakey in the url into localstorage and returns it or null
-  const idTakenFromUrl = React.useMemo(
+  const mediaKeyInUrl:string|boolean = React.useMemo(
     function () {
       if (searchParams.get("mediakey")?.length > 0) {
         let tempMediaKey = searchParams.get("mediakey");
@@ -48,23 +49,28 @@ export function App() {
   const [errorMsg, setErrorMsg] = React.useState(
     searchParams.has("error") ? searchParams.get("error") : null
   );
-  const [mediaKey, setMediaKey] = React.useState(localStorage.getItem('mediakey')?localStorage.getItem('mediakey'):idTakenFromUrl);
+
+
+  const [mediaKey, setMediaKey] = React.useState(localStorage.getItem("mediakey")||mediaKeyInUrl);
 
   // data state
 
   const [[pendingList, finalizedList], setManagementLists] = React.useState([
-    [],
-    [],
+    new Array(10).fill("loading"),
+    new Array(10).fill("loading"),
   ]);
 
   // Effects..
   // initiate authentication
   const [userInfo, isAuthenticated, logout] = useAuth(pkcetls);
+ // supply a method to trigger refetching of data 
 
+  const [fetchList, fetchListToggle] = React.useState(true)
   // initiate fetching and setting list
   React.useEffect(
     function () {
-      if (isAuthenticated) {
+      let toggle=true
+      if (isAuthenticated && toggle) {
         mediaManagement
           .fetchMainList(userInfo.access_token)
           .then((res) => {
@@ -73,21 +79,19 @@ export function App() {
             }
             return res.json();
           })
-          .then((res) => {
-            console.log("RES", res);
+          .then(res=>{
             let completed = res["Result"]["FinalizedMediaDetailsDtos"];
             let pending = res["Result"]["PendingMediaDetailsDtos"];
-
-            console.log("completed", pending);
-            setManagementLists([pending, completed]);
+            toggle && setManagementLists([pending, completed]);
           })
           .catch((err) => {
-            console.log("my error", err);
-            setErrorMsg(err.message);
+            console.log("RES", err);
+            toggle && setErrorMsg(err.message);
           });
       }
+      return ()=>{toggle=false}
     },
-    [userInfo, isAuthenticated]
+    [userInfo, isAuthenticated, fetchList]
   );
 
   return (
@@ -99,9 +103,9 @@ export function App() {
         logout={logout}
       />
       <Body>
-        <MediaList list={pendingList} />
+        <MediaList list={pendingList} mediaKey={mediaKey} setMediaKey={setMediaKey} fetchListToggle={fetchListToggle}/>
         <Dropzone />
-        <MediaList list={finalizedList} />
+        <MediaList list={finalizedList} mediaKey={mediaKey} setMediaKey={setMediaKey} fetchListToggle={fetchListToggle}/>
       </Body>
     </Container>
   );

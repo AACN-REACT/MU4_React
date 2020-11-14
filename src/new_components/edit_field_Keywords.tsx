@@ -11,6 +11,7 @@ export function KeywordEditableField({
   user,
   itemKey,
   itemName,
+  token,
 }) {
   console.log("DATA keyword", data);
   const [displayKeywords, addDisplayKeywords] = React.useState(data);
@@ -20,13 +21,13 @@ export function KeywordEditableField({
 
   //useEffect to set display keywords
 
-
   function sendData(userEdit) {
     let myquery = new URLSearchParams({ [itemName]: userEdit, username: user });
     let myrequest = new Request(
       endpoint + itemKey + "/" + name.toLowerCase() + "?" + myquery.toString(),
       {
         method: method,
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
     console.log("My request", myrequest);
@@ -52,6 +53,7 @@ export function KeywordEditableField({
       endpoint + itemKey + "/" + name.toLowerCase() + "?" + myquery.toString(),
       {
         method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
     console.log("My request", myrequest);
@@ -68,7 +70,7 @@ export function KeywordEditableField({
         }
       })
       .then((res) =>
-        addDisplayKeywords((d) => d.splice(d.indexOf(userEdit), 1))
+        addDisplayKeywords((d) => d?.splice(d.indexOf(userEdit), 1))
       )
       .catch((err) => console.log(err));
   }
@@ -86,13 +88,11 @@ export function KeywordEditableField({
       </div>
       {!isEditable ? (
         <div className="detail-value">
-          {Array.isArray(data)
-            ? data.join(",")
-            : data}
+          {Array.isArray(data) ? data.join(",") : data}
         </div>
       ) : (
         <div className="keyword-input-container">
-          {data?.map((el) => (
+          {Array.isArray(data)?data.map((el,indx, data) => { alert(data);return (
             <div className="keyword-popup">
               <div className="keyword-name">{el}</div>
 
@@ -105,7 +105,7 @@ export function KeywordEditableField({
                 {String.fromCharCode(10008)}
               </div>
             </div>
-          ))}
+          )   }  ):()=>null}
           <input ref={inputValue} type="text" placeholder="enter keyword" />
           <div
             onClick={(e) => {
