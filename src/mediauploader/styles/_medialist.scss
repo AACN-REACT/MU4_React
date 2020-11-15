@@ -7,5 +7,22 @@
 .list{
 
     background:pink;
-    animation:arrive 2s
+    // animation:arrive 2s;
+    border:2px solid green;
+    transition: .5s all;
+
+    
+}
+.inner-list{
+    
+}
+
+.list-depart{
+    margin-left:-100px;
+}
+
+.medialist-container{
+
+    width: 400px;
+    overflow: hidden;
 }

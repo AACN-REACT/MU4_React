@@ -22,6 +22,7 @@ const mediaManagement = new EndpointConstructor({
   version: 1,
   name: "MediaManagement",
 });
+
 export function App() {
   //this function takes no props but includes constants within scope
   // extract  with searh params to give error and or mediaKey intial state
@@ -30,7 +31,7 @@ export function App() {
   }, [window.location.href]);
 
   // this code puts any mediakey in the url into localstorage and returns it or null
-  const mediaKeyInUrl:string|boolean = React.useMemo(
+  const mediaKeyInUrl: string | boolean = React.useMemo(
     function () {
       if (searchParams.get("mediakey")?.length > 0) {
         let tempMediaKey = searchParams.get("mediakey");
@@ -50,31 +51,38 @@ export function App() {
     searchParams.has("error") ? searchParams.get("error") : null
   );
 
-
-  const [mediaKey, setMediaKey] = React.useState(localStorage.getItem("mediakey")||mediaKeyInUrl);
+  const [mediaKey, setMediaKey] = React.useState(
+    localStorage.getItem("mediakey") || mediaKeyInUrl
+  );
 
   // data state
 
   const [[pendingList, finalizedList], setManagementLists] = React.useState([
-    new Array(10).fill("loading"),
-    new Array(10).fill("loading"),
+    "idle",
+    "idle",
   ]);
 
+  console.log("Pending", pendingList);
   // Effects..
   // initiate authentication
   const [userInfo, isAuthenticated, logout] = useAuth(pkcetls);
- // supply a method to trigger refetching of data 
+  // supply a method to trigger refetching of data
 
-  const [fetchList, fetchListToggle] = React.useState(true)
+  const [fetchList, fetchListToggle] = React.useState(true);
+
+  // refresh function
+
+  function refreshList() {
+    setManagementLists(["loading", "loading"]);
+    fetchListToggle((t) => !t);
+  }
+
+  let isMounted = true;
+
   // initiate fetching and setting list
   React.useEffect(
     function () {
-      let toggle=true
-      if (isAuthenticated && toggle) {
-        setManagementLists([
-          new Array(10).fill("loading"),
-          new Array(10).fill("loading"),
-        ])
+      if (isAuthenticated && isMounted) {
         mediaManagement
           .fetchMainList(userInfo.access_token)
           .then((res) => {
@@ -83,17 +91,19 @@ export function App() {
             }
             return res.json();
           })
-          .then(res=>{
+          .then((res) => {
             let completed = res["Result"]["FinalizedMediaDetailsDtos"];
             let pending = res["Result"]["PendingMediaDetailsDtos"];
-            toggle && setManagementLists([pending, completed]);
+            isMounted && setManagementLists([pending, completed]);
           })
           .catch((err) => {
-            console.log("RES", err);
-            toggle && setErrorMsg(err.message);
+            alert("error");
+            isMounted && setErrorMsg(err.message);
           });
       }
-      return ()=>{toggle=false}
+      return () => {
+        isMounted = false;
+      };
     },
     [userInfo, isAuthenticated, fetchList]
   );
@@ -107,9 +117,19 @@ export function App() {
         logout={logout}
       />
       <Body>
-        <MediaListContainer list={pendingList} mediaKey={mediaKey} setMediaKey={setMediaKey} fetchListToggle={fetchListToggle}/>
+        <MediaListContainer
+          list={pendingList}
+          mediaKey={mediaKey}
+          setMediaKey={setMediaKey}
+          fetchListToggle={refreshList}
+        />
         <Dropzone />
-        <MediaListContainer list={finalizedList} mediaKey={mediaKey} setMediaKey={setMediaKey} fetchListToggle={fetchListToggle}/>
+        <MediaListContainer
+          list={finalizedList}
+          mediaKey={mediaKey}
+          setMediaKey={setMediaKey}
+          fetchListToggle={fetchListToggle}
+        />
       </Body>
     </Container>
   );

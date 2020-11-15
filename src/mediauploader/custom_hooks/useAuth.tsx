@@ -79,7 +79,7 @@ export function useAuth(config) {
         });
       }
     },
-    [mgr]
+    []
   );
 
   return [identity, isAuthenticated, mgr.signoutRedirect.bind(mgr)];

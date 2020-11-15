@@ -19,4 +19,5 @@ const sizeLimit = 45000000;
 const root = document.querySelector("#root");
 
 //render(<App uploadOrigin={uploadOrigin} user={user} sizeLimit={sizeLimit} />, root);
+
 render(<App />, root);
