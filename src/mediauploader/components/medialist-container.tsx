@@ -1,7 +1,8 @@
 import * as React from "react";
 import { MediaList } from "./medialist";
-
+import {SetToolTip} from "./globalstateContext"
 import { Paginate } from "../utils/sorting_algorithms";
+import {toolTipSetter} from "../utils/helperfunctions"
 
 export function MediaListContainer({
   mediaKey,
@@ -14,6 +15,8 @@ export function MediaListContainer({
   );
   const [pageNumber, setPageNumber] = React.useState(0);
   
+  const setToolTip = React.useContext(SetToolTip)
+
   React.useEffect(
     function () {
     
@@ -44,6 +47,9 @@ export function MediaListContainer({
         previous page
       </button>{" "}
       <button
+
+       
+
         onClick={(e) => {
           
           setPageNumber(0)

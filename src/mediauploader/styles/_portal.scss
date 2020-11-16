@@ -8,6 +8,20 @@
     opacity: 1;
   }
 }
+@keyframes tooltip {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity:0;
+  }
+}
 #portal {
   width: 100%;
   position: absolute;
@@ -36,3 +50,17 @@
     top: 0px;
   }
 }
+
+
+.tooltip{
+  position:absolute;
+  font-size: .5rem;
+  z-index:1000;
+   width:100px;
+   height:50px;
+   background-color: whitesmoke;
+   box-shadow: 2px 2px 5px gray;
+  opacity:0;
+  transition:1s opacity;
+  
+  }

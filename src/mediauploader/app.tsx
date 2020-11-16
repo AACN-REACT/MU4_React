@@ -104,10 +104,6 @@ export function App() {
             isMounted && setManagementLists(["idle", "idle"]);
           });
       }
-      if (!isAuthenticated && isMounted) {
-        !errorMsg && setErrorMsg("please login to continue");
-        setManagementLists(["idle", "idle"]);
-      }
 
       return () => {
         isMounted = false;
@@ -121,13 +117,17 @@ export function App() {
     <Container>
       <Tooltip tooltipMsg={tooltipMsg} />
       <ErrorToast msg={errorMsg} close={setErrorMsg} />
-      <Title
-        profile={userInfo.profile}
-        isAuthenticated={isAuthenticated}
-        logout={logout}
-      />
-      <Body>
-        <GlobalStateContexts setToolTip={setToolTip} setErrorMsg={setErrorMsg} endpoints={mediaManagement}>
+      <GlobalStateContexts
+        setToolTip={setToolTip}
+        setErrorMsg={setErrorMsg}
+        endpoints={mediaManagement}
+      >
+        <Title
+          profile={userInfo.profile}
+          isAuthenticated={isAuthenticated}
+          logout={logout}
+        />
+        <Body>
           <MediaListContainer
             list={pendingList}
             mediaKey={mediaKey}
@@ -141,8 +141,8 @@ export function App() {
             setMediaKey={setMediaKey}
             fetchListToggle={refreshList}
           />
-        </GlobalStateContexts>
-      </Body>
+        </Body>
+      </GlobalStateContexts>
     </Container>
   );
 }

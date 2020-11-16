@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Endpoint } from "../../new_components/contexts";
 
-const SetToolTip = React.createContext();
-const SetErrorMsg = React.createContext();
-const Endpoints = React.createContext();
+export const SetToolTip = React.createContext();
+export const SetErrorMsg = React.createContext();
+export const Endpoints = React.createContext();
 
 export function GlobalStateContexts({
   setToolTip,
