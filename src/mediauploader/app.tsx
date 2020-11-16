@@ -8,6 +8,8 @@ import { Title } from "./components/title";
 import { Body } from "./components/body";
 import { Dropzone } from "./components/dropzone";
 import { MediaListContainer } from "./components/medialist-container";
+import { Tooltip } from "./components/tooltip";
+import { GlobalStateContexts } from "./components/globalstateContext";
 
 //utils
 import { EndpointConstructor } from "./utils/endpoint_constructor";
@@ -16,6 +18,7 @@ import { EndpointConstructor } from "./utils/endpoint_constructor";
 import { pkce, pkcetls, auth0, aacn } from "./data/identity-config";
 import { useAuth } from "./custom_hooks/useAuth";
 import { Identity } from "../new_components/contexts";
+import { endpoints } from "./data/endpoints";
 
 const mediaManagement = new EndpointConstructor({
   origin: "https://localhost:44340",
@@ -45,7 +48,7 @@ export function App() {
 
   // set up  global state
 
-  const [tooltip, setToolTip] = React.useState("");
+  const [tooltipMsg, setToolTip] = React.useState("");
 
   const [errorMsg, setErrorMsg] = React.useState(
     searchParams.has("error") ? searchParams.get("error") : null
@@ -73,7 +76,7 @@ export function App() {
   // refresh function
 
   function refreshList() {
-    setManagementLists(["loading", "loading"]);
+    setManagementLists((s) => ["loading", "loading"]);
     fetchListToggle((t) => !t);
   }
 
@@ -82,7 +85,7 @@ export function App() {
   // initiate fetching and setting list
   React.useEffect(
     function () {
-      if (isAuthenticated && isMounted) {
+      if (isAuthenticated) {
         mediaManagement
           .fetchMainList(userInfo.access_token)
           .then((res) => {
@@ -97,10 +100,15 @@ export function App() {
             isMounted && setManagementLists([pending, completed]);
           })
           .catch((err) => {
-            alert("error");
             isMounted && setErrorMsg(err.message);
+            isMounted && setManagementLists(["idle", "idle"]);
           });
       }
+      if (!isAuthenticated && isMounted) {
+        !errorMsg && setErrorMsg("please login to continue");
+        setManagementLists(["idle", "idle"]);
+      }
+
       return () => {
         isMounted = false;
       };
@@ -108,8 +116,10 @@ export function App() {
     [userInfo, isAuthenticated, fetchList]
   );
 
+  console.log("list before", pendingList);
   return (
     <Container>
+      <Tooltip tooltipMsg={tooltipMsg} />
       <ErrorToast msg={errorMsg} close={setErrorMsg} />
       <Title
         profile={userInfo.profile}
@@ -117,19 +127,21 @@ export function App() {
         logout={logout}
       />
       <Body>
-        <MediaListContainer
-          list={pendingList}
-          mediaKey={mediaKey}
-          setMediaKey={setMediaKey}
-          fetchListToggle={refreshList}
-        />
-        <Dropzone />
-        <MediaListContainer
-          list={finalizedList}
-          mediaKey={mediaKey}
-          setMediaKey={setMediaKey}
-          fetchListToggle={fetchListToggle}
-        />
+        <GlobalStateContexts setToolTip={setToolTip} setErrorMsg={setErrorMsg} endpoints={mediaManagement}>
+          <MediaListContainer
+            list={pendingList}
+            mediaKey={mediaKey}
+            setMediaKey={setMediaKey}
+            fetchListToggle={refreshList}
+          />
+          <Dropzone />
+          <MediaListContainer
+            list={finalizedList}
+            mediaKey={mediaKey}
+            setMediaKey={setMediaKey}
+            fetchListToggle={refreshList}
+          />
+        </GlobalStateContexts>
       </Body>
     </Container>
   );

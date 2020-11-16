@@ -72,8 +72,7 @@ export function useAuth(config) {
             });
           // }
           else {
-            setIdentity(user);
-            localStorage.setItem("mytoken", user.access_token); //should be removed eventually
+            setIdentity(user);//should be removed eventually
             setAuthenticated(true);
           }
         });

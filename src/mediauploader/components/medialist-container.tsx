@@ -13,16 +13,23 @@ export function MediaListContainer({
    list
   );
   const [pageNumber, setPageNumber] = React.useState(0);
-
+  
   React.useEffect(
     function () {
-      console.log("paginated", setMediaList(Paginate(list, 10)));
-      if(list!=="loading" || list!=="idle") setMediaList(Paginate(list, 10));
-    },
+    
+      if(list!=="loading" && list!=="idle") {setMediaList(Paginate(list, 10))}
+      else { setMediaList(list)}
+      
+      },
+      
+      
     [list]
   );
 
   const listState = Array.isArray(list);
+
+  console.log("List passes", list, "stete",mediaList)
+
   return (
     <div className="medialist-container">
       <div>
@@ -38,6 +45,7 @@ export function MediaListContainer({
       </button>{" "}
       <button
         onClick={(e) => {
+          
           setPageNumber(0)
           fetchListToggle((s) => !s);
         }}
@@ -53,7 +61,7 @@ export function MediaListContainer({
       >
         next page
       </button>
-      <MediaList pageNumber={pageNumber} list={listState?mediaList[pageNumber]:mediaList} />
+      <MediaList pageNumber={pageNumber} list={typeof mediaList=="object"?mediaList[pageNumber]:mediaList} />
     </div>
   );
 }

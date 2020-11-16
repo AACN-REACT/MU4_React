@@ -26,3 +26,12 @@
     width: 400px;
     overflow: hidden;
 }
+
+.list-content{
+    width:500px;
+    display:flex;
+    justify-content: start;
+    & .list-cell{
+        border:1px solid green
+    }
+}
