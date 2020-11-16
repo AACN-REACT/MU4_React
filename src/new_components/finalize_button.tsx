@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export function FinalizeButton({ itemKey, user }) {
+export function FinalizeButton({ itemKey, user, identity }) {
   const [finalized, setFinalized] = React.useState(false);
 
   function FinalizeVideo(event) {
@@ -8,6 +8,9 @@ export function FinalizeButton({ itemKey, user }) {
       `https://localhost:44340/api/v1/Medias/${itemKey}/stakeholderfinalization?username=${user}`,
       {
         method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${identity.access_token}`,
+        },
       }
     )
       .then((res) => res.json())

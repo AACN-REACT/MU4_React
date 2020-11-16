@@ -98,31 +98,27 @@ Levenshtein.prototype.valueOf = function () {
   return this.distance;
 };
 
-
-onmessage = function(e){
-  console.log("WORKER: MESSAGE RECEIVED")
+onmessage = function (e) {
+  console.log("WORKER: MESSAGE RECEIVED", e.data);
   let params = e.data;
- let searhlistresults =  textSearch(params)
+  let searhlistresults = textSearch(params);
 
-postMessage(searhlistresults)
+  postMessage(searhlistresults);
+};
 
-
-}
-
-export function textSearch(word: string, list: any[], field: string) {
+export function textSearch({word, list, field}) {
   //fill
 
   function sortText(a, b) {
-    let first = new Levenshtein(a[field].toLowerCase().substring(0,word.length), word);
-    let second = new Levenshtein(b[field].toLowerCase().substring(0,word.length), word);
-    console.log(
-      "DISTANCE",
-      first.distance,
-      second.distance,
-      list,
-      a[field],
+    let first = new Levenshtein(
+      a[field].toLowerCase().substring(0, word.length),
       word
     );
+    let second = new Levenshtein(
+      b[field].toLowerCase().substring(0, word.length),
+      word
+    );
+    console.log("WORKER SORT");
     if (first.distance - second.distance > 0) {
       return 1;
     }
@@ -132,6 +128,7 @@ export function textSearch(word: string, list: any[], field: string) {
 
     return 0;
   }
-  console.log(">>>", list.sort(sortText).slice(0, 10));
+   console.log("WORKER -->", list.sort(sortText).slice(0, 10));
   return list.sort(sortText).slice(0, 10);
+
 }

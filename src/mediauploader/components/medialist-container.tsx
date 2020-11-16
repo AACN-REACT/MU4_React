@@ -35,6 +35,8 @@ export function MediaListContainer({
 
   return (
     <div className="medialist-container">
+
+      <MediaList pageNumber={pageNumber} list={typeof mediaList=="object"?mediaList[pageNumber]:mediaList} />
       <div>
         page {pageNumber + 1} of {mediaList.length}
       </div>
@@ -67,7 +69,6 @@ export function MediaListContainer({
       >
         next page
       </button>
-      <MediaList pageNumber={pageNumber} list={typeof mediaList=="object"?mediaList[pageNumber]:mediaList} />
     </div>
   );
 }

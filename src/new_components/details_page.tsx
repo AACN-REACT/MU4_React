@@ -16,16 +16,25 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
 
   React.useEffect(
     function () {
+      let localtoken = false;
+      console.log(">>>>>>", identity.access_token);
       if (localStorage.getItem("mediakey")) {
-        localStorage.removeItem("mediakey");
+        localtoken = localStorage.getItem("mytoken") || false;
+
+        //localStorage.removeItem("mediakey");
       }
       let isMounted = true;
       fetch(
         `https://localhost:44340/api/v1/Medias/${mediaKey}/MediaDetailsVm`,
-        { headers: { Authorization: `Bearer ${identity.access_token}` } }
+        {
+          headers: {
+            Authorization: `Bearer ${identity.access_token}`,
+          },
+        }
       )
         .then((res) => {
           if (isMounted) {
+            localStorage.removeItem("mediakey");
             return res.json();
           }
         })
@@ -35,10 +44,10 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
         isMounted = false;
       };
     },
-    [mediaKey]
+    [mediaKey, identity]
   );
 
-  console.log("PANEL STATE", panelState);
+  console.log("PANEL STATE", identity);
   return (
     <div className="details-page">
       <div className="details-bar">
@@ -168,8 +177,16 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
         />
       </div>
       <div className="button-container">
-        <DeleteButton user="amin" itemKey={mediaDetails?.Key} />
-        <FinalizeButton user="amin" itemKey={mediaDetails?.Key} />
+        <DeleteButton
+          user="amin"
+          itemKey={mediaDetails?.Key}
+          identity={identity}
+        />
+        <FinalizeButton
+          user="amin"
+          itemKey={mediaDetails?.Key}
+          identity={identity}
+        />
       </div>
 
       <OpenLogs data={mediaDetails?.MediaAudits} />

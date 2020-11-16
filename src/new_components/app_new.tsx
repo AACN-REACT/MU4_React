@@ -26,6 +26,7 @@ import { Levenshtein } from "../utils/sorting/levenshtein";
 import { EndpointConstructor } from "../mediauploader/utils/endpoint_constructor";
 import { Authentication, Identity, Logout, Endpoint } from "./contexts";
 
+
 const mediaManagement = new EndpointConstructor({
   origin: "https://localhost:44340",
   version: 1,

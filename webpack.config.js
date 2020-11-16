@@ -42,6 +42,10 @@ module.exports = function (env) {
     },
     module: {
       rules: [
+          {
+            test: /\.worker\.js$/,
+            use: { loader: 'worker-loader' },
+          },
         {
           test: /\.(png|svg|jpg)$/,
           loader: "file-loader",

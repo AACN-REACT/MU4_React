@@ -7,8 +7,10 @@
 .body {
 
   display: flex;
-
+  width:100%;
+  border:1px solid green;
   justify-content: space-between;
   flex-direction: row;
+  padding:5px;
 }
 

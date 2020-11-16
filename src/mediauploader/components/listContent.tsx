@@ -5,7 +5,8 @@ export function ListContent(listItem){
 
 
     return (
-        <div className="list-content">
+        <div className="cotent-rows">
+        <div className="content-columns">
                 <div className="list-cell">{listItem.Title}</div>
                 <div className="list-cell">{listItem.OriginalFileName}</div>
                 <div className="list-cell">{listItem.HasKeywords}</div>
@@ -15,6 +16,7 @@ export function ListContent(listItem){
                 <div className="list-cell">{listItem.Title}</div>
                 <div className="list-cell">{listItem.Title}</div>
                 <div className="list-cell">{listItem.StartDateTime}</div>
+        </div>
         </div>
     )
 

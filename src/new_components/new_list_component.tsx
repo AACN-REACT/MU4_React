@@ -18,12 +18,15 @@ import {
   sortOriginalReverse,
 } from "../utils/sorting/sorting_algorithms";
 import { textSearch } from "../utils/sorting/levenshtein";
+import Worker from "../utils/sorting/pendingList.worker";
+
 export function ListComponent({
   heading,
   dispatchPanelState,
   panelState,
   videolist,
   setMediaKey,
+  worker,
 }) {
   //not sure what this does just yet
   let [list, changeList] = React.useState([]);
@@ -33,6 +36,12 @@ export function ListComponent({
     // sortFileSize,
     // sortNewestDate,
   ]);
+  const [SORTING_WORKER] = React.useState(Worker);
+  SORTING_WORKER.onmessage = function (e) {
+    console.log("WORKER: ANSWER RETURNED", e.data);
+    changeList(Paginate(e.data, 10));
+  };
+
   console.log("tt", transforms);
 
   const searchValue = React.useRef();
@@ -100,12 +109,12 @@ export function ListComponent({
         <label>Search</label>
         <input
           onChange={(e) => {
-            changeList(
-              Paginate(
-                textSearch(searchValue.current.value, videolist, "Title"),
-                10
-              )
-            );
+            console.log("WORKER: EVENT INTIATED");
+            SORTING_WORKER.postMessage({
+              word: searchValue.current.value,
+              list: videolist,
+              field: "Title",
+            });
           }}
           type="text"
           ref={searchValue}

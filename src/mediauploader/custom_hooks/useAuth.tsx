@@ -1,5 +1,5 @@
 import * as React from "react";
-import { UserManager, WebStorageStateStore } from "oidc-client";
+import { UserManager} from "oidc-client";
 
 // interface IdentityInfo {
 //     profile?:any;
@@ -13,7 +13,7 @@ export function useAuth(config) {
 
   //set up userManager
 
-  const [mgr, setMgr] = React.useState(
+  const [mgr] = React.useState(
     new UserManager(config))
 
   //set up state for identity info

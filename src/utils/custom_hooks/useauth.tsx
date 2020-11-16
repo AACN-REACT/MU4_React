@@ -1,5 +1,5 @@
 import * as React from "react";
-import { UserManager } from "oidc-client";
+import { UserManager, Logger, WebStorageStateStore } from "oidc-client";
 import placeholder from "../../images/SVG/question.svg";
 // export function useAuth(idserver, flow, settings) {
 //   const [isAuthenticated, authenticate] = React.useState(false);
@@ -49,7 +49,12 @@ export function useAuth(config) {
 
   //set up userManager
 
-  const [mgr, setMgr] = React.useState(new UserManager(config));
+  const [mgr, setMgr] = React.useState(
+    new UserManager({
+      ...config,
+      userStore: new WebStorageStateStore({ store: localStorage }),
+    })
+  );
 
   //set up state for identity info
 
