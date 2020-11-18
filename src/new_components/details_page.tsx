@@ -3,6 +3,7 @@ import { Controls } from "./controls";
 import { ControlButton } from "./control_button";
 import { EditableField } from "./edit_field";
 import { KeywordEditableField } from "./edit_field_Keywords";
+import { NetforumEditableField } from "./edit_field_netforum";
 import { NonEditableField } from "./non_edit_field";
 import { OpenLogs } from "./open-logs-button";
 import butt from "../images/switch.png";
@@ -12,7 +13,9 @@ import { Identity } from "./contexts";
 
 export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
   const [mediaDetails, setMediaDetails] = React.useState(null);
+  const [toggle, refetchData] = React.useState(false)
   const identity = React.useContext(Identity);
+  //const [emptyPresentation, setEmptyPresentation] = React.useSate(false);
 
   React.useEffect(
     function () {
@@ -44,7 +47,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
         isMounted = false;
       };
     },
-    [mediaKey, identity]
+    [mediaKey, identity, toggle]
   );
 
   console.log("PANEL STATE", identity);
@@ -102,6 +105,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           itemKey={mediaDetails?.Key}
           itemName="keyword"
           token={identity.access_token}
+          refetchData={refetchData}
         />
         <NonEditableField
           setter={setMediaDetails}
@@ -109,13 +113,15 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           displayName="Added Date.."
           data={new Date(mediaDetails?.StartDateTime).toLocaleString()}
         />
-        <EditableField
+        <NetforumEditableField
           method="PUT"
           setter={setMediaDetails}
           name="NetforumLink"
           displayName="Netforum Link"
           data={mediaDetails?.NetforumItemLink?.NetforumKey}
           endpoint={"https://localhost:44340/api/v1/Medias/"}
+          netForumBaseV1={"https://localhost:44340/api/v0/NetforumItems/"}
+          netForumBaseV0={"https://localhost:44340/api/v0/NetforumItems/"}
           user="amin"
           itemKey={mediaDetails?.Key}
           itemName="netforumItemLink"

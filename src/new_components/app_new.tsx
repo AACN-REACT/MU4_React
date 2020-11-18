@@ -26,6 +26,8 @@ import { Levenshtein } from "../utils/sorting/levenshtein";
 import { EndpointConstructor } from "../mediauploader/utils/endpoint_constructor";
 import { Authentication, Identity, Logout, Endpoint } from "./contexts";
 
+import { GlobalContext } from "./contexts";
+import { GlobalStateContexts } from "../mediauploader/components/globalstateContext";
 
 const mediaManagement = new EndpointConstructor({
   origin: "https://localhost:44340",
@@ -59,7 +61,7 @@ the Auth server - not implemented yet
     if (url.searchParams.get("mediakey")?.length > 0) {
       let tempMediaKey = url.searchParams.get("mediakey");
       localStorage.setItem("mediakey", tempMediaKey);
-      alert(localStorage.getItem("mediakey"))
+      alert(localStorage.getItem("mediakey"));
       return tempMediaKey;
     }
     return null;
@@ -84,8 +86,11 @@ this needs to changed into a custome hook: */
   const uploadURL = uploadOrigin + "/api/v1/MediaManagement";
   const localJson = "http://localhost:3000/Result";
 
+  const [refreshToggle, refreshList] = React.useState(false);
+  const [isLoading, setLoading] = React.useState(true);
   React.useEffect(
     function () {
+      setLoading(true);
       if (isAuthenticated) {
         mediaManagement
           .fetchMainList(identity.access_token)
@@ -103,56 +108,62 @@ this needs to changed into a custome hook: */
             console.log("completed", pending);
             setManagementLists([pending, completed]);
           })
+          .then(function () {
+            setLoading((l) => false);
+          })
           .catch((err) => {
             console.log("my error", err);
             setErrorMsg(err.message);
+            setLoading((l) => false);
           });
       }
     },
-    [identity, isAuthenticated]
+    [identity, isAuthenticated, refreshToggle]
   );
 
   /*--------------------------------------------------------------------------------------------------------*/
   return (
     <div>
-      <Endpoint.Provider value={mediaManagement}>
-        <Identity.Provider value={identity}>
-          <Authentication.Provider value={isAuthenticated}>
-            <Logout.Provider value={logout}>
-              <Tooltip toolTip={toolTip} />
-              <div>{ErrorMsg}</div>
-              <TitleBar />
-              <Panels openDetails={localStorage.getItem("mediakey") || null}>
-                <UploadTable
-                  setMediaKey={setMediaKey}
-                  list={uploadSTATE}
-                  url={uploadURL}
-                  dispatch={DISPATCHUpload}
-                  user={user}
-                  setError={setErrorMsg}
-                />
-                <ListComponent
-                  heading="Pending"
-                  videolist={pendingList}
-                  setMediaKey={setMediaKey}
-                />
-                <DropzoneContainer
-                  uploadSTATE={uploadSTATE}
-                  DISPATCHUpload={DISPATCHUpload}
-                  sizeLimit={sizeLimit}
-                  setError={setErrorMsg}
-                />
-                <ListComponent
-                  heading="Completed"
-                  videolist={finalizedList}
-                  setMediaKey={setMediaKey}
-                />
-                <DetailsPage mediaKey={mediaKey} />
-              </Panels>
-            </Logout.Provider>
-          </Authentication.Provider>
-        </Identity.Provider>
-      </Endpoint.Provider>
+      <GlobalContext
+        identity={identity}
+        authentication={isAuthenticated}
+        logout={logout}
+        endpoint={mediaManagement}
+        refreshList={refreshList}
+      >
+        <Tooltip toolTip={toolTip} />
+        <div>{ErrorMsg}</div>
+        <TitleBar />
+        <Panels openDetails={localStorage.getItem("mediakey") || null}>
+          <UploadTable
+            setMediaKey={setMediaKey}
+            list={uploadSTATE}
+            url={uploadURL}
+            dispatch={DISPATCHUpload}
+            user={user}
+            setError={setErrorMsg}
+          />
+          <ListComponent
+            heading="Pending"
+            videolist={pendingList}
+            setMediaKey={setMediaKey}
+            isLoading={isLoading}
+          />
+          <DropzoneContainer
+            uploadSTATE={uploadSTATE}
+            DISPATCHUpload={DISPATCHUpload}
+            sizeLimit={sizeLimit}
+            setError={setErrorMsg}
+          />
+          <ListComponent
+            heading="Completed"
+            videolist={finalizedList}
+            setMediaKey={setMediaKey}
+            isLoading={isLoading}
+          />
+          <DetailsPage mediaKey={mediaKey} />
+        </Panels>
+      </GlobalContext>
     </div>
   );
 }

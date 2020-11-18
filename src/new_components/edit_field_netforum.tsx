@@ -1,7 +1,7 @@
 import * as React from "react";
 import tick from "../images/check.png";
-
-export function KeywordEditableField({
+import {NetforumSelector} from'./netforum_selector'
+export function NetforumEditableField({
   method = "GET",
   setter,
   endpoint,
@@ -13,6 +13,8 @@ export function KeywordEditableField({
   itemName,
   token,
   refetchData,
+  netForumBaseV1,
+  netForumBaseV0
 }) {
   console.log("DATA keyword", data);
   const [displayKeywords, addDisplayKeywords] = React.useState(data);
@@ -104,38 +106,11 @@ export function KeywordEditableField({
           {Array.isArray(data) ? data.join(",") : data}
         </div>
       ) : (
-        <div className="netforum-selector">
-          <div className="keyword-input-container">
-            {Array.isArray(data)
-              ? data.map((el, indx, data) => {
-                  return (
-                    <div className="keyword-popup">
-                      <div className="keyword-name">{el}</div>
-
-                      <div
-                        className="keyword-icon"
-                        onClick={(e) => {
-                          deleteData(el);
-                        }}
-                      >
-                        {String.fromCharCode(10008)}
-                      </div>
-                    </div>
-                  );
-                })
-              : () => null}
-            <input ref={inputValue} type="text" placeholder="enter keyword" />
-            <div
-              onClick={(e) => {
-                sendData(inputValue.current.value);
-              }}
-              className="check"
-            >
-              <img src={tick} />
-            </div>
+        <div className="netforum-input-container">
+          
+<NetforumSelector typeEndpoint={netForumBaseV1} selectEndpoint={netForumBaseV0} token={token}/>
           </div>
-        </div>
-        //end
+ 
       )}
     </div>
   );

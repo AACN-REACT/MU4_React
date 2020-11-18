@@ -19,6 +19,7 @@ import {
 } from "../utils/sorting/sorting_algorithms";
 import { textSearch } from "../utils/sorting/levenshtein";
 import Worker from "../utils/sorting/pendingList.worker";
+import { LoaderOne } from "./loader_ani_1";
 
 export function ListComponent({
   heading,
@@ -27,6 +28,7 @@ export function ListComponent({
   videolist,
   setMediaKey,
   worker,
+  isLoading
 }) {
   //not sure what this does just yet
   let [list, changeList] = React.useState([]);
@@ -49,7 +51,9 @@ export function ListComponent({
   const [pageNumber, changePageNumber] = React.useState(0);
   // this extaract the number for the specific panelState
   const panelStateNumber = panelState[`${heading.toLowerCase()}_container`];
+  const [enterNumber, toggleEnterNumber] = React.useState(false);
 
+  const numberInput = React.useRef();
   React.useEffect(() => {
     let internalList = [];
     transforms.length > 0
@@ -91,7 +95,33 @@ export function ListComponent({
         >
           {String.fromCharCode(9664)}
         </div>
-        <div>Page {pageNumber + 1}</div>
+        <div>
+          Page{" "}
+          <span
+            onDoubleClick={(e) => {
+              toggleEnterNumber((t) => !t);
+              if (enterNumber) {
+                alert(numberInput.current);
+                numberInput.current.focus();
+              }
+            }}
+          >
+            {enterNumber ? (
+              <input
+                ref={numberInput}
+                type="number"
+                onChange={(e) => {
+                  changePageNumber(Number(e.target.value) - 1);
+                }}
+                max={`${list.length + 1}`}
+                min={1}
+              ></input>
+            ) : (
+              parseInt(pageNumber) + 1
+            )}
+          </span>{" "}
+          of {list.length}{" "}
+        </div>
         <div
           onClick={(e) =>
             changePageNumber((s) => {
@@ -277,9 +307,19 @@ export function ListComponent({
           Date
         </div>
       </div>
-      <div
-        className={`paged-list`}
-        style={{
+      {isLoading?
+             ( <div className="flex-rows">
+                  <LoaderOne />
+                  <LoaderOne />
+                  <LoaderOne />
+                  <LoaderOne />
+                  <LoaderOne />
+                  <LoaderOne />
+                  <LoaderOne />
+
+              </div>)
+              :
+              <div className={`paged-list`} style={{
           width: `${(list.length + 1) * 100}%`,
           left: `-${pageNumber * 100}%`,
         }}
@@ -359,7 +399,8 @@ export function ListComponent({
           });
           return <div className="individual-pages">{thisPageList}</div>;
         })}
-      </div>
+      </div>}
+    
     </div>
   );
 }

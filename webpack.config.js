@@ -21,6 +21,7 @@ module.exports = function (env) {
     resolve: {
       extensions: [".ts", ".tsx", ".js", "jsx"],
     },
+    devtool: "inline-source-map",
     devServer: {
       // historyApiFallback: true,
       https: true,
@@ -42,10 +43,10 @@ module.exports = function (env) {
     },
     module: {
       rules: [
-          {
-            test: /\.worker\.js$/,
-            use: { loader: 'worker-loader' },
-          },
+        {
+          test: /\.worker\.js$/,
+          use: { loader: "worker-loader" },
+        },
         {
           test: /\.(png|svg|jpg)$/,
           loader: "file-loader",

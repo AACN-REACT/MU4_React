@@ -5,5 +5,11 @@
 @use 'dropzone';
 @use 'detailspage';
 @use 'upload';
+@use 'netforum';
+@use 'loaders';
 
-*{padding:0px;margin: 0px; box-sizing: border-box;}
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
