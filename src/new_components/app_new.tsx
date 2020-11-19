@@ -161,7 +161,7 @@ this needs to changed into a custome hook: */
             setMediaKey={setMediaKey}
             isLoading={isLoading}
           />
-          <DetailsPage mediaKey={mediaKey} />
+          <DetailsPage mediaKey={mediaKey} refreshList={refreshList}  isLoading={isLoading}  />
         </Panels>
       </GlobalContext>
     </div>

@@ -1,16 +1,11 @@
-import * as React from 'react';
+import * as React from "react";
 
+export function Tooltip({ tooltipMsg }) {
+  const thisPos = React.useRef();
 
-
-
-
-
-export function Tooltip({tooltipMsg}){
-
-    const thisPos = React.useRef()
-
-console.log("tooltip", thisPos.current, tooltipMsg)
-return <div ref={thisPos} className="tooltip"  style={tooltipMsg.ttStyles}>{tooltipMsg.message}</div>
-
-
-} 
+  return (
+    <div ref={thisPos} className="tooltip" style={tooltipMsg.ttStyles}>
+      {tooltipMsg.message}
+    </div>
+  );
+}

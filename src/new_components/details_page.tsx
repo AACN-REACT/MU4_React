@@ -9,13 +9,20 @@ import { OpenLogs } from "./open-logs-button";
 import butt from "../images/switch.png";
 import { DeleteButton } from "./delete_button";
 import { FinalizeButton } from "./finalize_button";
-import { Identity } from "./contexts";
+import { Identity, RefreshList } from "./contexts";
 
-export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
+export function DetailsPage({
+  mediaKey,
+  panelState,
+  dispatchPanelState,
+  isLoading,
+  refreshList,
+}) {
   const [mediaDetails, setMediaDetails] = React.useState(null);
-  const [toggle, refetchData] = React.useState(false)
+  const [toggle, refetchData] = React.useState(false);
   const identity = React.useContext(Identity);
   //const [emptyPresentation, setEmptyPresentation] = React.useSate(false);
+  const [isDetailsLoading, setDetailsLoading] = React.useState(isLoading);
 
   React.useEffect(
     function () {
@@ -27,6 +34,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
         //localStorage.removeItem("mediakey");
       }
       let isMounted = true;
+      setDetailsLoading(true);
       fetch(
         `https://localhost:44340/api/v1/Medias/${mediaKey}/MediaDetailsVm`,
         {
@@ -41,7 +49,10 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
             return res.json();
           }
         })
-        .then((res) => setMediaDetails(res["Result"]));
+        .then((res) => {
+          setMediaDetails(res["Result"]);
+          setDetailsLoading(false);
+        });
 
       return () => {
         isMounted = false;
@@ -70,13 +81,17 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           onClick={(e) => {
             panelState.details_container === 0
               ? dispatchPanelState({ type: "OPEN DETAILS CLOSE OTHERS" })
-              : dispatchPanelState({ type: "CLOSE DETAILS OPEN OTHER" });
+              : (function () {
+                  refreshList((d) => !d);
+                  dispatchPanelState({ type: "CLOSE DETAILS OPEN OTHER" });
+                })();
           }}
           src={butt}
         />
       </div>
       <div className="details-frame">
         <EditableField
+          isDetailsLoading={isDetailsLoading}
           method="PUT"
           setter={setMediaDetails}
           name="Title"
@@ -87,14 +102,17 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           itemKey={mediaDetails?.Key}
           itemName="title"
           token={identity.access_token}
+          refetchData
         />
         <NonEditableField
+          isDetailsLoading={isDetailsLoading}
           setter={setMediaDetails}
           name="StartedByUsername"
           displayName="Added By.."
           data={mediaDetails?.StartedByUsername}
         />
         <KeywordEditableField
+          isDetailsLoading={isDetailsLoading}
           method="POST"
           setter={setMediaDetails}
           name="Keywords"
@@ -108,12 +126,14 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           refetchData={refetchData}
         />
         <NonEditableField
+          isDetailsLoading={isDetailsLoading}
           setter={setMediaDetails}
           name="StartDateTime"
           displayName="Added Date.."
           data={new Date(mediaDetails?.StartDateTime).toLocaleString()}
         />
         <NetforumEditableField
+          isDetailsLoading={isDetailsLoading}
           method="PUT"
           setter={setMediaDetails}
           name="NetforumLink"
@@ -128,6 +148,7 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
           token={identity.access_token}
         />
         <NonEditableField
+          isDetailsLoading={isDetailsLoading}
           setter={setMediaDetails}
           name="StartedByUsername"
           displayName="Media Item Key"
@@ -135,41 +156,48 @@ export function DetailsPage({ mediaKey, panelState, dispatchPanelState }) {
         />
         <NonEditableField
           setter={setMediaDetails}
+          isDetailsLoading={isDetailsLoading}
           name="Status"
           displayName="Current Status"
           data={mediaDetails?.Status}
         />
         <NonEditableField
+          isDetailsLoading={isDetailsLoading}
           setter={setMediaDetails}
           name="OriginalFileName"
           displayName="Original File Name"
           data={mediaDetails?.OriginalFileName}
         />
         <NonEditableField
+          isDetailsLoading={isDetailsLoading}
           setter={setMediaDetails}
           name="FinalizedByUsername"
           displayName="Finalized by..."
           data={mediaDetails?.FinalizedByUsername}
         />
         <NonEditableField
+          isDetailsLoading={isDetailsLoading}
           setter={setMediaDetails}
           name="FileSize"
           displayName="File Size(mb)"
           data={(parseInt(mediaDetails?.FileSize) / 1000000).toFixed(3)}
         />
         <NonEditableField
+          isDetailsLoading={isDetailsLoading}
           setter={setMediaDetails}
           name="FinalizedDateTime"
           displayName="Finalized Date"
           data={mediaDetails?.FinalizedDateTime}
         />
         <NonEditableField
+          isDetailsLoading={isDetailsLoading}
           setter={setMediaDetails}
           name="FileDuration"
           displayName="File Duration"
           data={mediaDetails?.FileDuration}
         />
         <EditableField
+          isDetailsLoading={isDetailsLoading}
           method="PUT"
           setter={setMediaDetails}
           name="NetforumLink"

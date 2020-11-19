@@ -2,6 +2,7 @@ import * as React from "react";
 import tick from "../images/check.png";
 
 export function EditableField({
+  isDetailsLoading,
   method = "GET",
   setter,
   endpoint,
@@ -11,7 +12,8 @@ export function EditableField({
   user,
   itemKey,
   itemName,
-  token
+  token,
+  refetchData
 }) {
   console.log("DATA", data);
   const [isEditable, toggleEditable] = React.useState(false);
@@ -34,6 +36,7 @@ export function EditableField({
           setter((s) => {
             return { ...s, [name]: userEdit };
           });
+          refetchData(d=>!d)
           return res;
         } else {
           throw new Error("woops");
@@ -46,7 +49,7 @@ export function EditableField({
   return (
     <div className="field-container">
       <div className="detail-name-edit"><div>{displayName}</div><div onClick={(e) => toggleEditable(s=>!s)} className={isEditable?"edit-icon-active":"edit-icon"}>{String.fromCharCode(9998)}</div></div>
-      {!isEditable ? (
+      {isDetailsLoading?<h2>loading..</h2>:!isEditable ? (
         <div  className="detail-value">
           {Array.isArray(data)?data.join(","):data}
         </div>

@@ -8,7 +8,7 @@ const Logout = React.createContext();
 const Endpoint = React.createContext();
 const RefreshList = React.createContext();
 
-export { Identity, Authentication, Logout, Endpoint };
+export { Identity, Authentication, Logout, Endpoint,RefreshList };
 
 export function GlobalContext({
   identity,

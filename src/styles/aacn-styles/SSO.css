@@ -1,0 +1,146 @@
+.theme.sso-module p.center-paragraph {
+  text-align: center; }
+
+.theme.sso-module .form-group {
+  margin-bottom: 10px; }
+  .theme.sso-module .form-group.hidden {
+    visibility: hidden;
+    height: 0;
+    padding: 0; }
+  .theme.sso-module .form-group .sub-title {
+    margin-top: 25px;
+    margin-bottom: 25px; }
+    @media (min-width: 576px) {
+      .theme.sso-module .form-group .sub-title {
+        margin-top: 55px; } }
+  @media (min-width: 576px) {
+    .theme.sso-module .form-group {
+      margin-bottom: 20px;
+      padding: 10px; } }
+  .theme.sso-module .form-group.mobile-login {
+    margin-bottom: 45px;
+    text-align: center; }
+
+.theme.sso-module button.form-group.btn.btn-primary {
+  background-color: #36c4d6;
+  box-shadow: 0 -2px 0 0 #1e97a6 inset; }
+  .theme.sso-module button.form-group.btn.btn-primary:hover {
+    background-color: #36c4d6;
+    box-shadow: 0 -2px 0 0 #1e97a6 inset; }
+
+.theme.sso-module.sso-login .form-group {
+  margin-bottom: 10px; }
+
+.theme.sso-module.sso-login .large-title {
+  margin-bottom: 50px; }
+
+.theme.sso-module.sso-login .two-up .link-route.link {
+  margin-top: 0;
+  display: inline;
+  margin-bottom: 30px;
+  border-left: thin solid #d4d1cd; }
+  .theme.sso-module.sso-login .two-up .link-route.link.no-border {
+    border-left: none; }
+  .theme.sso-module.sso-login .two-up .link-route.link a {
+    text-decoration: none;
+    font-family: inherit;
+    font-weight: normal; }
+
+.theme.sso-module.sso-login .two-up .form-group .sub-title.mobile-signin {
+  margin-top: 0;
+  display: inline; }
+
+.theme.sso-module.sso-login .two-up .custom-control.custom-checkbox label {
+  color: #47433f;
+  font-size: .875rem;
+  margin-bottom: -5px; }
+
+@media (min-width: 576px) {
+  .theme.sso-module.sso-login .two-up .sub-title {
+    margin-top: 0; }
+  .theme.sso-module.sso-login .two-up:nth-child(odd) {
+    border-top: thin solid #47433f; } }
+
+@media (min-width: 576px) and (min-width: 768px) {
+  .theme.sso-module.sso-login .two-up:nth-child(odd) {
+    border-left: thin solid #afaca8;
+    margin-left: 52px;
+    height: 50%;
+    border-top: none;
+    padding-left: 15px; } }
+
+.theme.sso-module.email-sent, .theme.sso-module.password-success {
+  max-width: 600px;
+  margin: 0 auto; }
+  .theme.sso-module.email-sent .large-title, .theme.sso-module.password-success .large-title {
+    margin-bottom: 40px; }
+  .theme.sso-module.email-sent p, .theme.sso-module.email-sent div p, .theme.sso-module.password-success p, .theme.sso-module.password-success div p {
+    text-align: center; }
+    .theme.sso-module.email-sent p a, .theme.sso-module.email-sent p a:hover, .theme.sso-module.email-sent div p a, .theme.sso-module.email-sent div p a:hover, .theme.sso-module.password-success p a, .theme.sso-module.password-success p a:hover, .theme.sso-module.password-success div p a, .theme.sso-module.password-success div p a:hover {
+      color: #36c4d6; }
+
+.theme.sso-module.create-acct {
+  max-width: 700px;
+  margin: 0 auto; }
+  .theme.sso-module.create-acct .large-title {
+    margin-bottom: 20px; }
+  .theme.sso-module.create-acct p, .theme.sso-module.create-acct div p {
+    text-align: center; }
+  .theme.sso-module.create-acct button.form-group.btn.btn-primary {
+    margin: 0 auto; }
+
+.theme.sso-module.reset-pass, .theme.sso-module.create-pass, .theme.sso-module.create-new-pass {
+  max-width: 600px;
+  margin: 0 auto; }
+  .theme.sso-module.reset-pass .large-title, .theme.sso-module.create-pass .large-title, .theme.sso-module.create-new-pass .large-title {
+    margin-bottom: 40px; }
+  .theme.sso-module.reset-pass p, .theme.sso-module.reset-pass div, .theme.sso-module.create-pass p, .theme.sso-module.create-pass div, .theme.sso-module.create-new-pass p, .theme.sso-module.create-new-pass div {
+    text-align: center; }
+  .theme.sso-module.reset-pass button.form-group.btn.btn-primary, .theme.sso-module.create-pass button.form-group.btn.btn-primary, .theme.sso-module.create-new-pass button.form-group.btn.btn-primary {
+    margin: 0 auto; }
+
+.form-group.not-found .large-paragraph {
+  text-align: center;
+  font-size: 1.375rem;
+  line-height: 1.36364; }
+
+.form-group.not-found .sub-title {
+  margin-top: 40px;
+  margin-bottom: 50px;
+  text-align: center; }
+  .form-group.not-found .sub-title.barred {
+    padding: 20px 0;
+    border-top: thin solid #afaca8;
+    border-bottom: thin solid #afaca8;
+    font-size: 1.125rem; }
+    @media (min-width: 576px) {
+      .form-group.not-found .sub-title.barred {
+        font-size: 1.375rem; } }
+
+.form-group.not-found .large-title {
+  margin-bottom: 0;
+  font-size: 1.875rem;
+  line-height: 1.1; }
+  @media (min-width: 576px) {
+    .form-group.not-found .large-title {
+      font-size: 3.125rem; } }
+
+.form-group.not-found .large-paragraph {
+  font-size: 1rem;
+  line-height: 1.36364; }
+  @media (min-width: 768px) {
+    .form-group.not-found .large-paragraph {
+      font-size: 1.375rem; } }
+
+.form-group.not-found .large-links {
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.36364;
+  flex-direction: column; }
+  @media (min-width: 768px) {
+    .form-group.not-found .large-links {
+      font-size: 1.375rem; } }
+  .form-group.not-found .large-links a {
+    color: #36c4d6; }
+    .form-group.not-found .large-links a:hover {
+      text-decoration: none; }

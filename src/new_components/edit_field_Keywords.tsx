@@ -2,6 +2,7 @@ import * as React from "react";
 import tick from "../images/check.png";
 
 export function KeywordEditableField({
+  isDetailsLoading,
   method = "GET",
   setter,
   endpoint,
@@ -35,7 +36,6 @@ export function KeywordEditableField({
     fetch(myrequest)
       .then((res) => {
         if (res.status === 200) {
-          console.log("yay!!");
           setter((s) => {
             return { ...s, [name]: userEdit };
           });
