@@ -72,6 +72,16 @@ module.exports = function (env) {
           ],
         },
         {
+          test: /\.(ttf|eot|woff|woff2|svg)$/,
+          use: {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              outputPath: "fonts/",
+            },
+          },
+        },
+        {
           test: /\.scss?$/,
           exclude: /node_modules/,
           use: [

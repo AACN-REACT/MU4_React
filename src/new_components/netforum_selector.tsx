@@ -10,14 +10,25 @@ export function NetforumSelector({
   const [nfOptions, setNfOptions] = React.useState([]);
   const [nfSelction, setNfSelection] = React.useState([]);
 
-  //   const onchange=function(e){
-  //       fetch("https://localhost:44340/api/v0/NetforumItems/NetForumItems?netForumType=Webinar&searchText=covid")
-  //       .then(res=>res.json)
-  //       .then(res=>{ res.Result.NetforumItemDtos.forEach((el,ind,arr) => {
-  //         setNfOptions((t) => [...t, el.NetforumCode]);
-  //       })
-  //   }
-  // }
+  const onchange = function (type, search) {
+    fetch(
+      `https://localhost:44340/api/v0/NetforumItems/NetForumItems?netForumType=${type}&searchText=${encodeURI(
+        search
+      )}`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        setNfOptions(res.Result.NetforumItemDtos);
+        console.log("RETURN ITEMS", nfOptions);
+      })
+      .catch((err) => {
+        console.log("RETURN ITEMS", err);
+      });
+  };
   React.useEffect(function () {
     fetch(typeEndpoint + "ContentTypes", {
       method: "GET",
@@ -41,17 +52,29 @@ export function NetforumSelector({
     <div onClick={(e) => close()} className="netforum-selector">
       <div>
         <div>Type</div>
-        <select onClick={(e) => e.stopPropagation()}>
+        <select
+          onChange={(e) => onchange(e.target.value, "abc")}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
           {nfTypes.map((el) => (
-            <option>{el === "CEActivity" ? `CE Activity` : el}</option>
+            <option value={el}>
+              {el === "CEActivity" ? `CE Activity` : el}
+            </option>
           ))}
         </select>
       </div>
       <div>
         <div>Select</div>
-        <select onClick={(e) => e.stopPropagation()}>
+        <select
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
           {nfOptions.map((el) => (
-            <option>{el}</option>
+            <option>{el.NetforumCode
+            }</option>
           ))}
         </select>
         <button>Add</button>

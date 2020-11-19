@@ -1,6 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500;700&family=Roboto+Slab:wght@400;900&family=VT323&display=swap");
 
+$slab: "Roboto Slab", serif;
+$mono: "Roboto Mono", serif;
+$vt: "VT323", serif;
 
-$slab:"Roboto Slab", serif;
-$mono:"Roboto Mono", serif;
-$vt:"VT323", serif;
+
+@font-face{
+    font-family:'freight';
+    src: url('./fonts/freigsanprobol-webfont.woff')
+}
+@font-face{
+    font-family:'sourcesans';
+    src: url('./fonts/SourceSansPro-BoldIt.otf.woff'),
+     url('./fonts/SourceSansPro-Regular.otf.woff'),
+     url('./fonts/SourceSansPro-Light.otf.woff'),
+}
+@font-face{
+    font-family:'freight';
+    src: url('./fonts/freigsanprobol-webfont.woff')
+}
