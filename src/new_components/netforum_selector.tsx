@@ -65,7 +65,7 @@ export function NetforumSelector({
 
   React.useEffect(
     function () {
-      setSelectedType(nfTypes[0] === "CEActivity" ? `CE Activity` : nfTypes[0]);
+      setSelectedType(nfTypes[0]);
     },
     [nfTypes]
   );
@@ -78,15 +78,11 @@ export function NetforumSelector({
           value={selectedType}
           onChange={(e) => {
             e.stopPropagation();
-            setSelectedType(
-              e.target.value === "CEActivity" ? `CE Activity` : e.target.value
-            );
+            setSelectedType(e.target.value);
           }}
         >
           {nfTypes.map((el) => (
-            <option value={el === "CEActivity" ? `CE Activity` : el}>
-              {el === "CEActivity" ? `CE Activity` : el}
-            </option>
+            <option value={el}>{el}</option>
           ))}
         </select>
       </div>

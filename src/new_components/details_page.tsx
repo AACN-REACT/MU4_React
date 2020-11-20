@@ -140,7 +140,7 @@ export function DetailsPage({
           displayName="Netforum Link"
           data={mediaDetails?.NetforumItemLink?.NetforumKey}
           endpoint={"https://localhost:44340/api/v1/Medias/"}
-          netForumBaseV1={"https://localhost:44340/api/v0/NetforumItems/"}
+          netForumBaseV1={"https://localhost:44340/api/v1/NetforumItems/"}
           netForumBaseV0={"https://localhost:44340/api/v0/NetforumItems/"}
           user="amin"
           itemKey={mediaDetails?.Key}
