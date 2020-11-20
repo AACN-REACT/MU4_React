@@ -12,6 +12,7 @@ import { PendingList } from "./pending_list";
 import { ListComponent } from "./new_list_component";
 import { TitleBar } from "./title";
 import { Tooltip } from "./tooltip";
+import { ErrorToast } from "./errortoast";
 import { UploadTable } from "../components/ListTables/listtable";
 import { videolist } from "../data/videolist";
 import { uploadListReducer } from "../utils/reducers/upload-list-reducer";
@@ -27,7 +28,6 @@ import { EndpointConstructor } from "../mediauploader/utils/endpoint_constructor
 import { Authentication, Identity, Logout, Endpoint } from "./contexts";
 
 import { GlobalContext } from "./contexts";
-import { GlobalStateContexts } from "../mediauploader/components/globalstateContext";
 
 const mediaManagement = new EndpointConstructor({
   origin: "https://localhost:44340",
@@ -40,10 +40,17 @@ const mediaManagement = new EndpointConstructor({
 export function App({ uploadOrigin, user, sizeLimit }) {
   /* since we are defiing our components at the top level its important that we set up the uploading state and dispatcher here so we can 
 pass them directly down to the sibling components, utilises the uploadListReducer - see there for logic */
+
+  let searchParams = React.useMemo(() => {
+    return new URL(window.location.href).searchParams;
+  }, [window.location.href]);
+
   const [uploadSTATE, DISPATCHUpload] = React.useReducer(uploadListReducer, {});
   /*-------------------------------------------------------------------------------------------------------*/
   /*Now we set up state for a an error and error message */
-  const [ErrorMsg, setErrorMsg] = React.useState(null);
+  const [ErrorMsg, setErrorMsg] = React.useState(
+    searchParams.has("error") ? searchParams.get("error") : null
+  );
 
   /*Now we set up state for a tooltip */
   const [toolTip, setTooltip] = React.useState(null);
@@ -55,17 +62,20 @@ load an initial details page. This is required if we are to allow copy and pasti
 the Auth server - not implemented yet
 */
 
-  const idTakenFromUrl = React.useMemo(function () {
-    let url = new URL(window.location.href);
-
-    if (url.searchParams.get("mediakey")?.length > 0) {
-      let tempMediaKey = url.searchParams.get("mediakey");
-      localStorage.setItem("mediakey", tempMediaKey);
-      alert(localStorage.getItem("mediakey"));
-      return tempMediaKey;
-    }
-    return null;
-  }, []);
+  const idTakenFromUrl = React.useMemo(
+    function () {
+      if (searchParams.get("mediakey")?.length > 0) {
+        let tempMediaKey = searchParams.get("mediakey");
+        localStorage.setItem("mediakey", tempMediaKey);
+        alert("media key: " + localStorage.getItem("mediakey"))
+        return tempMediaKey;
+      }
+      else {
+        return localStorage.getItem("mediakey")}
+      
+    },
+    [searchParams,window.location.href]
+  );
   console.log("LLLL", idTakenFromUrl);
   /*-------------------------------------------------------------------------------------------------------*/
   /* we make our initial request for the media management details here, this may change depending on how
@@ -78,9 +88,7 @@ this needs to changed into a custome hook: */
     [],
   ]);
 
-  const [mediaKey, setMediaKey] = React.useState(
-    localStorage.getItem("mediakey") || null
-  );
+  const [mediaKey, setMediaKey] = React.useState(idTakenFromUrl);
   console.log(">> mediakey", mediaKey);
   const v0 = "https://localhost:44390/api/v0/MediaManagement";
   const uploadURL = uploadOrigin + "/api/v1/MediaManagement";
@@ -132,7 +140,7 @@ this needs to changed into a custome hook: */
         refreshList={refreshList}
       >
         <Tooltip toolTip={toolTip} />
-        <div>{ErrorMsg}</div>
+        <ErrorToast close={setErrorMsg} msg={ErrorMsg} />
         <TitleBar />
         <Panels openDetails={localStorage.getItem("mediakey") || null}>
           <UploadTable

@@ -9,25 +9,31 @@ export function NetforumSelector({
   const [nfTypes, setNfTypes] = React.useState([]);
   const [nfOptions, setNfOptions] = React.useState([]);
   const [nfSelction, setNfSelection] = React.useState([]);
+  const [validSearch, setValidSearch] = React.useState(false);
 
   const onchange = function (type, search) {
-    fetch(
-      `https://localhost:44340/api/v0/NetforumItems/NetForumItems?netForumType=${type}&searchText=${encodeURI(
-        search
-      )}`,
-      {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        setNfOptions(res.Result.NetforumItemDtos);
-        console.log("RETURN ITEMS", nfOptions);
-      })
-      .catch((err) => {
-        console.log("RETURN ITEMS", err);
-      });
+    if (search.length > 2) {
+      setValidSearch(true);
+      fetch(
+        `https://localhost:44340/api/v0/NetforumItems/NetForumItems?netForumType=${type}&searchText=${encodeURI(
+          search
+        )}`,
+        {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          setNfOptions(res.Result.NetforumItemDtos);
+          console.log("RETURN ITEMS", nfOptions);
+        })
+        .catch((err) => {
+          console.log("RETURN ITEMS", err);
+        });
+    } else {
+      setValidSearch(false);
+    }
   };
   React.useEffect(function () {
     fetch(typeEndpoint + "ContentTypes", {
@@ -47,15 +53,15 @@ export function NetforumSelector({
       )
       .catch((err) => console.log(err));
   }, []);
-
+  console.log("selection", nfSelction);
   return (
-    <div onClick={(e) => close()} className="netforum-selector">
+    <div onClick={(e) => null /*close()*/} className="netforum-selector">
       <div>
         <div>Type</div>
         <select
-          onChange={(e) => onchange(e.target.value, "abc")}
-          onClick={(e) => {
+          onChange={(e) => {
             e.stopPropagation();
+            setNfSelection(e.target.value);
           }}
         >
           {nfTypes.map((el) => (
@@ -66,6 +72,16 @@ export function NetforumSelector({
         </select>
       </div>
       <div>
+        <div>Keyword</div>
+        <input
+          autofocus="true"
+          className={validSearch ? "valid-input" : "invalid-input"}
+          type="text"
+          onChange={(e) => {
+            e.stopPropagation();
+            onchange(nfSelction, e.target.value);
+          }}
+        />
         <div>Select</div>
         <select
           onClick={(e) => {
@@ -73,8 +89,7 @@ export function NetforumSelector({
           }}
         >
           {nfOptions.map((el) => (
-            <option>{el.NetforumCode
-            }</option>
+            <option>{el.NetforumCode}</option>
           ))}
         </select>
         <button>Add</button>

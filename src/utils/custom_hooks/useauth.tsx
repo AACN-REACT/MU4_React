@@ -49,12 +49,13 @@ export function useAuth(config) {
 
   //set up userManager
 
-  const [mgr, setMgr] = React.useState(
-    new UserManager({
-      ...config,
-      userStore: new WebStorageStateStore({ store: localStorage }),
-    })
-  );
+  // const [mgr, setMgr] = React.useState(
+  //   new UserManager({
+  //     ...config,
+  //     userStore: new WebStorageStateStore({ store: localStorage }),
+  //   })
+  // );
+  const [mgr, setMgr] = React.useState(new UserManager(config));
 
   //set up state for identity info
 
