@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import butt from "../images/switch.png";
 import { Paginate } from "../utils/sorting/sorting_algorithms";
 import {
@@ -28,7 +28,7 @@ export function ListComponent({
   videolist,
   setMediaKey,
   worker,
-  isLoading
+  isLoading,
 }) {
   //not sure what this does just yet
   let [list, changeList] = React.useState([]);
@@ -307,100 +307,109 @@ export function ListComponent({
           Date
         </div>
       </div>
-      {isLoading?
-             ( <div className="flex-rows">
-                  <LoaderOne />
-                  <LoaderOne />
-                  <LoaderOne />
-                  <LoaderOne />
-                  <LoaderOne />
-                  <LoaderOne />
-                  <LoaderOne />
-
-              </div>)
-              :
-              <div className={`paged-list`} style={{
-          width: `${(list.length + 1) * 100}%`,
-          left: `-${pageNumber * 100}%`,
-        }}
-      >
-        {list.map((page: [], pageInd) => {
-          let thisPageList = page.map((mediaItem, mediaInd) => {
-            return (
-              <div
-                className="inner-container"
-                onClick={(e) => {
-                  setMediaKey(mediaItem.Key);
-                  dispatchPanelState({ type: "OPEN DETAILS CLOSE OTHERS" });
-                }}
-              >
-                <div key="column-title" className="column-title">
-                  {mediaItem.Title}
-                </div>
+      {isLoading ? (
+        <div className="flex-rows">
+          <LoaderOne />
+          <LoaderOne />
+          <LoaderOne />
+          <LoaderOne />
+          <LoaderOne />
+          <LoaderOne />
+          <LoaderOne />
+        </div>
+      ) : (
+        <div
+          className={`paged-list`}
+          style={{
+            width: `${(list.length + 1) * 100}%`,
+            left: `-${pageNumber * 100}%`,
+          }}
+        >
+          {list.map((page: [], pageInd) => {
+            let thisPageList = page.map((mediaItem, mediaInd) => {
+              return (
                 <div
-                  key="column-original"
-                  className={`"column-title" ${
-                    panelStateNumber === 2 ? "" : "column-close"
-                  }`}
-                  style={
-                    panelStateNumber === 2 ? { inherit: "" } : { width: "0px" }
-                  }
+                  className="inner-container"
+                  onClick={(e) => {
+                    setMediaKey(mediaItem.Key);
+                    dispatchPanelState({ type: "OPEN DETAILS CLOSE OTHERS" });
+                  }}
                 >
-                  {mediaItem.OriginalFileName}
+                  <div key="column-title" className="column-title">
+                    {mediaItem.Title}
+                  </div>
+                  <div
+                    key="column-original"
+                    className={`"column-title" ${
+                      panelStateNumber === 2 ? "" : "column-close"
+                    }`}
+                    style={
+                      panelStateNumber === 2
+                        ? { inherit: "" }
+                        : { width: "0px" }
+                    }
+                  >
+                    {mediaItem.OriginalFileName}
+                  </div>
+                  <div
+                    key="column-addedBy"
+                    className={`column-addedBy ${
+                      panelStateNumber === 2 ? "" : "column-close"
+                    }`}
+                  >
+                    {mediaItem.StartedByUsername}
+                  </div>
+                  <div key="column-size" className="column-size">
+                    {(parseInt(mediaItem.FileSize) / 1000000).toFixed(1)}
+                  </div>
+                  <div
+                    key="column-keywords"
+                    className={`column-keywords ${
+                      panelStateNumber === 2 ? "" : "column-close"
+                    }`}
+                  >
+                    {mediaItem.HasKeywords ? (
+                      <span className="true">{String.fromCharCode(10004)}</span>
+                    ) : (
+                      <span className="false">
+                        {" "}
+                        {String.fromCharCode(10008)}
+                      </span>
+                    )}
+                  </div>
+                  <div
+                    key="column-netforum"
+                    className={`column-netforum ${
+                      panelStateNumber === 2 ? "" : "column-close"
+                    }`}
+                  >
+                    {mediaItem.HasNetforumLink ? (
+                      <span className="true">{String.fromCharCode(10004)}</span>
+                    ) : (
+                      <span className="false">
+                        {" "}
+                        {String.fromCharCode(10008)}
+                      </span>
+                    )}
+                  </div>
+                  <div
+                    key="column-status"
+                    className={`column-status ${
+                      panelStateNumber === 2 ? "" : "column-close"
+                    }`}
+                  >
+                    {mediaItem.Status}
+                  </div>
+                  <div key="column-date" className="column-date">
+                    {new Date(mediaItem.StartDateTime).toDateString()}
+                  </div>
                 </div>
-                <div
-                  key="column-addedBy"
-                  className={`column-addedBy ${
-                    panelStateNumber === 2 ? "" : "column-close"
-                  }`}
-                >
-                  {mediaItem.StartedByUsername}
-                </div>
-                <div key="column-size" className="column-size">
-                  {(parseInt(mediaItem.FileSize) / 1000000).toFixed(1)}
-                </div>
-                <div
-                  key="column-keywords"
-                  className={`column-keywords ${
-                    panelStateNumber === 2 ? "" : "column-close"
-                  }`}
-                >
-                  {mediaItem.HasKeywords ? (
-                    <span className="true">{String.fromCharCode(10004)}</span>
-                  ) : (
-                    <span className="false"> {String.fromCharCode(10008)}</span>
-                  )}
-                </div>
-                <div
-                  key="column-netforum"
-                  className={`column-netforum ${
-                    panelStateNumber === 2 ? "" : "column-close"
-                  }`}
-                >
-                  {mediaItem.HasNetforumLink ? (
-                    <span className="true">{String.fromCharCode(10004)}</span>
-                  ) : (
-                    <span className="false"> {String.fromCharCode(10008)}</span>
-                  )}
-                </div>
-                <div
-                  key="column-status"
-                  className={`column-status ${
-                    panelStateNumber === 2 ? "" : "column-close"
-                  }`}
-                >
-                  {mediaItem.Status}
-                </div>
-                <div key="column-date" className="column-date">
-                  {new Date(mediaItem.StartDateTime).toDateString()}
-                </div>
-              </div>
-            );
-          });
-          return <div className="individual-pages">{thisPageList}</div>;
-        })}
-      </div>}
-    
+              );
+            });
+            return <div className="individual-pages">{thisPageList}</div>;
+          })}
+        </div>
+      )}
     </div>
   );
 }

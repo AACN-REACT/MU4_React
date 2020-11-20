@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 //sub-components
 //dropzone
@@ -17,7 +17,7 @@ export function DropzoneContainer({
   dispatchPanelState,
   uploadSTATE,
   DISPATCHUpload,
-  setError
+  setError,
 }) {
   //set up state for Uploading files
   //const [uploadSTATE, DISPATCHUpload] = React.useReducer(uploadListReducer, {});

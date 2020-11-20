@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Controls } from "./controls";
 import { ControlButton } from "./control_button";
 import { EditableField } from "./edit_field";

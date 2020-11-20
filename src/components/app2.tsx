@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Uploader2 } from "./uploader2";
 
 import { Title } from "./title/title";

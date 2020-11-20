@@ -1,5 +1,4 @@
-import * as React from "react";
-
+import React from "react";
 
 export function NonEditableField({
   method = "GET",
@@ -12,14 +11,10 @@ export function NonEditableField({
   itemKey,
   itemName,
 }) {
-
-
   return (
     <div className="field-container">
       <div className="detail-name">{displayName}</div>
-        <div className="detail-value">
-          {data}
-        </div>
+      <div className="detail-value">{data}</div>
     </div>
   );
 }

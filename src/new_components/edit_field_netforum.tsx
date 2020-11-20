@@ -1,6 +1,6 @@
-import * as React from "react";
+import React from "react";
 import tick from "../images/check.png";
-import {NetforumSelector} from'./netforum_selector'
+import { NetforumSelector } from "./netforum_selector";
 export function NetforumEditableField({
   method = "GET",
   setter,
@@ -14,7 +14,7 @@ export function NetforumEditableField({
   token,
   refetchData,
   netForumBaseV1,
-  netForumBaseV0
+  netForumBaseV0,
 }) {
   console.log("DATA keyword", data);
   const [displayKeywords, addDisplayKeywords] = React.useState(data);
@@ -107,10 +107,13 @@ export function NetforumEditableField({
         </div>
       ) : (
         <div className="netforum-input-container">
-          
-<NetforumSelector typeEndpoint={netForumBaseV1} selectEndpoint={netForumBaseV0} token={token} close={toggleEditable}/>
-          </div>
- 
+          <NetforumSelector
+            typeEndpoint={netForumBaseV1}
+            selectEndpoint={netForumBaseV0}
+            token={token}
+            close={toggleEditable}
+          />
+        </div>
       )}
     </div>
   );

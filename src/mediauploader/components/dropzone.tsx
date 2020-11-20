@@ -1,8 +1,5 @@
-import * as React from 'react'
+import React from "react";
 
-
-
-export function Dropzone(){
-
-    return <div className="dropzone-container-open">dropzone</div>
+export function Dropzone() {
+  return <div className="dropzone-container-open">dropzone</div>;
 }

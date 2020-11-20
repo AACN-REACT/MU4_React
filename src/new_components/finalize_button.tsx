@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 export function FinalizeButton({ itemKey, user, identity }) {
   const [finalized, setFinalized] = React.useState(false);
@@ -9,7 +9,7 @@ export function FinalizeButton({ itemKey, user, identity }) {
       {
         method: "PUT",
         headers: {
-          "Authorization": `Bearer ${identity.access_token}`,
+          Authorization: `Bearer ${identity.access_token}`,
         },
       }
     )
@@ -30,7 +30,7 @@ export function FinalizeButton({ itemKey, user, identity }) {
       className={finalized ? "disabled-delete-button" : "active-delete-button"}
       onClick={FinalizeVideo}
     >
-      Finalize 
+      Finalize
     </div>
   );
 }

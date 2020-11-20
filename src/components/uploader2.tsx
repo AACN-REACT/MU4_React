@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { getGuid } from "../utils/getguid.ts";
 //import icon from '../icon.gif'
 import {
@@ -8,7 +8,7 @@ import {
   drop,
   pick,
 } from "../utils/eventhandlers";
-import * as network from "../utils/networkrequests";
+import network from "../utils/networkrequests";
 import { DropZone } from "./dropzone/dropzoneOLD";
 import { FileList } from "./filelist.jsx";
 import { FileInput } from "./fileinput.jsx";
@@ -19,7 +19,7 @@ function uploadListReducer(state, { type, action }) {
   let newstate = { ...state };
   switch (type) {
     case "ADD":
-      alert("yay")
+      alert("yay");
       newstate = { ...newstate, ...action };
       break;
     case "DELETE":
@@ -48,9 +48,10 @@ function uploadListReducer(state, { type, action }) {
 }
 
 export function Uploader2() {
-  const [uploadingFiles, dispatchFile] = React.useReducer(uploadListReducer, {
-
-  });
+  const [uploadingFiles, dispatchFile] = React.useReducer(
+    uploadListReducer,
+    {}
+  );
 
   const [dropzoneState, setDropZoneState] = React.useState("dropzone-idle");
 

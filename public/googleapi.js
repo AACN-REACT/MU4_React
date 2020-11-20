@@ -6,7 +6,7 @@
 var CLIENT_ID =
   "486381265833-6s13talcinj4r93ab82sdscepjc65kld.apps.googleusercontent.com";
 
-var CLIENT_SECRET= "CnUWaGjzlKlt_jERWk6l1TLn"  
+var CLIENT_SECRET = "CnUWaGjzlKlt_jERWk6l1TLn";
 var API_KEY = "AIzaSyCVLjbO8CD9Cs53cdFH6aqlHxlFYt_iU1I";
 
 // Array of API discovery doc URLs for APIs used by the quickstart
@@ -87,7 +87,7 @@ function handleSignoutClick(event) {
 
 /**
  * Append a pre element to the body containing the given message
- * as its text node. Used to display the results of the API call.
+  its text node. Used to display the results of the API call.
  *
  * @param {string} message Text to be placed in pre element.
  */

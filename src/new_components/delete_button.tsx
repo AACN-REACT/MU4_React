@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 export function DeleteButton({ itemKey, user, identity }) {
   const [deleted, setDeleted] = React.useState(false);
@@ -7,7 +7,7 @@ export function DeleteButton({ itemKey, user, identity }) {
     fetch(`https://localhost:44340/api/v1/Medias/${itemKey}?username=${user}`, {
       method: "DELETE",
       headers: {
-        "Authorization": `Bearer ${identity.access_token}`,
+        Authorization: `Bearer ${identity.access_token}`,
       },
     })
       .then((res) => res.json())

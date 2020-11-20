@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 import { UploadingListItem } from "./listitems";
 import butt from "../images/switch.png";
@@ -11,7 +11,7 @@ export function UploadTable({
   dispatch,
   panelState,
   dispatchPanelState,
-  setError
+  setError,
 }) {
   //create a list from the list
 
@@ -121,4 +121,3 @@ export function UploadTable({
     </div>
   );
 }
-

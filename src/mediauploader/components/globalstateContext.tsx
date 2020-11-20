@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Endpoint } from "../../new_components/contexts";
 
 export const SetToolTip = React.createContext();

@@ -1,8 +1,8 @@
-import * as React from "react";
+import React from "react";
 import { MediaList } from "./medialist";
-import {SetToolTip} from "./globalstateContext"
+import { SetToolTip } from "./globalstateContext";
 import { Paginate } from "../utils/sorting_algorithms";
-import {toolTipSetter} from "../utils/helperfunctions"
+import { toolTipSetter } from "../utils/helperfunctions";
 
 export function MediaListContainer({
   mediaKey,
@@ -10,33 +10,33 @@ export function MediaListContainer({
   list,
   fetchListToggle,
 }) {
-  const [mediaList, setMediaList] = React.useState(
-   list
-  );
+  const [mediaList, setMediaList] = React.useState(list);
   const [pageNumber, setPageNumber] = React.useState(0);
-  
-  const setToolTip = React.useContext(SetToolTip)
+
+  const setToolTip = React.useContext(SetToolTip);
 
   React.useEffect(
     function () {
-    
-      if(list!=="loading" && list!=="idle") {setMediaList(Paginate(list, 10))}
-      else { setMediaList(list)}
-      
-      },
-      
-      
+      if (list !== "loading" && list !== "idle") {
+        setMediaList(Paginate(list, 10));
+      } else {
+        setMediaList(list);
+      }
+    },
+
     [list]
   );
 
   const listState = Array.isArray(list);
 
-  console.log("List passes", list, "stete",mediaList)
+  console.log("List passes", list, "stete", mediaList);
 
   return (
     <div className="medialist-container">
-
-      <MediaList pageNumber={pageNumber} list={typeof mediaList=="object"?mediaList[pageNumber]:mediaList} />
+      <MediaList
+        pageNumber={pageNumber}
+        list={typeof mediaList == "object" ? mediaList[pageNumber] : mediaList}
+      />
       <div>
         page {pageNumber + 1} of {mediaList.length}
       </div>
@@ -49,12 +49,8 @@ export function MediaListContainer({
         previous page
       </button>{" "}
       <button
-
-       
-
         onClick={(e) => {
-          
-          setPageNumber(0)
+          setPageNumber(0);
           fetchListToggle((s) => !s);
         }}
       >

@@ -1,9 +1,5 @@
-import * as React from 'react'
+import React from "react";
 
-
-
-export function Heading({title}){
-
-
-    return <div className="title">{title}</div>
+export function Heading({ title }) {
+  return <div className="title">{title}</div>;
 }

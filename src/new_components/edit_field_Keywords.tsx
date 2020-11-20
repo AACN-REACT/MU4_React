@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import tick from "../images/check.png";
 
 export function KeywordEditableField({

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import butt from "../images/switch.png";
 export function ListComponent({
   heading,

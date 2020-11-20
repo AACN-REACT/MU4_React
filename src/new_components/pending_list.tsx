@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 export function PendingList({ dispatchPanelState, panelState, videolist }) {
   let [list, changelist] = React.useState([]);

@@ -1,13 +1,11 @@
-import * as React from "react";
+import React from "react";
 
 //import filechecker
 import { isAcceptableType, isWithinSizeLimit } from "../utils/fileprocess";
 import { getGuid } from "../utils/getguid";
 
-function clickHiddenInput (inputRef) {
+function clickHiddenInput(inputRef) {
   inputRef.current.click();
- 
-
 }
 export function SelectFile({
   DISPATCHupload,
@@ -54,7 +52,6 @@ export function SelectFile({
                 },
               });
               dispatchPanelState({ type: "OPEN UPLOAD" });
-             
             } else if (!isAcceptableType(file)) {
               alert(`${file["name"]} is not an accepted video format`);
             } else {
@@ -63,13 +60,13 @@ export function SelectFile({
               );
             }
           }
-          inputField.current.value="";
+          inputField.current.value = "";
         }}
       />
       <div
         className={"select-button"}
-        onClick={(e)=>{
-            clickHiddenInput(inputField)
+        onClick={(e) => {
+          clickHiddenInput(inputField);
         }}
       >
         Select Files

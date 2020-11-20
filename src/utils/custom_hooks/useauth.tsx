@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { UserManager, Logger, WebStorageStateStore } from "oidc-client";
 import placeholder from "../../images/SVG/question.svg";
 // export function useAuth(idserver, flow, settings) {

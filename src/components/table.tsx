@@ -1,6 +1,6 @@
-import * as React from "react";
+import React from "react";
 
-export function Table({ heading, pagesize,list,open }) {
+export function Table({ heading, pagesize, list, open }) {
   const [pending, setPending] = React.useState([{}]);
   const [page, setPage] = React.useState({ start: 0, end: 3 });
   React.useEffect(function () {

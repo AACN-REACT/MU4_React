@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 import { UploadingListItem } from "./listitems_new";
 
@@ -23,7 +23,7 @@ export function UploadTable({ list, url, user, dispatch, dispatchPanelState }) {
     function () {
       if (arr.length > 0) {
         console.log("hello");
-    
+
         console.log(
           "arr",
           arr,
@@ -48,7 +48,6 @@ export function UploadTable({ list, url, user, dispatch, dispatchPanelState }) {
   if (arr.length > 0) {
     return (
       <div className="upload-container">
-        
         <div className="active">
           {activelist.map((item) => (
             <UploadingListItem

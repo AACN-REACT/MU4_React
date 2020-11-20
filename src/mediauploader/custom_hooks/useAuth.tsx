@@ -1,5 +1,5 @@
-import * as React from "react";
-import { UserManager} from "oidc-client";
+import React from "react";
+import { UserManager } from "oidc-client";
 
 // interface IdentityInfo {
 //     profile?:any;
@@ -13,8 +13,7 @@ export function useAuth(config) {
 
   //set up userManager
 
-  const [mgr] = React.useState(
-    new UserManager(config))
+  const [mgr] = React.useState(new UserManager(config));
 
   //set up state for identity info
 
@@ -37,49 +36,45 @@ export function useAuth(config) {
       : myURL.hash !== "";
 
   const pageHadErrored = myURL.searchParams.has("error");
-  React.useEffect(
-    function () {
-      if (!pageHadErrored) {
-        mgr.getUser().then((user) => {
-          if (!user && !redirectedFromCallback) {
-            mgr
-              .signinRedirect()
-              .catch(
-                (err) =>
-                  (window.location.href =
-                    window.location.origin + `/?error=${err}`)
-              );
-          } else if (!user && redirectedFromCallback) {
-            mgr
-              .signinRedirectCallback()
-              .then((user) => {
-                let newUrl = window.location.origin;
-                window.location.href = newUrl;
-              })
-              .catch((err) => {
-                window.location.href =
-                  window.location.origin + `/?error=${err}`;
-              });
-          }
-
-          // else if (user && tokenWillExpire) {
-          //   //check if silent sign-in necessary
-          // console.log( "EXPIRES IN ", user.expires_in)
-          if (user.expires_in < 100)
-            mgr.signinSilent().then((user) => {
-              console.log("re-signed!!");
-              setIdentity(user);
+  React.useEffect(function () {
+    if (!pageHadErrored) {
+      mgr.getUser().then((user) => {
+        if (!user && !redirectedFromCallback) {
+          mgr
+            .signinRedirect()
+            .catch(
+              (err) =>
+                (window.location.href =
+                  window.location.origin + `/?error=${err}`)
+            );
+        } else if (!user && redirectedFromCallback) {
+          mgr
+            .signinRedirectCallback()
+            .then((user) => {
+              let newUrl = window.location.origin;
+              window.location.href = newUrl;
+            })
+            .catch((err) => {
+              window.location.href = window.location.origin + `/?error=${err}`;
             });
-          // }
-          else {
-            setIdentity(user);//should be removed eventually
-            setAuthenticated(true);
-          }
-        });
-      }
-    },
-    []
-  );
+        }
+
+        // else if (user && tokenWillExpire) {
+        //   //check if silent sign-in necessary
+        // console.log( "EXPIRES IN ", user.expires_in)
+        if (user.expires_in < 100)
+          mgr.signinSilent().then((user) => {
+            console.log("re-signed!!");
+            setIdentity(user);
+          });
+        // }
+        else {
+          setIdentity(user); //should be removed eventually
+          setAuthenticated(true);
+        }
+      });
+    }
+  }, []);
 
   return [identity, isAuthenticated, mgr.signoutRedirect.bind(mgr)];
 }

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { getGuid } from "../../utils/getguid";
 export function DropZone({
   dropZoneState,
