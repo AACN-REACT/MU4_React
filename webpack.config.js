@@ -44,11 +44,21 @@ module.exports = function (env) {
     module: {
       rules: [
         {
+          test: /\.svg$/,
+          use: [
+            {
+              loader: "@svgr/webpack",
+              options: { dimensions: true },
+            },
+            "url-loader",
+          ],
+        },
+        {
           test: /\.worker\.js$/,
           use: { loader: "worker-loader" },
         },
         {
-          test: /\.(png|svg|jpg)$/,
+          test: /\.(png|jpg)$/,
           loader: "file-loader",
           options: {
             outputPath: "images",
@@ -72,7 +82,7 @@ module.exports = function (env) {
           ],
         },
         {
-          test: /\.(ttf|eot|woff|woff2|svg)$/,
+          test: /\.(ttf|eot|woff|woff2)$/,
           use: {
             loader: "file-loader",
             options: {

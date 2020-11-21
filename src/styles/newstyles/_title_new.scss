@@ -1,14 +1,17 @@
 @use 'colors';
+@use 'fonts';
 
 .title-container {
   display: flex;
+  border-bottom: colors.$blue-aacn 1px solid;
   height: 80px;
   width: 100%;
   margin: 0 auto;
   max-width: 1600px;
-  background-color: black;
-  img {
-    width: 400px;
+
+
+  svg {
+    width: 300px;
     margin: 0 auto;
     object-fit: cover;
   }
@@ -16,4 +19,29 @@
 .logo {
   width: 400px;
   height: auto;
+}
+.greeting {
+  font-family:sourcesans;
+  font-weight:200;
+  color:rgb(94, 19, 180);;
+
+}
+.log-info{
+  padding-top:40px;
+  padding-right: 20px;
+  width:200px;
+  justify-content: space-between;
+  display:flex;
+  button{
+
+    height:30px;
+    outline:none;
+    border:1px solid purple;
+    border-radius:3px;
+    width:60px;
+    color:rgb(94, 19, 180);
+    background-color:white;
+    // background-image:linear-gradient(to left, purple, rgb(92, 18, 134))
+  }
+
 }
