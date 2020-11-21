@@ -15,6 +15,14 @@ export function NetforumSelector({
   const [nfSelction, setNfSelection] = React.useState([]);
   const [validSearch, setValidSearch] = React.useState(false);
 
+
+// set up refs for the three fields that will be used
+
+const nfTypeRef = React.useRef();
+const nfSearchTextRef = React.useRef();
+const nfItemRef = React.useRef();
+
+
   const onchange = function (type, search) {
     console.log("HANDLER ", type, selectedType, nfTypes);
 
@@ -75,10 +83,13 @@ export function NetforumSelector({
       <div>
         <div>Type</div>
         <select
+        ref={nfTypeRef}
           value={selectedType}
           onChange={(e) => {
+            
             e.stopPropagation();
-            setSelectedType(e.target.value);
+            //setSelectedType(e.target.value);
+            onchange(e.target.value,nfSearchTextRef.current.value);
           }}
         >
           {nfTypes.map((el) => (
@@ -89,19 +100,23 @@ export function NetforumSelector({
       <div>
         <div>Keyword</div>
         <input
+        ref={nfSearchTextRef}
           autofocus="true"
           className={validSearch ? "valid-input" : "invalid-input"}
           type="text"
           onChange={(e) => {
             e.stopPropagation();
-            onchange(selectedType, e.target.value);
+            onchange(nfTypeRef.current.value, e.target.value);
           }}
         />
         <div>Select</div>
         <select
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
+        ref={nfItemRef}
+        onChange={(e) => {
+          e.stopPropagation();
+        
+        }}
+         
         >
           {nfOptions.map((el) => (
             <option>{el.NetforumCode}</option>
