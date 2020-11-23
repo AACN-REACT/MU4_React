@@ -1,8 +1,8 @@
 import React from "react";
 import butt from "../images/switch.png";
-import {ListStructure} from './ListStructure' 
-import {ListResult} from './ListResult' 
-import {Thing} from './thing' 
+import { ListStructure } from "./ListStructure";
+import { ListResult } from "./ListResult";
+import { Thing } from "./thing";
 import { Paginate } from "../utils/sorting/sorting_algorithms";
 import {
   sortNewestDate,
@@ -157,7 +157,7 @@ export function ListComponent({
       <div className="inner-container">
         <div
           key="title"
-          className="column-title"
+          className="column-title-heading"
           onClick={function (e) {
             setTransforms((t) => {
               if (t.indexOf(sortTitle) > -1) {
@@ -175,7 +175,9 @@ export function ListComponent({
         <div
           key="original"
           className={
-            panelStateNumber === 2 ? "column-double-line" : "column-close"
+            panelStateNumber === 2
+              ? "column-original-heading column-double-line"
+              : "column-close"
           }
           onClick={function (e) {
             setTransforms((t) => {
@@ -196,7 +198,7 @@ export function ListComponent({
         </div>
         <div
           key="addedby"
-          className={`column-addedBy ${
+          className={`column-addedBy-heading ${
             panelStateNumber === 2 ? "" : "column-close"
           }`}
           onClick={function (e) {
@@ -218,7 +220,7 @@ export function ListComponent({
         </div>
         <div
           key="size"
-          className="column-size"
+          className="column-size-heading"
           onClick={function (e) {
             setTransforms((t) => {
               if (t.indexOf(sortFileSize) > -1) {
@@ -235,11 +237,11 @@ export function ListComponent({
           }}
         >
           <p>Size</p>
-          <p>MB</p>
+          <span >MB</span>
         </div>
         <div
           key="keywords"
-          className={`column-keywords ${
+          className={`column-keywords-heading ${
             panelStateNumber === 2 ? "" : "column-close"
           }`}
           onClick={function (e) {
@@ -261,7 +263,7 @@ export function ListComponent({
         </div>
         <div
           key="netforum"
-          className={`column-double-line ${
+          className={`column-netforum-heading column-double-line ${
             panelStateNumber === 2 ? "" : "column-close"
           }`}
           onClick={function (e) {
@@ -283,7 +285,7 @@ export function ListComponent({
         </div>
         <div
           key="status"
-          className={`column-status ${
+          className={`column-status-heading ${
             panelStateNumber === 2 ? "" : "column-close"
           }`}
         >
@@ -291,7 +293,7 @@ export function ListComponent({
         </div>
         <div
           key="date"
-          className="column-date"
+          className="column-date-heading"
           onClick={function (e) {
             setTransforms((t) => {
               if (t.indexOf(sortNewestDate) > -1) {
@@ -328,7 +330,14 @@ export function ListComponent({
             left: `-${pageNumber * 100}%`,
           }}
         >
-          <Thing list={list[pageNumber]}  pos={`${pageNumber * 100}%`} pageNumber={pageNumber} panelStateNumber={panelStateNumber} setMediaKey={setMediaKey} dispatchPanelState={dispatchPanelState}/>
+          <Thing
+            list={list[pageNumber]}
+            pos={`${pageNumber * 100}%`}
+            pageNumber={pageNumber}
+            panelStateNumber={panelStateNumber}
+            setMediaKey={setMediaKey}
+            dispatchPanelState={dispatchPanelState}
+          />
         </div>
       )}
     </div>

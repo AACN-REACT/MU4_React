@@ -185,9 +185,9 @@
   height: 30px;
   font-size: 1.3rem;
   padding: 5px;
-  color: white;
+  color: colors.$blue-aacn;
   text-shadow: 1px 1px 5px white;
-  background: linear-gradient(45deg, colors.$dark-green, colors.$mid-green);
+
 }
 
 [class*="row-"] {
@@ -220,7 +220,7 @@
 }
 [class*="column-"] {
   color: colors.$white-yellow;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   flex-shrink: 1;
   height: 35.5px;
   width: 32%;
@@ -245,7 +245,7 @@
     font-size: 1rem;
   }
 }
-.column-close {
+[class*="column-close"] {
   width: 0px;
 }
 .column-double-line {
@@ -258,4 +258,36 @@
 }
 [class*="column-full"] {
   width: 17%;
+}
+
+.column-size {
+  font-size: 1.2rem;
+}
+.column-title-heading {
+}
+
+[class*="-heading"] {
+  font-family: freight;
+  border: 1px solid colors.$blue-scooter;
+  font-size: 1.2rem;
+  height: 50px;
+  &:nth-of-type(odd) {
+    border: 1px solid colors.$blue-scooter;
+  }
+}
+
+.column-netforum-heading {
+  font-size: 1rem;
+}
+.column-original-heading {
+  font-size: 1rem;
+}
+.column-size-heading {
+  font-size: 1.2rem;
+  & > p {
+    margin-bottom: -10px;
+  }
+  & > span {
+    font-size: 0.8rem;
+  }
 }
