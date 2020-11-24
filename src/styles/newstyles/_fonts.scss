@@ -4,18 +4,49 @@ $slab: "Roboto Slab", serif;
 $mono: "Roboto Mono", serif;
 $vt: "VT323", serif;
 
-
-@font-face{
-    font-family:'freight';
-    src: url('./fonts/freigsanprobol-webfont.woff')
+@font-face {
+  font-family: "freight";
+  src: url("./fonts/freigsanprobol-webfont.woff");
 }
-@font-face{
-    font-family:'sourcesans';
-    src: url('./fonts/SourceSansPro-BoldIt.otf.woff'),
-     url('./fonts/SourceSansPro-Regular.otf.woff'),
-     url('./fonts/SourceSansPro-Light.otf.woff'),
+@font-face {
+  font-family: "sourcesans-bold-italic";
+  src: url("./fonts/SourceSansPro-BoldIt.otf.woff"),
+    url("./fonts/SourceSansPro-Regular.otf.woff"),
+    url("./fonts/SourceSansPro-Light.otf.woff");
 }
-@font-face{
-    font-family:'freight';
-    src: url('./fonts/freigsanprobol-webfont.woff')
+@font-face {
+  font-family: "sourcesans-regular";
+  src: url("./fonts/SourceSansPro-Regular.otf.woff");
+}
+@font-face {
+  font-family: "sourcesans-bold";
+  src: url("./fonts/SourceSansPro-Bold.otf.woff");
+}
+@font-face {
+  font-family: "sourcesans-light";
+  src: url("./fonts/SourceSansPro-Light.otf.woff");
+}
+@font-face {
+  font-family: "sourcesans-light-italic";
+  src: url("./fonts/SourceSansPro-LightIt.otf.woff");
+}
+@font-face {
+  font-family: "metaserif-bold";
+  src: url("./fonts/MetaSerifWebPro-Bold.woff");
+}
+@font-face {
+  font-family: "metaserif-book";
+  src: url("./fonts/MetaSerifWebPro-Book.woff");
+}
+@font-face {
+  font-family: "aacn-icon";
+  src: url("./fonts/aacn-icons.woff");
+}
+@font-face {
+  font-family: "freight-med";
+  src: url("./fonts/freigsanpromed-webfont.woff");
+}
+@font-face {
+  font-family: "freight-sem";
+  src: url("./fonts/freigsanprosem-webfont.woff");
 }

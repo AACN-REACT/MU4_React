@@ -1,7 +1,7 @@
 import React from "react";
 import { Logo } from "./new_title";
 import myimage from "../images/title_new2.png";
-import { ReactComponent as PurpleLogo } from "../images/SVG/SVG/muLogo.svg";
+import { ReactComponent as PurpleLogo } from "../images/SVG/SVG/boldLogo2.svg";
 import { Identity, Logout, Authentication } from "./contexts";
 // let mylogo = new Image();
 // mylogo.src = mylogo;

@@ -74,7 +74,6 @@ the Auth server - not implemented yet
       if (searchParams.get("mediakey")?.length > 0) {
         let tempMediaKey = searchParams.get("mediakey");
         localStorage.setItem("mediakey", tempMediaKey);
-        alert("media key: " + localStorage.getItem("mediakey"));
         return tempMediaKey;
       } else {
         return localStorage.getItem("mediakey");

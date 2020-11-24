@@ -4,6 +4,8 @@
 .title-container {
   display: flex;
   border-bottom: colors.$blue-aacn 1px solid;
+  background:white;
+  justify-content: space-between;
   height: 80px;
   width: 100%;
   margin: 0 auto;
@@ -11,8 +13,8 @@
 
 
   svg {
+    margin-left:30px;
     width: 300px;
-    margin: 0 auto;
     object-fit: cover;
   }
 }
@@ -21,7 +23,7 @@
   height: auto;
 }
 .greeting {
-  font-family:sourcesans;
+  font-family:'sourcesans-bold';
   font-weight:200;
   color:rgb(94, 19, 180);;
 

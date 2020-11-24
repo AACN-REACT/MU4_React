@@ -61,11 +61,10 @@ export function DetailsPage({
     [mediaKey, identity, toggle]
   );
 
-  console.log("PANEL STATE", identity);
   return (
     <div className="details-page">
       <div className="details-bar">
-        <span>media details...</span>
+        <span className="media-details-title">media details...</span>
         <div
           style={{ cursor: "pointer" }}
           onClick={(e) => {
@@ -75,7 +74,7 @@ export function DetailsPage({
             );
           }}
         >
-          Key: {mediaKey}
+          <span>Key:</span> {mediaKey}
         </div>
         <img
           onClick={(e) => {

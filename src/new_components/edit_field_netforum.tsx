@@ -108,6 +108,8 @@ export function NetforumEditableField({
       ) : (
         <div className="netforum-input-container">
           <NetforumSelector
+          toggleEditable={toggleEditable}
+          itemKey={itemKey}
             typeEndpoint={netForumBaseV1}
             selectEndpoint={netForumBaseV0}
             token={token}
