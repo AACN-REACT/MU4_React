@@ -114,6 +114,7 @@ export function NetforumEditableField({
             selectEndpoint={netForumBaseV0}
             token={token}
             close={toggleEditable}
+            refetchData={refetchData}
           />
         </div>
       )}

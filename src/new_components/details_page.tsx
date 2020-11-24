@@ -145,6 +145,7 @@ export function DetailsPage({
           itemKey={mediaDetails?.Key}
           itemName="netforumItemLink"
           token={identity.access_token}
+          refetchData={refetchData}
         />
         <NonEditableField
           isDetailsLoading={isDetailsLoading}

@@ -7,7 +7,8 @@ export function NetforumSelector({
   selectEndpoint,
   token,
   close,
-  toggleEditable
+  toggleEditable,
+  refetchData,
 }) {
   const errorHandler = React.useContext(ErrorHandler);
   const endHandler = React.useContext(Endpoint);
@@ -16,6 +17,7 @@ export function NetforumSelector({
   const [nfOptions, setNfOptions] = React.useState([]);
   const [nfSelction, setNfSelection] = React.useState([]);
   const [validSearch, setValidSearch] = React.useState(false);
+  const [NfLinkInfo, setNFlinkInfo] = React.useState({ code: "", key: "" });
 
   // set up refs for the three fields that will be used
 
@@ -24,16 +26,27 @@ export function NetforumSelector({
   const nfItemRef = React.useRef();
   // get contexts
   const identity = React.useContext(Identity);
-  function postLink({ key, nfKey, nfType, nfCode, name }) {
+  const handlerError = React.useContext(ErrorHandler);
+  function postLink({ key, nfKey, nfType, nfCode }) {
     alert("WORKS");
     fetch(
-      `https://localhost:44340/api/v1/Medias/${key}/netforumItemLink?netForumKey=${nfKey}&netForumType=${nfType}&netForumCode=${nfCode}&username=${name}`,
+      `https://localhost:44340/api/v1/Medias/${key}/netforumItemLink?netForumKey=${nfKey}&netForumType=${nfType}&netForumCode=${nfCode}&username=${
+        identity.profile.given_name || "guest"
+      }`,
 
       {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       }
-    );
+    ).then(function (res) {
+      if (res.status === 400) {
+        handlerError("netforum link bad");
+      }
+      if (res.status === 200) {
+        refetchData((d) => !d);
+        toggleEditable(false);
+      }
+    });
   }
 
   const onchange = function (type, search) {
@@ -53,11 +66,14 @@ export function NetforumSelector({
         .then((res) => res.json())
         .then((res) => {
           setNfOptions(res.Result.NetforumItemDtos);
-          console.log("RETURN ITEMS", nfOptions);
+          setNFlinkInfo([
+            res.Result.NetforumItemDtos[0].NetforumKey,
+            res.Result.NetforumItemDtos[0].NetforumCode,
+          ]);
         })
         .catch((err) => {
           console.log("RETURN ITEMS", err);
-          errorHandler(err);
+          errorHandler("error fetching types");
         });
     } else {
       setValidSearch(false);
@@ -87,18 +103,26 @@ export function NetforumSelector({
   React.useEffect(
     function () {
       setSelectedType(nfTypes[0]);
+      console.log("mmmm link", NfLinkInfo);
+      setNFlinkInfo(nfItemRef.current.value);
     },
     [nfTypes]
   );
   console.log("selection", nfTypes, selectedType);
   return (
     <div onClick={(e) => null /*close()*/} className="netforum-selector">
-      <div className="toggle-inputbox" onClick={e=>{toggleEditable(s=>!s)}}>X</div>
+      <div
+        className="toggle-inputbox"
+        onClick={(e) => {
+          toggleEditable((s) => !s);
+        }}
+      >
+        X
+      </div>
       <div>
         <div>Type</div>
         <select
           ref={nfTypeRef}
-          value={selectedType}
           onChange={(e) => {
             e.stopPropagation();
             //setSelectedType(e.target.value);
@@ -127,11 +151,13 @@ export function NetforumSelector({
           ref={nfItemRef}
           onChange={(e) => {
             e.stopPropagation();
-            console.log("mmmm", nfItemRef.current.value);
+            console.log("mmmm", e.target.value);
+            let splitInfo = e.target.value.split(",");
+            setNFlinkInfo(splitInfo);
           }}
         >
           {nfOptions.map((el) => (
-            <option value={{ key: el.NetforumKey, code: el.NetforumCode }}>
+            <option value={[el.NetforumKey, el.NetforumCode]}>
               {el.NetforumCode}
             </option>
           ))}
@@ -141,8 +167,8 @@ export function NetforumSelector({
           onClick={(e) => {
             postLink({
               key: itemKey,
-              nfKey: nfItemRef.current.value.key,
-              nfCode: nfItemRef.current.value.code,
+              nfKey: NfLinkInfo[0],
+              nfCode: NfLinkInfo[1],
               nfType: nfTypeRef.current.value,
               name: identity.given_name,
             });

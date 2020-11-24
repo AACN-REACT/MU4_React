@@ -3,9 +3,28 @@
 
 .search-bar {
   padding: 5px;
+  font-family: "sourcesans-regular";
+  color: colors.$blue-denim;
+  font-size: 1.2rem;
+  input {
+    margin-left: 5px;
+    font-size: 1.2rem;
+    color: colors.$blue-dodger;
+    border: none;
+    border-bottom: 1px solid colors.$blue-aacn;
+    font-family: "sourcesans-light";
+    outline: none;
+  }
   label {
     margin-right: 5px;
   }
+}
+
+.list-controls {
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  border-bottom: 1px dotted colors.$blue-aacn;
 }
 
 // paginated set up
@@ -13,7 +32,6 @@
   transition: 1s all;
   display: inline;
   position: relative;
-
 }
 .individual-pages {
   width: 100%;
@@ -32,14 +50,13 @@
   border: 1px solid colors.$mid-green;
 }
 .page-controls {
+  flex-grow: 1;
   display: flex;
   justify-content: space-between;
   height: 30px;
   font-size: 1rem;
   padding: 5px;
-  color: gray;
-  text-shadow: 1px 1px 5px purple;
-
+  color: colors.$blue-denim;
 }
 .inner-container {
   box-sizing: border-box;
@@ -66,7 +83,7 @@
 [class*="details-container-"] {
   transition: all 0.5s;
   overflow: hidden;
-  background: ghostwhite
+  background: ghostwhite;
 }
 .details-container-0 {
   height: 40px;
@@ -162,9 +179,10 @@
   white-space: nowrap;
   overflow: hidden;
 
-  font-family: fonts.$mono;
+  font-family: "sourcesans-regular";
   .list-heading {
-    font-family: fonts.$vt;
+    font-size: 1.5rem;
+    border-bottom: 1px solid colors.$blue-aacn;
   }
 }
 .list-0 {
@@ -185,7 +203,6 @@
   padding: 5px;
   color: colors.$blue-aacn;
   text-shadow: 1px 1px 5px white;
-
 }
 
 [class*="row-"] {
@@ -265,12 +282,11 @@
 }
 
 [class*="-heading"] {
-  font-family: 'sourcesans-bold';
-
+  font-family: "sourcesans-bold";
+  color:colors.$blue-aacn;
   font-size: 1.2rem;
   height: 50px;
   &:nth-of-type(odd) {
-
   }
 }
 

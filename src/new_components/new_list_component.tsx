@@ -85,75 +85,76 @@ export function ListComponent({
           <img src={butt} />
         </div>
       </div>
+      <div className="list-controls"><div className="search-bar">
+      <label>Search</label>
+      <input
+      onChange={(e) => {
+      console.log("WORKER: EVENT INTIATED");
+      SORTING_WORKER.postMessage({
+      word: searchValue.current.value,
+      list: videolist,
+      field: "Title",
+      });
+      }}
+      type="text"
+      ref={searchValue}
+      className="search"
+      />
+      </div>
       <div className="page-controls">
-        <div
-          onClick={(e) =>
-            changePageNumber((s) => {
-              if (s > 0) {
-                return s - 1;
-              }
-              return s;
-            })
-          }
-        >
-          {String.fromCharCode(9664)}
-        </div>
-        <div>
-          Page{" "}
-          <span
-            onDoubleClick={(e) => {
-              toggleEnterNumber((t) => !t);
-              if (enterNumber) {
-                alert(numberInput.current);
-                numberInput.current.focus();
-              }
-            }}
-          >
-            {enterNumber ? (
-              <input
-                ref={numberInput}
-                type="number"
-                onChange={(e) => {
-                  changePageNumber(Number(e.target.value) - 1);
-                }}
-                max={`${list.length + 1}`}
-                min={1}
-              ></input>
-            ) : (
-              parseInt(pageNumber) + 1
-            )}
-          </span>{" "}
-          of {list.length}{" "}
-        </div>
-        <div
-          onClick={(e) =>
-            changePageNumber((s) => {
-              if (s < list.length - 1) {
-                return s + 1;
-              }
-              return s;
-            })
-          }
-        >
-          {String.fromCharCode(9658)}
-        </div>
+      <div
+      onClick={(e) =>
+      changePageNumber((s) => {
+      if (s > 0) {
+      return s - 1;
+      }
+      return s;
+      })
+      }
+      >
+      {String.fromCharCode(9664)}
       </div>
-      <div className="search-bar">
-        <label>Search</label>
-        <input
-          onChange={(e) => {
-            console.log("WORKER: EVENT INTIATED");
-            SORTING_WORKER.postMessage({
-              word: searchValue.current.value,
-              list: videolist,
-              field: "Title",
-            });
-          }}
-          type="text"
-          ref={searchValue}
-          className="search"
-        />
+      <div>
+      Page{" "}
+      <span
+      onDoubleClick={(e) => {
+      toggleEnterNumber((t) => !t);
+      if (enterNumber) {
+      alert(numberInput.current);
+      numberInput.current.focus();
+      }
+      }}
+      >
+      {enterNumber ? (
+      <input
+      ref={numberInput}
+      type="number"
+      onChange={(e) => {
+      changePageNumber(Number(e.target.value) - 1);
+      }}
+      max={`${list.length + 1}`}
+      min={1}
+      ></input>
+      ) : (
+      parseInt(pageNumber) + 1
+      )}
+      </span>{" "}
+      of {list.length}{" "}
       </div>
+      <div
+      onClick={(e) =>
+      changePageNumber((s) => {
+      if (s < list.length - 1) {
+      return s + 1;
+      }
+      return s;
+      })
+      }
+      >
+      {String.fromCharCode(9658)}
+      </div>
+      </div></div>
+      
       <div className="inner-container">
         <div
           key="title"

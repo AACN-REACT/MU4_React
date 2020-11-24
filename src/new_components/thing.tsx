@@ -44,7 +44,7 @@ export function Thing ({pageNumber, panelStateNumber, list, pos, setMediaKey, di
 return (
   <div ref={myPos} style={{position:"relative", left:`${pageNumber*100}%`}}>
     {
-      list.map(el=><ListMediaItem mediaItem={el} setMediaKey={setMediaKey} dispatchPanelState={dispatchPanelState} panelStateNumber={panelStateNumber} />)
+      list?.map(el=><ListMediaItem mediaItem={el} setMediaKey={setMediaKey} dispatchPanelState={dispatchPanelState} panelStateNumber={panelStateNumber} />)
     }
 
   </div>
