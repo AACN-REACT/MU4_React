@@ -155,7 +155,7 @@ export function ListComponent({
       </div>
       </div></div>
       
-      <div className="inner-container">
+      <div className="inner-container-heading">
         <div
           key="title"
           className="column-title-heading"
