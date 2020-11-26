@@ -70,7 +70,7 @@
   display: flex;
   width: 100%;
   justify-content: start;
-  text-shadow: 1px 1px 5px white;
+  color: colors.$merlingray;
 
   &:nth-of-type(odd) {
     background: white;
@@ -79,8 +79,10 @@
   font-size: 0.8rem;
   transition: 0.5s all;
   &:hover {
+    text-shadow: 1px 1px 5px white;
+    color: white;
     background: orange;
-    transition: 0.5s all;
+    transition: 0.2s all;
   }
 }
 .column-close {
@@ -245,16 +247,12 @@
   color: green;
 }
 [class*="column-"] {
-  color: colors.$merlingray;
   font-size: 0.7rem;
   flex-shrink: 1;
   height: 35.5px;
   width: 32%;
-  text-shadow: 1px 1px 5px white;
   text-align: center;
-
   overflow: hidden;
-  transition: all 1s;
 
   &:first-of-type {
     text-align: start;
@@ -262,6 +260,7 @@
   &:last-of-type {
     text-align: end;
   }
+
   .false {
     color: colors.$bright-red;
     text-shadow: 1px 1px 5px colors.$light-red;

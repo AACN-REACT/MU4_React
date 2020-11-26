@@ -23,11 +23,10 @@ export function DetailsPage({
   const identity = React.useContext(Identity);
   //const [emptyPresentation, setEmptyPresentation] = React.useSate(false);
   const [isDetailsLoading, setDetailsLoading] = React.useState(isLoading);
-
+  console.log("MEDIA ", mediaDetails, mediaKey);
   React.useEffect(
     function () {
       let localtoken = false;
-      console.log(">>>>>>", identity.access_token);
       if (localStorage.getItem("mediakey")) {
         localtoken = localStorage.getItem("mytoken") || false;
 
@@ -89,20 +88,37 @@ export function DetailsPage({
         />
       </div>
       <div className="details-frame">
-        <EditableField
-          isDetailsLoading={isDetailsLoading}
-          method="PUT"
-          setter={setMediaDetails}
-          name="Title"
-          displayName="Title"
-          data={mediaDetails?.Title}
-          endpoint={"https://localhost:44340/api/v1/Medias/"}
-          user="amin"
-          itemKey={mediaDetails?.Key}
-          itemName="title"
-          token={identity.access_token}
-          refetchData
-        />
+        {mediaDetails?.CanEdit ? (
+          <EditableField
+            isDetailsLoading={isDetailsLoading}
+            method="PUT"
+            setter={setMediaDetails}
+            name="Title"
+            displayName="Title"
+            data={mediaDetails?.Title}
+            endpoint={"https://localhost:44340/api/v1/Medias/"}
+            user="amin"
+            itemKey={mediaDetails?.Key}
+            itemName="title"
+            token={identity.access_token}
+            refetchData
+          />
+        ) : (
+          <NonEditableField
+            isDetailsLoading={isDetailsLoading}
+            method="PUT"
+            setter={setMediaDetails}
+            name="Title"
+            displayName="Title"
+            data={mediaDetails?.Title}
+            endpoint={"https://localhost:44340/api/v1/Medias/"}
+            user="amin"
+            itemKey={mediaDetails?.Key}
+            itemName="title"
+            token={identity.access_token}
+            refetchData
+          />
+        )}
         <NonEditableField
           isDetailsLoading={isDetailsLoading}
           setter={setMediaDetails}
@@ -110,20 +126,37 @@ export function DetailsPage({
           displayName="Added By.."
           data={mediaDetails?.StartedByUsername}
         />
-        <KeywordEditableField
-          isDetailsLoading={isDetailsLoading}
-          method="POST"
-          setter={setMediaDetails}
-          name="Keywords"
-          displayName="Keywords"
-          data={mediaDetails?.Keywords}
-          endpoint={"https://localhost:44340/api/v1/Medias/"}
-          user="amin"
-          itemKey={mediaDetails?.Key}
-          itemName="keyword"
-          token={identity.access_token}
-          refetchData={refetchData}
-        />
+        {mediaDetails?.CanEdit ? (
+          <KeywordEditableField
+            isDetailsLoading={isDetailsLoading}
+            method="POST"
+            setter={setMediaDetails}
+            name="Keywords"
+            displayName="Keywords"
+            data={mediaDetails?.Keywords}
+            endpoint={"https://localhost:44340/api/v1/Medias/"}
+            user="amin"
+            itemKey={mediaDetails?.Key}
+            itemName="keyword"
+            token={identity.access_token}
+            refetchData={refetchData}
+          />
+        ) : (
+          <NonEditableField
+            isDetailsLoading={isDetailsLoading}
+            method="POST"
+            setter={setMediaDetails}
+            name="Keywords"
+            displayName="Keywords"
+            data={mediaDetails?.Keywords}
+            endpoint={"https://localhost:44340/api/v1/Medias/"}
+            user="amin"
+            itemKey={mediaDetails?.Key}
+            itemName="keyword"
+            token={identity.access_token}
+            refetchData={refetchData}
+          />
+        )}
         <NonEditableField
           isDetailsLoading={isDetailsLoading}
           setter={setMediaDetails}
@@ -131,22 +164,41 @@ export function DetailsPage({
           displayName="Added Date.."
           data={new Date(mediaDetails?.StartDateTime).toLocaleString()}
         />
-        <NetforumEditableField
-          isDetailsLoading={isDetailsLoading}
-          method="PUT"
-          setter={setMediaDetails}
-          name="NetforumLink"
-          displayName="Netforum Link"
-          data={mediaDetails?.NetforumItemLink?.NetforumKey}
-          endpoint={"https://localhost:44340/api/v1/Medias/"}
-          netForumBaseV1={"https://localhost:44340/api/v1/NetforumItems/"}
-          netForumBaseV0={"https://localhost:44340/api/v0/NetforumItems/"}
-          user="amin"
-          itemKey={mediaDetails?.Key}
-          itemName="netforumItemLink"
-          token={identity.access_token}
-          refetchData={refetchData}
-        />
+        {mediaDetails?.CanEdit ? (
+          <NetforumEditableField
+            isDetailsLoading={isDetailsLoading}
+            method="PUT"
+            setter={setMediaDetails}
+            name="NetforumLink"
+            displayName="Netforum Link"
+            data={mediaDetails?.NetforumItemLink?.NetforumKey}
+            endpoint={"https://localhost:44340/api/v1/Medias/"}
+            netForumBaseV1={"https://localhost:44340/api/v1/NetforumItems/"}
+            netForumBaseV0={"https://localhost:44340/api/v0/NetforumItems/"}
+            user="amin"
+            itemKey={mediaDetails?.Key}
+            itemName="netforumItemLink"
+            token={identity.access_token}
+            refetchData={refetchData}
+          />
+        ) : (
+          <NonEditableField
+            isDetailsLoading={isDetailsLoading}
+            method="PUT"
+            setter={setMediaDetails}
+            name="NetforumLink"
+            displayName="Netforum Link"
+            data={mediaDetails?.NetforumItemLink?.NetforumKey}
+            endpoint={"https://localhost:44340/api/v1/Medias/"}
+            netForumBaseV1={"https://localhost:44340/api/v1/NetforumItems/"}
+            netForumBaseV0={"https://localhost:44340/api/v0/NetforumItems/"}
+            user="amin"
+            itemKey={mediaDetails?.Key}
+            itemName="netforumItemLink"
+            token={identity.access_token}
+            refetchData={refetchData}
+          />
+        )}
         <NonEditableField
           isDetailsLoading={isDetailsLoading}
           setter={setMediaDetails}
@@ -196,7 +248,7 @@ export function DetailsPage({
           displayName="File Duration"
           data={mediaDetails?.FileDuration}
         />
-        <EditableField
+        <NonEditableField
           isDetailsLoading={isDetailsLoading}
           method="PUT"
           setter={setMediaDetails}
@@ -212,12 +264,14 @@ export function DetailsPage({
       </div>
       <div className="button-container">
         <DeleteButton
-          user="amin"
+          disabled={!mediaDetails?.CanEdit}
+          user={identity.given_name || "guest"}
           itemKey={mediaDetails?.Key}
           identity={identity}
         />
         <FinalizeButton
-          user="amin"
+          disabled={!mediaDetails?.CanEdit}
+          user={identity.given_name || "guest"}
           itemKey={mediaDetails?.Key}
           identity={identity}
         />

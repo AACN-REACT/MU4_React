@@ -1,6 +1,6 @@
 import React from "react";
 
-export function FinalizeButton({ itemKey, user, identity }) {
+export function FinalizeButton({disabled=false, itemKey, user, identity }) {
   const [finalized, setFinalized] = React.useState(false);
 
   function FinalizeVideo(event) {
@@ -27,7 +27,7 @@ export function FinalizeButton({ itemKey, user, identity }) {
   React.useEffect(() => () => setFinalized(false), [itemKey]);
   return (
     <div
-      className={finalized ? "disabled-delete-button" : "active-delete-button"}
+      className={finalized || disabled ? "disabled-delete-button" : "active-delete-button"}
       onClick={FinalizeVideo}
     >
       Finalize

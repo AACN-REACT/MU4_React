@@ -1,6 +1,6 @@
 import React from "react";
 
-export function DeleteButton({ itemKey, user, identity }) {
+export function DeleteButton({ disabled=false, itemKey, user, identity }) {
   const [deleted, setDeleted] = React.useState(false);
 
   function DeleteVideo(event) {
@@ -24,7 +24,7 @@ export function DeleteButton({ itemKey, user, identity }) {
   React.useEffect(() => () => setDeleted(false), [itemKey]);
   return (
     <div
-      className={deleted ? "disabled-delete-button" : "active-delete-button"}
+      className={deleted || disabled ? "disabled-delete-button" : "active-delete-button"}
       onClick={DeleteVideo}
     >
       Delete
