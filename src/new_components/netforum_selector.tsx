@@ -110,7 +110,7 @@ export function NetforumSelector({
   );
   console.log("selection", nfTypes, selectedType);
   return (
-    <div onClick={(e) => null /*close()*/} className="netforum-selector">
+    <div onClick={(e) =>close()} className="netforum-selector">
       <div
         className="toggle-inputbox"
         onClick={(e) => {
