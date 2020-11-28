@@ -1,6 +1,33 @@
 import React from "react";
+import { SingleEntryPlugin } from "webpack";
 import { SetErrorMsg } from "../mediauploader/components/globalstateContext";
 import { ErrorHandler, Endpoint, Identity } from "./contexts";
+
+import { NFTable } from "./nfTable";
+
+function closeAfterAni(
+  element,
+  callBack,
+  toggleAniCleanUp,
+  setToggleAniCleanUp
+) {
+  if (toggleAniCleanUp) {
+    element.style.animationName = "slideIn";
+    element.removeEventListener("animationend", function (e) {
+      callBack();
+      setToggleAniCleanUp((a) => !a);
+    });
+  } else {
+    element.style.animationName = "slideOut";
+    element.addEventListener("animationend", function (e) {
+      callBack();
+      setToggleAniCleanUp((a) => !a);
+    });
+
+    setToggleAniCleanUp((a) => !a);
+  }
+}
+
 export function NetforumSelector({
   itemKey,
   typeEndpoint,
@@ -17,6 +44,7 @@ export function NetforumSelector({
   const [nfOptions, setNfOptions] = React.useState([]);
   const [nfSelction, setNfSelection] = React.useState([]);
   const [validSearch, setValidSearch] = React.useState(false);
+  const [toggleAniCleanUp, setToggleAniCleanUp] = React.useState(false);
   const [NfLinkInfo, setNFlinkInfo] = React.useState({ code: "", key: "" });
 
   // set up refs for the three fields that will be used
@@ -24,6 +52,7 @@ export function NetforumSelector({
   const nfTypeRef = React.useRef();
   const nfSearchTextRef = React.useRef();
   const nfItemRef = React.useRef();
+  const slideAnimationRef = React.useRef();
   // get contexts
   const identity = React.useContext(Identity);
   const handlerError = React.useContext(ErrorHandler);
@@ -103,21 +132,26 @@ export function NetforumSelector({
   React.useEffect(
     function () {
       setSelectedType(nfTypes[0]);
-      console.log("mmmm link", NfLinkInfo);
+      console.log("mmmm link", slideAnimationRef.current.style.aninationName);
       setNFlinkInfo(nfItemRef.current.value);
     },
     [nfTypes]
   );
   console.log("selection", nfTypes, selectedType);
   return (
-    <div onClick={(e) =>close()} className="netforum-selector">
+    <div ref={slideAnimationRef} className="netforum-selector">
       <div
         className="toggle-inputbox"
         onClick={(e) => {
-          toggleEditable((s) => !s);
+          closeAfterAni(
+            slideAnimationRef.current,
+            close,
+            toggleAniCleanUp,
+            setToggleAniCleanUp
+          );
         }}
       >
-        X
+        close..
       </div>
       <div>
         <div>Type</div>
@@ -151,7 +185,6 @@ export function NetforumSelector({
           ref={nfItemRef}
           onChange={(e) => {
             e.stopPropagation();
-            console.log("mmmm", e.target.value);
             let splitInfo = e.target.value.split(",");
             setNFlinkInfo(splitInfo);
           }}
@@ -170,12 +203,12 @@ export function NetforumSelector({
               nfKey: NfLinkInfo[0],
               nfCode: NfLinkInfo[1],
               nfType: nfTypeRef.current.value,
-              name: identity.given_name,
             });
           }}
         >
           Add
         </button>
+        <NFTable options={nfOptions} />
       </div>
     </div>
   );

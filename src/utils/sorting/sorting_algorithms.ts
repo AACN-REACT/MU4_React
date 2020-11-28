@@ -115,7 +115,8 @@ export function sortNewestDate(a, b) {
 }
 
 export function Paginate(arr, numPerPage) {
-  let remainder = arr.length % numPerPage;
+
+  // let remainder = arr.length % numPerPage ;
   let newArray = [];
   for (let i = 0; i < arr.length; i += numPerPage) {
     let temp = arr.slice(i, i + numPerPage);
