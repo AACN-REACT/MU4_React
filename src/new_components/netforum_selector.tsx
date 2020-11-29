@@ -208,7 +208,7 @@ export function NetforumSelector({
         >
           Add
         </button>
-        <NFTable options={nfOptions} />
+        {validSearch?<NFTable options={nfOptions} postLink={postLink} itemKey={itemKey} nfCode={NfLinkInfo[1]} nfKey={NfLinkInfo[0]} setNFlinkInfo={setNFlinkInfo} nfType={nfTypeRef.current.value} />:null}
       </div>
     </div>
   );

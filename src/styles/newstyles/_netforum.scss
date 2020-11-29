@@ -20,6 +20,26 @@
     transform: translateY(-300px);
   }
 }
+@keyframes leftSlide {
+  0% {
+    opacity: 0;
+    transform: translateX(300px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+@keyframes leftSlideOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(300px);
+  }
+}
 
 .netforum-selector {
   left: 0px;
@@ -80,4 +100,48 @@
   }
 
 
+}
+
+.nf-table{
+
+
+  color:white;
+  animation-name: leftSlide;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+
+
+.nf-table-cell{
+
+  display:flex;
+
+
+}
+
+.nf-table-cell-select{
+
+
+  width:50px;
+  height:50px;
+  border:3px white;
+  background-color:colors.$deep-purple;
+  color:white;
+  font-size:.8rem;
+  margin-left:5px;
+  
+}
+
+[class*='nf-table-cell-'] {
+
+
+  width:20%;
+  border:2px solid white;
+  margin:5px;
+}
+.selected-nf-table-cell{
+  display:flex;
+  border:5px solid colors.$orange-carrot;
 }
