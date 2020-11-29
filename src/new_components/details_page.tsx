@@ -9,7 +9,7 @@ import { OpenLogs } from "./open-logs-button";
 import butt from "../images/switch.png";
 import { DeleteButton } from "./delete_button";
 import { FinalizeButton } from "./finalize_button";
-import { Identity, RefreshList } from "./contexts";
+import { Identity, RefreshList, ErrorHandler } from "./contexts";
 
 export function DetailsPage({
   mediaKey,
@@ -21,6 +21,7 @@ export function DetailsPage({
   const [mediaDetails, setMediaDetails] = React.useState(null);
   const [toggle, refetchData] = React.useState(false);
   const identity = React.useContext(Identity);
+  const setErrorMsg= React.useContext(ErrorHandler);
   //const [emptyPresentation, setEmptyPresentation] = React.useSate(false);
   const [isDetailsLoading, setDetailsLoading] = React.useState(isLoading);
   console.log("MEDIA ", mediaDetails, mediaKey);
@@ -42,7 +43,13 @@ export function DetailsPage({
           },
         }
       )
-        .then((res) => {
+      .then(res=>{
+        if(res.status>399 && res.status<600){
+          throw new Error(`MediaDetails endpoint sending an ${res.status}`)
+        }
+        return res
+      })
+      .then((res) => {
           if (isMounted) {
             localStorage.removeItem("mediakey");
             return res.json();
@@ -51,7 +58,10 @@ export function DetailsPage({
         .then((res) => {
           setMediaDetails(res["Result"]);
           setDetailsLoading(false);
-        });
+        })
+        .catch(err=>{
+            setErrorMsg(err.message)
+        })
 
       return () => {
         isMounted = false;
@@ -189,7 +199,7 @@ console.log("Netforum Data-- ", netForumDisplayData)
             setter={setMediaDetails}
             name="NetforumLink"
             displayName="Netforum Link"
-            data={netForumDisplayData}
+            data={mediaDetails?.NetforumItemLink}
             endpoint={"https://localhost:44340/api/v1/Medias/"}
             netForumBaseV1={"https://localhost:44340/api/v1/NetforumItems/"}
             netForumBaseV0={"https://localhost:44340/api/v0/NetforumItems/"}

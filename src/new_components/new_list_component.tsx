@@ -332,6 +332,7 @@ export function ListComponent({
           }}
         >
           <Thing
+            changePageNumber={changePageNumber}
             list={list[pageNumber]}
             pos={`${pageNumber * 100}%`}
             pageNumber={pageNumber}
