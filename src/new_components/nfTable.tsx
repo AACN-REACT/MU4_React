@@ -32,7 +32,7 @@ export function NFTable({
       <div onClick={(e) => setPageNumber((s) => s + 1)}>Next</div>
       <div onClick={(e) => setPageNumber((s) => s - 1)}>Previous</div>
       <div>
-        Selected <div>{selected.NetforumKey}</div>
+        Selected <div>{selected!==""?selected.Name:"Nothing selected"}</div>
       </div>
       <div className="nf-table-heading"></div>
       {pages[pageNumber]?.map((el) => {

@@ -103,13 +103,13 @@ export function NetforumEditableField({
       </div>
       {!isEditable ? (
         <div className="detail-value">
-          {Array.isArray(data) ? data.join(",") : data}
+          {data.NetforumType + " " + data.NetforumCode}
         </div>
       ) : (
         <div className="netforum-input-container">
           <NetforumSelector
-          toggleEditable={toggleEditable}
-          itemKey={itemKey}
+            toggleEditable={toggleEditable}
+            itemKey={itemKey}
             typeEndpoint={netForumBaseV1}
             selectEndpoint={netForumBaseV0}
             token={token}

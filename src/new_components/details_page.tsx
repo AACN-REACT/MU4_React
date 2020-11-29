@@ -59,7 +59,8 @@ export function DetailsPage({
     },
     [mediaKey, identity, toggle]
   );
-
+const netForumDisplayData = mediaDetails?.NetforumLink?mediaDetails.NetforumLink:""
+console.log("Netforum Data-- ", netForumDisplayData)
   return (
     <div className="details-page">
       <div className="details-bar">
@@ -171,7 +172,7 @@ export function DetailsPage({
             setter={setMediaDetails}
             name="NetforumLink"
             displayName="Netforum Link"
-            data={mediaDetails?.NetforumItemLink?.NetforumKey}
+            data={mediaDetails?.NetforumItemLink}
             endpoint={"https://localhost:44340/api/v1/Medias/"}
             netForumBaseV1={"https://localhost:44340/api/v1/NetforumItems/"}
             netForumBaseV0={"https://localhost:44340/api/v0/NetforumItems/"}
@@ -188,7 +189,7 @@ export function DetailsPage({
             setter={setMediaDetails}
             name="NetforumLink"
             displayName="Netforum Link"
-            data={mediaDetails?.NetforumItemLink?.NetforumKey}
+            data={netForumDisplayData}
             endpoint={"https://localhost:44340/api/v1/Medias/"}
             netForumBaseV1={"https://localhost:44340/api/v1/NetforumItems/"}
             netForumBaseV0={"https://localhost:44340/api/v0/NetforumItems/"}

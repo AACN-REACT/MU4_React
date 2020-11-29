@@ -11,6 +11,9 @@ export function NonEditableField({
   itemKey,
   itemName,
 }) {
+if(displayName==="Netforum Link"){console.log("Netforum Data", data || "nothing")};
+
+
   return (
     <div className="field-container">
       <div className="detail-name">{displayName}</div>
