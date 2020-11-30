@@ -45,7 +45,9 @@
   left: 0px;
   top: 10px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
   padding-top: 50px;
   border-radius: 5px;
   box-shadow: 2px 2px 5px gray;
@@ -65,6 +67,50 @@
   & > div {
     z-index: 5000;
   }
+
+.nf-type-search{
+
+  display:flex;
+  width:60%;
+  justify-content: space-between;
+  color:white;
+  font-family: 'sourcesans-regular';
+  font-size: 1.3rem;
+  &>div{
+    text-shadow: 2px 2px 5px colors.$deep-purple;
+  }
+  
+  select{
+    //appearance:none;
+    font-family: 'sourcesans-light';
+    font-size: 1.3rem;
+    margin:5px;
+    border:none;
+    outline:none;
+    padding:15px 10px;
+    width:200px;
+    color:colors.$deep-purple;
+    border-bottom: 3px solid colors.$deep-purple;
+   option{
+     color:colors.$blue-dodger;
+     &:hover{background-color:colors.$orange-carrot};
+   }
+
+    
+  }
+  input{
+    font-family: 'sourcesans-light';
+    font-size: 1.3rem;
+    margin:5px;
+    border:none;
+    outline:none;
+    padding:15px 10px;
+    width:200px;
+    border-bottom: 3px solid colors.$deep-purple;
+  }
+ 
+}
+
 
   // select {
   //   // A reset of styles, including removing the default dropdown arrow
@@ -104,7 +150,8 @@
 
 .nf-table{
 
-
+  width:100%;
+  border:3px solid green;
   color:white;
   animation-name: leftSlide;
   animation-duration: 0.5s;
@@ -114,9 +161,11 @@
 
 
 
-.nf-table-cell{
+
+.nf-table-cell, .nf-table-heading{
 
   display:flex;
+  justify-content: space-between;
 
 
 }
@@ -134,12 +183,22 @@
   
 }
 
+[class*='nf-table-heading-'] {
+
+
+  width:20%;
+  background-color:colors.$deep-purple;
+  font-size: 1rem;
+  text-align: center;
+  color:white;
+  font-family: 'sourcesans-regular';
+
+}
 [class*='nf-table-cell-'] {
 
 
   width:20%;
-  border:2px solid white;
-  margin:5px;
+
 }
 .selected-nf-table-cell{
   display:flex;

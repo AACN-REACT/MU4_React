@@ -11,8 +11,9 @@ export function NonEditableField({
   itemKey,
   itemName,
 }) {
+ 
   if (name === "NetforumLink") {
-    data = Object.values(data?{...data.NetforumType, ...data.NetforumCode}:{});
+    data = Object.keys(data?{...data.NetforumType, ...data.NetforumCode}:{});
   }
 
   return (

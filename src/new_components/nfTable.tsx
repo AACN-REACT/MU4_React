@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Paginate } from "../utils/sorting/sorting_algorithms";
+import { PageControls } from "./page-controls";
 
 export function NFTable({
   options,
@@ -15,6 +16,24 @@ export function NFTable({
   const [fadeIn, setFadeIn] = React.useState(false);
   const [pages, setPages] = React.useState([[]]);
   const [pageNumber, setPageNumber] = React.useState(0);
+  const [activeFields, setActiveFields] = React.useState()
+
+  function getActiveFields(){
+    let entries=[];
+    if(options?.length>0){ entries = Object.entries(options[0]).filter(el=>el[1]!=="").map(el=>el[0])}
+    console.log("options entries", entries)
+    return entries
+  }
+
+
+
+React.useEffect(
+  function(){
+    setActiveFields(getActiveFields())
+  },[options]
+)
+
+
 
   React.useEffect(
     function () {
@@ -29,30 +48,29 @@ export function NFTable({
 
   return fadeIn ? (
     <div className="nf-table">
-      <div onClick={(e) => setPageNumber((s) => s + 1)}>Next</div>
-      <div onClick={(e) => setPageNumber((s) => s - 1)}>Previous</div>
       <div>
-        Selected <div>{selected!==""?selected.Name:"Nothing selected"}</div>
+        Selected{" "}
+        <div>{selected !== "" ? selected.Name : "Nothing selected"}</div>
       </div>
-      <div className="nf-table-heading"></div>
+      <PageControls
+        changePageNumber={setPageNumber}
+        list={pages}
+        pageNumber={pageNumber}
+      />
+      <div className="nf-table-heading">
+        {activeFields.map(el=><div className={`nf-table-heading-${el}`}>{el}</div>)   }
+      </div>
+
       {pages[pageNumber]?.map((el) => {
         return (
           <div
+          onClick={(e) => setSelected(el)}
             className={
               selected.NetforumKey === el.NetforumKey
                 ? "selected-nf-table-cell"
                 : "nf-table-cell"
             }
-          >
-            <div className="nf-table-cell-name">{el.Name}</div>
-            <div className="nf-table-cell-code">{el.NetforumCode}</div>
-            <div className="nf-table-cell-key">{el.NetforumKey}</div>
-            <div
-              className="nf-table-cell-select"
-              onClick={(e) => setSelected(el)}
-            >
-              select
-            </div>
+          >{activeFields.map(item=><div>{el[item]}</div>)}
           </div>
         );
       })}

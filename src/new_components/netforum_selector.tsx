@@ -133,7 +133,7 @@ export function NetforumSelector({
     function () {
       setSelectedType(nfTypes[0]);
       console.log("mmmm link", slideAnimationRef.current.style.aninationName);
-      setNFlinkInfo(nfItemRef.current.value);
+      //setNFlinkInfo(nfItemRef.current.value);
     },
     [nfTypes]
   );
@@ -153,63 +153,48 @@ export function NetforumSelector({
       >
         close..
       </div>
-      <div>
-        <div>Type</div>
-        <select
-          ref={nfTypeRef}
-          onChange={(e) => {
-            e.stopPropagation();
-            //setSelectedType(e.target.value);
-            onchange(e.target.value, nfSearchTextRef.current.value);
-          }}
-        >
-          {nfTypes.map((el) => (
-            <option value={el}>{el}</option>
-          ))}
-        </select>
+      <div className="nf-type-search">
+        <div>
+          <div>Type</div>
+          <select
+            ref={nfTypeRef}
+            onChange={(e) => {
+              e.stopPropagation();
+              //setSelectedType(e.target.value);
+              onchange(e.target.value, nfSearchTextRef.current.value);
+            }}
+          >
+            {nfTypes.map((el) => (
+              <option value={el}>{el}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <div>Search</div>
+          <input
+            ref={nfSearchTextRef}
+            autoFocus="true"
+            className={validSearch ? "valid-input" : "invalid-input"}
+            placeholder="min 3 characters"
+            type="text"
+            onChange={(e) => {
+              e.stopPropagation();
+              onchange(nfTypeRef.current.value, e.target.value);
+            }}
+          />
+        </div>
       </div>
-      <div>
-        <div>Keyword</div>
-        <input
-          ref={nfSearchTextRef}
-          autofocus="true"
-          className={validSearch ? "valid-input" : "invalid-input"}
-          type="text"
-          onChange={(e) => {
-            e.stopPropagation();
-            onchange(nfTypeRef.current.value, e.target.value);
-          }}
+      {validSearch ? (
+        <NFTable
+          options={nfOptions}
+          postLink={postLink}
+          itemKey={itemKey}
+          nfCode={NfLinkInfo[1]}
+          nfKey={NfLinkInfo[0]}
+          setNFlinkInfo={setNFlinkInfo}
+          nfType={nfTypeRef.current.value}
         />
-        <div>Select</div>
-        <select
-          ref={nfItemRef}
-          onChange={(e) => {
-            e.stopPropagation();
-            let splitInfo = e.target.value.split(",");
-            setNFlinkInfo(splitInfo);
-          }}
-        >
-          {nfOptions.map((el) => (
-            <option value={[el.NetforumKey, el.NetforumCode]}>
-              {el.NetforumCode}
-            </option>
-          ))}
-        </select>
-        <button
-          disabled={!validSearch}
-          onClick={(e) => {
-            postLink({
-              key: itemKey,
-              nfKey: NfLinkInfo[0],
-              nfCode: NfLinkInfo[1],
-              nfType: nfTypeRef.current.value,
-            });
-          }}
-        >
-          Add
-        </button>
-        {validSearch?<NFTable options={nfOptions} postLink={postLink} itemKey={itemKey} nfCode={NfLinkInfo[1]} nfKey={NfLinkInfo[0]} setNFlinkInfo={setNFlinkInfo} nfType={nfTypeRef.current.value} />:null}
-      </div>
+      ) : null}
     </div>
   );
 }
