@@ -59,9 +59,9 @@ export function DetailsPage({
           setMediaDetails(res["Result"]);
           setDetailsLoading(false);
         })
-        .catch(err=>{
-            setErrorMsg(err.message)
-        })
+        // .catch(err=>{
+        //     setErrorMsg(err.message)
+        // })
 
       return () => {
         isMounted = false;

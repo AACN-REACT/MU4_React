@@ -56,6 +56,12 @@ export function ListComponent({
   const panelStateNumber = panelState[`${heading.toLowerCase()}_container`];
   const [enterNumber, toggleEnterNumber] = React.useState(false);
 
+  const [sortPriority, setSortPriority] = React.useState([]);
+
+  const [toggleSortPriority, changeSortPriorityToggle] = React.useState(false);
+
+  let currentSort = "";
+
   const numberInput = React.useRef();
   React.useEffect(() => {
     let internalList = [];
@@ -67,10 +73,19 @@ export function ListComponent({
     changeList(Paginate(internalList, 10));
   }, [videolist, transforms]);
 
+  // React.useEffect(
+  //   function(){
+  //     let mysort = currentSort
+  //       setSortPriority(s=>{return [mysort,...s]})
+  //   },[toggleSortPriority]
+  // )
+
   return (
     <div className={`list-${panelStateNumber}`}>
       <div className="list-heading">
-        <div>{heading}...</div>
+        <div>
+          {heading}...{sortPriority}
+        </div>
         <div
           onClick={(e) => {
             dispatchPanelState({
@@ -85,81 +100,100 @@ export function ListComponent({
           <img src={butt} />
         </div>
       </div>
-      <div className="list-controls"><div className="search-bar">
-      <label>Search</label>
-      <input
-      onChange={(e) => {
-      console.log("WORKER: EVENT INTIATED");
-      SORTING_WORKER.postMessage({
-      word: searchValue.current.value,
-      list: videolist,
-      field: "Title",
-      });
-      }}
-      type="text"
-      ref={searchValue}
-      className="search"
-      />
+      <div className="list-controls">
+        <div className="search-bar">
+          <label>Search</label>
+          <input
+            onChange={(e) => {
+              console.log("WORKER: EVENT INTIATED");
+              SORTING_WORKER.postMessage({
+                word: searchValue.current.value,
+                list: videolist,
+                field: "Title",
+              });
+            }}
+            type="text"
+            ref={searchValue}
+            className="search"
+          />
+        </div>
+        <div className="page-controls">
+          <div
+            onClick={(e) =>
+              changePageNumber((s) => {
+                if (s > 0) {
+                  return s - 1;
+                }
+                return s;
+              })
+            }
+          >
+            {String.fromCharCode(9664)}
+          </div>
+          <div>
+            Page{" "}
+            <span
+              onDoubleClick={(e) => {
+                toggleEnterNumber((t) => !t);
+                if (enterNumber) {
+                  alert(numberInput.current);
+                  numberInput.current.focus();
+                }
+              }}
+            >
+              {enterNumber ? (
+                <input
+                  ref={numberInput}
+                  type="number"
+                  onChange={(e) => {
+                    changePageNumber(Number(e.target.value) - 1);
+                  }}
+                  max={`${list.length + 1}`}
+                  min={1}
+                ></input>
+              ) : (
+                parseInt(pageNumber) + 1
+              )}
+            </span>{" "}
+            of {list.length}{" "}
+          </div>
+          <div
+            onClick={(e) =>
+              changePageNumber((s) => {
+                if (s < list.length - 1) {
+                  return s + 1;
+                }
+                return s;
+              })
+            }
+          >
+            {String.fromCharCode(9658)}
+          </div>
+        </div>
       </div>
-      <div className="page-controls">
-      <div
-      onClick={(e) =>
-      changePageNumber((s) => {
-      if (s > 0) {
-      return s - 1;
-      }
-      return s;
-      })
-      }
-      >
-      {String.fromCharCode(9664)}
-      </div>
-      <div>
-      Page{" "}
-      <span
-      onDoubleClick={(e) => {
-      toggleEnterNumber((t) => !t);
-      if (enterNumber) {
-      alert(numberInput.current);
-      numberInput.current.focus();
-      }
-      }}
-      >
-      {enterNumber ? (
-      <input
-      ref={numberInput}
-      type="number"
-      onChange={(e) => {
-      changePageNumber(Number(e.target.value) - 1);
-      }}
-      max={`${list.length + 1}`}
-      min={1}
-      ></input>
-      ) : (
-      parseInt(pageNumber) + 1
-      )}
-      </span>{" "}
-      of {list.length}{" "}
-      </div>
-      <div
-      onClick={(e) =>
-      changePageNumber((s) => {
-      if (s < list.length - 1) {
-      return s + 1;
-      }
-      return s;
-      })
-      }
-      >
-      {String.fromCharCode(9658)}
-      </div>
-      </div></div>
-      
+
       <div className="inner-container-heading">
         <div
           key="title"
+          style={{
+            color:
+              sortPriority.indexOf("Title") !== -1
+                ? `rgb(${254 - sortPriority.indexOf("Title") * 50}, ${
+                    0 + sortPriority.indexOf("Title") * 50
+                  }, 0)`
+                : `#005496`,
+          }}
           className="column-title-heading"
           onClick={function (e) {
+            if (e.shiftKey) {
+              setSortPriority((s) => {
+                return [];
+              });
+            } else {
+              setSortPriority((s) => {
+                return ["Title", ...s];
+              });
+            }
             setTransforms((t) => {
               if (t.indexOf(sortTitle) > -1) {
                 return [
@@ -171,9 +205,17 @@ export function ListComponent({
             });
           }}
         >
-          Title
+          Title{" "}
         </div>
         <div
+          style={{
+            color:
+              sortPriority.indexOf("Original Filename") !== -1
+                ? `rgb(${
+                    254 - sortPriority.indexOf("Original Filename") * 50
+                  }, ${0 + sortPriority.indexOf("Original Filename") * 50}, 0)`
+                : `#005496`,
+          }}
           key="original"
           className={
             panelStateNumber === 2
@@ -181,6 +223,16 @@ export function ListComponent({
               : "column-close"
           }
           onClick={function (e) {
+            currentSort = "Original Filename";
+            if (e.shiftKey) {
+              setSortPriority((s) => {
+                return [];
+              });
+            } else {
+              setSortPriority((s) => {
+                return ["Original Filename", ...s];
+              });
+            }
             setTransforms((t) => {
               if (t.indexOf(sortOriginal) > -1) {
                 return [
@@ -203,6 +255,15 @@ export function ListComponent({
             panelStateNumber === 2 ? "" : "column-close"
           }`}
           onClick={function (e) {
+            if (e.shiftKey) {
+              setSortPriority((s) => {
+                return [];
+              });
+            } else {
+              setSortPriority((s) => {
+                return ["Added By..", ...s];
+              });
+            }
             setTransforms((t) => {
               if (t.indexOf(sortAddedBy) > -1) {
                 return [
@@ -223,6 +284,15 @@ export function ListComponent({
           key="size"
           className="column-size-heading"
           onClick={function (e) {
+            if (e.shiftKey) {
+              setSortPriority((s) => {
+                return [];
+              });
+            } else {
+              setSortPriority((s) => {
+                return ["Size", ...s];
+              });
+            }
             setTransforms((t) => {
               if (t.indexOf(sortFileSize) > -1) {
                 return [
@@ -237,15 +307,54 @@ export function ListComponent({
             });
           }}
         >
-          <p>Size</p>
-          <span >MB</span>
+          <p
+            style={{
+              color:
+                sortPriority.indexOf("Size") !== -1
+                  ? `rgb(${254 - sortPriority.indexOf("Size") * 50}, ${
+                      0 + sortPriority.indexOf("Size") * 50
+                    }, 0)`
+                  : `#005496`,
+            }}
+          >
+            Size
+          </p>
+          <span
+            style={{
+              color:
+                sortPriority.indexOf("Size") !== -1
+                  ? `rgb(${254 - sortPriority.indexOf("Size") * 50}, ${
+                      0 + sortPriority.indexOf("Size") * 50
+                    }, 0)`
+                  : `#005496`,
+            }}
+          >
+            MB
+          </span>
         </div>
         <div
+          style={{
+            color:
+              sortPriority.indexOf("Has Keywords?") !== -1
+                ? `rgb(${254 - sortPriority.indexOf("Has Keywords?") * 50}, ${
+                    0 + sortPriority.indexOf("Has Keywords?") * 50
+                  }, 0)`
+                : `#005496`,
+          }}
           key="keywords"
           className={`column-keywords-heading ${
             panelStateNumber === 2 ? "" : "column-close"
           }`}
           onClick={function (e) {
+            if (e.shiftKey) {
+              setSortPriority((s) => {
+                return [];
+              });
+            } else {
+              setSortPriority((s) => {
+                return ["Has Keywords?", ...s];
+              });
+            }
             setTransforms((t) => {
               if (t.indexOf(sortKeywords) > -1) {
                 return [
@@ -268,6 +377,15 @@ export function ListComponent({
             panelStateNumber === 2 ? "" : "column-close"
           }`}
           onClick={function (e) {
+            if (e.shiftKey) {
+              setSortPriority((s) => {
+                return [];
+              });
+            } else {
+              setSortPriority((s) => {
+                return ["Linked to Netforum", ...s];
+              });
+            }
             setTransforms((t) => {
               if (t.indexOf(sortNetforumLink) > -1) {
                 return [

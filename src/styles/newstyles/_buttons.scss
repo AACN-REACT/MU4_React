@@ -44,12 +44,14 @@
   box-sizing: border-box;
   width: 120px;
   height: 50px;
+  border: 3px solid white;
+  border-radius: 25px;
   transition: 0.5s all;
   font-size: 1rem;
-  font-family: fonts.$mono;
+  font-family: "sourcesans-regular";
   text-align: center;
   padding-top: 10px;
-  border-radius: 5px;
+  cursor: pointer;
   color: white;
   box-shadow: 0px 0px 5px gray;
 }
@@ -59,17 +61,17 @@
   background-color: gray;
 }
 .active-delete-button {
+  background-color: colors.$blue-aacn;
   pointer-events: auto;
-  background-color: colors.$mid-green;
   &:hover {
-    background-color: colors.$dark-red;
+    background-color: colors.$purple-medium;
   }
 }
 
 .button-container {
   box-sizing: border-box;
   width: 50%;
-  margin:50px auto;
+  margin: 50px auto;
   padding: 5px;
   color: green;
   // width: 400px;

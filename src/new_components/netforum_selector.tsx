@@ -2,7 +2,7 @@ import React from "react";
 import { SingleEntryPlugin } from "webpack";
 import { SetErrorMsg } from "../mediauploader/components/globalstateContext";
 import { ErrorHandler, Endpoint, Identity } from "./contexts";
-import {closeAfterAni} from '../utils/close_after_ani'
+import { closeAfterAni } from "../utils/close_after_ani";
 
 import { NFTable } from "./nfTable";
 
@@ -67,19 +67,26 @@ export function NetforumSelector({
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       }
-    ).then(function (res) {
-      if (res.status === 400) {
-        handlerError("netforum link bad");
-      }
-      if (res.status === 200) {
-        refetchData((d) => !d);
-        toggleEditable(false);
-      }
-    });
+    )
+      .then(function (res) {
+        if (res.status === 400) {
+          handlerError("netforum link bad");
+          return res.json();
+        }
+        if (res.status === 200) {
+          refetchData((d) => !d);
+          toggleEditable(false);
+          return res.json();
+        }
+      })
+      .then((res) => {
+        if (res["Errors"].length > 0) {
+          handlerError(res["Errors"][0]["Value"]);
+        }
+      });
   }
 
   const onchange = function (type, search) {
-
     if (search.length > 2 && type.length > 0) {
       setValidSearch(true);
       fetch(
@@ -144,7 +151,6 @@ export function NetforumSelector({
             slideAnimationRef.current,
             close,
             toggleAniCleanUp,
-
 
             setToggleAniCleanUp
           );
