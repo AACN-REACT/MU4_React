@@ -139,6 +139,7 @@ console.log("Netforum Data-- ", netForumDisplayData)
         />
         {mediaDetails?.CanEdit ? (
           <KeywordEditableField
+            close={close}
             isDetailsLoading={isDetailsLoading}
             method="POST"
             setter={setMediaDetails}

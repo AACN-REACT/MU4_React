@@ -1,8 +1,9 @@
 import React from "react";
-import tick from "../images/check.png";
+import {KeywordSelector} from './keyword_selector'
 
 export function KeywordEditableField({
   isDetailsLoading,
+  close,
   method = "GET",
   setter,
   endpoint,
@@ -47,9 +48,6 @@ export function KeywordEditableField({
       })
       .then((res) => addDisplayKeywords((d) => [d, userEdit]))
       .then((res) => {
-        toggleEditable((d) => !d);
-      })
-      .then((res) => {
         refetchData((d) => !d);
       }) //!!!! no longer spreading the d value, presume is it string not an array
       .catch((err) => console.log(err)); // ad
@@ -80,9 +78,6 @@ export function KeywordEditableField({
         addDisplayKeywords((d) => d?.splice(d.indexOf(userEdit), 1))
       )
       .then((res) => {
-        toggleEditable((d) => !d);
-      })
-      .then((res) => {
         refetchData((d) => !d);
       })
       .catch((err) => console.log(err));
@@ -104,39 +99,41 @@ export function KeywordEditableField({
           {Array.isArray(data) ? data.join(",") : data}
         </div>
       ) : (
-        <div className="netforum-selector">
-          <div className="keyword-input-container">
-            {Array.isArray(data)
-              ? data.map((el, indx, data) => {
-                  return (
-                    <div className="keyword-popup">
-                      <div className="keyword-name">{el}</div>
+        <KeywordSelector  data={data} deleteData={deleteData} sendData={sendData} close={toggleEditable} />)
+      //   <div className="netforum-selector">
+      //     <div className="keyword-input-container">
+      //       {Array.isArray(data)
+      //         ? data.map((el, indx, data) => {
+      //             return (
+      //               <div className="keyword-popup">
+      //                 <div className="keyword-name">{el}</div>
 
-                      <div
-                        className="keyword-icon"
-                        onClick={(e) => {
-                          deleteData(el);
-                        }}
-                      >
-                        {String.fromCharCode(10008)}
-                      </div>
-                    </div>
-                  );
-                })
-              : () => null}
-            <input ref={inputValue} type="text" placeholder="enter keyword" />
-            <div
-              onClick={(e) => {
-                sendData(inputValue.current.value);
-              }}
-              className="check"
-            >
-              <img src={tick} />
-            </div>
-          </div>
-        </div>
-        //end
-      )}
+      //                 <div
+      //                   className="keyword-icon"
+      //                   onClick={(e) => {
+      //                     deleteData(el);
+      //                   }}
+      //                 >
+      //                   {String.fromCharCode(10008)}
+      //                 </div>
+      //               </div>
+      //             );
+      //           })
+      //         : () => null}
+      //       <input ref={inputValue} type="text" placeholder="enter keyword" />
+      //       <div
+      //         onClick={(e) => {
+      //           sendData(inputValue.current.value);
+      //         }}
+      //         className="check"
+      //       >
+      //         <img src={tick} />
+      //       </div>
+      //     </div>
+      //   </div>
+      //   //end
+      // )
+    }
     </div>
   );
 }

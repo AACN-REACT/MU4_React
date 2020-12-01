@@ -2,31 +2,32 @@ import React from "react";
 import { SingleEntryPlugin } from "webpack";
 import { SetErrorMsg } from "../mediauploader/components/globalstateContext";
 import { ErrorHandler, Endpoint, Identity } from "./contexts";
+import {closeAfterAni} from '../utils/close_after_ani'
 
 import { NFTable } from "./nfTable";
 
-function closeAfterAni(
-  element,
-  callBack,
-  toggleAniCleanUp,
-  setToggleAniCleanUp
-) {
-  if (toggleAniCleanUp) {
-    element.style.animationName = "slideIn";
-    element.removeEventListener("animationend", function (e) {
-      callBack();
-      setToggleAniCleanUp((a) => !a);
-    });
-  } else {
-    element.style.animationName = "slideOut";
-    element.addEventListener("animationend", function (e) {
-      callBack();
-      setToggleAniCleanUp((a) => !a);
-    });
+// function closeAfterAni(
+//   element,
+//   callBack,
+//   toggleAniCleanUp,
+//   setToggleAniCleanUp
+// ) {
+//   if (toggleAniCleanUp) {
+//     element.style.animationName = "slideIn";
+//     element.removeEventListener("animationend", function (e) {
+//       callBack();
+//       setToggleAniCleanUp((a) => !a);
+//     });
+//   } else {
+//     element.style.animationName = "slideOut";
+//     element.addEventListener("animationend", function (e) {
+//       callBack();
+//       setToggleAniCleanUp((a) => !a);
+//     });
 
-    setToggleAniCleanUp((a) => !a);
-  }
-}
+//     setToggleAniCleanUp((a) => !a);
+//   }
+// }
 
 export function NetforumSelector({
   itemKey,
@@ -57,7 +58,6 @@ export function NetforumSelector({
   const identity = React.useContext(Identity);
   const handlerError = React.useContext(ErrorHandler);
   function postLink({ key, nfKey, nfType, nfCode }) {
-    alert("WORKS");
     fetch(
       `https://localhost:44340/api/v1/Medias/${key}/netforumItemLink?netForumKey=${nfKey}&netForumType=${nfType}&netForumCode=${nfCode}&username=${
         identity.profile.given_name || "guest"
@@ -79,7 +79,6 @@ export function NetforumSelector({
   }
 
   const onchange = function (type, search) {
-    console.log("HANDLER ", type, selectedType, nfTypes);
 
     if (search.length > 2 && type.length > 0) {
       setValidSearch(true);
@@ -101,7 +100,6 @@ export function NetforumSelector({
           ]);
         })
         .catch((err) => {
-          console.log("RETURN ITEMS", err);
           errorHandler("error fetching types");
         });
     } else {
@@ -132,7 +130,6 @@ export function NetforumSelector({
   React.useEffect(
     function () {
       setSelectedType(nfTypes[0]);
-      console.log("mmmm link", slideAnimationRef.current.style.aninationName);
       //setNFlinkInfo(nfItemRef.current.value);
     },
     [nfTypes]
@@ -147,6 +144,8 @@ export function NetforumSelector({
             slideAnimationRef.current,
             close,
             toggleAniCleanUp,
+
+
             setToggleAniCleanUp
           );
         }}
