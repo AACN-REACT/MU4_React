@@ -1,16 +1,20 @@
 @use 'colors';
 @use 'fonts';
-.upload-heading {
-    transition:all .3s;
+.upload-heading  {
   display: flex;
   justify-content: space-between;
-  height: 30px;
-  padding: 5px;
-  background-color: colors.$mid-green;
-  color: white;
-  font-family: fonts.$vt;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid colors.$blue-aacn;
+  background-color:ghostwhite;
+  color: colors.$blue-aacn;
+  //font-family: fonts.$vt;
+  font-family: "sourcesans-light";
   font-size: 1.3rem;
-  text-shadow: 1px 1px 5px white;
+
+  span{
+    font-family: "sourcesans-regular"
+  }
   img {
     width: 20px;
     object-fit: contain;
