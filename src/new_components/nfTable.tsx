@@ -48,10 +48,7 @@ React.useEffect(
 
   return fadeIn ? (
     <div className="nf-table">
-      <div>
-        Selected{" "}
-        <div>{selected !== "" ? selected.Name : "Nothing selected"}</div>
-      </div>
+      
       <PageControls
         changePageNumber={setPageNumber}
         list={pages}
@@ -61,20 +58,28 @@ React.useEffect(
         {activeFields.map(el=><div className={`nf-table-heading-${el}`}>{el}</div>)   }
       </div>
 
+
+    <div className="nf-cell-container">
       {pages[pageNumber]?.map((el) => {
         return (
           <div
-          onClick={(e) => setSelected(el)}
+          onClick={(e) =>{selected.NetforumKey !== el.NetforumKey ?setSelected(el):setSelected("")}}
             className={
               selected.NetforumKey === el.NetforumKey
                 ? "selected-nf-table-cell"
                 : "nf-table-cell"
             }
-          >{activeFields.map(item=><div>{el[item]}</div>)}
+          >{activeFields.map((item,ind,arr)=><div style={{fontSize:`${70/arr.length}px`}}>{el[item]}</div>)}
           </div>
         );
       })}
-      <button
+      </div>
+      <div className="display-nf-selection">
+        <div>Selected: {" "}</div>
+        <div className="selected-nf-info">{selected !== "" ? `${selected.NetforumType } , ${selected.NetforumCode} , ${selected.Name} ` : "Nothing selected"}</div>
+      </div>
+      <div
+      className="create-nf-link"
         onClick={(e) =>
           postLink({
             key: itemKey,
@@ -85,7 +90,7 @@ React.useEffect(
         }
       >
         Create Link
-      </button>
+      </div>
     </div>
   ) : null;
 }
