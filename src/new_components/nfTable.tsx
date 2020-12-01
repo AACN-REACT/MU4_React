@@ -69,7 +69,7 @@ React.useEffect(
                 ? "selected-nf-table-cell"
                 : "nf-table-cell"
             }
-          >{activeFields.map((item,ind,arr)=><div style={{fontSize:`${70/arr.length}px`}}>{el[item]}</div>)}
+          >{activeFields.map((item,ind,arr)=><div style={{fontSize:`${(70/arr.length)+.5}px`}}>{el[item]}</div>)}
           </div>
         );
       })}

@@ -11,7 +11,7 @@ export function LoaderOne({
     animationDuration: "1s",
     width: diameter,
     height: diameter,
-    borderRadius: diameter,
+    // borderRadius: diameter,
   };
   for (let i = 0; i < numberOfCells; ++i) {
     output.push(

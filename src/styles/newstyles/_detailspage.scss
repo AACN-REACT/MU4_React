@@ -89,7 +89,16 @@
   font-size: 1rem;
   text-shadow: 2px 2px 5px white;
   color: blueviolet;
-  transition: 0.4s all;
+  text-align:center;
+  padding-top: 2px;
+  margin-bottom: -10px;
+  transform-origin: center;
+  background-color: white;
+  width:30px;
+  height:30px;
+  border-radius:20px;
+  box-shadow: 1px 1px 5px rgb(117, 158, 172);
+  transition: 0.4s all ease-in-out;
   cursor: pointer;
   &:hover {
     transform: rotate(90deg);
@@ -100,6 +109,14 @@
   transition: 0.4s all;
   text-shadow: 2px 2px 5px pink;
   color: red;
+  text-align:center;
+  padding-top: 2px;
+  margin-bottom: -10px;
+  transform-origin: center;
+  background-color: white;
+  box-shadow: 1px 1px 5px rgb(117, 158, 172);
+  width:30px;
+  height:30px;
   transform: rotate(90deg);
 }
 
