@@ -12,6 +12,7 @@
 }
 
 .dropzone-idle {
+  
   &:before {
     content: "Drag and drop file here ";
   }
@@ -28,6 +29,7 @@
   box-sizing: border-box;
   padding: 60px;
   transition: 0.3s all;
+  div{opacity:1}
   .select-file-button {
     &:hover {
       transition: 0.2s all;

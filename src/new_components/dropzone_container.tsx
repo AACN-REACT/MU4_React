@@ -5,7 +5,7 @@ import React from "react";
 import { DropZone } from "./dropzone_new";
 import { SelectFile } from "./selectfile_new";
 import { UploadTable } from "../components/ListTables/listtable";
-
+import backgroundLogo from '../images/SVG/backgroundlogo.svg'
 // reducers
 import { uploadListReducer } from "../utils/reducers/upload-list-reducer";
 
@@ -24,7 +24,8 @@ export function DropzoneContainer({
 
   console.log("upload state", uploadSTATE);
   return (
-    <div className={`dropzone-container-${panelState.dropzone_container}`}>
+    <div  style={{backgroundImage:`url(${backgroundLogo})`}} className={`dropzone-container-${panelState.dropzone_container}`}>
+
       <DropZone
         DISPATCHupload={DISPATCHUpload}
         sizeLimit={sizeLimit}

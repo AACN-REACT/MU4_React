@@ -1,22 +1,27 @@
 @use 'colors';
 @use 'fonts';
-.upload-heading  {
+.upload-heading {
   display: flex;
   justify-content: space-between;
   height: 40px;
   padding: 10px;
   border: 1px solid colors.$blue-aacn;
-  background-color:ghostwhite;
+  background-color: ghostwhite;
   color: colors.$blue-aacn;
   //font-family: fonts.$vt;
   font-family: "sourcesans-light";
   font-size: 1.3rem;
 
-  span{
-    font-family: "sourcesans-regular"
+  span {
+    font-family: "sourcesans-regular";
   }
   img {
     width: 20px;
     object-fit: contain;
   }
+}
+.loading-bar {
+  font-family: "sourcesans-regular";
+  font-size: 2rem;
+  color: colors.$blue-aacn;
 }

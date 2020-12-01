@@ -1,6 +1,14 @@
 @use 'colors';
 @use 'fonts';
 
+@keyframes dropzoneAni {
+  0% {
+    filter: hue-rotate(0);
+  }
+  100% {
+    filter: hue-rotate(200);
+  }
+}
 .search-bar {
   padding: 5px;
   font-family: "sourcesans-regular";
@@ -159,9 +167,20 @@
 
 [class*="dropzone-container"] {
   transition: 0.5s all;
+  background-size: 500px;
+  background-position: center 200px;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  filter: opacity(0.1);
+  filter: drop-shadow(5px 5px 10px gray);
+
+  transition: 1s all;
+  &:hover {
+  }
 }
 .dropzone-container-0 {
-  flex-basis: 5%;
+  flex-basis: 0%;
 }
 .dropzone-container-1 {
   flex-basis: 40%;
