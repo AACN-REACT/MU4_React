@@ -5,7 +5,7 @@ import { EditableField } from "./edit_field";
 import { KeywordEditableField } from "./edit_field_Keywords";
 import { NetforumEditableField } from "./edit_field_netforum";
 import { NonEditableField } from "./non_edit_field";
-import { OpenLogs } from "./open-logs-button";
+import { OpenLogs } from "./open-logs";
 import butt from "../images/switch.png";
 import { DeleteButton } from "./delete_button";
 import { FinalizeButton } from "./finalize_button";
@@ -27,7 +27,7 @@ export function DetailsPage({
   console.log("MEDIA ", mediaDetails, mediaKey);
   React.useEffect(
     function () {
-      let localtoken = false;
+         let localtoken = false;
       if (localStorage.getItem("mediakey")) {
         localtoken = localStorage.getItem("mytoken") || false;
 
@@ -108,7 +108,7 @@ console.log("Netforum Data-- ", netForumDisplayData)
             displayName="Title"
             data={mediaDetails?.Title}
             endpoint={"https://localhost:44340/api/v1/Medias/"}
-            user="amin"
+            user={identity?.profile?.given_name}
             itemKey={mediaDetails?.Key}
             itemName="title"
             token={identity.access_token}
@@ -147,7 +147,7 @@ console.log("Netforum Data-- ", netForumDisplayData)
             displayName="Keywords"
             data={mediaDetails?.Keywords}
             endpoint={"https://localhost:44340/api/v1/Medias/"}
-            user="amin"
+            user={identity?.profile?.given_name}
             itemKey={mediaDetails?.Key}
             itemName="keyword"
             token={identity.access_token}
@@ -187,7 +187,7 @@ console.log("Netforum Data-- ", netForumDisplayData)
             endpoint={"https://localhost:44340/api/v1/Medias/"}
             netForumBaseV1={"https://localhost:44340/api/v1/NetforumItems/"}
             netForumBaseV0={"https://localhost:44340/api/v0/NetforumItems/"}
-            user="amin"
+            user={identity?.profile?.given_name}
             itemKey={mediaDetails?.Key}
             itemName="netforumItemLink"
             token={identity.access_token}
@@ -204,7 +204,7 @@ console.log("Netforum Data-- ", netForumDisplayData)
             endpoint={"https://localhost:44340/api/v1/Medias/"}
             netForumBaseV1={"https://localhost:44340/api/v1/NetforumItems/"}
             netForumBaseV0={"https://localhost:44340/api/v0/NetforumItems/"}
-            user="amin"
+            user={identity?.profile?.given_name}
             itemKey={mediaDetails?.Key}
             itemName="netforumItemLink"
             token={identity.access_token}
@@ -268,7 +268,7 @@ console.log("Netforum Data-- ", netForumDisplayData)
           displayName="Mediahost URL"
           data={mediaDetails?.MediaHostUrl}
           endpoint={"https://localhost:44340/api/v1/Medias/"}
-          user="amin"
+          user={identity?.profile?.given_name}
           itemKey={mediaDetails?.MediaHostUrl}
           itemName="originalfilename"
           token={identity.access_token}
@@ -280,12 +280,16 @@ console.log("Netforum Data-- ", netForumDisplayData)
           user={identity.given_name || "guest"}
           itemKey={mediaDetails?.Key}
           identity={identity}
-        />
+          setErrorMsg={setErrorMsg}
+          refetchData={refetchData}
+          />
         <FinalizeButton
           disabled={!mediaDetails?.CanEdit}
           user={identity.given_name || "guest"}
           itemKey={mediaDetails?.Key}
           identity={identity}
+          setErrorMsg={setErrorMsg}
+          refetchData={refetchData}
         />
       </div>
 

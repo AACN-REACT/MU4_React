@@ -39,6 +39,7 @@ export function UploadTable({
           }
         }
       }
+      //if(arr.length===0){dispatchPanelState({ type: "CLOSE UPLOAD" })}
       return () => null;
     },
     [activelist]

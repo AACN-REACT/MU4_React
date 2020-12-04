@@ -43,16 +43,16 @@
   height: 200px;
   border: 1px solid colors.$purple-royal;
   border-radius: 20px;
-  background-color: white;
+  background: linear-gradient(to left, rgba(colors.$purple-royal,.9 ), rgba(colors.$purple-medium,.9));
   box-shadow: 2px 2px 5px gray;
   position: absolute;
   top: -250px;
   left: calc(50vw - 150px);
-  font-family: "freight";
+  font-family: "sourcesans-regular";
+  text-shadow: 2px 2px 5px white;
   padding: 2%;
-  color: colors.$purple-royal;
+  color: white;
   font-size: 1.3rem;
-  color: black;
   transition: 1s all;
   &.error-open {
     top: 0px;

@@ -53,9 +53,9 @@ export function SelectFile({
               });
               dispatchPanelState({ type: "OPEN UPLOAD" });
             } else if (!isAcceptableType(file)) {
-              alert(`${file["name"]} is not an accepted video format`);
+              setError(`${file["name"]} is not an accepted video format`);
             } else {
-              alert(
+              setError(
                 `${file["name"]} is not within the size limit of ${sizeLimit} `
               );
             }

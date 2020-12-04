@@ -84,7 +84,7 @@ export function ListComponent({
     <div className={`list-${panelStateNumber}`}>
       <div className="list-heading">
         <div>
-          {heading}...{sortPriority}
+          {heading}...
         </div>
         <div
           onClick={(e) => {

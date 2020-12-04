@@ -30,7 +30,7 @@ import {
   Identity,
   Logout,
   Endpoint,
-  ErrorHandler
+  ErrorHandler,
 } from "./contexts";
 
 import { GlobalContext } from "./contexts";
@@ -123,6 +123,7 @@ this needs to changed into a custome hook: */
           })
           .then(function () {
             setLoading((l) => false);
+  
           })
           .catch((err) => {
             console.log("my error", err);
@@ -138,7 +139,6 @@ this needs to changed into a custome hook: */
   return (
     <div>
       <GlobalContext
-
         errorHandler={setErrorMsg}
         identity={identity}
         authentication={isAuthenticated}

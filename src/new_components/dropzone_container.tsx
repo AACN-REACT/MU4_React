@@ -36,7 +36,7 @@ export function DropzoneContainer({
         DISPATCHupload={DISPATCHUpload}
         sizeLimit={sizeLimit}
         dispatchPanelState={dispatchPanelState}
-      />
+           />
       {/* <UploadTable list={uploadSTATE} url={uploadURL} dispatch={DISPATCHUpload} user={user}/> */}
     </div>
   );

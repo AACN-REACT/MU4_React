@@ -100,19 +100,20 @@
   height: 500px;
 }
 [class*="details-container-"] {
-  transition: all 0.5s;
+  transition: max-height .5s;
   overflow: hidden;
   background: ghostwhite;
 }
 .details-container-0 {
-  height: 40px;
+  max-height: 40px;
 }
 .details-container-1 {
   flex-basis: 00px;
-  height: 30px;
+  max-height: 30px;
 }
 .details-container-2 {
-  height: 1200px;
+  height:auto;
+  max-height: 2000px;
 }
 [class*="upload-container-"] {
   background-image: linear-gradient(0deg, rgb(220, 205, 253), white),

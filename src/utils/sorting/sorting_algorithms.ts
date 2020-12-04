@@ -114,6 +114,13 @@ export function sortNewestDate(a, b) {
   return new Date(b.StartDateTime) - new Date(a.StartDateTime);
 }
 
+export function sortOldestLogDate(a, b) {
+  return new Date(a.DateTime) - new Date(b.DateTime);
+}
+export function sortNewestLogDate(a, b) {
+  return new Date(b.DateTime) - new Date(a.DateTime);
+}
+
 export function Paginate(arr, numPerPage) {
 
   // let remainder = arr.length % numPerPage ;

@@ -1,14 +1,20 @@
 import React from "react";
 
-export function ErrorToast(props) {
+export function ErrorToast({msg=void 0, close}) {
+
+
+
+
   return (
     <div
       onClick={(e) => {
-        props.close(null);
+        close(null);
       }}
-      className={`error ${props.msg ? "error-open" : ""}`}
+      className={`error ${msg ? "error-open" : ""}`}
+
+      style={msg?{top:`${window.scrollY}px`}:null}
     >
-      {props.msg}
+      {msg}
     </div>
   );
 }
