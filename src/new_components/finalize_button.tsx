@@ -1,7 +1,9 @@
 import React from "react";
 
+import {LoaderOne} from './loader_ani_1'
 import { CatchNetworkError } from "../utils/catchNetworkError";
 export function FinalizeButton({
+  setDetailsLoading,
   disabled = false,
   itemKey,
   user,
@@ -12,6 +14,8 @@ export function FinalizeButton({
   const [finalized, setFinalized] = React.useState(false);
 
   function FinalizeVideo(event) {
+
+    setDetailsLoading(true)
     fetch(
       `https://localhost:44340/api/v1/Medias/${itemKey}/stakeholderfinalization?username=${identity.profile.given_name}`,
       {
@@ -31,6 +35,7 @@ export function FinalizeButton({
           setErrorMsg(res.Errors[0]["Value"]);
         }
       })
+      .then(res=>{setDetailsLoading(d=>!d); return res})
       .catch((err) => {
         setErrorMsg(err);
       });
