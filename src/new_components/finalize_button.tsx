@@ -1,6 +1,14 @@
 import React from "react";
 
-export function FinalizeButton({disabled=false, itemKey, user, identity, setErrorMsg,refetchData }) {
+import { CatchNetworkError } from "../utils/catchNetworkError";
+export function FinalizeButton({
+  disabled = false,
+  itemKey,
+  user,
+  identity,
+  setErrorMsg,
+  refetchData,
+}) {
   const [finalized, setFinalized] = React.useState(false);
 
   function FinalizeVideo(event) {
@@ -13,20 +21,14 @@ export function FinalizeButton({disabled=false, itemKey, user, identity, setErro
         },
       }
     )
-.then((res) => {
-        if (res.status > 399 && res.status < 600) {
-          alert(res.error);
-          setErrorMsg(`Could not be deleted.\n Bad request: response status ${res.status} \n `);
-        }
-        return res.json();
-      })
+      .then((res) => CatchNetworkError.call(null, res, setErrorMsg))
       .then((res) => {
         if (res.Result === true) {
           setFinalized(true);
-          refetchData(d=>!d)
+          refetchData((d) => !d);
         }
-        if (res.Result === false){
-          setErrorMsg(res.Errors[0]['Value'])
+        if (res.Result === false) {
+          setErrorMsg(res.Errors[0]["Value"]);
         }
       })
       .catch((err) => {
@@ -37,7 +39,11 @@ export function FinalizeButton({disabled=false, itemKey, user, identity, setErro
   React.useEffect(() => () => setFinalized(false), [itemKey]);
   return (
     <div
-      className={finalized || disabled ? "disabled-delete-button" : "active-delete-button"}
+      className={
+        finalized || disabled
+          ? "disabled-delete-button"
+          : "active-delete-button"
+      }
       onClick={FinalizeVideo}
     >
       Finalize

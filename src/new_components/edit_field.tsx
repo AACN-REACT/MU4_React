@@ -1,5 +1,6 @@
 import React from "react";
 import tick from "../images/check.png";
+import {LoaderOne} from './loader_ani_1'
 
 export function EditableField({
   isDetailsLoading,
@@ -58,7 +59,9 @@ export function EditableField({
         </div>
       </div>
       {isDetailsLoading ? (
-        <h2>loading..</h2>
+        <div>
+          <LoaderOne diameter={10} numberOfCells={5} />
+          </div>
       ) : !isEditable ? (
         <div className="detail-value">
           {Array.isArray(data) ? data.join(",") : data}

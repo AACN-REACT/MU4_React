@@ -40,7 +40,7 @@
 .error {
   z-index: 1000;
   width: 300px;
-  height: 200px;
+  height: auto;
   border: 1px solid colors.$purple-royal;
   border-radius: 20px;
   background: linear-gradient(to left, rgba(colors.$purple-royal,.9 ), rgba(colors.$purple-medium,.9));

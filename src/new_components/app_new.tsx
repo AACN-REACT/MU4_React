@@ -17,6 +17,7 @@ import { UploadTable } from "../components/ListTables/listtable";
 import { videolist } from "../data/videolist";
 import { uploadListReducer } from "../utils/reducers/upload-list-reducer";
 import { Client } from "../network_functions/swaggerclient/swaggerclient";
+import {CatchNetworkError} from '../utils/catchNetworkError'
 import {
   sortNewestDate,
   sortOldestDate,
@@ -35,6 +36,14 @@ import {
 
 import { GlobalContext } from "./contexts";
 import { SetErrorMsg } from "../mediauploader/components/globalstateContext";
+function bin2String(array) {
+  var result = "";
+  for (var i = 0; i < array.length; i++) {
+    result += String.fromCharCode(array[i]);
+  }
+  return JSON.parse(result).error;
+}
+
 
 const mediaManagement = new EndpointConstructor({
   origin: "https://localhost:44340",
@@ -107,12 +116,7 @@ this needs to changed into a custome hook: */
       if (isAuthenticated) {
         mediaManagement
           .fetchMainList(identity.access_token)
-          .then((res) => {
-            if (res.status === 401) {
-              throw new Error("401 api denied request, possible stale token");
-            }
-            return res.json();
-          })
+          .then((res) => CatchNetworkError.call(null, res, setErrorMsg))
           .then((res) => {
             console.log("RES", res);
             let completed = res["Result"]["FinalizedMediaDetailsDtos"];

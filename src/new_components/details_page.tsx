@@ -10,6 +10,7 @@ import butt from "../images/switch.png";
 import { DeleteButton } from "./delete_button";
 import { FinalizeButton } from "./finalize_button";
 import { Identity, RefreshList, ErrorHandler } from "./contexts";
+import { CatchNetworkError } from "../utils/catchNetworkError";
 
 export function DetailsPage({
   mediaKey,
@@ -35,6 +36,7 @@ export function DetailsPage({
       }
       let isMounted = true;
       setDetailsLoading(true);
+      if(mediaKey){
       fetch(
         `https://localhost:44340/api/v1/Medias/${mediaKey}/MediaDetailsVm`,
         {
@@ -43,22 +45,18 @@ export function DetailsPage({
           },
         }
       )
-      .then(res=>{
-        if(res.status>399 && res.status<600){
-          throw new Error(`MediaDetails endpoint sending an ${res.status}`)
-        }
-        return res
-      })
+      .then((res) => CatchNetworkError.call(null, res, setErrorMsg))
       .then((res) => {
           if (isMounted) {
             localStorage.removeItem("mediakey");
-            return res.json();
+            return res;
           }
         })
         .then((res) => {
           setMediaDetails(res["Result"]);
           setDetailsLoading(false);
         })
+      }
         // .catch(err=>{
         //     setErrorMsg(err.message)
         // })
@@ -276,6 +274,7 @@ console.log("Netforum Data-- ", netForumDisplayData)
       </div>
       <div className="button-container">
         <DeleteButton
+        setDetailsLoading={setDetailsLoading}
           disabled={!mediaDetails?.CanEdit}
           user={identity.given_name || "guest"}
           itemKey={mediaDetails?.Key}
@@ -284,6 +283,7 @@ console.log("Netforum Data-- ", netForumDisplayData)
           refetchData={refetchData}
           />
         <FinalizeButton
+        setDetailsLoading={setDetailsLoading}
           disabled={!mediaDetails?.CanEdit}
           user={identity.given_name || "guest"}
           itemKey={mediaDetails?.Key}

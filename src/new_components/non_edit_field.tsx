@@ -1,6 +1,8 @@
 import React from "react";
+import {LoaderOne} from './loader_ani_1'
 
 export function NonEditableField({
+  isDetailsLoading,
   method = "GET",
   setter,
   endpoint,
@@ -19,7 +21,7 @@ export function NonEditableField({
   return (
     <div className="field-container">
       <div className="detail-name">{displayName}</div>
-      <div className="detail-value">{data}</div>
+      {isDetailsLoading?<LoaderOne diameter={10} numberOfCells={5}    />:<div className="detail-value">{data}</div>}
     </div>
   );
 }

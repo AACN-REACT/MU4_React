@@ -3,7 +3,7 @@ import React from "react";
 export function ErrorToast({msg=void 0, close}) {
 
 
-
+console.log('[[[[ TOAST', msg, 'close', close)
 
   return (
     <div
