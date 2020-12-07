@@ -141,74 +141,59 @@
   height: 30px;
   background-color: ghostwhite;
 }
+
+@keyframes pulse {
+  0%{color:white;background-color:colors.$blue-dodger;box-shadow: 0px 0px 5px colors.$blue-dodger; }
+  100%{color:white;background-color:colors.$purple-medium ;box-shadow: 0px 0px 5px colors.$purple-medium;}
+
+}
+@keyframes completed {
+  0%{color:white;background-color:colors.$green-caribbean;box-shadow: 0px 0px 5px colors.$green-caribbean;}
+  100%{color:white;background-color:colors.$green-observatory;box-shadow: 0px 0px 5px colors.$green-observatory; }
+
+}
+
+.loading-bar {
+  font-family: "sourcesans-regular";
+  font-size: 1.2rem;
+
+}
 .upload-list-item {
   box-sizing: border-box;
+  margin:5px auto;
   height: 35px;
-  width: 25%;
+  border-radius:30px;
+  width: 90%;
   display: flex;
   flex-direction: row;
-  justify-content: start;
-  border-bottom: 1px solid lightblue;
+  justify-content: space-between;
+  color:white;
+  padding:3px;
+  background:linear-gradient(to right, colors.$merlingray, colors.$cloudygray);
+  box-shadow: 2px 2px 5px gray;
   align-items: center;
   transition: all 1s;
-  &.completed {
-    &::after {
-      content: "completed";
-    }
+  .name-box{width:20%};
+  .size-box{width:5%};
+  .type-box{width:5%};
+  .progress-box{width:50%; text-align:center;border-radius: 15px; &>div{border-radius: 15px;  
+    text-shadow:0px 0px 5px white;
+    animation-name:pulse;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate};
+    animation-fill-mode:forwards;}
+  .close-box{font-size:1.6rem;width:30px;text-align:center;height:30px;background-color: colors.$timberwolfgray;border-radius: 15px;}
+}
+    .completed {
+
+      &>.progress-box {div{animation-name:completed;animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-fill-mode:forwards;}}
+    
+    
   }
-  & > div {
-    padding: 5px;
-    overflow: ellipsis;
-    border: 1px solid lightblue;
-    text-align: center;
-    &.name-box {
-      background-color: slategray;
-    }
-  }
-}
 
-.type-box,
-.size-box {
-  width: 60px;
-  color: slategray;
-  background-color: rgb(231, 228, 228);
-}
 
-.name-box,
-.progress-box {
-  width: 120px;
-  overflow: hidden;
-  font-size: 1rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 
-.name-box {
-  color: white;
-  background-color: slateblue;
-}
-
-.close-box {
-  padding: 0px;
-  box-sizing: border-box;
-  width: 30px;
-  height: 90%;
-  margin-left: 0px;
-
-  cursor: pointer;
-  background-color: rgb(180, 50, 3);
-  color: white;
-  text-align: center;
-  font-size: 1.2rem;
-  font-family: sans-serif;
-  padding-top: -20px;
-  transition: 0.5s all;
-  &:hover {
-    background-color: rgb(253, 117, 68);
-  }
-}
-.flexrow {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-}
