@@ -116,21 +116,23 @@
   max-height: 2000px;
 }
 [class*="upload-container-"] {
-  background-image: linear-gradient(0deg, rgb(220, 205, 253), white),
-    url(../../images/SVG/SVG/boldlogo2.svg) contain;
-  transition: all 0.5s;
 
+  transition: all 0.5s;
+  background-position: top center;
+  // background-color: pink;
   overflow: hidden;
 }
 .upload-container-0 {
-  height: auto;
-  height: 41px;
+
+  min-height: 41px;
 }
 .upload-container-1 {
-  height: 100px;
+  min-height: 100px;
 }
 .upload-container-2 {
-  height: 300px;
+  min-height: 300px;
+  height:auto;
+  max-height:700px;
 }
 
 [class*="list-container-"] {

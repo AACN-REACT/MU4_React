@@ -32,14 +32,13 @@ export function ListComponent({
   setMediaKey,
   worker,
   isLoading,
+  refreshList
 }) {
   //not sure what this does just yet
   let [list, changeList] = React.useState([]);
 
   const [transforms, setTransforms] = React.useState([
-    //sortTitle,
-    // sortFileSize,
-    // sortNewestDate,
+sortNewestDate
   ]);
   const [SORTING_WORKER] = React.useState(Worker);
   SORTING_WORKER.onmessage = function (e) {
@@ -105,7 +104,7 @@ export function ListComponent({
           <label>Search</label>
           <input
             onChange={(e) => {
-              console.log("WORKER: EVENT INTIATED");
+              if(searchValue.current.value===""){ refreshList(l=>!l)}
               SORTING_WORKER.postMessage({
                 word: searchValue.current.value,
                 list: videolist,

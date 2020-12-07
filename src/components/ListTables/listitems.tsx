@@ -1,4 +1,5 @@
 import React, { useEffect, createElement, useState } from "react";
+import { SetErrorMsg } from "../../mediauploader/components/globalstateContext";
 import { XHRNew } from "../../network_functions/XHRNew";
 import { Identity } from "../../new_components/contexts";
 export function UploadingListItem({
@@ -10,6 +11,7 @@ export function UploadingListItem({
   user,
   key,
   dispatch,
+  SetErrorMsg
 }) {
   const loggedUser = React.useContext(Identity);
   console.log("arr name", item);
@@ -24,7 +26,8 @@ export function UploadingListItem({
           `https://localhost:44340/api/v1/Medias/${item.id}?username=${loggedUser.profile.given_name}`,
           setprogress,
           dispatch,
-          loggedUser.access_token
+          loggedUser.access_token,
+          SetErrorMsg
         )
       );
     } else if (status === "completed") {

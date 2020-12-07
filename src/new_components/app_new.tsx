@@ -167,6 +167,7 @@ this needs to changed into a custome hook: */
             videolist={pendingList}
             setMediaKey={setMediaKey}
             isLoading={isLoading}
+            refreshList={refreshList}
           />
           <DropzoneContainer
             uploadSTATE={uploadSTATE}

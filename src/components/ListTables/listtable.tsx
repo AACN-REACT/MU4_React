@@ -44,7 +44,7 @@ export function UploadTable({
     },
     [activelist]
   );
-
+    console.log("... uploadTable", setError)
   return (
     <div className="upload-container">
       <div className="upload-heading">
@@ -71,6 +71,8 @@ export function UploadTable({
                 item={item}
                 url={url}
                 user={user}
+                SetErrorMsg={setError}
+               
               />
             ))}
           </div>
@@ -98,6 +100,7 @@ export function UploadTable({
                 item={item}
                 url={url}
                 user={user}
+                
               />
             ))}
           </div>
@@ -114,6 +117,7 @@ export function UploadTable({
                 item={item}
                 url={url}
                 user={user}
+                
               />
             ))}
           </div>

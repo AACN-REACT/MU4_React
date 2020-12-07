@@ -14,7 +14,9 @@ console.log('[[[[ TOAST', msg, 'close', close)
 
       style={msg?{top:`${window.scrollY}px`}:null}
     >
-      {msg}
+      <div className="error-heading">Error</div>
+      <div className="error-message">  {msg}</div>
+    
     </div>
   );
 }

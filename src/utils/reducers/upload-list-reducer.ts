@@ -42,6 +42,12 @@ export function uploadListReducer(state, { type, action }) {
         action: { ...newstate[action], status: "pending" },
       };
       break;
+    case "FAILED":
+      newstate = {
+        ...newstate,
+        action:{...newstate[action], status:"failed"}
+      };
+      break;
     case "ABORT":
       newstate = {
         ...newstate,
