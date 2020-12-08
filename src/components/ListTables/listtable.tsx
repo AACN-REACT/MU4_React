@@ -29,21 +29,35 @@ export function UploadTable({
   editablelist = arr.filter((item, ind, arr) => item.status === "canedit");
   pendinglist = arr.filter((item, ind, list) => item.status === "pending");
 
+
+  const [shouldClose, setShouldClose] = React.useState(false)
   /* this runs after commit phase and re-renders evertime activelist changes, may need to useMemo? */
   React.useEffect(
     function () {
       if (arr.length > 0) {
+        setShouldClose(false)
         if (activelist.length < 2) {
           if (pendinglist.length > 0) {
             dispatch({ type: "ACTIVE", action: pendinglist[0].id });
           }
         }
       }
+      
       //if(arr.length===0){dispatchPanelState({ type: "CLOSE UPLOAD" })}
       return () => null;
     },
     [activelist]
   );
+
+  React.useEffect(
+    function(){
+      if(shouldClose && arr.length===0){
+
+        dispatchPanelState({ type: "CLOSE UPLOAD" });
+      }
+
+    },[shouldClose]
+  )
     console.log("... uploadTable", setError)
   return (
     <div className="upload-container">
@@ -72,6 +86,7 @@ export function UploadTable({
                 url={url}
                 user={user}
                 SetErrorMsg={setError}
+                setShouldClose={setShouldClose}
                
               />
             ))}
@@ -100,6 +115,7 @@ export function UploadTable({
                 item={item}
                 url={url}
                 user={user}
+                setShouldClose={setShouldClose}
                 
               />
             ))}
@@ -117,6 +133,7 @@ export function UploadTable({
                 item={item}
                 url={url}
                 user={user}
+                setShouldClose={setShouldClose}
                 
               />
             ))}

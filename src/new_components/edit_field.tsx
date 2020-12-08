@@ -47,6 +47,12 @@ export function EditableField({
       .catch((err) => console.log(err));
   }
 
+  React.useEffect(
+    function(){
+        isEditable?inputValue.current.focus():undefined;
+    },[isEditable]
+  )
+
   return (
     <div className="field-container">
       <div className="detail-name-edit">
@@ -67,13 +73,29 @@ export function EditableField({
           {Array.isArray(data) ? data.join(",") : data}
         </div>
       ) : (
-        <div className="input-container">
-          <input ref={inputValue} type="text" placeholder={data} />
+        <div className="input-container"
+        onKeyDown={(e)=>{
+          e.stopPropagation();
+
+          if(e.key==='Enter' && inputValue.current===document.activeElement){
+            toggleEditable(false);
+            sendData(inputValue.current.value);
+          }
+        }
+
+        }
+        
+        
+        
+        >
+          <input  ref={inputValue} type="text" placeholder={data} />
           <div
             onClick={(e) => {
               toggleEditable(false);
               sendData(inputValue.current.value);
             }}
+
+    
             className="check"
           >
             <img src={tick} />

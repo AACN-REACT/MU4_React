@@ -132,7 +132,6 @@
   justify-content: space-evenly;
   flex-direction: column;
   width: 100%;
-  border: 1px solid lightblue;
   transition: all 0.5s;
 }
 
@@ -148,8 +147,8 @@
 
 }
 @keyframes completed {
-  0%{color:white;background-color:colors.$green-caribbean;box-shadow: 0px 0px 5px colors.$green-caribbean;}
-  100%{color:white;background-color:colors.$green-observatory;box-shadow: 0px 0px 5px colors.$green-observatory; }
+  0%{text-shadow:0px 0px 10px white;color:white;background-color:colors.$green-caribbean;box-shadow: 0px 0px 5px colors.$green-caribbean;}
+  100%{text-shadow:0px 0px 5px white;color:white;background-color:colors.$green-observatory;box-shadow: 0px 0px 5px colors.$green-observatory; }
 
 }
 

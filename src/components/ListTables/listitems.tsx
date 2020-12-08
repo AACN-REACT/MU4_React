@@ -11,7 +11,8 @@ export function UploadingListItem({
   user,
   key,
   dispatch,
-  SetErrorMsg
+  SetErrorMsg,
+  setShouldClose,
 }) {
   const loggedUser = React.useContext(Identity);
   console.log("arr name", item);
@@ -71,6 +72,7 @@ export function UploadingListItem({
             onClick={(e) => {
               returnedXhr.abort();
               dispatch({ type: "DELETE", action: item.id });
+              setShouldClose(true);
             }}
             className="close-box"
           >
@@ -98,11 +100,12 @@ export function UploadingListItem({
                     : "orangered",
                 width: `${parseInt(progress)}%`,
               }}
-            >{`${parseInt(progress)}%`}</div>
+            >processing uploaded..</div>
           </div>
           <div
             onClick={(e) => {
               dispatch({ type: "DELETE", action: item.id });
+              setShouldClose(true);
             }}
             className="close-box"
           >
@@ -130,7 +133,7 @@ export function UploadingListItem({
                     : "orangered",
                 width: `${parseInt(progress)}%`,
               }}
-            >{`${parseInt(progress)}%`}</div>
+            >awiting upload</div>
           </div>
           <div
             onClick={(e) => {
@@ -165,11 +168,12 @@ export function UploadingListItem({
                 backgroundColor: "green",
                 width: "100%",
               }}
-            >{`${parseInt(progress)}%`}</div>
+            >finished processing</div>
           </div>
           <div
             onClick={(e) => {
               dispatch({ type: "DELETE", action: item.id });
+              setShouldClose(true);
             }}
             className="close-box"
           >

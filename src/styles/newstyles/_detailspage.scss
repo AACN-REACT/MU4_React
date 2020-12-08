@@ -3,10 +3,22 @@
 
 @keyframes pop {
   0% {
-    filter:  blur(100%); transform:scale(0);
+    filter: blur(100%);
+    transform: scale(0);
   }
   100% {
-    filter:  blur(0%);transform:scale(1);
+    filter: blur(0%);
+    transform: scale(1);
+  }
+}
+@keyframes drop {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
   }
 }
 
@@ -47,11 +59,24 @@
   transform: rotate(0deg);
 
   font-family: fonts.$mono;
-  
 }
 .input-container {
   display: flex;
   flex-wrap: nowrap;
+  input {
+    animation-name: drop;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    font-family: "sourcesans-light";
+    font-size: 1.3rem;
+    margin: 5px;
+    border: none;
+    outline: none;
+    padding: 10px 10px;
+    width: 200px;
+    border-bottom: 2px solid #2b92f7;
+  }
 }
 .field-container {
   box-sizing: border-box;
@@ -206,7 +231,7 @@
   }
   .logs-table-header {
     display: flex;
-    padding:15px;
+    padding: 15px;
     justify-content: space-between;
 
     margin-bottom: 10px;
@@ -233,19 +258,19 @@
     display: flex;
     text-align: start;
     font-family: "sourcesans-light";
-    font-size: .9rem;
+    font-size: 0.9rem;
     justify-content: space-between;
     transition: 0.3s all;
     transition-delay: 0.2s all;
     align-items: center;
-    padding:5px;
+    padding: 5px;
     overflow: hidden;
     div {
       flex-basis: 20%;
       // border:1px solid white;
       border-collapse: collapse;
       flex-grow: 0;
-      height:100px;
+      height: 100px;
     }
 
     div:last-child {

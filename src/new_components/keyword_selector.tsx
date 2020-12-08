@@ -3,14 +3,14 @@ import tick from "../images/check.png";
 
 import { closeAfterAni } from "../utils/close_after_ani";
 
-export function KeywordSelector({  data, deleteData, sendData, close }) {
+export function KeywordSelector({ data, deleteData, sendData, close }) {
   const [toggleAniCleanUp, setToggleAniCleanUp] = React.useState(false);
   const slideAnimationRef = React.useRef();
   const inputValue = React.useRef();
 
   return (
     <div ref={slideAnimationRef} className="netforum-selector">
-         <div
+      <div
         className="toggle-inputbox"
         onClick={(e) => {
           closeAfterAni(
@@ -42,15 +42,28 @@ export function KeywordSelector({  data, deleteData, sendData, close }) {
               );
             })
           : () => null}
-        <input  ref={inputValue} type="text" placeholder="enter keyword" />
         <div
+          onKeyDown={(e) => {
+            e.stopPropagation();
+
+            if (
+              e.key === "Enter" &&
+              inputValue.current === document.activeElement
+            ) {
+              sendData(inputValue.current.value);
+            }
+          }}
+        >
+          <input ref={inputValue} type="text" placeholder="enter keyword" />
+        </div>
+        {/* <div
           onClick={(e) => {
             sendData(inputValue.current.value);
           }}
           className="check"
         >
           <img src={tick} />
-        </div>
+        </div> */}
       </div>
     </div>
   );
