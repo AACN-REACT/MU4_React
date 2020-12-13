@@ -3,33 +3,39 @@
 
 @keyframes change-color {
   0% {
-    background-color: white;
-    color: colors.$dark-red;
+    // filter: contrast(0%);
+    filter: invert(100%);
   }
   100% {
-    background-color: colors.$bright-red;
+    // filter: contrast(200%);
+    filter: invert(0%);
   }
 }
 
 .dropzone-idle {
-  
   &:before {
-    content: "Drag and drop file here ";
+    color: colors.$orange-cinnamon;
+    content: "Drag file here ";
+    font-family: "sourcesans-regular";
+    position: absolute;
+    top: 230px;
+    left: 40%;
   }
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
   margin: auto;
-  border-radius: 150px;
-  margin-top: 50px;
+  padding-top: 50px;
   text-align: center;
-  border: 2px dashed colors.$light-green;
+  // border: 2px dashed colors.$light-green;
   text-align: center;
   color: colors.$dark-red;
   font-size: 1.5rem;
   box-sizing: border-box;
   padding: 60px;
   transition: 0.3s all;
-  div{opacity:1}
+  div {
+    opacity: 1;
+  }
   .select-file-button {
     &:hover {
       transition: 0.2s all;
@@ -41,24 +47,30 @@
 .dropzone-active {
   margin: auto;
   &:before {
-    font-size: 3rem;
-    margin-top: 100px;
+    color: colors.$orange-carrot;
+    text-shadow: 2px 2px 5px colors.$orange-carrot;
+    font-size: 2rem;
     content: "DROP!!";
-    color: white;
+    font-family: "sourcesans-regular";
+    position: absolute;
+    top: 230px;
+    left: 45%;
   }
-  width: 300px;
-  height: 300px;
-  border-radius: 150px;
-  margin-top: 50px;
+  width: 100%;
+  height: 100%;
+  margin-top: 0px;
   text-align: center;
-  border: 2px dashed colors.$light-green;
+  // border: 2px dashed colors.$light-green;
   text-align: center;
   color: colors.$dark-red;
   font-size: 1.5rem;
   padding: 60px;
   box-sizing: border-box;
   transition: 0.3s all;
-  animation: change-color linear 2s;
+  animation-name: change-color;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
   .select-file-button {
     transition: 0.3s all;
     display: none;
@@ -66,27 +78,35 @@
 }
 .select-container {
   display: flex;
+  transform-origin: center;
 
-  position: relative;
-  margin-top: 20px;
+  position: absolute;
+  top: 300px;
+  left: 50%;
+  // margin-top: 20px;
+  margin-left: -150px;
 }
 .select-button {
-  margin: auto;
+  margin: 0px auto;
   text-align: center;
   box-sizing: border-box;
   padding: 10px;
-  font-family: sans-serif;
+  font-size: 1.4rem;
+  font-family: "sourcesans-regular";
+  text-shadow: 1px 1px 5px white;
   cursor: pointer;
   border: none;
-  border-radius: 5px;
-  width: 100px;
+  border-radius: 50px;
+  width: 300px;
   height: 50px;
   color: white;
-  background-color: colors.$dark-red;
-  transition: 0.2s all;
+
+  border: 2px solid colors.$orange-carrot;
+  background-color: rgba(colors.$orange-cinnamon, 0.7);
+  transition: 0.3s all;
   &:hover {
-    background-color: colors.$light-green;
-    transition: 0.2s all;
+    background-color: colors.$orange-carrot;
+    transition: 0.3s all;
   }
 }
 
@@ -141,58 +161,171 @@
   background-color: ghostwhite;
 }
 
-@keyframes pulse {
-  0%{color:white;background-color:colors.$blue-dodger;box-shadow: 0px 0px 5px colors.$blue-dodger; }
-  100%{color:white;background-color:colors.$purple-medium ;box-shadow: 0px 0px 5px colors.$purple-medium;}
-
+@keyframes edit {
+  0% {
+    color: white;
+    background-color: colors.$blue-dodger;
+    box-shadow: 0px 0px 5px colors.$blue-dodger;
+  }
+  100% {
+    color: white;
+    background-color: colors.$purple-medium;
+    box-shadow: 0px 0px 5px colors.$purple-medium;
+  }
 }
 @keyframes completed {
-  0%{text-shadow:0px 0px 10px white;color:white;background-color:colors.$green-caribbean;box-shadow: 0px 0px 5px colors.$green-caribbean;}
-  100%{text-shadow:0px 0px 5px white;color:white;background-color:colors.$green-observatory;box-shadow: 0px 0px 5px colors.$green-observatory; }
-
+  0% {
+    text-shadow: 0px 0px 10px white;
+    color: white;
+    background-color: colors.$green-caribbean;
+    box-shadow: 0px 0px 5px colors.$green-caribbean;
+  }
+  100% {
+    text-shadow: 0px 0px 5px white;
+    color: white;
+    background-color: colors.$green-observatory;
+    box-shadow: 0px 0px 5px colors.$green-observatory;
+  }
+}
+@keyframes pulse {
+  0% {
+    text-shadow: 0px 0px 10px white;
+    color: white;
+    background-color: colors.$orange-carrot;
+    box-shadow: 0px 0px 5px colors.$orange-carrot;
+  }
+  100% {
+    text-shadow: 0px 0px 5px white;
+    color: white;
+    background-color: colors.$orange-cinnamon;
+    box-shadow: 0px 0px 5px colors.$orange-cinnamon;
+  }
+}
+@keyframes slidefromleft {
+  0% {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
 }
 
 .loading-bar {
   font-family: "sourcesans-regular";
   font-size: 1.2rem;
-
 }
 .upload-list-item {
+  animation-name: slidefromleft;
+  animation-duration: 1s;
+  animation-delay: 0.3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+
+  transform: translateY(110%);
   box-sizing: border-box;
-  margin:5px auto;
+  margin: 5px auto;
   height: 35px;
-  border-radius:30px;
+  border-radius: 30px;
   width: 90%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  color:white;
-  padding:3px;
-  background:linear-gradient(to right, colors.$merlingray, colors.$cloudygray);
+  color: white;
+  padding: 3px;
+  background: linear-gradient(to right, colors.$merlingray, colors.$cloudygray);
   box-shadow: 2px 2px 5px gray;
   align-items: center;
   transition: all 1s;
-  .name-box{width:20%};
-  .size-box{width:5%};
-  .type-box{width:5%};
-  .progress-box{width:50%; text-align:center;border-radius: 15px; &>div{border-radius: 15px;  
-    text-shadow:0px 0px 5px white;
-    animation-name:pulse;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate};
-    animation-fill-mode:forwards;}
-  .close-box{font-size:1.6rem;width:30px;text-align:center;height:30px;background-color: colors.$timberwolfgray;border-radius: 15px;}
-}
-    .completed {
-
-      &>.progress-box {div{animation-name:completed;animation-duration: 1s;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
-        animation-fill-mode:forwards;}}
-    
-    
+  .name-box {
+    width: 20%;
   }
+  .size-box {
+    width: 5%;
+  }
+  .type-box {
+    width: 5%;
+  }
+  .progress-box {
+    width: 50%;
+    text-align: center;
+    border-radius: 15px;
+    & > div {
+      border-radius: 15px;
+      text-shadow: 0px 0px 5px white;
+      animation-name: pulse;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+    animation-fill-mode: forwards;
+  }
+  .close-box {
+    font-size: 1.6rem;
+    width: 30px;
+    text-align: center;
+    height: 30px;
+    background-color: colors.$timberwolfgray;
+    border-radius: 15px;
+  }
+}
+.completed {
+  & > .progress-box {
+    div {
+      animation-name: completed;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+.canedit {
+  & > .progress-box {
+    div {
+      animation-name: edit;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+
+.drag-animation {
+  width: auto;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid colors.$blue-dodger;
+  background-color: colors.$blue-aacn;
+  border-radius: 10px;
+  color: white;
+  text-shadow: 2px 2px 5px white;
+  font-family: "sourcesans-light";
+  font-size: 1rem;
+  position: absolute;
+  top: 100px;
+  left: 100px;
+}
 
 
-
+.video-recorder-container{
+  z-index:20000000000;
+  display:flex;
+  flex-direction: column;
+  border:1px solid colors.$orange-carrot;
+  box-sizing:border-box;
+  position:absolute;
+  height:100%;
+  width:100%;
+  background:white;
+  &>video {
+    width:50%;
+    height:auto;
+  }
+  button{
+    width:100px;
+    height:50px;
+  }
+}

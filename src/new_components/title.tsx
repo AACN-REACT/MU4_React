@@ -5,7 +5,7 @@ import { ReactComponent as PurpleLogo } from "../images/SVG/SVG/boldLogo2.svg";
 import { Identity, Logout, Authentication } from "./contexts";
 // let mylogo = new Image();
 // mylogo.src = mylogo;
-function TitleBar(user) {
+function TitleBar({setSidePanel, setRecord}) {
   const Id = React.useContext(Identity);
   const logmeout = React.useContext(Logout);
   const isAuth = React.useContext(Authentication);
@@ -13,6 +13,8 @@ function TitleBar(user) {
   return (
     <div className="title-container">
       <PurpleLogo />
+      <div className="panel-choose" onClick={e=>setSidePanel(s=>!s)}>P</div>
+      <div className="panel-choose" onClick={e=>setRecord(r=>!r)}>P</div>
       <div className="log-info">
         <div className="greeting">
           welcome, {Id?.profile?.given_name || "guest"}

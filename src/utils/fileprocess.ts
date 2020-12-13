@@ -11,9 +11,11 @@
 let acceptedFormats = [
   "video/mp4",
   "video/webm",
+  "video/webm; codecs=vp9",
   "video/ogg",
   "video/x-flv",
   "video/quicktime",
+  "video/x-matroska;codecs=avc1,opus",
   "application/x-mpegURL",
   "video/MP2T",
   "video/3gpp",

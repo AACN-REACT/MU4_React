@@ -25,7 +25,7 @@ function extractThreePages(list = [], pageNumber = 0) {
 
 function pagePosition(arr, ind, posOfParent) {}
 
-export function Thing({
+export function ManagementList({
   changePageNumber,
   pageNumber,
   panelStateNumber,

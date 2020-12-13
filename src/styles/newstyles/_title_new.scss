@@ -47,3 +47,24 @@
   }
 
 }
+
+.panel-choose{
+  margin-top:30px;
+  font-size:1.3rem;
+  cursor:pointer;
+  width:40px;
+  height:40px;
+  text-align:center;
+  font-family:'sourcesans-regular';
+  padding-top:8px;
+  color:white;
+  border-radius: 25px;
+  box-shadow: 2px 2px 5px lightgray;
+  background:colors.$blue-dodger;
+  transition:.4s all;
+  &:hover{
+    background:colors.$orange-carrot;
+
+  }
+}
+

@@ -2,7 +2,7 @@ import React from "react";
 import butt from "../images/switch.png";
 import { ListStructure } from "./ListStructure";
 import { ListResult } from "./ListResult";
-import { Thing } from "./thing";
+import { ManagementList } from "./managementlist";
 import { Paginate } from "../utils/sorting/sorting_algorithms";
 import {
   sortNewestDate,
@@ -23,6 +23,7 @@ import {
 import { textSearch } from "../utils/sorting/levenshtein";
 import Worker from "../utils/sorting/pendingList.worker";
 import { LoaderOne } from "./loader_ani_1";
+import {SearchCriteria} from "./search_criteria"
 
 export function ListComponent({
   heading,
@@ -37,6 +38,9 @@ export function ListComponent({
   //not sure what this does just yet
   let [list, changeList] = React.useState([]);
 
+  let [searchCriteria, setSearchCriteria]= React.useState("Title");
+  let [criteriaOpen, setCriteriaOpen] =  React.useState(false)
+
   const [transforms, setTransforms] = React.useState([
 sortNewestDate
   ]);
@@ -49,6 +53,7 @@ sortNewestDate
   console.log("tt", transforms);
 
   const searchValue = React.useRef();
+  const searchbar = React.useRef();
 
   const [pageNumber, changePageNumber] = React.useState(0);
   // this extaract the number for the specific panelState
@@ -100,22 +105,27 @@ sortNewestDate
         </div>
       </div>
       <div className="list-controls">
-        <div className="search-bar">
+        <div className="search-bar" ref={searchbar}>
           <label>Search</label>
           <input
+          onFocus={e=>setCriteriaOpen(true)}
             onChange={(e) => {
               if(searchValue.current.value===""){ refreshList(l=>!l)}
               SORTING_WORKER.postMessage({
                 word: searchValue.current.value,
                 list: videolist,
-                field: "Title",
+                field: searchCriteria,
               });
             }}
             type="text"
             ref={searchValue}
             className="search"
           />
+          {criteriaOpen?<SearchCriteria searchbar={searchbar.current} setCriteriaOpen={setCriteriaOpen} setSearchCriteria={setSearchCriteria} />:null}
         </div>
+        
+        
+        
         <div className="page-controls">
           <div
             onClick={(e) =>
@@ -135,7 +145,6 @@ sortNewestDate
               onDoubleClick={(e) => {
                 toggleEnterNumber((t) => !t);
                 if (enterNumber) {
-                  alert(numberInput.current);
                   numberInput.current.focus();
                 }
               }}
@@ -448,7 +457,7 @@ sortNewestDate
             left: `-${pageNumber * 100}%`,
           }}
         >
-          <Thing
+          <ManagementList
             changePageNumber={changePageNumber}
             list={list[pageNumber]}
             pos={`${pageNumber * 100}%`}

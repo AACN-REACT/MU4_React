@@ -18,18 +18,22 @@ export function DropzoneContainer({
   uploadSTATE,
   DISPATCHUpload,
   setError,
+  shouldRecord
 }) {
   //set up state for Uploading files
   //const [uploadSTATE, DISPATCHUpload] = React.useReducer(uploadListReducer, {});
 
   console.log("upload state", uploadSTATE);
   return (
-    <div  style={{backgroundImage:`url(${backgroundLogo})`}} className={`dropzone-container-${panelState.dropzone_container}`}>
+    <div  style={{position:'relative',backgroundImage:`url(${backgroundLogo})`}} className={`dropzone-container-${panelState.dropzone_container}`}>
 
       <DropZone
         DISPATCHupload={DISPATCHUpload}
         sizeLimit={sizeLimit}
         dispatchPanelState={dispatchPanelState}
+        setError={setError}
+        panelState={panelState}
+        shouldRecord={shouldRecord}
       />
       <SelectFile
         setError={setError}

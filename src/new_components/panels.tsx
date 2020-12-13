@@ -129,7 +129,7 @@ export function Panels(props) {
   console.log("panels", Panels);
   return (
     <div className="panel-container">
-      <div className={`upload-container-${panelState.upload_container}`}>
+      <div className={props.sidePanel?`side-uploader`:`upload-container-${panelState.upload_container}`}>
         {elements[0]}
       </div>
       <div className={`list-container-${panelState.list_container}`}>

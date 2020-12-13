@@ -89,17 +89,7 @@ export function EditableField({
         
         >
           <input  ref={inputValue} type="text" placeholder={data} />
-          <div
-            onClick={(e) => {
-              toggleEditable(false);
-              sendData(inputValue.current.value);
-            }}
 
-    
-            className="check"
-          >
-            <img src={tick} />
-          </div>
         </div>
       )}
     </div>

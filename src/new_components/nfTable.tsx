@@ -20,7 +20,7 @@ export function NFTable({
 
   function getActiveFields(){
     let entries=[];
-    if(options?.length>0){ entries = Object.entries(options[0]).filter(el=>el[1]!=="").map(el=>el[0])}
+    if(options?.length>0){ entries = Object.entries(options[0]).filter(el=>el[1]!=="").filter(el=>el[0]!=="NetforumKey").map(el=>el[0])}
     console.log("options entries", entries)
     return entries
   }
@@ -37,7 +37,7 @@ React.useEffect(
 
   React.useEffect(
     function () {
-      setPages(Paginate(options, 3));
+      setPages(Paginate(options, 8));
     },
     [options]
   );
@@ -48,6 +48,7 @@ React.useEffect(
 
   return fadeIn ? (
     <div className="nf-table">
+      <h1>Please Select a link</h1>
       
       <PageControls
         changePageNumber={setPageNumber}
@@ -55,7 +56,7 @@ React.useEffect(
         pageNumber={pageNumber}
       />
       <div className="nf-table-heading">
-        {activeFields.map(el=><div className={`nf-table-heading-${el}`}>{el}</div>)   }
+        {activeFields.length>4?activeFields.slice(1).map(el=><div className={`nf-table-heading-${el}`}>{el}</div>):activeFields.map(el=><div className={`nf-table-heading-${el}`}>{el}</div>)    }
       </div>
 
 
@@ -69,7 +70,7 @@ React.useEffect(
                 ? "selected-nf-table-cell"
                 : "nf-table-cell"
             }
-          >{activeFields.map((item,ind,arr)=><div style={{fontSize:`${(70/arr.length)+.5}px`}}>{el[item]}</div>)}
+          >{activeFields.length>4?activeFields.slice(1).map((item,ind,arr)=><div style={{fontSize:`${(70/arr.length)+.5}px`}}>{el[item]}</div>):activeFields.map((item,ind,arr)=><div style={{fontSize:`${(70/arr.length)+.5}px`}}>{el[item]}</div>)}
           </div>
         );
       })}

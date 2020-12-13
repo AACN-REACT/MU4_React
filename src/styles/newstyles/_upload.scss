@@ -1,5 +1,23 @@
 @use 'colors';
 @use 'fonts';
+
+@keyframes grownfade {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
 .upload-heading {
   display: flex;
   justify-content: space-between;
@@ -21,4 +39,98 @@
   }
 }
 
+[class*="ring-"] {
+  opacity: 0;
+  animation-name: grownfade;
+  animation-duration: 1s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center;
+}
 
+// .ring-1 {
+//   opacity: 0;
+//   width: 100px;
+//   height: 100px;
+
+//   background-color: colors.$blue-dodger;
+//   border-radius: 50px;
+
+//   animation-delay: 0.4s;
+// }
+// .ring-2 {
+//   opacity: 0;
+//   width: 50px;
+//   height: 50%;
+//   border-radius: 25px;
+//   background-color: colors.$blue-aacn;
+//   animation-delay: 0.2s;
+// }
+// .ring-3 {
+//   width: 20px;
+//   height: 20%;
+//   background-color: colors.$purple-royal;
+//   border-radius: 10px;
+//   animation-delay: 0s;
+// }
+
+.upload-heading {
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid colors.$blue-aacn;
+  background-color: ghostwhite;
+  color: colors.$blue-aacn;
+  //font-family: fonts.$vt;
+  font-family: "sourcesans-light";
+  font-size: 1.3rem;
+
+  span {
+    font-family: "sourcesans-regular";
+  }
+  img {
+    width: 20px;
+    object-fit: contain;
+  }
+}
+
+[class*="ring-"] {
+  animation-name: grownfade;
+  animation-timing-function: ease-out;
+  animation-duration: 1s;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  // animation-fill-mode: forwards;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring-1 {
+  width: 100px;
+  height: 100px;
+
+  background-color: colors.$blue-dodger;
+  border-radius: 50px;
+
+  animation-delay: 0.4s;
+}
+.ring-2 {
+  width: 50px;
+  height: 50%;
+  border-radius: 25px;
+  background-color: colors.$blue-aacn;
+  animation-delay: 0.2s;
+}
+.ring-3 {
+  width: 20px;
+  height: 20px;
+  background-color: colors.$purple-royal;
+  border-radius: 10px;
+  animation-delay: 0s;
+}

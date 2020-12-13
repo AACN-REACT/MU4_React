@@ -71,6 +71,9 @@ pass them directly down to the sibling components, utilises the uploadListReduce
   /*Now we set up state for a tooltip */
   const [toolTip, setTooltip] = React.useState(null);
 
+  const [sidePanel, setSidePanel] = React.useState(false)
+  const [shouldRecord, setRecord] = React.useState(false)
+
   /*-------------------------------------------------------------------------------------------------------*/
   /* this initial value is too check if we have a key value in the url params, so that we can use it to
 load an initial details page. This is required if we are to allow copy and pasting of urls to specific details pages
@@ -152,8 +155,8 @@ this needs to changed into a custome hook: */
       >
         <Tooltip toolTip={toolTip} />
         <ErrorToast close={setErrorMsg} msg={ErrorMsg} />
-        <TitleBar />
-        <Panels openDetails={localStorage.getItem("mediakey") || null}>
+        <TitleBar setSidePanel={setSidePanel} setRecord={setRecord} />
+        <Panels sidePanel={sidePanel} openDetails={localStorage.getItem("mediakey") || null}>
           <UploadTable
             setMediaKey={setMediaKey}
             list={uploadSTATE}
@@ -174,6 +177,7 @@ this needs to changed into a custome hook: */
             DISPATCHUpload={DISPATCHUpload}
             sizeLimit={sizeLimit}
             setError={setErrorMsg}
+            shouldRecord={shouldRecord}
           />
           <ListComponent
             heading="Completed"

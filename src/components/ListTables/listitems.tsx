@@ -100,12 +100,15 @@ export function UploadingListItem({
                     : "orangered",
                 width: `${parseInt(progress)}%`,
               }}
-            >processing uploaded..</div>
+            >
+              processing uploaded..
+            </div>
           </div>
           <div
             onClick={(e) => {
-              dispatch({ type: "DELETE", action: item.id });
-              setShouldClose(true);
+              returnedXhr.abort();
+              //dispatch({ type: "DELETE", action: item.id });
+              // setShouldClose(true);
             }}
             className="close-box"
           >
@@ -133,7 +136,9 @@ export function UploadingListItem({
                     : "orangered",
                 width: `${parseInt(progress)}%`,
               }}
-            >awiting upload</div>
+            >
+              awiting upload
+            </div>
           </div>
           <div
             onClick={(e) => {
@@ -155,7 +160,7 @@ export function UploadingListItem({
               type: "OPEN DETAILS OPEN UPLOAD CLOSE OTHERS",
             });
           }}
-          className={`upload-list-item ${progress === 100 ? "EDIT" : ""}`}
+          className={`upload-list-item canedit`}
         >
           <div className="name-box">{item.name}</div>
           <div className="type-box">{item.type}</div>
@@ -168,10 +173,13 @@ export function UploadingListItem({
                 backgroundColor: "green",
                 width: "100%",
               }}
-            >finished processing</div>
+            >
+              finished processing
+            </div>
           </div>
           <div
             onClick={(e) => {
+              e.stopPropagation();
               dispatch({ type: "DELETE", action: item.id });
               setShouldClose(true);
             }}
