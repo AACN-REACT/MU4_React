@@ -14,9 +14,11 @@ export function recordVideo(
   };
   const CaptureSettings = { cursor: "always", logicalSurface: true };
 
+  //this is an example recording of the thing
+
   if ("mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices) {
     navigator.mediaDevices
-      .getUserMedia(settings)
+      .getDisplayMedia(CaptureSettings)
       .then((stream) => {
         setVideoStream(stream);
         console.log("STREAM", stream);
