@@ -98,7 +98,10 @@ export function VideoRecorder({
                 name: "recording",
                 size: String((blob.size / 1000000).toFixed(1)) + "mb",
                 type: "webm",
-                file: new File([blob], "upload.webm", { type: "video/webm" }),
+                file: new File([blob], "upload.webm", {
+                  type: "video/webm",
+                  lastModified: Date.now(),
+                }),
                 status: "pending",
                 id: guid,
                 progress: 0,
