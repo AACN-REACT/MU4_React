@@ -54,13 +54,12 @@
   top: -50px;
   position: fixed;
   width: 100%;
-  min-height:600px;
+  min-height: 600px;
   height: auto;
-  z-index: 10000000
-;
+  z-index: 10000000;
   background-image: radial-gradient(
     rgba(colors.$blue-aacn, 1),
-    rgba(colors.$blue-aacn, .9)
+    rgba(colors.$blue-aacn, 0.9)
   );
   z-index: 2000;
   animation-name: slideIn;
@@ -131,20 +130,20 @@
   position: absolute;
   right: 15px;
   top: 15px;
-  width: 100px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
 
-  border: 3px solid white;
-  border-radius: 20px;
-  text-align: center;
-  padding-top: 8px;
-  color: white;
-  transition: 0.5s all;
-  box-shadow: 2px 2px 5px rgb(46, 3, 46);
+  // border: 3px solid white;
+  // border-radius: 20px;
+  // text-align: center;
+  // padding-top: 8px;
+  // color: white;
+  // transition: 0.5s all;
+  // box-shadow: 2px 2px 5px rgb(46, 3, 46);
   cursor: pointer;
-  &:hover {
-    background-color: colors.$deep-purple;
-  }
+  // &:hover {
+  //   background-color: colors.$deep-purple;
+  // }
 }
 
 .nf-table {
@@ -155,13 +154,12 @@
   animation-duration: 0.5s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
-  h1,h2{
-    margin-top:50px;
-    font-family:'sourcesans-regular';
-    text-align:center;
+  h1,
+  h2 {
+    margin-top: 50px;
+    font-family: "sourcesans-regular";
+    text-align: center;
   }
-
-
 }
 
 .nf-table-cell,
@@ -259,7 +257,7 @@
   display: flex;
   margin-top: 10px;
   flex-direction: column;
-  padding:10px;
+  padding: 10px;
   justify-content: start;
   background-color: rgba(0, 84, 150, 0.6);
 }

@@ -70,7 +70,7 @@ React.useEffect(
                 ? "selected-nf-table-cell"
                 : "nf-table-cell"
             }
-          >{activeFields.length>4?activeFields.slice(1).map((item,ind,arr)=><div style={{fontSize:`${(70/arr.length)+.5}px`}}>{el[item]}</div>):activeFields.map((item,ind,arr)=><div style={{fontSize:`${(70/arr.length)+.5}px`}}>{el[item]}</div>)}
+          >{activeFields.length>4?activeFields.slice(1).map((item,ind,arr)=><div key={el[item]} style={{fontSize:`${(70/arr.length)+.5}px`}}>{el[item]}</div>):activeFields.map((item,ind,arr)=><div key={el[item]} style={{fontSize:`${(70/arr.length)+.5}px`}}>{el[item]}</div>)}
           </div>
         );
       })}

@@ -1,7 +1,11 @@
 import React from "react";
 import tick from "../images/check.png";
 
+import cross  from "../images/SVG/SVG/greyCross.svg";
+
 import { closeAfterAni } from "../utils/close_after_ani";
+
+
 
 export function KeywordSelector({ data, deleteData, sendData, close }) {
   const [toggleAniCleanUp, setToggleAniCleanUp] = React.useState(false);
@@ -21,7 +25,14 @@ export function KeywordSelector({ data, deleteData, sendData, close }) {
           );
         }}
       >
-        close..
+                         <div
+                    className="keyword-icon"
+                    onClick={(e) => {
+                      deleteData(el);
+                    }}
+                    style={{backgroundImage:`url(${cross})`}}
+                  >
+                  </div>
       </div>
       <div className="keyword-input-container">
         {Array.isArray(data)
@@ -35,8 +46,8 @@ export function KeywordSelector({ data, deleteData, sendData, close }) {
                     onClick={(e) => {
                       deleteData(el);
                     }}
+                    style={{backgroundImage:`url(${cross})`}}
                   >
-                    {String.fromCharCode(9986)}
                   </div>
                 </div>
               );

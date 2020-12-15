@@ -11,6 +11,7 @@ import { DeleteButton } from "./delete_button";
 import { FinalizeButton } from "./finalize_button";
 import { Identity, RefreshList, ErrorHandler } from "./contexts";
 import { CatchNetworkError } from "../utils/catchNetworkError";
+import {Switch} from './switch-details'
 
 export function DetailsPage({
   mediaKey,
@@ -84,7 +85,7 @@ console.log("Netforum Data-- ", netForumDisplayData)
         >
           <span>Key:</span> {mediaKey}
         </div>
-        <img
+        <div
           onClick={(e) => {
             panelState.details_container === 0
               ? dispatchPanelState({ type: "OPEN DETAILS CLOSE OTHERS" })
@@ -94,7 +95,7 @@ console.log("Netforum Data-- ", netForumDisplayData)
                 })();
           }}
           src={butt}
-        />
+        ><Switch dispatchPanelState={dispatchPanelState} panelState={panelState} refreshList={refreshList} /> </div>
       </div>
       <div className="details-frame">
         {mediaDetails?.CanEdit ? (
@@ -249,7 +250,7 @@ console.log("Netforum Data-- ", netForumDisplayData)
           setter={setMediaDetails}
           name="FinalizedDateTime"
           displayName="Finalized Date"
-          data={mediaDetails?.FinalizedDateTime}
+          data={new Date(mediaDetails?.FinalizedDateTime).toLocaleString()}
         />
         <NonEditableField
           isDetailsLoading={isDetailsLoading}

@@ -1,7 +1,7 @@
 export function XHRNew(item, url, setter, dispatch, token, setErrorMsg) {
   function createFormData(file) {
     let myFormData = new FormData();
-    myFormData.append("file", file, item.name);
+    myFormData.append("file", file);
     return myFormData;
   }
   let xhr = new XMLHttpRequest();

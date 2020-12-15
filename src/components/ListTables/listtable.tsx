@@ -1,6 +1,8 @@
 import React from "react";
 
 import { UploadingListItem } from "./listitems";
+import { Switch} from '../../new_components/switch-upload'
+
 import butt from "../images/switch.png";
 
 export function UploadTable({
@@ -64,14 +66,8 @@ export function UploadTable({
       <div className="upload-heading">
         {" "}
         <span>uploading details...</span>
-        <img
-          onClick={(e) => {
-            panelState.upload_container === 0
-              ? dispatchPanelState({ type: "OPEN UPLOAD" })
-              : dispatchPanelState({ type: "CLOSE UPLOAD" });
-          }}
-          src={`butt`}
-        />
+        <Switch panelState={panelState.upload_container} dispatchPanelState={dispatchPanelState} />
+
       </div>
       {arr.length > 0 ? (
         <div className="upload-container">

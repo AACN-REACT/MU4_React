@@ -23,7 +23,8 @@ import {
 import { textSearch } from "../utils/sorting/levenshtein";
 import Worker from "../utils/sorting/pendingList.worker";
 import { LoaderOne } from "./loader_ani_1";
-import {SearchCriteria} from "./search_criteria"
+import {SearchCriteria} from "./search_criteria";
+import {Switch} from './switch-list'
 
 export function ListComponent({
   heading,
@@ -90,7 +91,7 @@ sortNewestDate
         <div>
           {heading}...
         </div>
-        <div
+        {/* <div
           onClick={(e) => {
             dispatchPanelState({
               type:
@@ -102,7 +103,8 @@ sortNewestDate
           className="switch"
         >
           <img src={butt} />
-        </div>
+        </div> */}
+        <Switch dispatchPanelState={dispatchPanelState} panelStateNumber={panelStateNumber} heading={heading} />
       </div>
       <div className="list-controls">
         <div className="search-bar" ref={searchbar}>

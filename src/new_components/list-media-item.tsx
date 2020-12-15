@@ -82,6 +82,9 @@ export function ListMediaItem({panelStateNumber, mediaItem, dispatchPanelState, 
               </div>
               <div key="column-date" className="column-date">
                 {new Date(mediaItem.StartDateTime).toDateString()}
+                <div className="date-time">
+                  {new Date(mediaItem.StartDateTime).toLocaleTimeString()}
+                </div>
               </div>
             </div>
 

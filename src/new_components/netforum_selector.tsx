@@ -3,6 +3,7 @@ import { SingleEntryPlugin } from "webpack";
 import { SetErrorMsg } from "../mediauploader/components/globalstateContext";
 import { ErrorHandler, Endpoint, Identity } from "./contexts";
 import { closeAfterAni } from "../utils/close_after_ani";
+import cross from "../images/SVG/SVG/greyCross.svg";
 
 import { NFTable } from "./nfTable";
 
@@ -156,7 +157,10 @@ export function NetforumSelector({
           );
         }}
       >
-        close..
+        <div
+          className="keyword-icon"
+          style={{ backgroundImage: `url(${cross})` }}
+        ></div>
       </div>
       <div className="nf-type-search">
         <div>

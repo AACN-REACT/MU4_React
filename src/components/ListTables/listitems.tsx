@@ -107,8 +107,8 @@ export function UploadingListItem({
           <div
             onClick={(e) => {
               returnedXhr.abort();
-              //dispatch({ type: "DELETE", action: item.id });
-              // setShouldClose(true);
+              dispatch({ type: "DELETE", action: item.id });
+              setShouldClose(true);
             }}
             className="close-box"
           >
@@ -137,7 +137,7 @@ export function UploadingListItem({
                 width: `${parseInt(progress)}%`,
               }}
             >
-              awiting upload
+              awaiting upload
             </div>
           </div>
           <div

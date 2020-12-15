@@ -57,7 +57,6 @@ export function VideoRecorder({
   const [chunks, addChunks] = React.useState([]);
   const videoDisplay = React.useRef();
   const linkRef = React.useRef();
-  const fileInputTag= React.useRef();
   React.useEffect(() => {
     recordVideo(setError, setVideoStream, videoDisplay.current, setRecorder);
     videoDisplay.current.srcObject = videoStream;
@@ -76,7 +75,7 @@ export function VideoRecorder({
         //   addChunks((chunks) => [...chunks, e.data]);
         //   console.log("chunks",chunks)
         // };
-        
+
         recorder.onstop = function (e) {
           let blob = new Blob(chunks, { type: "webm" });
           //let file = URL.createObjectURL(blob);
@@ -89,7 +88,7 @@ export function VideoRecorder({
           let uploadFile;
           reader.onloadend = function () {
             uploadFile = reader.result;
-            console.log("***", uploadFile.type?uploadFile.type:"no type");
+            console.log("***", uploadFile.type ? uploadFile.type : "no type");
           };
           if (linkRef?.current) linkRef.current.href = file;
           DISPATCHupload({
@@ -97,12 +96,9 @@ export function VideoRecorder({
             action: {
               [guid]: {
                 name: "recording",
-                size:
-                  String((blob.size
-                    
-                    / 1000000).toFixed(1)) + "mb",
+                size: String((blob.size / 1000000).toFixed(1)) + "mb",
                 type: "webm",
-                file: new File([blob],"name"),
+                file: new File([blob], "upload.webm", { type: "video/webm" }),
                 status: "pending",
                 id: guid,
                 progress: 0,
@@ -117,12 +113,9 @@ export function VideoRecorder({
   );
   return (
     <div className="video-recorder-container">
-      <input ref={fileInputTag} type="file" hidden/>
       <video ref={videoDisplay} autoPlay controls></video>
       <div className="button-container">
         <button
-
-       
           onClick={(e) => {
             videoDisplay.current
               .captureStream()
@@ -136,7 +129,9 @@ export function VideoRecorder({
           Quit
         </button>
         <button
-           style={{backgroundColor:recorder?.state==="recording"?"red":"gray"}}
+          style={{
+            backgroundColor: recorder?.state === "recording" ? "red" : "gray",
+          }}
           onClick={(e) => {
             Record(recorder, addChunks, chunks);
           }}
@@ -155,7 +150,9 @@ export function VideoRecorder({
             Stop(recorder);
           }}
         >
-          <a ref={linkRef} download="someName.webm">Dload</a>
+          <a ref={linkRef} download="someName.webm">
+            Dload
+          </a>
         </button>
       </div>
     </div>
