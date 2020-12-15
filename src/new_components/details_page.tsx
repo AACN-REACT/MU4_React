@@ -250,7 +250,7 @@ console.log("Netforum Data-- ", netForumDisplayData)
           setter={setMediaDetails}
           name="FinalizedDateTime"
           displayName="Finalized Date"
-          data={new Date(mediaDetails?.FinalizedDateTime).toLocaleString()}
+          data={mediaDetails?.FinalizedDateTime?new Date(mediaDetails?.FinalizedDateTime).toLocaleString():null}
         />
         <NonEditableField
           isDetailsLoading={isDetailsLoading}

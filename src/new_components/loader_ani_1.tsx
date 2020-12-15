@@ -1,4 +1,7 @@
 import React from "react";
+import mulogo from '../images/SVG/acnLOGOgray.svg'
+import backgroundLogo from '../images/SVG/dbllogo.svg'
+
 
 export function LoaderOne({
   diameter = 20,
@@ -25,3 +28,18 @@ export function LoaderOne({
 
   return <div className="ani-container">{output}</div>;
 }
+
+export function LoaderThree({
+  diameter = 20,
+  numberOfCells = 20,
+  color = "red",
+  delay
+}) {
+  
+  return (<div className="ani-container loader-ani-three" style={{animationDelay:`${delay}s`,backgroundImage:`url(${backgroundLogo})`}}>
+    <div>Aacn</div>
+    <div>Media</div>
+    <div>Uploader</div>
+  </div>);
+}
+

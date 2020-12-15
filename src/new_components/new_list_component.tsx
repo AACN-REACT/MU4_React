@@ -22,9 +22,9 @@ import {
 } from "../utils/sorting/sorting_algorithms";
 import { textSearch } from "../utils/sorting/levenshtein";
 import Worker from "../utils/sorting/pendingList.worker";
-import { LoaderOne } from "./loader_ani_1";
-import {SearchCriteria} from "./search_criteria";
-import {Switch} from './switch-list'
+import { LoaderOne, LoaderThree } from "./loader_ani_1";
+import { SearchCriteria } from "./search_criteria";
+import { Switch } from "./switch-list";
 
 export function ListComponent({
   heading,
@@ -34,17 +34,15 @@ export function ListComponent({
   setMediaKey,
   worker,
   isLoading,
-  refreshList
+  refreshList,
 }) {
   //not sure what this does just yet
   let [list, changeList] = React.useState([]);
 
-  let [searchCriteria, setSearchCriteria]= React.useState("Title");
-  let [criteriaOpen, setCriteriaOpen] =  React.useState(false)
+  let [searchCriteria, setSearchCriteria] = React.useState("Title");
+  let [criteriaOpen, setCriteriaOpen] = React.useState(false);
 
-  const [transforms, setTransforms] = React.useState([
-sortNewestDate
-  ]);
+  const [transforms, setTransforms] = React.useState([sortNewestDate]);
   const [SORTING_WORKER] = React.useState(Worker);
   SORTING_WORKER.onmessage = function (e) {
     console.log("WORKER: ANSWER RETURNED", e.data);
@@ -88,9 +86,7 @@ sortNewestDate
   return (
     <div className={`list-${panelStateNumber}`}>
       <div className="list-heading">
-        <div>
-          {heading}...
-        </div>
+        <div>{heading}...</div>
         {/* <div
           onClick={(e) => {
             dispatchPanelState({
@@ -104,15 +100,21 @@ sortNewestDate
         >
           <img src={butt} />
         </div> */}
-        <Switch dispatchPanelState={dispatchPanelState} panelStateNumber={panelStateNumber} heading={heading} />
+        <Switch
+          dispatchPanelState={dispatchPanelState}
+          panelStateNumber={panelStateNumber}
+          heading={heading}
+        />
       </div>
       <div className="list-controls">
         <div className="search-bar" ref={searchbar}>
           <label>Search</label>
           <input
-          onFocus={e=>setCriteriaOpen(true)}
+            onFocus={(e) => setCriteriaOpen(true)}
             onChange={(e) => {
-              if(searchValue.current.value===""){ refreshList(l=>!l)}
+              if (searchValue.current.value === "") {
+                refreshList((l) => !l);
+              }
               SORTING_WORKER.postMessage({
                 word: searchValue.current.value,
                 list: videolist,
@@ -123,11 +125,15 @@ sortNewestDate
             ref={searchValue}
             className="search"
           />
-          {criteriaOpen?<SearchCriteria searchbar={searchbar.current} setCriteriaOpen={setCriteriaOpen} setSearchCriteria={setSearchCriteria} />:null}
+          {criteriaOpen ? (
+            <SearchCriteria
+              searchbar={searchbar.current}
+              setCriteriaOpen={setCriteriaOpen}
+              setSearchCriteria={setSearchCriteria}
+            />
+          ) : null}
         </div>
-        
-        
-        
+
         <div className="page-controls">
           <div
             onClick={(e) =>
@@ -442,14 +448,27 @@ sortNewestDate
         </div>
       </div>
       {isLoading ? (
-        <div className="flex-rows">
-          <LoaderOne />
-          <LoaderOne />
-          <LoaderOne />
-          <LoaderOne />
-          <LoaderOne />
-          <LoaderOne />
-          <LoaderOne />
+        <div className="flex-rows" style={{ perspective: `${700}px` }}>
+          <LoaderThree delay={Math.random()} />
+          <LoaderThree delay={Math.random()} />
+          <LoaderThree delay={Math.random()} />
+          <LoaderThree delay={Math.random()} />
+          <LoaderThree delay={Math.random()} />
+          <LoaderThree delay={Math.random()} />
+          <LoaderThree delay={Math.random()} />
+          <LoaderThree delay={Math.random()} />
+          <LoaderThree delay={Math.random()} />
+          <LoaderThree delay={Math.random()} />
+          {/* <LoaderOne/>
+          <LoaderOne/>
+          <LoaderOne/>
+          <LoaderOne/>
+          <LoaderOne/>
+          <LoaderOne/>
+          <LoaderOne/>
+          <LoaderOne/>
+          <LoaderOne/>
+          <LoaderOne/> */}
         </div>
       ) : (
         <div

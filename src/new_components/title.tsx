@@ -2,6 +2,7 @@ import React from "react";
 import { Logo } from "./new_title";
 import myimage from "../images/title_new2.png";
 import { ReactComponent as PurpleLogo } from "../images/SVG/SVG/boldLogo2.svg";
+import panelpop from "../images/SVG/panels.svg";
 import { Identity, Logout, Authentication } from "./contexts";
 // let mylogo = new Image();
 // mylogo.src = mylogo;
@@ -13,7 +14,7 @@ function TitleBar({setSidePanel, setRecord}) {
   return (
     <div className="title-container">
       <PurpleLogo />
-      <div className="panel-choose" onClick={e=>setSidePanel(s=>!s)}>P</div>
+      <div className="panel-pop" style={{backgroundImage:`url(${panelpop})`}} onClick={e=>setSidePanel(s=>!s)}>P</div>
       <div className="panel-choose" onClick={e=>setRecord(r=>!r)}>P</div>
       <div className="log-info">
         <div className="greeting">

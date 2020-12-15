@@ -8,14 +8,67 @@
   50% {
     opacity: 1;
     transform: scale(1);
+    
   }
   100% {
     opacity: 0;
     transform: scale(0);
   }
 }
+@keyframes zoom {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+@keyframes flip {
+  0% {
+    opacity: 0;
+    background-color:rgb(230, 230, 243);
+    transform: rotateX(-90deg);
+
+  }
+  20% {
+    opacity: 1;
+    background-color:ghostwhite;
+
+  }
+  50% {
+    opacity: 1;
+    background-color:white;
+    transform: rotateX(0deg);
+  }
+  80% {
+    opacity: 1;
+    background-color:ghostwhite;
+
+  }
+  100% {
+    opacity: 1;
+    background-color:rgb(230, 230, 243);
+    transform: rotateX(360deg);
+  }
+}
 
 .loader-ani-one {
+  margin: 3px;
+  // background-color:colors.$blue-dodger;
+  // border: 5px solid colors.$timberwolfgray;
+  background-color:colors.$timberwolfgray;
+  animation-fill-mode: backwards;
+  animation-name: float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.loader-ani-two {
   margin: 3px;
   // background-color:colors.$blue-dodger;
   border: 5px solid colors.$blue-dodger;
@@ -23,6 +76,28 @@
   animation-name: float;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
+}
+.loader-ani-three {
+  // background-blend-mode:soft-light;
+  backface-visibility:visible;
+  display:flex;
+  margin: 3px;
+  justify-content: space-between;
+  font-size: 1rem;
+  // background-color:colors.$blue-dodger;
+  animation-name: flip;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 2s;
+  animation-direction:alternate-reverse;
+  div{padding:10px};
+  background-attachment:fixed;
+   background-repeat:  no-repeat;
+  background-position: center 31%;
+  background-size: 75%;
+ 
+  
 }
 .ani-container {
   width: 100%;
