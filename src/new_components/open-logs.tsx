@@ -73,7 +73,7 @@ export function OpenLogs({ data }) {
       <div className="logs-table-body">
         {list?.map((el) => (
           <div key={el.Key} className="logs-table-row">
-            <div>{new Date(el.DateTime).toDateString()}</div>
+            <div>{new Date(el.DateTime).toLocaleString()}</div>
             <div>{el.Action}</div>
             <div>{el.Notes}</div>
             <div>{el.Username}</div>

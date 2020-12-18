@@ -72,6 +72,8 @@ pass them directly down to the sibling components, utilises the uploadListReduce
   const [toolTip, setTooltip] = React.useState(null);
 
   const [sidePanel, setSidePanel] = React.useState(false)
+  const [pendingFloat, setPendingFloat] = React.useState(false)
+
   const [shouldRecord, setRecord] = React.useState(false)
 
   /*-------------------------------------------------------------------------------------------------------*/

@@ -18,26 +18,7 @@
     opacity: 0;
   }
 }
-.upload-heading {
-  display: flex;
-  justify-content: space-between;
-  height: 40px;
-  padding: 10px;
-  border: 1px solid colors.$blue-aacn;
-  background-color: ghostwhite;
-  color: colors.$blue-aacn;
-  //font-family: fonts.$vt;
-  font-family: "sourcesans-light";
-  font-size: 1.3rem;
 
-  span {
-    font-family: "sourcesans-regular";
-  }
-  img {
-    width: 20px;
-    object-fit: contain;
-  }
-}
 
 [class*="ring-"] {
   opacity: 0;

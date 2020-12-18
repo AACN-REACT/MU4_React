@@ -125,11 +125,14 @@ export function ListComponent({
             ref={searchValue}
             className="search"
           />
-          {criteriaOpen ? (
+          {criteriaOpen && panelState.details_container !== 2 ? (
             <SearchCriteria
+              worker={SORTING_WORKER}
+              searchValue={searchValue}
               searchbar={searchbar.current}
               setCriteriaOpen={setCriteriaOpen}
               setSearchCriteria={setSearchCriteria}
+              videolist={videolist}
             />
           ) : null}
         </div>

@@ -24,7 +24,7 @@ export function UploadingListItem({
       setReturnedXhr(
         XHRNew(
           item,
-          `https://localhost:44340/api/v1/Medias/${item.id}?username=${loggedUser.profile.given_name}`,
+          `https://localhost:44340/api/v1/Medias/${item.id}?username=${loggedUser?.profile?.given_name}`,
           setprogress,
           dispatch,
           loggedUser.access_token,

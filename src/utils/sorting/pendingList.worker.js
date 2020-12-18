@@ -128,7 +128,7 @@ export function textSearch({word, list, field}) {
 
     return 0;
   }
-   console.log("WORKER -->", list.sort(sortText).slice(0, 10));
-  return list.sort(sortText).slice(0, 10);
+
+  return list.sort(sortText);
 
 }

@@ -2,12 +2,20 @@ import React from 'react'
 
 
 
-export function SearchCriteria({searchbar, setCriteriaOpen,setSearchCriteria}){
+export function SearchCriteria({worker,searchValue,searchbar, setCriteriaOpen,setSearchCriteria, videolist}){
 
 
     const [chosen, setChosen] = React.useState("Title")
 
-
+    React.useEffect(
+        function(){
+            worker.postMessage({
+                word: searchValue.current.value,
+                list: videolist,
+                field: chosen,
+              }); 
+        },[chosen]
+    )
 
     return (
         <div className="search-criteria" style={{top:(searchbar.getBoundingClientRect().top+40)+"px", left:(searchbar.getBoundingClientRect().left+70)+"px"}} >
