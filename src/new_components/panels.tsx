@@ -22,6 +22,12 @@ function panelReducer(state, action) {
         details_container: 2,
       };
       break;
+    case "OPEN DETAILS FLOAT":
+      newPanelState = {
+          ...newPanelState,
+        details_container: 4,
+      };
+      break;
     case "OPEN DETAILS OPEN UPLOAD CLOSE OTHERS":
       newPanelState = {
         upload_container: 2,
@@ -139,7 +145,7 @@ export function Panels(props) {
         </div>
       )}
       <div className={`list-container-${panelState.list_container}`}>
-        {[elements[1], elements[2], elements[3]]}
+        {[ props.pendingFloat?<Drag>{elements[1]}</Drag>:elements[1], elements[2], elements[3]]}
       </div>
       <div className={`details-container-${panelState.details_container}`}>
         {elements[4]}

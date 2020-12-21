@@ -17,7 +17,7 @@ import { UploadTable } from "../components/ListTables/listtable";
 import { videolist } from "../data/videolist";
 import { uploadListReducer } from "../utils/reducers/upload-list-reducer";
 import { Client } from "../network_functions/swaggerclient/swaggerclient";
-import {CatchNetworkError} from '../utils/catchNetworkError'
+import { CatchNetworkError } from "../utils/catchNetworkError";
 import {
   sortNewestDate,
   sortOldestDate,
@@ -43,7 +43,6 @@ function bin2String(array) {
   }
   return JSON.parse(result).error;
 }
-
 
 const mediaManagement = new EndpointConstructor({
   origin: "https://localhost:44340",
@@ -71,10 +70,10 @@ pass them directly down to the sibling components, utilises the uploadListReduce
   /*Now we set up state for a tooltip */
   const [toolTip, setTooltip] = React.useState(null);
 
-  const [sidePanel, setSidePanel] = React.useState(false)
-  const [pendingFloat, setPendingFloat] = React.useState(false)
+  const [sidePanel, setSidePanel] = React.useState(false);
+  const [pendingFloat, setPendingFloat] = React.useState(false);
 
-  const [shouldRecord, setRecord] = React.useState(false)
+  const [shouldRecord, setRecord] = React.useState(false);
 
   /*-------------------------------------------------------------------------------------------------------*/
   /* this initial value is too check if we have a key value in the url params, so that we can use it to
@@ -132,7 +131,6 @@ this needs to changed into a custome hook: */
           })
           .then(function () {
             setLoading((l) => false);
-  
           })
           .catch((err) => {
             console.log("my error", err);
@@ -157,8 +155,16 @@ this needs to changed into a custome hook: */
       >
         <Tooltip toolTip={toolTip} />
         <ErrorToast close={setErrorMsg} msg={ErrorMsg} />
-        <TitleBar setSidePanel={setSidePanel} setRecord={setRecord} />
-        <Panels sidePanel={sidePanel} openDetails={localStorage.getItem("mediakey") || null}>
+        <TitleBar
+          setSidePanel={setSidePanel}
+          setRecord={setRecord}
+          setPendingFloat={setPendingFloat}
+        />
+        <Panels
+          sidePanel={sidePanel}
+          pendingFloat={pendingFloat}
+          openDetails={localStorage.getItem("mediakey") || null}
+        >
           <UploadTable
             setMediaKey={setMediaKey}
             list={uploadSTATE}

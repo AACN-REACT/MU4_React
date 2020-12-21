@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Portal } from "../mediauploader/components/portal";
 
-export function Drag({ children }) {
+export function Drag({ children, width=null }) {
   const draggContainer = React.useRef();
 
 
@@ -45,7 +45,7 @@ export function Drag({ children }) {
   );
 
   return ReactDOM.createPortal(
-    <div ref={draggContainer} className="draggable" onMouseDown={handleMouseDown}>
+    <div ref={draggContainer} className="draggable" style={{width: width}} onMouseDown={handleMouseDown}>
       {children}
     </div>, document.getElementById('portal')
   );

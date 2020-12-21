@@ -6,7 +6,7 @@ import panelpop from "../images/SVG/panels.svg";
 import { Identity, Logout, Authentication } from "./contexts";
 // let mylogo = new Image();
 // mylogo.src = mylogo;
-function TitleBar({setSidePanel, setRecord}) {
+function TitleBar({setSidePanel, setRecord, setPendingFloat}) {
   const Id = React.useContext(Identity);
   const logmeout = React.useContext(Logout);
   const isAuth = React.useContext(Authentication);
@@ -15,6 +15,7 @@ function TitleBar({setSidePanel, setRecord}) {
     <div className="title-container">
       <PurpleLogo />
       <div className="panel-pop" style={{backgroundImage:`url(${panelpop})`}} onClick={e=>setSidePanel(s=>!s)}>P</div>
+      <div className="panel-pop" style={{backgroundImage:`url(${panelpop})`}} onClick={e=>setPendingFloat(s=>!s)}>P</div>
       <div className="panel-choose" onClick={e=>setRecord(r=>!r)}>P</div>
       <div className="log-info">
         <div className="greeting">

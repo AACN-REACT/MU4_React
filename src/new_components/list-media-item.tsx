@@ -11,8 +11,10 @@ export function ListMediaItem({panelStateNumber, mediaItem, dispatchPanelState, 
        return ( <div
               className="inner-container"
               onClick={(e) => {
+                
+
                 setMediaKey(mediaItem.Key);
-                dispatchPanelState({ type: "OPEN DETAILS CLOSE OTHERS" });
+                e.shiftKey?dispatchPanelState({ type: "OPEN DETAILS FLOAT"}):dispatchPanelState({ type: "OPEN DETAILS CLOSE OTHERS" });
               }}
             >
               <div key="column-title" className="column-title">
