@@ -1,13 +1,8 @@
 import React from "react";
 import { render } from "react-dom";
-//import "./styles/main.scss";
+
 import "./styles/newstyles/main_new.scss";
-//import "./mediauploader/styles/main.scss";
-//components
 
-//import
-
-//import App from "./components/app2";
 import { App } from "./new_components/app_new";
 
 //import { App } from "./mediauploader/app";
