@@ -145,10 +145,10 @@ export function sortNetforumLink(a, b) {
 }
 export function sortNetforumLinkReverse(a, b) {
   if (a.HasNetforumLink && !b.HasNetforumLink) {
-    return 1;
+    return -1;
   }
   if (b.HasNetforumLink && !a.HasNetforumLink) {
-    return -1;
+    return 1;
   }
 
   return 0;
@@ -173,3 +173,33 @@ export function sortKeywords(a, b) {
 
   return 0;
 }
+
+export function sortStatusReverse(a, b) {
+  let aA = a.Status.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
+  let bB = b.Status.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
+
+  let elementsToCompare = [aA, bB];
+   ;
+  if (elementsToCompare.sort()[0] === aA) {
+    return 1;
+  }
+  if (elementsToCompare.sort()[0] === bB) {
+    return -1;
+  }
+  return 0;
+}
+export function sortStatus(a, b) {
+  let aA = a.Status.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
+  let bB = b.Status.replace(/[^a-zA-Z]|(\s)/g, "").toLowerCase();
+
+  let elementsToCompare = [aA, bB];
+   ;
+  if (elementsToCompare.sort()[0] === aA) {
+    return -1;
+  }
+  if (elementsToCompare.sort()[0] === bB) {
+    return 1;
+  }
+  return 0;
+}
+

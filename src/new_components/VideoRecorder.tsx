@@ -17,34 +17,6 @@ function Stop(recorder) {
   if (recorder.state === "recording") recording = recorder.stop();
 
   console.log("recording", recorder);
-
-  // const guid = getGuid();
-  //         if (isAcceptableType(file) && isWithinSizeLimit(file, sizeLimit)) {
-
-  //        DISPATCHupload({
-  //             type: "ADD",
-  //             action: {
-  //               [guid]: {
-  //                 name: file["name"].split(".")[0],
-  //                 size: (parseInt(file["size"]) / 1000000).toFixed(1) + "mb",
-  //                 type: file["type"]
-  //                   .substring(file["type"].indexOf("/"))
-  //                   .slice(1),
-  //                 file: file,
-  //                 status: "pending",
-  //                 id: guid,
-  //                 progress: 0,
-  //               },
-  //             },
-  //           });
-  //           dispatchPanelState({ type: "OPEN UPLOAD" }); },1500)
-  //         } else if (!isAcceptableType(file)) {
-  //           errorCollection.push(<h4>{`${file["name"]} is not an accepted video format`}</h4>);
-  //         } else {
-  //           errorCollection.push(<h4>{`${file["name"]} is not within the size limit of ${sizeLimit / 1000000} mb`}</h4>);
-  //         }
-  //       }
-  //       if(errorCollection.length>0){setError(errorCollection)}
 }
 
 export function VideoRecorder({

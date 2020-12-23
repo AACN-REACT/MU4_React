@@ -19,6 +19,8 @@ import {
   sortAddedByReverse,
   sortOriginal,
   sortOriginalReverse,
+  sortStatus,
+  sortStatusReverse
 } from "../utils/sorting/sorting_algorithms";
 import { textSearch } from "../utils/sorting/levenshtein";
 import Worker from "../utils/sorting/pendingList.worker";
@@ -429,6 +431,22 @@ export function ListComponent({
           className={`column-status-heading ${
             panelStateNumber === 2 ? "" : "column-close"
           }`}
+
+   onClick={function(e) {       setTransforms((t) => {
+            if (t.indexOf(sortStatus) > -1) {
+              return [
+                ...t.filter((el) => el !== sortStatus),
+                sortStatusReverse,
+              ];
+            }
+            return [
+              ...t.filter((el) => el !== sortStatusReverse),
+              sortStatus,
+            ];
+          })}}
+
+
+
         >
           Status
         </div>

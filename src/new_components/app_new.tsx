@@ -1,11 +1,11 @@
 import React from "react";
-import { DropZone } from "../components/dropzone/dropzoneOLD";
+
 import { aacn, pkce, pkcetls } from "../data/identity-config";
 import { DropzoneContainer } from "./dropzone_container";
 import { useAuth } from "../utils/custom_hooks/useauth";
 import { CompletedList } from "./completed_list";
 import { DetailsPage } from "./details_page";
-import { Dummy } from "./dummy";
+
 import { Panels } from "./panels";
 import { PendingList } from "./pending_list";
 // import { ListComponent } from "./list-component";
@@ -16,26 +16,12 @@ import { ErrorToast } from "./errortoast";
 import { UploadTable } from "../components/ListTables/listtable";
 import { videolist } from "../data/videolist";
 import { uploadListReducer } from "../utils/reducers/upload-list-reducer";
-import { Client } from "../network_functions/swaggerclient/swaggerclient";
 import { CatchNetworkError } from "../utils/catchNetworkError";
-import {
-  sortNewestDate,
-  sortOldestDate,
-  sortTitle,
-  sortFileSize,
-} from "../utils/sorting/sorting_algorithms";
-import { Levenshtein } from "../utils/sorting/levenshtein";
+
 import { EndpointConstructor } from "../mediauploader/utils/endpoint_constructor";
-import {
-  Authentication,
-  Identity,
-  Logout,
-  Endpoint,
-  ErrorHandler,
-} from "./contexts";
 
 import { GlobalContext } from "./contexts";
-import { SetErrorMsg } from "../mediauploader/components/globalstateContext";
+
 function bin2String(array) {
   var result = "";
   for (var i = 0; i < array.length; i++) {
@@ -193,7 +179,7 @@ this needs to changed into a custome hook: */
             shouldRecord={shouldRecord}
           />
           <ListComponent
-          setFloat={setFinalizedFloat}
+            setFloat={setFinalizedFloat}
             heading="Completed"
             videolist={finalizedList}
             setMediaKey={setMediaKey}

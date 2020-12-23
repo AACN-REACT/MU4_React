@@ -115,14 +115,7 @@ export function textSearch(word: string, list: any[], field: string) {
   function sortText(a, b) {
     let first = new Levenshtein(a[field].toLowerCase().substring(0,word.length), word);
     let second = new Levenshtein(b[field].toLowerCase().substring(0,word.length), word);
-    console.log(
-      "DISTANCE",
-      first.distance,
-      second.distance,
-      list,
-      a[field],
-      word
-    );
+
     if (first.distance - second.distance > 0) {
       return 1;
     }
@@ -132,6 +125,6 @@ export function textSearch(word: string, list: any[], field: string) {
 
     return 0;
   }
-  console.log(">>>", list.sort(sortText).slice(0, 10));
+
   return list.sort(sortText).slice(0, 10);
 }
