@@ -1,6 +1,6 @@
 import React from "react";
 
-export function Switch({ dispatchPanelState, panelStateNumber, heading }) {
+export function Switch({floatInfo, dispatchPanelState, panelStateNumber, heading }) {
 
 
 

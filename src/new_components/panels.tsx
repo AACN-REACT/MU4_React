@@ -146,7 +146,7 @@ export function Panels(props) {
       )}
       <div className={`list-container-${panelState.list_container}`} style={{justifyContent:props.pendingFloat && props.finalizedFloat?`center`:props.pendingFloat?`flex-end`:`flex-start`}}>
         {[
-          props.pendingFloat ? <Drag>{elements[1]}</Drag> : elements[1],
+          props.pendingFloat ? <Drag >{elements[1]}</Drag> : elements[1],
           elements[2],
           props.finalizedFloat ? <Drag>{elements[3]}</Drag> : elements[3],
         ]}

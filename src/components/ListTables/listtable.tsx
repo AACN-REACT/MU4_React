@@ -6,6 +6,7 @@ import { Switch} from '../../new_components/switch-upload'
 import butt from "../images/switch.png";
 
 export function UploadTable({
+  floatInfo,
   setMediaKey,
   list,
   url,

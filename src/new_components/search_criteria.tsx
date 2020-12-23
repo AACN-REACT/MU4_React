@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+
+import cross from '../images/SVG/SVG/greyCross.svg'
 
 
 
@@ -17,8 +19,9 @@ export function SearchCriteria({worker,searchValue,searchbar, setCriteriaOpen,se
         },[chosen]
     )
 
+    console.log("COORD", searchbar.getBoundingClientRect().top, searchbar.getBoundingClientRect().left)
     return (
-        <div className="search-criteria" style={{top:(searchbar.getBoundingClientRect().top+40)+"px", left:(searchbar.getBoundingClientRect().left+70)+"px"}} >
+        <div className="search-criteria" style={{top:(searchbar.offsetTop+40)+"px", left:(searchbar.offsetLeft+70)+"px"}} >
             <div key="title" className={`search-icon ${chosen==="Title"?" search-chosen":""}`} onClick={function(e){if(chosen==="Title"){setChosen(" ");setSearchCriteria("Title")} else {setChosen("Title");setSearchCriteria("Title")}}} >
                 T
          </div>
@@ -32,7 +35,7 @@ export function SearchCriteria({worker,searchValue,searchbar, setCriteriaOpen,se
                 O
                 </div>
 
-                <div onClick={e=>{setSearchCriteria("Title");setCriteriaOpen(false) }} className="close-search-criteria">x</div>
+                <div style={{backgroundImage:`url(${cross})`}} onClick={e=>{setSearchCriteria("Title");setCriteriaOpen(false) }} className="close-search-criteria"></div>
 
 
         </div>

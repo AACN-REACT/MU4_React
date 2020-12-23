@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Portal } from "../mediauploader/components/portal";
 
-export function Drag({ children, width=null }) {
+export function Drag({ children, width="auto" }) {
   const draggContainer = React.useRef();
 
 

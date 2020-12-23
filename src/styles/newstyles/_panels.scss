@@ -10,6 +10,7 @@
   }
 }
 .search-bar {
+  // position:relative;
   padding: 5px;
   font-family: "sourcesans-regular";
   color: colors.$blue-denim;
@@ -420,9 +421,23 @@
     background-color: colors.$blue-dodger;
     color: white;
   }
-  & > .close-search-criteria {
-    background-color: colors.$orange-cinnamon;
-    color: white;
+  & > .close-search-criteria {  height: 30px;
+    border-radius: 15px;
+    width: 30px;
+    background-color: white;
+    color: colors.$cloudygray;
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+  
+    cursor: pointer;
+    box-shadow: 2px 2px 7px colors.$merlingray;
+    transition: 0.2s all;
+    &:hover {
+      background-color: colors.$purple-medium;
+      color: white;
+    }
+    
   }
 }
 
