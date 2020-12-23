@@ -27,6 +27,7 @@ import { SearchCriteria } from "./search_criteria";
 import { Switch } from "./switch-list";
 
 export function ListComponent({
+  setFloat,
   heading,
   dispatchPanelState,
   panelState,
@@ -35,6 +36,7 @@ export function ListComponent({
   worker,
   isLoading,
   refreshList,
+  floatInfo
 }) {
   //not sure what this does just yet
   let [list, changeList] = React.useState([]);
@@ -85,7 +87,7 @@ export function ListComponent({
 
   return (
     <div className={`list-${panelStateNumber}`}>
-      <div className="list-heading">
+      <div className="list-heading" onDoubleClick={e=>setFloat(s=>!s)}>
         <div>{heading}...</div>
         {/* <div
           onClick={(e) => {
@@ -101,6 +103,7 @@ export function ListComponent({
           <img src={butt} />
         </div> */}
         <Switch
+          floatInfo={floatInfo}
           dispatchPanelState={dispatchPanelState}
           panelStateNumber={panelStateNumber}
           heading={heading}

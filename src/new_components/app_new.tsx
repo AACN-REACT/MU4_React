@@ -72,6 +72,8 @@ pass them directly down to the sibling components, utilises the uploadListReduce
 
   const [sidePanel, setSidePanel] = React.useState(false);
   const [pendingFloat, setPendingFloat] = React.useState(false);
+  const [finalizedFloat, setFinalizedFloat] = React.useState(false);
+  const [uploadFloat, setUploadFloat] = React.useState(false);
 
   const [shouldRecord, setRecord] = React.useState(false);
 
@@ -163,6 +165,8 @@ this needs to changed into a custome hook: */
         <Panels
           sidePanel={sidePanel}
           pendingFloat={pendingFloat}
+          finalizedFloat={finalizedFloat}
+          uploadFloat={uploadFloat}
           openDetails={localStorage.getItem("mediakey") || null}
         >
           <UploadTable
@@ -174,6 +178,7 @@ this needs to changed into a custome hook: */
             setError={setErrorMsg}
           />
           <ListComponent
+            setFloat={setPendingFloat}
             heading="Pending"
             videolist={pendingList}
             setMediaKey={setMediaKey}
@@ -188,6 +193,7 @@ this needs to changed into a custome hook: */
             shouldRecord={shouldRecord}
           />
           <ListComponent
+          setFloat={setFinalizedFloat}
             heading="Completed"
             videolist={finalizedList}
             setMediaKey={setMediaKey}

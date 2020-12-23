@@ -11,8 +11,9 @@ import { DeleteButton } from "./delete_button";
 import { FinalizeButton } from "./finalize_button";
 import { Identity, RefreshList, ErrorHandler } from "./contexts";
 import { CatchNetworkError } from "../utils/catchNetworkError";
-import {Switch} from './switch-details'
-import {NewWindow} from './new_window'
+import { Switch } from "./switch-details";
+import { DetailsContents } from "./details_contents";
+import { NewWindow } from "./new_window";
 
 export function DetailsPage({
   mediaKey,
@@ -24,12 +25,23 @@ export function DetailsPage({
   const [mediaDetails, setMediaDetails] = React.useState(null);
   const [toggle, refetchData] = React.useState(false);
   const identity = React.useContext(Identity);
-  const setErrorMsg= React.useContext(ErrorHandler);
-  //const [emptyPresentation, setEmptyPresentation] = React.useSate(false);
+  const setErrorMsg = React.useContext(ErrorHandler);
   const [isDetailsLoading, setDetailsLoading] = React.useState(isLoading);
 
-  const [arrayOfFloatingDetailsPages, setArrayOfFloatingDetailsPages] = React.setState([])
+  //const [emptyPresentation, setEmptyPresentation] = React.useSate(false);
+
+  const [
+    arrayOfFloatingDetailsPages,
+    setArrayOfFloatingDetailsPages,
+  ] = React.useState(new Array());
   console.log("MEDIA ", mediaDetails, mediaKey);
+
+  const netForumDisplayData = mediaDetails?.NetforumLink
+    ? mediaDetails.NetforumLink
+    : "";
+  console.log("Netforum Data-- ", netForumDisplayData);
+  console.log("ARRAY", arrayOfFloatingDetailsPages);
+
   React.useEffect(
     function () {
          let localtoken = false;
@@ -57,7 +69,7 @@ export function DetailsPage({
           }
         })
         .then((res) => {
-          setMediaDetails(res["Result"]);
+        setMediaDetails(res["Result"]);
           setDetailsLoading(false);
         })
       }
@@ -71,465 +83,26 @@ export function DetailsPage({
     },
     [mediaKey, identity, toggle]
   );
-const netForumDisplayData = mediaDetails?.NetforumLink?mediaDetails.NetforumLink:""
-console.log("Netforum Data-- ", netForumDisplayData)
-return (
-    <div className="details-page">
-      <div className="details-bar">
-        <span className="media-details-title">media details...</span>
-        <div
-          style={{ cursor: "pointer" }}
-          onClick={(e) => {
-            window.open(
-              `https://localhost:8080/?mediakey=${mediaKey}`,
-              "_blank"
-            );
-          }}
-        >
-          <span>Key:</span> {mediaKey}
-        </div>
-        <div
-          onClick={(e) => {
-            panelState.details_container === 0
-              ? dispatchPanelState({ type: "OPEN DETAILS CLOSE OTHERS" })
-              : (function () {
-                  refreshList((d) => !d);
-                  dispatchPanelState({ type: "CLOSE DETAILS OPEN OTHER" });
-                })();
-          }}
-          src={butt}
-        ><Switch dispatchPanelState={dispatchPanelState} panelState={panelState} refreshList={refreshList} /> </div>
-      </div>
-      <div className="details-frame">
-        {mediaDetails?.CanEdit ? (
-          <EditableField
-            isDetailsLoading={isDetailsLoading}
-            method="PUT"
-            setter={setMediaDetails}
-            name="Title"
-            displayName="Title"
-            data={mediaDetails?.Title}
-            endpoint={"https://localhost:44340/api/v1/Medias/"}
-            user={identity?.profile?.given_name}
-            itemKey={mediaDetails?.Key}
-            itemName="title"
-            token={identity.access_token}
-            refetchData
-          />
-        ) : (
-          <NonEditableField
-            isDetailsLoading={isDetailsLoading}
-            method="PUT"
-            setter={setMediaDetails}
-            name="Title"
-            displayName="Title"
-            data={mediaDetails?.Title}
-            endpoint={"https://localhost:44340/api/v1/Medias/"}
-            user="amin"
-            itemKey={mediaDetails?.Key}
-            itemName="title"
-            token={identity.access_token}
-            refetchData
-          />
-        )}
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          setter={setMediaDetails}
-          name="StartedByUsername"
-          displayName="Added By.."
-          data={mediaDetails?.StartedByUsername}
-        />
-        {mediaDetails?.CanEdit ? (
-          <KeywordEditableField
-            close={close}
-            isDetailsLoading={isDetailsLoading}
-            method="POST"
-            setter={setMediaDetails}
-            name="Keywords"
-            displayName="Keywords"
-            data={mediaDetails?.Keywords}
-            endpoint={"https://localhost:44340/api/v1/Medias/"}
-            user={identity?.profile?.given_name}
-            itemKey={mediaDetails?.Key}
-            itemName="keyword"
-            token={identity.access_token}
-            refetchData={refetchData}
-          />
-        ) : (
-          <NonEditableField
-            isDetailsLoading={isDetailsLoading}
-            method="POST"
-            setter={setMediaDetails}
-            name="Keywords"
-            displayName="Keywords"
-            data={mediaDetails?.Keywords}
-            endpoint={"https://localhost:44340/api/v1/Medias/"}
-            user="amin"
-            itemKey={mediaDetails?.Key}
-            itemName="keyword"
-            token={identity.access_token}
-            refetchData={refetchData}
-          />
-        )}
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          setter={setMediaDetails}
-          name="StartDateTime"
-          displayName="Added Date.."
-          data={new Date(mediaDetails?.StartDateTime).toLocaleString()}
-        />
-        {mediaDetails?.CanEdit ? (
-          <NetforumEditableField
-            isDetailsLoading={isDetailsLoading}
-            method="PUT"
-            setter={setMediaDetails}
-            name="NetforumLink"
-            displayName="Netforum Link"
-            data={mediaDetails?.NetforumItemLink}
-            endpoint={"https://localhost:44340/api/v1/Medias/"}
-            netForumBaseV1={"https://localhost:44340/api/v1/NetforumItems/"}
-            netForumBaseV0={"https://localhost:44340/api/v0/NetforumItems/"}
-            user={identity?.profile?.given_name}
-            itemKey={mediaDetails?.Key}
-            itemName="netforumItemLink"
-            token={identity.access_token}
-            refetchData={refetchData}
-          />
-        ) : (
-          <NonEditableField
-            isDetailsLoading={isDetailsLoading}
-            method="PUT"
-            setter={setMediaDetails}
-            name="NetforumLink"
-            displayName="Netforum Link"
-            data={mediaDetails?.NetforumItemLink}
-            endpoint={"https://localhost:44340/api/v1/Medias/"}
-            netForumBaseV1={"https://localhost:44340/api/v1/NetforumItems/"}
-            netForumBaseV0={"https://localhost:44340/api/v0/NetforumItems/"}
-            user={identity?.profile?.given_name}
-            itemKey={mediaDetails?.Key}
-            itemName="netforumItemLink"
-            token={identity.access_token}
-            refetchData={refetchData}
-          />
-        )}
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          setter={setMediaDetails}
-          name="StartedByUsername"
-          displayName="Media Item Key"
-          data={mediaDetails?.Key}
-        />
-        <NonEditableField
-          setter={setMediaDetails}
-          isDetailsLoading={isDetailsLoading}
-          name="Status"
-          displayName="Current Status"
-          data={mediaDetails?.Status}
-        />
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          setter={setMediaDetails}
-          name="OriginalFileName"
-          displayName="Original File Name"
-          data={mediaDetails?.OriginalFileName}
-        />
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          setter={setMediaDetails}
-          name="FinalizedByUsername"
-          displayName="Finalized by..."
-          data={mediaDetails?.FinalizedByUsername}
-        />
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          setter={setMediaDetails}
-          name="FileSize"
-          displayName="File Size(mb)"
-          data={(parseInt(mediaDetails?.FileSize) / 1000000).toFixed(3)}
-        />
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          setter={setMediaDetails}
-          name="FinalizedDateTime"
-          displayName="Finalized Date"
-          data={mediaDetails?.FinalizedDateTime?new Date(mediaDetails?.FinalizedDateTime).toLocaleString():null}
-        />
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          setter={setMediaDetails}
-          name="FileDuration"
-          displayName="File Duration"
-          data={mediaDetails?.FileDuration}
-        />
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          method="PUT"
-          setter={setMediaDetails}
-          name="NetforumLink"
-          displayName="Mediahost URL"
-          data={mediaDetails?.MediaHostUrl}
-          endpoint={"https://localhost:44340/api/v1/Medias/"}
-          user={identity?.profile?.given_name}
-          itemKey={mediaDetails?.MediaHostUrl}
-          itemName="originalfilename"
-          token={identity.access_token}
-        />
-      </div>
-      <div className="button-container">
-        <DeleteButton
+  return (
+    <>
+  <DetailsContents
+        mediaKey={mediaKey}
+        errorHandler={ErrorHandler}
+        panelState={panelState}
+        dispatchPanelState={dispatchPanelState}
+        refreshList={refreshList}
+        identity={identity}
+        mediaDetails={mediaDetails}
+        setErrorMsg={setErrorMsg}
+        close={close}
+        refetchData={refetchData}
+        toggle={toggle}
+        isDetailsLoading={isDetailsLoading}
         setDetailsLoading={setDetailsLoading}
-          disabled={!mediaDetails?.CanEdit}
-          user={identity.given_name || "guest"}
-          itemKey={mediaDetails?.Key}
-          identity={identity}
-          setErrorMsg={setErrorMsg}
-          refetchData={refetchData}
-          />
-        <FinalizeButton
-        setDetailsLoading={setDetailsLoading}
-          disabled={!mediaDetails?.CanEdit}
-          user={identity.given_name || "guest"}
-          itemKey={mediaDetails?.Key}
-          identity={identity}
-          setErrorMsg={setErrorMsg}
-          refetchData={refetchData}
-        />
-      </div>
+        setMediaDetails={setMediaDetails}
 
-      <OpenLogs data={mediaDetails?.MediaAudits} />
-    </div>
- 
-  )}
-  else return (
-    <NewWindow key={mediaDetails?.Key}>
-       <div className="details-page">
-      <div className="details-bar">
-        <span className="media-details-title">media details...</span>
-        <div
-          style={{ cursor: "pointer" }}
-          onClick={(e) => {
-            window.open(
-              `https://localhost:8080/?mediakey=${mediaKey}`,
-              "_blank"
-            );
-          }}
-        >
-          <span>Key:</span> {mediaKey}
-        </div>
-        <div
-          onClick={(e) => {
-            panelState.details_container === 0
-              ? dispatchPanelState({ type: "OPEN DETAILS CLOSE OTHERS" })
-              : (function () {
-                  refreshList((d) => !d);
-                  dispatchPanelState({ type: "CLOSE DETAILS OPEN OTHER" });
-                })();
-          }}
-          src={butt}
-        ><Switch dispatchPanelState={dispatchPanelState} panelState={panelState} refreshList={refreshList} /> </div>
-      </div>
-      <div className="details-frame">
-        {mediaDetails?.CanEdit ? (
-          <EditableField
-            isDetailsLoading={isDetailsLoading}
-            method="PUT"
-            setter={setMediaDetails}
-            name="Title"
-            displayName="Title"
-            data={mediaDetails?.Title}
-            endpoint={"https://localhost:44340/api/v1/Medias/"}
-            user={identity?.profile?.given_name}
-            itemKey={mediaDetails?.Key}
-            itemName="title"
-            token={identity.access_token}
-            refetchData
-          />
-        ) : (
-          <NonEditableField
-            isDetailsLoading={isDetailsLoading}
-            method="PUT"
-            setter={setMediaDetails}
-            name="Title"
-            displayName="Title"
-            data={mediaDetails?.Title}
-            endpoint={"https://localhost:44340/api/v1/Medias/"}
-            user="amin"
-            itemKey={mediaDetails?.Key}
-            itemName="title"
-            token={identity.access_token}
-            refetchData
-          />
-        )}
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          setter={setMediaDetails}
-          name="StartedByUsername"
-          displayName="Added By.."
-          data={mediaDetails?.StartedByUsername}
-        />
-        {mediaDetails?.CanEdit ? (
-          <KeywordEditableField
-            close={close}
-            isDetailsLoading={isDetailsLoading}
-            method="POST"
-            setter={setMediaDetails}
-            name="Keywords"
-            displayName="Keywords"
-            data={mediaDetails?.Keywords}
-            endpoint={"https://localhost:44340/api/v1/Medias/"}
-            user={identity?.profile?.given_name}
-            itemKey={mediaDetails?.Key}
-            itemName="keyword"
-            token={identity.access_token}
-            refetchData={refetchData}
-          />
-        ) : (
-          <NonEditableField
-            isDetailsLoading={isDetailsLoading}
-            method="POST"
-            setter={setMediaDetails}
-            name="Keywords"
-            displayName="Keywords"
-            data={mediaDetails?.Keywords}
-            endpoint={"https://localhost:44340/api/v1/Medias/"}
-            user="amin"
-            itemKey={mediaDetails?.Key}
-            itemName="keyword"
-            token={identity.access_token}
-            refetchData={refetchData}
-          />
-        )}
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          setter={setMediaDetails}
-          name="StartDateTime"
-          displayName="Added Date.."
-          data={new Date(mediaDetails?.StartDateTime).toLocaleString()}
-        />
-        {mediaDetails?.CanEdit ? (
-          <NetforumEditableField
-            isDetailsLoading={isDetailsLoading}
-            method="PUT"
-            setter={setMediaDetails}
-            name="NetforumLink"
-            displayName="Netforum Link"
-            data={mediaDetails?.NetforumItemLink}
-            endpoint={"https://localhost:44340/api/v1/Medias/"}
-            netForumBaseV1={"https://localhost:44340/api/v1/NetforumItems/"}
-            netForumBaseV0={"https://localhost:44340/api/v0/NetforumItems/"}
-            user={identity?.profile?.given_name}
-            itemKey={mediaDetails?.Key}
-            itemName="netforumItemLink"
-            token={identity.access_token}
-            refetchData={refetchData}
-          />
-        ) : (
-          <NonEditableField
-            isDetailsLoading={isDetailsLoading}
-            method="PUT"
-            setter={setMediaDetails}
-            name="NetforumLink"
-            displayName="Netforum Link"
-            data={mediaDetails?.NetforumItemLink}
-            endpoint={"https://localhost:44340/api/v1/Medias/"}
-            netForumBaseV1={"https://localhost:44340/api/v1/NetforumItems/"}
-            netForumBaseV0={"https://localhost:44340/api/v0/NetforumItems/"}
-            user={identity?.profile?.given_name}
-            itemKey={mediaDetails?.Key}
-            itemName="netforumItemLink"
-            token={identity.access_token}
-            refetchData={refetchData}
-          />
-        )}
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          setter={setMediaDetails}
-          name="StartedByUsername"
-          displayName="Media Item Key"
-          data={mediaDetails?.Key}
-        />
-        <NonEditableField
-          setter={setMediaDetails}
-          isDetailsLoading={isDetailsLoading}
-          name="Status"
-          displayName="Current Status"
-          data={mediaDetails?.Status}
-        />
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          setter={setMediaDetails}
-          name="OriginalFileName"
-          displayName="Original File Name"
-          data={mediaDetails?.OriginalFileName}
-        />
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          setter={setMediaDetails}
-          name="FinalizedByUsername"
-          displayName="Finalized by..."
-          data={mediaDetails?.FinalizedByUsername}
-        />
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          setter={setMediaDetails}
-          name="FileSize"
-          displayName="File Size(mb)"
-          data={(parseInt(mediaDetails?.FileSize) / 1000000).toFixed(3)}
-        />
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          setter={setMediaDetails}
-          name="FinalizedDateTime"
-          displayName="Finalized Date"
-          data={mediaDetails?.FinalizedDateTime?new Date(mediaDetails?.FinalizedDateTime).toLocaleString():null}
-        />
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          setter={setMediaDetails}
-          name="FileDuration"
-          displayName="File Duration"
-          data={mediaDetails?.FileDuration}
-        />
-        <NonEditableField
-          isDetailsLoading={isDetailsLoading}
-          method="PUT"
-          setter={setMediaDetails}
-          name="NetforumLink"
-          displayName="Mediahost URL"
-          data={mediaDetails?.MediaHostUrl}
-          endpoint={"https://localhost:44340/api/v1/Medias/"}
-          user={identity?.profile?.given_name}
-          itemKey={mediaDetails?.MediaHostUrl}
-          itemName="originalfilename"
-          token={identity.access_token}
-        />
-      </div>
-      <div className="button-container">
-        <DeleteButton
-        setDetailsLoading={setDetailsLoading}
-          disabled={!mediaDetails?.CanEdit}
-          user={identity.given_name || "guest"}
-          itemKey={mediaDetails?.Key}
-          identity={identity}
-          setErrorMsg={setErrorMsg}
-          refetchData={refetchData}
-          />
-        <FinalizeButton
-        setDetailsLoading={setDetailsLoading}
-          disabled={!mediaDetails?.CanEdit}
-          user={identity.given_name || "guest"}
-          itemKey={mediaDetails?.Key}
-          identity={identity}
-          setErrorMsg={setErrorMsg}
-          refetchData={refetchData}
-        />
-      </div>
-
-      <OpenLogs data={mediaDetails?.MediaAudits} />
-    </div>
- 
-    </NewWindow>
-  )
-  
+        setArrayOfFloatingDetailsPages={setArrayOfFloatingDetailsPages}
+      />
+    </>
+  );
 }

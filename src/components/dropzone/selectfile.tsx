@@ -1,4 +1,4 @@
-import React from "react";
+timport React from "react";
 
 //import filechecker
 import { isAcceptableType, isWithinSizeLimit } from "../../utils/fileprocess";

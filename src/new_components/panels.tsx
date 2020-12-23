@@ -24,7 +24,7 @@ function panelReducer(state, action) {
       break;
     case "OPEN DETAILS FLOAT":
       newPanelState = {
-          ...newPanelState,
+        ...newPanelState,
         details_container: 4,
       };
       break;
@@ -131,7 +131,7 @@ export function Panels(props) {
 
   //this piece of code adds the panel state and panel state dispatcher to our anonymous children's props
   const elements = React.Children.map(props.children, (el) =>
-    React.cloneElement(el, { panelState, dispatchPanelState })
+    React.cloneElement(el, { panelState, dispatchPanelState, floatInfo:{pendingFloat:props.pendingFloat,sidePanel:props.sidePanel, finalizedFloat:props.finalizedFloat} })
   );
 
   console.log("panels", Panels);
@@ -144,8 +144,12 @@ export function Panels(props) {
           {elements[0]}
         </div>
       )}
-      <div className={`list-container-${panelState.list_container}`}>
-        {[ props.pendingFloat?<Drag>{elements[1]}</Drag>:elements[1], elements[2], elements[3]]}
+      <div className={`list-container-${panelState.list_container}`} style={{justifyContent:props.pendingFloat && props.finalizedFloat?`center`:props.pendingFloat?`flex-end`:`flex-start`}}>
+        {[
+          props.pendingFloat ? <Drag>{elements[1]}</Drag> : elements[1],
+          elements[2],
+          props.finalizedFloat ? <Drag>{elements[3]}</Drag> : elements[3],
+        ]}
       </div>
       <div className={`details-container-${panelState.details_container}`}>
         {elements[4]}
