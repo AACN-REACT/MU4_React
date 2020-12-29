@@ -8,6 +8,7 @@ const Logout = React.createContext();
 const Endpoint = React.createContext();
 const RefreshList = React.createContext();
 const ErrorHandler = React.createContext();
+const TooltipSetter = React.createContext();
 
 export {
   Identity,
@@ -16,6 +17,7 @@ export {
   Endpoint,
   RefreshList,
   ErrorHandler,
+  TooltipSetter
 };
 
 export function GlobalContext({
@@ -26,6 +28,7 @@ export function GlobalContext({
   endpoint,
   refreshList,
   children,
+  setToolTip
 }) {
   return (
     <ErrorHandler.Provider value={errorHandler}>
@@ -34,7 +37,9 @@ export function GlobalContext({
           <Logout.Provider value={logout}>
             <Endpoint.Provider value={endpoint}>
               <RefreshList.Provider value={RefreshList}>
-                {children}
+                <TooltipSetter.Provider value={setToolTip}>
+                  {children}
+                </TooltipSetter.Provider>
               </RefreshList.Provider>
             </Endpoint.Provider>
           </Logout.Provider>

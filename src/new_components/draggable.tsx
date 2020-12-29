@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Portal } from "../mediauploader/components/portal";
 
-export function Drag({ children, width="auto" }) {
+export function Drag({ children, width="auto", this_panel_state }) {
   const draggContainer = React.useRef();
 
 
@@ -14,10 +14,8 @@ export function Drag({ children, width="auto" }) {
       event.clientX - draggContainer.current.getBoundingClientRect().left;
     let offsetY =
       event.clientY - draggContainer.current.getBoundingClientRect().top;
-      console.log("TARGET 3", event.clientX, event.clientY)
 
     function moveto(event) {
-        console.log("TARGET",draggContainer.current)
       draggContainer.current.style.left = event.clientX-offsetX+"px";
       draggContainer.current.style.top = event.clientY-offsetY+"px";
     }
@@ -44,8 +42,9 @@ export function Drag({ children, width="auto" }) {
     [draggContainer.current]
   );
 
+
   return ReactDOM.createPortal(
-    <div ref={draggContainer} className="draggable" style={{width: width}} onMouseDown={handleMouseDown}>
+    <div ref={draggContainer} className="draggable" style={{width: `${this_panel_state!==2?width:'1000px'}`}} onMouseDown={handleMouseDown}>
       {children}
     </div>, document.getElementById('portal')
   );

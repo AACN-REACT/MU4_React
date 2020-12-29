@@ -20,14 +20,15 @@ import {
   sortOriginal,
   sortOriginalReverse,
   sortStatus,
-  sortStatusReverse
+  sortStatusReverse,
 } from "../utils/sorting/sorting_algorithms";
 import { textSearch } from "../utils/sorting/levenshtein";
 import Worker from "../utils/sorting/pendingList.worker";
 import { LoaderOne, LoaderThree } from "./loader_ani_1";
 import { SearchCriteria } from "./search_criteria";
 import { Switch } from "./switch-list";
-
+import { TooltipSetter } from "./contexts";
+import {toolTipSetter} from '../utils/tooltipsetter'
 export function ListComponent({
   setFloat,
   heading,
@@ -38,7 +39,9 @@ export function ListComponent({
   worker,
   isLoading,
   refreshList,
-  floatInfo
+  floatInfo,
+  isFloat,
+  mediaKey,
 }) {
   //not sure what this does just yet
   let [list, changeList] = React.useState([]);
@@ -52,7 +55,7 @@ export function ListComponent({
     console.log("WORKER: ANSWER RETURNED", e.data);
     changeList(Paginate(e.data, 10));
   };
-
+  const setTooltip = React.useContext(TooltipSetter);
   console.log("tt", transforms);
 
   const searchValue = React.useRef();
@@ -89,7 +92,19 @@ export function ListComponent({
 
   return (
     <div className={`list-${panelStateNumber}`}>
-      <div className="list-heading" onDoubleClick={e=>setFloat(s=>!s)}>
+      <div
+        className="list-heading"
+        onMouseEnter={(e) => {
+          toolTipSetter(e, setTooltip, "Dbl-click to undock", true);
+        }}
+        onMouseLeave={(e) => {
+          toolTipSetter(e, setTooltip, "Dbl-click to undock", false);
+        }}
+        onDoubleClick={(e) => {
+          isFloat ? dispatchPanelState({ type: "OPEN PARTIAL" }) : null;
+          setFloat((s) => !s);
+        }}
+      >
         <div>{heading}...</div>
         {/* <div
           onClick={(e) => {
@@ -109,6 +124,7 @@ export function ListComponent({
           dispatchPanelState={dispatchPanelState}
           panelStateNumber={panelStateNumber}
           heading={heading}
+          isFloat={isFloat}
         />
       </div>
       <div className="list-controls">
@@ -431,22 +447,20 @@ export function ListComponent({
           className={`column-status-heading ${
             panelStateNumber === 2 ? "" : "column-close"
           }`}
-
-   onClick={function(e) {       setTransforms((t) => {
-            if (t.indexOf(sortStatus) > -1) {
+          onClick={function (e) {
+            setTransforms((t) => {
+              if (t.indexOf(sortStatus) > -1) {
+                return [
+                  ...t.filter((el) => el !== sortStatus),
+                  sortStatusReverse,
+                ];
+              }
               return [
-                ...t.filter((el) => el !== sortStatus),
-                sortStatusReverse,
+                ...t.filter((el) => el !== sortStatusReverse),
+                sortStatus,
               ];
-            }
-            return [
-              ...t.filter((el) => el !== sortStatusReverse),
-              sortStatus,
-            ];
-          })}}
-
-
-
+            });
+          }}
         >
           Status
         </div>
@@ -509,6 +523,7 @@ export function ListComponent({
             pageNumber={pageNumber}
             panelStateNumber={panelStateNumber}
             setMediaKey={setMediaKey}
+            mediaKey={mediaKey}
             dispatchPanelState={dispatchPanelState}
           />
         </div>

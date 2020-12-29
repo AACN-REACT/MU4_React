@@ -3,10 +3,11 @@ import { Logo } from "./new_title";
 import myimage from "../images/title_new2.png";
 import { ReactComponent as PurpleLogo } from "../images/SVG/SVG/boldLogo2.svg";
 import panelpop from "../images/SVG/panels.svg";
+import screenshare from "../images/SVG/screenshare.svg";
 import { Identity, Logout, Authentication } from "./contexts";
 // let mylogo = new Image();
 // mylogo.src = mylogo;
-function TitleBar({setSidePanel, setRecord, setPendingFloat}) {
+function TitleBar({setSidePanel, setRecord, setPendingFloat, shouldRecord}) {
   const Id = React.useContext(Identity);
   const logmeout = React.useContext(Logout);
   const isAuth = React.useContext(Authentication);
@@ -16,7 +17,7 @@ function TitleBar({setSidePanel, setRecord, setPendingFloat}) {
       <PurpleLogo />
       <div className="panel-pop" style={{backgroundImage:`url(${panelpop})`}} onClick={e=>setSidePanel(s=>!s)}>P</div>
       <div className="panel-pop" style={{backgroundImage:`url(${panelpop})`}} onClick={e=>setPendingFloat(s=>!s)}>P</div>
-      <div className="panel-choose" onClick={e=>setRecord(r=>!r)}>P</div>
+      <div className="panel-choose" style={{backgroundImage:`url(${screenshare})`, border:shouldRecord?"5px solid #fd9741":"5px solid white"}} onClick={e=>setRecord(r=>!r)}></div>
       <div className="log-info">
         <div className="greeting">
           welcome, {Id?.profile?.given_name || "guest"}

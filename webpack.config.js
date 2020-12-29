@@ -14,7 +14,8 @@ module.exports = function (env) {
         env && env.production
           ? path.resolve(
               __dirname,
-              "../../Aacn.VideoUploader.Presentation.React/wwwroot"
+              // "../../Aacn.VideoUploader.Presentation.React/wwwroot"
+              "dist"
             )
           : path.resolve(__dirname, "dist"),
     },

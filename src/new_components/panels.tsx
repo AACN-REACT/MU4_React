@@ -58,6 +58,18 @@ function panelReducer(state, action) {
         details_container: 0,
       };
       break;
+    case "OPEN PENDING FLOAT":
+      newPanelState = {
+        ...newPanelState,
+        pending_container: 2
+      };
+      break;
+    case "OPEN COMPLETED FLOAT":
+      newPanelState = {
+        ...newPanelState,
+        completed_container: 2
+      };
+      break;
     case "OPEN PARTIAL":
       newPanelState = {
         ...newPanelState,
@@ -138,7 +150,7 @@ export function Panels(props) {
   return (
     <div className="panel-container">
       {props.sidePanel ? (
-        <Drag>{elements[0]}</Drag>
+        <Drag width="700px" isOpen={props.sidePanel}>{elements[0]}</Drag>
       ) : (
         <div className={`upload-container-${panelState.upload_container}`}>
           {elements[0]}
@@ -146,9 +158,9 @@ export function Panels(props) {
       )}
       <div className={`list-container-${panelState.list_container}`} style={{justifyContent:props.pendingFloat && props.finalizedFloat?`center`:props.pendingFloat?`flex-end`:`flex-start`}}>
         {[
-          props.pendingFloat ? <Drag >{elements[1]}</Drag> : elements[1],
+          props.pendingFloat ? <Drag width="700px" this_panel_state={panelState.pending_container}>{elements[1]}</Drag> : elements[1],
           elements[2],
-          props.finalizedFloat ? <Drag>{elements[3]}</Drag> : elements[3],
+          props.finalizedFloat ? <Drag width="700px" this_panel_state={panelState.completed_container}>{elements[3]}</Drag> : elements[3],
         ]}
       </div>
       <div className={`details-container-${panelState.details_container}`}>

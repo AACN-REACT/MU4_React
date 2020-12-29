@@ -18,7 +18,7 @@ import { videolist } from "../data/videolist";
 import { uploadListReducer } from "../utils/reducers/upload-list-reducer";
 import { CatchNetworkError } from "../utils/catchNetworkError";
 
-import { EndpointConstructor } from "../mediauploader/utils/endpoint_constructor";
+import { EndpointConstructor } from "../utils/endpoint_constructor";
 
 import { GlobalContext } from "./contexts";
 
@@ -54,7 +54,7 @@ pass them directly down to the sibling components, utilises the uploadListReduce
   );
 
   /*Now we set up state for a tooltip */
-  const [toolTip, setTooltip] = React.useState(null);
+  const [toolTip, setTooltip] = React.useState("");
 
   const [sidePanel, setSidePanel] = React.useState(false);
   const [pendingFloat, setPendingFloat] = React.useState(false);
@@ -140,13 +140,15 @@ this needs to changed into a custome hook: */
         logout={logout}
         endpoint={mediaManagement}
         refreshList={refreshList}
+        setToolTip={setTooltip}
       >
-        <Tooltip toolTip={toolTip} />
+        <Tooltip tooltipMsg={toolTip} />
         <ErrorToast close={setErrorMsg} msg={ErrorMsg} />
         <TitleBar
           setSidePanel={setSidePanel}
           setRecord={setRecord}
           setPendingFloat={setPendingFloat}
+          shouldRecord={shouldRecord}
         />
         <Panels
           sidePanel={sidePanel}
@@ -170,21 +172,25 @@ this needs to changed into a custome hook: */
             setMediaKey={setMediaKey}
             isLoading={isLoading}
             refreshList={refreshList}
-          />
+            isFloat={pendingFloat}
+            mediaKey={mediaKey}
+            />
           <DropzoneContainer
             uploadSTATE={uploadSTATE}
             DISPATCHUpload={DISPATCHUpload}
             sizeLimit={sizeLimit}
             setError={setErrorMsg}
             shouldRecord={shouldRecord}
-          />
+            />
           <ListComponent
             setFloat={setFinalizedFloat}
             heading="Completed"
             videolist={finalizedList}
             setMediaKey={setMediaKey}
             isLoading={isLoading}
-          />
+            isFloat={finalizedFloat}
+            mediaKey={mediaKey}
+            />
           <DetailsPage
             mediaKey={mediaKey}
             refreshList={refreshList}

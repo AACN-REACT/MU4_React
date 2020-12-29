@@ -11,6 +11,10 @@ import { FinalizeButton } from "./finalize_button";
 import { Identity, RefreshList, ErrorHandler } from "./contexts";
 import { CatchNetworkError } from "../utils/catchNetworkError";
 import { Switch } from "./switch-details";
+import { TooltipSetter } from "./contexts";
+import {toolTipSetter} from '../utils/tooltipsetter'
+
+import copyicon from "../images/SVG/copy_icon.svg";
 
 export function DetailsContents({
   mediaKey,
@@ -24,10 +28,9 @@ export function DetailsContents({
   setMediaDetails,
   isDetailsLoading,
   setDetailsLoading,
-  setArrayOfFloatingDetailsPages
+  setArrayOfFloatingDetailsPages,
 }) {
-
-
+  const setTooltip = React.useContext(TooltipSetter);
 
 
 
@@ -35,16 +38,34 @@ export function DetailsContents({
     <div className="details-page">
       <div className="details-bar">
         <span className="media-details-title">media details...</span>
-        <div
-          style={{ cursor: "pointer" }}
-          onClick={(e) => {
-            window.open(
-              `https://localhost:8080/?mediakey=${mediaKey}`,
-              "_blank"
-            );
-          }}
-        >
-          <span>Key:</span> {mediaKey}
+        <div style={{ cursor: "pointer", display: "flex" }}>
+          <span
+            onClick={(e) => {
+              window.open(
+                `https://localhost:8080/?mediakey=${mediaKey}`,
+                "_blank"
+              );
+            }}
+          >
+            Key:
+          </span>{" "}
+          {mediaKey}
+          <div
+            onMouseEnter={(e) => {
+              toolTipSetter(e, setTooltip, "Click to copy link", true);
+            }}
+            onMouseLeave={(e) => {
+              toolTipSetter(e, setTooltip, "Click to copy link", false);
+            }}
+            className="copy-icon"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigator.clipboard.writeText(
+                `https://localhost:8080/?mediakey=${mediaKey}`
+              );
+            }}
+            style={{ backgroundImage: `url(${copyicon})` }}
+          ></div>
         </div>
         <div
           onClick={(e) => {

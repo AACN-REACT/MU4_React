@@ -4,12 +4,14 @@ import React from 'react'
 
 
 
-export function ListMediaItem({panelStateNumber, mediaItem, dispatchPanelState, setMediaKey}){
+export function ListMediaItem({panelStateNumber, mediaItem, dispatchPanelState, setMediaKey,isSelected}){
 
+  
 
 
        return ( <div
-              className="inner-container"
+              className={isSelected?"inner-container selected":"inner-container"}
+              
               onClick={(e) => {
                 
 

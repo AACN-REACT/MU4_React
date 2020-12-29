@@ -63,7 +63,7 @@
   display: flex;
   justify-content: space-between;
   margin: 5px 20px;
-  background-color:ghostwhite;
+  background-color: ghostwhite;
 
   height: 30px;
   font-size: 1rem;
@@ -75,7 +75,7 @@
   display: flex;
   width: 100%;
   justify-content: start;
-  background-color:ghostwhite;
+  background-color: ghostwhite;
   text-shadow: 1px 1px 5px white;
 }
 .inner-container {
@@ -92,7 +92,11 @@
   &:nth-of-type(even) {
     background: ghostwhite;
   }
-
+  &.selected {
+    background-color: colors.$blue-dodger;
+    border:5px solid colors.$orange-carrot;
+    color: white;
+  }
   font-size: 0.8rem;
   transition: 0.5s all;
   &:hover {
@@ -162,11 +166,6 @@
 .list-container-2 {
   flex-basis: 675px;
 }
-
-
-
-
-
 
 // [class*="pending-list-"] {
 //   border: 2px solid green;
@@ -421,7 +420,8 @@
     background-color: colors.$blue-dodger;
     color: white;
   }
-  & > .close-search-criteria {  height: 30px;
+  & > .close-search-criteria {
+    height: 30px;
     border-radius: 15px;
     width: 30px;
     background-color: white;
@@ -429,7 +429,7 @@
     background-size: 70%;
     background-position: center;
     background-repeat: no-repeat;
-  
+
     cursor: pointer;
     box-shadow: 2px 2px 7px colors.$merlingray;
     transition: 0.2s all;
@@ -437,7 +437,6 @@
       background-color: colors.$purple-medium;
       color: white;
     }
-    
   }
 }
 
@@ -453,14 +452,15 @@
   height: auto;
 }
 
-.draggable{
-
-  border:1px solid colors.$blue-aacn;
-  border-radius:10px 10px 0px 0px;
-  position:absolute;
+.draggable {
+  cursor: move;
+  border: 1px solid colors.$blue-aacn;
+  border-radius: 10px 10px 0px 0px;
+  position: absolute;
   box-shadow: 3px 3px 15px colors.$timberwolfgray;
-  width:500px;
-  height:auto;
-  z-index:99999999999999
+  width: 500px;
+  height: auto;
+  z-index: 99999999999999;
+  transition: width 0.3s;
+  background:ghostwhite;
 }
-
