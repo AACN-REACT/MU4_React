@@ -63,7 +63,6 @@
   display: flex;
   justify-content: space-between;
   margin: 5px 20px;
-  background-color: ghostwhite;
 
   height: 30px;
   font-size: 1rem;
@@ -94,7 +93,7 @@
   }
   &.selected {
     background-color: colors.$blue-dodger;
-    border:5px solid colors.$orange-carrot;
+    border: 5px solid colors.$orange-carrot;
     color: white;
   }
   font-size: 0.8rem;
@@ -462,5 +461,5 @@
   height: auto;
   z-index: 99999999999999;
   transition: width 0.3s;
-  background:ghostwhite;
+  background: ghostwhite;
 }
