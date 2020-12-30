@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:dev": "webpack --mode development --env.development",
-    "build:prod": "webpack --mode production --env.production",
+    "build:devlocal": "webpack --mode development --env.development",
+    "build:prod": "set NODE_ENV=PRODUCTION && webpack --mode production --env.production",
+    "build:preprod": "set NODE_ENV=PREPROD && webpack --mode production --env.production",
+    "build:qa": "set NODE_ENV=QA && webpack --mode production --env.production",
+    "build:dev": "set NODE_ENV=DEVELOPMENT && webpack --mode production --env.production",
     "serve": "webpack-dev-server --env.development --open",
     "json": "start json-server src/data/db.json && start npm run serve",
     "greeting": "echo hello"

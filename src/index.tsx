@@ -17,5 +17,3 @@ render(
   <App uploadOrigin={uploadOrigin} user={user} sizeLimit={sizeLimit} />,
   root
 );
-
-//render(<App />, root);
