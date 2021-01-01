@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:devlocal": "webpack --mode development --env.development",
+    "build": "set NODE_ENV=PRODUCTION && webpack --mode production --env.production",
     "build:prod": "set NODE_ENV=PRODUCTION && webpack --mode production --env.production",
     "build:preprod": "set NODE_ENV=PREPROD && webpack --mode production --env.production",
     "build:qa": "set NODE_ENV=QA && webpack --mode production --env.production",
