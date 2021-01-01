@@ -95,10 +95,10 @@ export function ListComponent({
       <div
         className="list-heading"
         onMouseEnter={(e) => {
-          toolTipSetter(e, setTooltip, "Dbl-click to undock", true);
+          toolTipSetter(e, setTooltip, isFloat?"Dbl-click to dock":"Dbl-click to undock", true);
         }}
         onMouseLeave={(e) => {
-          toolTipSetter(e, setTooltip, "Dbl-click to undock", false);
+          toolTipSetter(e, setTooltip, isFloat?"Dbl-click to dock":"Dbl-click to undock", false);
         }}
         onDoubleClick={(e) => {
           isFloat ? dispatchPanelState({ type: "OPEN PARTIAL" }) : null;

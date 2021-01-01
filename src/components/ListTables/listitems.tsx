@@ -1,7 +1,11 @@
 import React, { useEffect, createElement, useState } from "react";
 import { SetErrorMsg } from "../../mediauploader/components/globalstateContext";
 import { XHRNew } from "../../network_functions/XHRNew";
-import { Identity } from "../../new_components/contexts";
+import { Identity, TooltipSetter } from "../../new_components/contexts";
+import cross from "../../images/SVG/SVG/greyCross.svg";
+
+import {toolTipSetter} from '../../utils/tooltipsetter'
+
 export function UploadingListItem({
   setMediaKey,
   dispatchPanelState,
@@ -15,6 +19,7 @@ export function UploadingListItem({
   setShouldClose,
 }) {
   const loggedUser = React.useContext(Identity);
+  const setTooltip= React.useContext(TooltipSetter);
   console.log("arr name", item);
   console.log("STATUS", status);
   const [progress, setprogress] = useState(item.progress);
@@ -85,6 +90,12 @@ export function UploadingListItem({
         <div
           key={key}
           className={`upload-list-item ${progress === 100 ? "completed" : ""}`}
+          onMouseEnter={(e) => {
+            toolTipSetter(e, setTooltip, "Item uploaded, still being processed", true);
+          }}
+          onMouseLeave={(e) => {
+            toolTipSetter(e, setTooltip, "Item uploaded, still being processed", false);
+          }}
         >
           <div className="name-box">{item.name}</div>
           <div className="type-box">{item.type}</div>
@@ -112,7 +123,8 @@ export function UploadingListItem({
             }}
             className="close-box"
           >
-            {item.edit ? "o" : "x"}
+            <div  className="keyword-icon" style={{backgroundImage:`url(${cross})`}}></div>
+           {/* <{item.edit ? "o" : "x"}> */}
           </div>
         </div>
       );
