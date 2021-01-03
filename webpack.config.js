@@ -7,7 +7,7 @@ module.exports = function (env) {
     entry: { index: "./src/index.tsx" },
     output: {
       publicPath: "/",
-      filename: "js/site.js",
+      //filename: "js/site.js",
       chunkFilename: "js/[name].js",
       path:
         env && env.production
@@ -21,7 +21,7 @@ module.exports = function (env) {
     resolve: {
       extensions: [".ts", ".tsx", ".js", "jsx"],
     },
-    devtool: env.production?"cheap-source-map":"inline-source-map",
+    devtool: env.production ? false : "inline-source-map",
     devServer: {
       // historyApiFallback: true,
       https: true,
@@ -32,7 +32,7 @@ module.exports = function (env) {
 
     optimization: {
       minimize: true,
-      runtimeChunk: { name: "runtime" },
+      runtimeChunk: { name: "js/runtime" },
       splitChunks: {
         cacheGroups: {
           reactVendor: {
@@ -57,7 +57,8 @@ module.exports = function (env) {
         },
         {
           test: /\.worker\.js$/,
-          use: { loader: "worker-loader" },
+          loader: "worker-loader",
+          options: { filename: "js/worker.js" },
         },
         {
           test: /\.(png|jpg)$/,
@@ -111,6 +112,7 @@ module.exports = function (env) {
       new miniextractplugin({
         filename: "css/site.css",
       }),
+      new cleanwebpackplugin(),
       new htmlwebpackplugin({
         template: "./public/index.html",
       }),
