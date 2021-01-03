@@ -1,22 +1,29 @@
 import React from 'react'
-
+import { TooltipSetter } from "./contexts";
+import {toolTipSetter} from '../utils/tooltipsetter'
 
 
 
 
 export function ListMediaItem({panelStateNumber, mediaItem, dispatchPanelState, setMediaKey,isSelected}){
 
-  
+  const setTooltip = React.useContext(TooltipSetter)
 
 
        return ( <div
               className={isSelected?"inner-container selected":"inner-container"}
-              
+              onMouseEnter={(e) => {
+        toolTipSetter(e, setTooltip, "click to open detail, shift-click to open detail in new tab", true);
+              }}
+              onMouseLeave={(e) => {
+                toolTipSetter(e, setTooltip, "click to open detail, shift-click to open detail in new tab", false);
+              }}
               onClick={(e) => {
-                
-
                 setMediaKey(mediaItem.Key);
-                e.shiftKey?dispatchPanelState({ type: "OPEN DETAILS FLOAT"}):dispatchPanelState({ type: "OPEN DETAILS CLOSE OTHERS" });
+                e.shiftKey?window.open(
+                  `https://localhost:8080/?mediakey=${mediaKey}`,
+                  "_blank"
+                ):dispatchPanelState({ type: "OPEN DETAILS CLOSE OTHERS" });
               }}
             >
               <div key="column-title" className="column-title">

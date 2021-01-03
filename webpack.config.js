@@ -3,7 +3,6 @@ const htmlwebpackplugin = require("html-webpack-plugin");
 const cleanwebpackplugin = require("clean-webpack-plugin").CleanWebpackPlugin;
 const miniextractplugin = require("mini-css-extract-plugin");
 module.exports = function (env) {
-  console.log(env);
   return {
     entry: { index: "./src/index.tsx" },
     output: {
@@ -22,7 +21,7 @@ module.exports = function (env) {
     resolve: {
       extensions: [".ts", ".tsx", ".js", "jsx"],
     },
-    devtool: "inline-source-map",
+    devtool: env.production?"cheap-source-map":"inline-source-map",
     devServer: {
       // historyApiFallback: true,
       https: true,
@@ -30,8 +29,10 @@ module.exports = function (env) {
       port: 8080,
       open: true,
     },
+
     optimization: {
-      runtimeChunk: "single",
+      minimize: true,
+      runtimeChunk: { name: "runtime" },
       splitChunks: {
         cacheGroups: {
           reactVendor: {

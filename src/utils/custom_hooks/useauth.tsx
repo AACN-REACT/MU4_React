@@ -55,7 +55,7 @@ export function useAuth(config) {
   //     userStore: new WebStorageStateStore({ store: localStorage }),
   //   })
   // );
-  const [mgr, setMgr] = React.useState(new UserManager(config));
+  const [mgr, setMgr] = React.useState(function(){return new UserManager(config)});
 
   //set up state for identity info
 
@@ -80,6 +80,7 @@ export function useAuth(config) {
   const pageHadErrored = myURL.searchParams.has("error");
   React.useEffect(
     function () {
+      console.log("re-rendered");
       if (!pageHadErrored) {
         mgr.getUser().then((user) => {
           if (!user && !redirectedFromCallback) {

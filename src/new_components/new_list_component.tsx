@@ -102,6 +102,7 @@ export function ListComponent({
         }}
         onDoubleClick={(e) => {
           isFloat ? dispatchPanelState({ type: "OPEN PARTIAL" }) : null;
+          toolTipSetter(e, setTooltip, isFloat?"Dbl-click to dock":"Dbl-click to undock", false);
           setFloat((s) => !s);
         }}
       >

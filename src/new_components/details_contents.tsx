@@ -40,22 +40,33 @@ export function DetailsContents({
         <span className="media-details-title">media details...</span>
         <div style={{ cursor: "pointer", display: "flex" }}>
           <span
-            onClick={(e) => {
+
+          >
+            Key:
+          </span>{" "}
+          <div    
+
+onMouseEnter={(e) => {
+  toolTipSetter(e, setTooltip, "Click to open video detail in new tab", true);
+}}
+onMouseLeave={(e) => {
+  toolTipSetter(e, setTooltip, "Click to open video detail in new tab", false);
+}}
+          
+          onClick={(e) => {
               window.open(
                 `https://localhost:8080/?mediakey=${mediaKey}`,
                 "_blank"
               );
-            }}
-          >
-            Key:
-          </span>{" "}
-          {mediaKey}
+            }}>
+            {mediaKey}
+          </div>
           <div
             onMouseEnter={(e) => {
-              toolTipSetter(e, setTooltip, "Click to copy link", true);
+              toolTipSetter(e, setTooltip, "Click to copy details link to clipboard", true);
             }}
             onMouseLeave={(e) => {
-              toolTipSetter(e, setTooltip, "Click to copy link", false);
+              toolTipSetter(e, setTooltip, "Click to copy details link to clipboard", false);
             }}
             className="copy-icon"
             onClick={(e) => {
