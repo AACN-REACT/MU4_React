@@ -58,7 +58,7 @@ pass them directly down to the sibling components, utilises the uploadListReduce
 
   /*Now we set up state for a tooltip */
   const [toolTip, setTooltip] = React.useState("");
-
+  const [showTooltip, toggleTooltip] = React.useState(true)
   const [sidePanel, setSidePanel] = React.useState(false);
   const [pendingFloat, setPendingFloat] = React.useState(false);
   const [finalizedFloat, setFinalizedFloat] = React.useState(false);
@@ -145,9 +145,11 @@ this needs to changed into a custome hook: */
         refreshList={refreshList}
         setToolTip={setTooltip}
       >
-        <Tooltip tooltipMsg={toolTip} />
+        {showTooltip?<Tooltip tooltipMsg={toolTip} />:null}
         <ErrorToast close={setErrorMsg} msg={ErrorMsg} />
         <TitleBar
+          toggleTooltip={toggleTooltip}
+          showTooltip={showTooltip}
           setSidePanel={setSidePanel}
           setRecord={setRecord}
           setPendingFloat={setPendingFloat}
@@ -161,6 +163,8 @@ this needs to changed into a custome hook: */
           openDetails={localStorage.getItem("mediakey") || null}
         >
           <UploadTable
+          setFloat={setSidePanel}
+          isFloat={sidePanel}
             setMediaKey={setMediaKey}
             list={uploadSTATE}
             url={uploadURL}

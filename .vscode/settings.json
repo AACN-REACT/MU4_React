@@ -4,12 +4,12 @@
     "liveServer.settings.CustomBrowser" : "chrome",
     "liveServer.settings.AdvanceCustomBrowserCmdLine": "chrome --incognito --remote-debugging-port=9222",
     "liveServer.settings.NoBrowser" : false,
-    // "liveServer.settings.https": {
-    //     "enable": true, //set it true to enable the feature.
-    //     "cert": "C:\\https\\server.cert", //full path
-    //     "key": "C:\\https\\server.key", //full path
-    //     "passphrase": "12345"
-    // },
+    "liveServer.settings.https": {
+        "enable": true, //set it true to enable the feature.
+         "cert": "C:/Users/makar/source/repos/certs/localhost.crt",// path to local cert
+         "key":  "C:/Users/makar/source/repos/certs/localhost.key",// path to local key
+         "passphrase": "localhost"
+    },
     "liveServer.settings.host" : "localhost",
     "liveServer.settings.ignoreFiles" : [
             ".vscode/**",
