@@ -8,7 +8,7 @@ import {toolTipSetter} from '../utils/tooltipsetter'
 import { Identity, Logout, Authentication, TooltipSetter } from "./contexts";
 // let mylogo = new Image();
 // mylogo.src = mylogo;
-function TitleBar({setSidePanel, setRecord, setPendingFloat, shouldRecord, toggleTooltip, showTooltip}) {
+function TitleBar({setSidePanel, setRecord, setPendingFloat, shouldRecord}) {
   const Id = React.useContext(Identity);
   const setTooltip = React.useContext(TooltipSetter);
   const logmeout = React.useContext(Logout);
@@ -17,8 +17,8 @@ function TitleBar({setSidePanel, setRecord, setPendingFloat, shouldRecord, toggl
   return (
     <div className="title-container"  >
       <PurpleLogo />
-      <div className="panel-choose" style={{backgroundImage:`url(${panelpop})`}} onClick={e=>setSidePanel(s=>!s)}>P</div>
-      <div className="panel-choose" style={{border:showTooltip?"5px solid #fd9741":"5px solid white"}} onClick={e=>toggleTooltip(s=>!s)}>Tool tip</div>
+      <div className="panel-pop" style={{backgroundImage:`url(${panelpop})`}} onClick={e=>setSidePanel(s=>!s)}>P</div>
+      <div className="panel-pop" style={{backgroundImage:`url(${panelpop})`}} onClick={e=>setPendingFloat(s=>!s)}>P</div>
       <div 
         // onMouseEnter={(e) => {
         //   toolTipSetter(e, setTooltip, "Toggle Video Record mode", true);
