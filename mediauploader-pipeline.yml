@@ -1,5 +1,11 @@
 trigger:
-- main
+  batch: true
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - /*
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -12,5 +18,8 @@ steps:
 
 - script: |
     npm install
-    npm run build  
-  displayName: 'npm install and build'
+  displayName: 'npm install'
+
+- script: |
+    npm run build
+  displayName: 'npm build'
