@@ -34,7 +34,7 @@ export function ManagementList({
   setMediaKey,
   dispatchPanelState,
   mediaItem,
-  mediaKey
+  mediaKey,
 }) {
   let myPos = React.useRef();
 
@@ -53,7 +53,8 @@ export function ManagementList({
     >
       {list?.map((el) => (
         <ListMediaItem
-          isSelected={mediaKey===el.Key}
+          isSelected={mediaKey === el.Key}
+          mediaKey={el.Key}
           mediaItem={el}
           setMediaKey={setMediaKey}
           dispatchPanelState={dispatchPanelState}
