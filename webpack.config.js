@@ -50,9 +50,14 @@ module.exports = function (env) {
           use: [
             {
               loader: "@svgr/webpack",
-              options: { dimensions: true },
+              options: {
+                dimensions: true,
+              },
             },
-            "url-loader",
+            {
+              loader: "file-loader",
+              options: { outputPath: "images", name: "[name].[ext]" },
+            },
           ],
         },
         {
@@ -65,7 +70,7 @@ module.exports = function (env) {
           loader: "file-loader",
           options: {
             outputPath: "images",
-            name: "[name][ext]",
+            name: "[name].[ext]",
           },
         },
         {
@@ -108,14 +113,23 @@ module.exports = function (env) {
       ],
       // rules: [{ test: /\.tsx?/, exclude: /node_modules/, use: "ts-loader" }],
     },
-    plugins: [
-      new miniextractplugin({
-        filename: "css/site.css",
-      }),
-      new cleanwebpackplugin(),
-      new htmlwebpackplugin({
-        template: "./public/index.html",
-      }),
-    ],
+    plugins: env.production
+      ? [
+          new miniextractplugin({
+            filename: "css/site.css",
+          }),
+          new cleanwebpackplugin(),
+          new htmlwebpackplugin({
+            template: "./public/index.html",
+          }),
+        ]
+      : [
+          new miniextractplugin({
+            filename: "css/site.css",
+          }),
+          new htmlwebpackplugin({
+            template: "./public/index.html",
+          }),
+        ],
   };
 };
