@@ -23,3 +23,31 @@ steps:
 - script: |
     npm run build
   displayName: 'npm build'
+
+- task: DeleteFiles@1
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)/PresentationToZip'
+    Contents: '*'
+    RemoveSourceFolder: true
+
+- task: CopyFiles@2
+  displayName: 'Copy dist to ToZip'
+  inputs:
+    SourceFolder: 'dist'
+    Contents: '**'
+    TargetFolder: '$(System.DefaultWorkingDirectory)/PresentationToZip'
+    OverWrite: true
+
+- task: ArchiveFiles@2
+  displayName: 'Archive PresentationToZip'
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/PresentationToZip'
+    includeRootFolder: false
+    archiveType: zip
+    archiveFile: $(Build.ArtifactStagingDirectory)/Aacn.MediaUploader.Presentation.React.zip
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
