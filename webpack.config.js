@@ -49,9 +49,20 @@ module.exports = function (env) {
           test: /\.svg$/,
           use: [
             {
+              loader: "babel-loader",
+              options: {
+                presets: [
+                  "@babel/preset-react",
+                  "@babel/preset-env",
+                  "@babel/preset-typescript",
+                ],
+              },
+            },
+            {
               loader: "@svgr/webpack",
               options: {
                 dimensions: true,
+                babel: false,
               },
             },
             {
